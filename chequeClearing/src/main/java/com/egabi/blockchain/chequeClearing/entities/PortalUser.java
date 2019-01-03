@@ -13,8 +13,8 @@ import javax.persistence.Table;
 @Table(name = "users")
 public class PortalUser {
 
-    @Id
-    private long id;
+    
+    private long userId;
     private String username;
     private String password;
     private boolean enabled;
@@ -37,7 +37,7 @@ public class PortalUser {
         this.userRole = userRole;
     }
 
-    @Id
+   
     @Column(name = "username", unique = true,
             nullable = false, length = 45)
     public String getUsername() {
@@ -76,11 +76,15 @@ public class PortalUser {
         this.userRole = userRole;
     }
 
-    public long getId() {
-        return id;
+    @Id
+    @Column(name = "USERID",
+    nullable = false)
+  //  @Column(name = "enabled", nullable = false)
+    public long getUserId() {
+        return userId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setUserId(long id) {
+        this.userId = id;
     }
 }

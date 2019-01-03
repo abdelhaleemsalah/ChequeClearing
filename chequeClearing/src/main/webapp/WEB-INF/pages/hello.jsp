@@ -1,6 +1,8 @@
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 
 
@@ -23,10 +25,18 @@
     
     		<!-- For login portalUser -->
 		<c:url value="/logout" var="logoutUrl" />
-		<form action="${logoutUrl}" method="post" id="logoutForm">
+		<!--<form action="${logoutUrl}" method="post" id="logoutForm">-->
+		<form:form id="hello" action="/chequeClearing/hello" method="post"  modelAttribute="formBean" >
+		
+		
+		
+		
+		
+			
+			
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
-		</form>
+		
 		<script>
 			function formSubmit() {
 				document.getElementById("logoutForm").submit();
@@ -144,7 +154,8 @@
       <div id="u19" class="ax_default label">
         <div id="u19_div" class=""></div>
         <div id="u19_text" class="text ">
-          <p><span>Cheque Serial number to:</span></p>
+           <form:label path="accountnumber"> <p><span>Cheque Serial number to:</span></p></form:label>
+        
         </div>
       </div>
 
@@ -162,7 +173,9 @@
       </div>
     </div>
         
-    </form>
+    </form:form>
+    
+
     </body>
 
 

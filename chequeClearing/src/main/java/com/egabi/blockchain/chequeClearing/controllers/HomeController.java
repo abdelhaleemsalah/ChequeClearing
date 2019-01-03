@@ -5,7 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.util.stream.Collectors;
@@ -21,7 +25,19 @@ public class HomeController {
     {
         return "login";
     }
-
+    
+//    @PostMapping("/RegConfirmation") 
+//	public String displayConfirmation( @ModelAttribute FormBean formBean)
+//	{
+//    	
+//	return "RegConfirmation"; 
+//	}
+	@RequestMapping(value = "/", method = RequestMethod.GET) 
+	public String displayLogin( Model model)
+	{
+		model.addAttribute("formBean", new FormBean());
+	return "hello"; 
+	}
     @GetMapping("/{tenant}/home")
     public String homePage(Model model , @PathVariable("tenant") String merchant)
     {
