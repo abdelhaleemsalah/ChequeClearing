@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,23 +42,21 @@ public class FormController {
 		return new FormBean();
 	}
 
-	@GetMapping
-	 public ModelAndView hello() {
-	      return new ModelAndView("hello", "formBean", new FormBean());
-   }
 
+	
 	@PostMapping
 	public String processSubmit(@Valid FormBean formBean, BindingResult result, 
 								@ModelAttribute("ajaxRequest") boolean ajaxRequest, 
-								Model model, RedirectAttributes redirectAttrs) {
+								Model model) {
 		if (result.hasErrors()) {
 			return null;
 		}
-		model.addAttribute("formBean",formBean);
+		//model.addAttribute("formBean",formBean);
 		// Typically you would save to a db and clear the "form" attribute from the session 
 		// via SessionStatus.setCompleted(). For the demo we leave it in the session.
 		String message = "Form submitted successfully.  Bound " + formBean;
 		// Success response handling
+		System.out.println("account number "+formBean.getAccountnumber());
 		if (ajaxRequest) {
 			// prepare model for rendering success message in this request
 			model.addAttribute("message", message);
@@ -65,8 +64,13 @@ public class FormController {
 		} else {
 			// store a success message for rendering on the next request after redirect
 			// redirect back to the form to render the success message along with newly bound values
-			redirectAttrs.addFlashAttribute("message", message);
-			return "RegConfirmation";			
+			//redirectAttrs.addFlashAttribute("message", message);
+			System.out.println("inside process submit");
+			FormBean formBean1= new FormBean();
+			formBean1.setAccountnumber("111111");
+			model.addAttribute("formBean",formBean1);
+			return "RegConfirmation";	
+				
 		}
 	}
 	

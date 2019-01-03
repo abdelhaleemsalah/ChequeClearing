@@ -26,12 +26,13 @@ public class HomeController {
         return "login";
     }
     
-//    @PostMapping("/RegConfirmation") 
-//	public String displayConfirmation( @ModelAttribute FormBean formBean)
-//	{
-//    	
-//	return "RegConfirmation"; 
-//	}
+   // @PostMapping("/RegConfirmation") 
+    @RequestMapping(value = "/RegConfirmation", method = RequestMethod.GET) 
+	public String displayConfirmation( @ModelAttribute FormBean formBean,Model model)
+	{
+    	model.addAttribute("formBean", formBean);
+	return "RegConfirmation"; 
+	}
 	@RequestMapping(value = "/", method = RequestMethod.GET) 
 	public String displayLogin( Model model)
 	{

@@ -22,24 +22,22 @@
     </head>
     
     <body>
-    
+   
     		<!-- For login portalUser -->
 		<c:url value="/logout" var="logoutUrl" />
 		<!--<form action="${logoutUrl}" method="post" id="logoutForm">-->
-		<form:form id="hello" action="/chequeClearing/hello" method="post"  modelAttribute="formBean" >
+		<form:form id="hello"  method="post" action="hello"  modelAttribute="formBean" >
 		
 		
 		
-		
-		
-			
+
 			
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 		
 		<script>
 			function formSubmit() {
-				document.getElementById("logoutForm").submit();
+				document.getElementById("hello").submit();
 			}
 		</script>
 
@@ -174,7 +172,6 @@
     </div>
         
     </form:form>
-    
 
     </body>
 
