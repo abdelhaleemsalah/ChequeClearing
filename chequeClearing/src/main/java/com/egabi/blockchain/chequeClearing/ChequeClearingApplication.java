@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.egabi")
+@ComponentScan(basePackages = "com.egabi.blockchain")
 @EnableConfigurationProperties(StorageProperties.class)
 @EnableScheduling
 public class ChequeClearingApplication {
