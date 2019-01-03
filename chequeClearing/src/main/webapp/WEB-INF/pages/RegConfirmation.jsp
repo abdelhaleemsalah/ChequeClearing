@@ -14,7 +14,7 @@
 	    <meta name="apple-mobile-web-app-capable" content="yes" />
 		<link href="./resources/css/styles.css" type="text/css" rel="stylesheet"/>
 		<link href="./resources/css/styles_registeration.css" type="text/css" rel="stylesheet"/>
-		<link href="./resources/css/styles_registerationConf.css" type="text/css" rel="stylesheet"/>
+	     <link href="./resources/css/styles_regconfirmation.css" type="text/css" rel="stylesheet"/>
 		<link type="text/css" href="./resources/css/axure_rp_page.css" rel="Stylesheet" />
 	    <link type="text/css" href="./resources/css/jquery-ui-themes.css" rel="Stylesheet" />
 	    <script src="./resources/js/jquery-1.7.1.min.js"></script>
@@ -31,171 +31,164 @@
 		
 		xcxcxc
 		<h3>Path variable 'account': ${formBean.accountnumber}</h3>
-				<div class="header">
-		  		<h2>Form</h2>
-		  		<c:if test="${not empty message}">
-					<div id="message" class="success"><c:out value="${message}"/></div>
-		  		</c:if>
-		  		<s:bind path="*">
-		  			<c:if test="${status.error}">
-				  		<div id="message" class="error">Form has errors</div>
-		  			</c:if>
-		  		</s:bind>
-			</div>
-			
-			
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-		
-		<script>
-			function formSubmit() {
-				document.getElementById("logoutForm").submit();
-			}
-		</script>
-
-		<c:if test="${pageContext.request.userPrincipal.name != null}">
-			<h2>
-				User : ${pageContext.request.userPrincipal.name} | <a
-					href="javascript:formSubmit()"> Logout</a>
-			</h2>
-		</c:if>
-    
-   <!--  <form action="@{/logout}">-->
-    <div id="base" class="">
+			<div id="base" class="">
+      <!-- Unnamed (Rectangle) -->
+      <div id="u38" class="ax_default heading_2">
+        <div id="u38_div" class=""></div>
+      </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u6" class="ax_default box_1">
-        <div id="u6_div" class=""></div>
-        <div id="u6_text" class="text ">
-          <p style="font-size:25px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;font-size:30px;">&nbsp;Cheque Registeration:</span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;"> </span></p>
+      <div id="u39" class="ax_default box_1">
+        <div id="u39_div" class=""></div>
+        <div id="u39_text" class="text ">
+          <p style="font-size:25px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;font-size:30px;">&nbsp;Cheque Registeration&nbsp; Confirmation:</span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;"> </span></p>
         </div>
       </div>
-
-      <!-- Unnamed (Text Field) -->
-      <div id="u7" class="ax_default text_field" title="from cheque serial number">
-        <input id="u7_input" type="text" value="" title="from cheque serial number"/>
-      </div>
-
-      <!-- Unnamed (Rectangle) -->
-      <div id="u8" class="ax_default label">
-        <div id="u8_div" class=""></div>
-        <div id="u8_text" class="text ">
+      
+      <!--  Unnamed (Rectangle) -->
+      <div id="u40" class="ax_default label">
+        <div id="u40_div" class=""></div>
+        <div id="u40_text" class="text ">
           <p><span>Cheque Serial number from:</span></p>
         </div>
       </div>
 
-      <!-- Unnamed (Text Field) -->
-      <div id="u9" class="ax_default text_field" title="to cheque serial number">
-        <input id="u9_input" type="text" value="" title="to cheque serial number"/>
-      </div>
-
       <!-- Unnamed (Rectangle) -->
-      <div id="u10" class="ax_default label">
-        <div id="u10_div" class=""></div>
-        <div id="u10_text" class="text ">
+      <div id="u41" class="ax_default label">
+        <div id="u41_div" class=""></div>
+        <div id="u41_text" class="text ">
           <p><span>Customer id:</span></p>
         </div>
       </div>
 
-      <!-- Unnamed (Text Field) -->
-      <div id="u11" class="ax_default text_field" title="Cif Id">
-        <input id="u11_input" type="text" value="" title="Cif Id"/>
+      <!-- Unnamed (Rectangle) -->
+      <div id="u42" class="ax_default label">
+        <div id="u42_div" class=""></div>
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u12" class="ax_default label">
-        <div id="u12_div" class=""></div>
-        <div id="u12_text" class="text ">
-          <p><span>Branch ID:</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Text Field) -->
-      <div id="u13" class="ax_default text_field" title="branch id">
-        <input id="u13_input" type="text" value="" title="branch id"/>
-      </div>
-
-      <!-- Unnamed (Rectangle) -->
-      <div id="u14" class="ax_default label">
-        <div id="u14_div" class=""></div>
-        <div id="u14_text" class="text ">
+      <div id="u43" class="ax_default label">
+        <div id="u43_div" class=""></div>
+        <div id="u43_text" class="text ">
           <p><span>Currency:</span></p>
         </div>
       </div>
-
-      <!-- Unnamed (Droplist) -->
-      <div id="u15" class="ax_default droplist" title="cheque currency">
-        <select id="u15_input" title="cheque currency">
-          <option value="EGP">EGP</option>
-          <option value="USD">USD</option>
-          <option value="EUR">EUR</option>
-          <option value="INR">INR</option>
-          <option value="NOK">NOK</option>
-          <option value="CAD">CAD</option>
-          <option value="AUD">AUD</option>
-          <option value="DKK">DKK</option>
-          <option value="IQD">IQD</option>
-          <option value="KWD">KWD</option>
-          <option value="CHF">CHF</option>
-        </select>
-      </div>
-
+      
       <!-- Unnamed (Rectangle) -->
-      <div id="u16" class="ax_default button" title="continue registeration">
-        <div id="u16_div" class=""></div>
-        <div id="u16_text" class="text ">
-        <input type="submit" value="Save"/></div>  
-      </div>
-
-      <!-- Unnamed (Rectangle) -->
-      <div id="u17" class="ax_default label">
-        <div id="u17_div" class=""></div>
-        <div id="u17_text" class="text ">
+      <div id="u44" class="ax_default label">
+        <div id="u44_div" class=""></div>
+        <div id="u44_text" class="text ">
           <p><span>Customer Name:</span></p>
         </div>
       </div>
 
-      <!-- Unnamed (Text Field) -->
-      <div id="u18" class="ax_default text_field" title="branch id">
-        <input id="u18_input" type="text" value="" title="branch id"/>
-      </div>
-
       <!-- Unnamed (Rectangle) -->
-      <div id="u19" class="ax_default label">
-        <div id="u19_div" class=""></div>
-        <div id="u19_text" class="text ">
-           <form:label path="accountnumber" > <p><span>Cheque Serial number to:</span></p></form:label>
-        
+      <div id="u45" class="ax_default label">
+        <div id="u45_div" class=""></div>
+        <div id="u45_text" class="text ">
+          <p><span>Cheque Serial number to:</span></p>
         </div>
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u20" class="ax_default label">
-        <div id="u20_div" class=""></div>
-        <div id="u20_text" class="text ">
+      <div id="u46" class="ax_default button" title="continue registeration">
+        <div id="u46_div" class=""></div>
+        <div id="u46_text" class="text ">
+          <p><span>Register</span></p>
+        </div>
+      </div>
+      
+      <!-- Unnamed (Rectangle) -->
+      <div id="u47" class="ax_default button" title="continue registeration">
+        <div id="u47_div" class=""></div>
+        <div id="u47_text" class="text ">
+          <input action="RegModification.jsp" type="submit" value="back"/></div>  
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <!-- ID -->
+      <div id="u48" class="ax_default label">
+        <div id="u48_div" class=""></div>
+        <div id="u48_text" class="text ">
+          <p><span>2547836</span></p><p><span><br></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u49" class="ax_default label">
+        <div id="u49_div" class=""></div>
+        <div id="u49_text" class="text ">
+          <p><span>nada abdallah</span></p><p><span><br></span></p>
+        </div>
+      </div>
+      
+      <!-- Unnamed (Rectangle) -->
+      <div id="u50" class="ax_default paragraph">
+        <div id="u50_div" class=""></div>
+        <div id="u50_text" class="text ">
+          <p><span>245</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u51" class="ax_default paragraph">
+        <div id="u51_div" class=""></div>
+        <div id="u51_text" class="text ">
+          <p><span>22</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u52" class="ax_default paragraph">
+        <div id="u52_div" class=""></div>
+        <div id="u52_text" class="text ">
+          <p><span>180</span></p>
+        </div>
+      </div>
+      
+      <!-- Unnamed (Rectangle) -->
+      <div id="u53" class="ax_default paragraph">
+        <div id="u53_div" class=""></div>
+        <div id="u53_text" class="text ">
+          <p><span>EGP</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u54" class="ax_default label">
+        <div id="u54_div" class=""></div>
+        <div id="u54_text" class="text ">
+          <p><span>Branch Id:</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u55" class="ax_default label">
+        <div id="u55_div" class=""></div>
+      </div>
+      
+      <!-- Unnamed (Rectangle) -->
+      <div id="u56" class="ax_default paragraph">
+        <div id="u56_div" class=""></div>
+        <div id="u56_text" class="text ">
+          <p><span>16003254783647</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u57" class="ax_default label">
+        <div id="u57_div" class=""></div>
+        <div id="u57_text" class="text ">
           <p><span>Account ID:</span></p>
         </div>
       </div>
-
-      <!-- Unnamed (Text Field) -->
-      <div id="u21" class="ax_default text_field" title="branch id">
-        <input id="u21_input" type="text" value="" title="branch id"/>
-      </div>
     </div>
+      
         
     </form:form>
     
-    <script type="text/javascript">
-			$(document).ready(function() {
-				$("#form").submit(function() {  
-					$.post($(this).attr("action"), $(this).serialize(), function(html) {
-						$("#formsContent").replaceWith(html);
-						$('html, body').animate({ scrollTop: $("#message").offset().top }, 500);
-					});
-					return false;  
-				});			
-			});
-		</script>
+    
     </body>
 
 
