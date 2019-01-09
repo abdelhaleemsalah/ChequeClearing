@@ -1,5 +1,7 @@
 package com.egabi.blockchain.chequeClearing.controllers;
 
+import java.math.BigDecimal;
+
 import javax.validation.Valid;
 
 import org.springframework.mvc.extensions.ajax.AjaxUtils;
@@ -68,6 +70,13 @@ public class FormController {
 			System.out.println("inside process submit");
 			FormBean formBean1= new FormBean();
 			formBean1.setAccountnumber("111111");
+			formBean1.setBankid("CIB");
+			formBean1.setChequecurrency("EGP");
+			formBean1.setBranchcode(new BigDecimal(104));
+			formBean1.setChequeserialNOfrom(new BigDecimal(5));
+			formBean1.setChequeserialNOto(new BigDecimal(20));
+			formBean1.setCustomerid(new BigDecimal(578369));
+			formBean1.setCustomername("hhhhhhh");
 			model.addAttribute("formBean",formBean1);
 			return "RegConfirmation";	
 				

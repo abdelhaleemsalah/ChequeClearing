@@ -10,7 +10,15 @@ public class FormBean {
 	private String bankid ;
 	private BigDecimal chequeserialNOfrom ;
 	private BigDecimal chequeserialNOto ;
-	private String chequecurreny ;
+	private String chequecurrency ;
+	public String getChequecurrency() {
+		return chequecurrency;
+	}
+
+	public void setChequecurrency(String chequecurrency) {
+		this.chequecurrency = chequecurrency;
+	}
+
 	private BigDecimal chequebookserialNO ;
 	
 	public BigDecimal getCustomerid() 
@@ -62,13 +70,7 @@ public class FormBean {
 		this.chequeserialNOto = chequeserialNOto;
 	}
 
-	public String getChequecurreny() {
-		return chequecurreny;
-	}
-
-	public void setChequecurreny(String chequecurreny) {
-		this.chequecurreny = chequecurreny;
-	}
+	
 
 	public BigDecimal getChequebookserialNO() {
 		return chequebookserialNO;

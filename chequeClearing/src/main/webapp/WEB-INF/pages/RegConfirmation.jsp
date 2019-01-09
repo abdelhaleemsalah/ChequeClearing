@@ -5,9 +5,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 
-
-
-
 <head>
         <title>Hello World!</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -30,9 +27,6 @@
 		<!--<form action="${logoutUrl}" method="post" id="logoutForm">-->
 		<form:form id="RegConfirmation"  method="post" modelAttribute="formBean" >
 		
-		
-		xcxcxc
-		<h3>Path variable 'account': ${formBean.accountnumber}</h3>
 			<div id="base" class="">
       <!-- Unnamed (Rectangle) -->
       <div id="u38" class="ax_default heading_2">
@@ -113,7 +107,7 @@
       <div id="u48" class="ax_default label">
         <div id="u48_div" class=""></div>
         <div id="u48_text" class="text ">
-          <p><span>2547836</span></p><p><span><br></span></p>
+          <p>${formBean.customerid}<br></span></p>
         </div>
       </div>
 
@@ -121,7 +115,7 @@
       <div id="u49" class="ax_default label">
         <div id="u49_div" class=""></div>
         <div id="u49_text" class="text ">
-          <p><span>nada abdallah</span></p><p><span><br></span></p>
+          <p>${formBean.customername}</p><p><span><br></span></p>
         </div>
       </div>
       
@@ -129,7 +123,7 @@
       <div id="u50" class="ax_default paragraph">
         <div id="u50_div" class=""></div>
         <div id="u50_text" class="text ">
-          <p><span>245</span></p>
+          <p>${formBean.bankid} - ${formBean.branchcode}</p>
         </div>
       </div>
 
@@ -137,7 +131,7 @@
       <div id="u51" class="ax_default paragraph">
         <div id="u51_div" class=""></div>
         <div id="u51_text" class="text ">
-          <p><span>22</span></p>
+          <p>${formBean.chequeserialNOfrom}</p>
         </div>
       </div>
 
@@ -145,7 +139,7 @@
       <div id="u52" class="ax_default paragraph">
         <div id="u52_div" class=""></div>
         <div id="u52_text" class="text ">
-          <p><span>180</span></p>
+          <p>${formBean.chequeserialNOto}</p>
         </div>
       </div>
       
@@ -153,7 +147,7 @@
       <div id="u53" class="ax_default paragraph">
         <div id="u53_div" class=""></div>
         <div id="u53_text" class="text ">
-          <p><span>EGP</span></p>
+          <p>${formBean.chequecurrency}</p>
         </div>
       </div>
 
@@ -174,7 +168,7 @@
       <div id="u56" class="ax_default paragraph">
         <div id="u56_div" class=""></div>
         <div id="u56_text" class="text ">
-          <p><span>16003254783647</span></p>
+          <p>${formBean.accountnumber}</p>
         </div>
       </div>
 
@@ -192,18 +186,4 @@
     
     
     </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </html>
