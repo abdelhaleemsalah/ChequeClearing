@@ -47,9 +47,21 @@ public class FormController {
 
 	
 	@PostMapping
-	public String processSubmit(@Valid FormBean formBean, BindingResult result, 
+	public String processSubmit(@RequestParam(value="pageName") String page,@Valid FormBean formBean, BindingResult result, 
 								@ModelAttribute("ajaxRequest") boolean ajaxRequest, 
 								Model model) {
+		
+		
+		System.out.println("inside processSubmit");
+		System.out.println("pageName            "+page);
+		String returnPage=null;
+		if(page.equalsIgnoreCase("RegConfirmation"))
+		{
+			returnPage= "hello";
+		}
+		else if(page.equalsIgnoreCase("hello"))
+		{
+		
 		if (result.hasErrors()) {
 			return null;
 		}
@@ -78,9 +90,11 @@ public class FormController {
 			formBean1.setCustomerid(new BigDecimal(578369));
 			formBean1.setCustomername("hhhhhhh");
 			model.addAttribute("formBean",formBean1);
-			return "RegConfirmation";	
+			returnPage= "RegConfirmation";	
 				
 		}
+		}
+		return returnPage;
 	}
 	
 }

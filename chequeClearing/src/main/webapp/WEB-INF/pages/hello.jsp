@@ -30,7 +30,7 @@
 		
 		
 		
-
+	<form:hidden path = "pageName" value = "hello" />
 			
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />

@@ -11,6 +11,7 @@ public class FormBean {
 	private BigDecimal chequeserialNOfrom ;
 	private BigDecimal chequeserialNOto ;
 	private String chequecurrency ;
+	private String pageName;
 	public String getChequecurrency() {
 		return chequecurrency;
 	}
@@ -87,6 +88,15 @@ public class FormBean {
 	public void setAccountnumber(String accountnumber) {
 		this.accountnumber = accountnumber;
 	}
-	
+
+	public String getPageName() {
+		return pageName;
+	}
+
+	public void setPageName(String pageName) {
+		this.pageName = pageName;
+	}
+
+
 	}
         
