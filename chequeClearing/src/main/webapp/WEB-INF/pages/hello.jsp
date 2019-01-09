@@ -7,7 +7,7 @@
 
 
 <head>
-        <title>Hello World    !</title>
+        <title>Hello World!</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -61,7 +61,7 @@
 
       <!-- Unnamed (Text Field) -->
       <div id="u7" class="ax_default text_field" title="from cheque serial number">
-        <input id="u7_input" type="text" value="" title="from cheque serial number"/>
+        <form:input path="chequeserialNOfrom" id="u7_input" type="text" value="" title="from cheque serial number"/>
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -74,7 +74,7 @@
 
       <!-- Unnamed (Text Field) -->
       <div id="u9" class="ax_default text_field" title="to cheque serial number">
-        <input id="u9_input" type="text" value="" title="to cheque serial number"/>
+      	<form:input path="chequeserialNOto" id="u9_input" type="text" value="" title="to cheque serial number"/>
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -87,7 +87,7 @@
 
       <!-- Unnamed (Text Field) -->
       <div id="u11" class="ax_default text_field" title="Cif Id">
-        <input id="u11_input" type="text" value="" title="Cif Id"/>
+        <form:input path="customerid" id="u11_input" type="text" value="" title="Cif Id"/>
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -100,7 +100,7 @@
 
       <!-- Unnamed (Text Field) -->
       <div id="u13" class="ax_default text_field" title="branch id">
-        <input id="u13_input" type="text" value="" title="branch id"/>
+        <form:input path="bankid" id="u13_input" type="text" value="" title="Bank id"/>
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -113,7 +113,7 @@
 
       <!-- Unnamed (Droplist) -->
       <div id="u15" class="ax_default droplist" title="cheque currency">
-        <select id="u15_input" title="cheque currency">
+        <form:select id="u15_input" title="cheque currency" path="chequecurrency">
           <option value="EGP">EGP</option>
           <option value="USD">USD</option>
           <option value="EUR">EUR</option>
@@ -125,7 +125,7 @@
           <option value="IQD">IQD</option>
           <option value="KWD">KWD</option>
           <option value="CHF">CHF</option>
-        </select>
+        </form:select>
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -145,7 +145,7 @@
 
       <!-- Unnamed (Text Field) -->
       <div id="u18" class="ax_default text_field" title="branch id">
-        <input id="u18_input" type="text" value="" title="branch id"/>
+      	<form:input path="customername" id="u18_input" type="text" value="" title="Customer Name"/>
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -166,8 +166,8 @@
       </div>
 
       <!-- Unnamed (Text Field) -->
-      <div id="u21" class="ax_default text_field" title="branch id">
-        <input id="u21_input" type="text" value="" title="branch id"/>
+      <div id="u21" class="ax_default text_field" title="branch id"> 	
+      	<form:input path="accountnumber" id="u21_input" type="text" value="" title="Account Id"/>
       </div>
     </div>
         

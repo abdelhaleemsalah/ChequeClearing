@@ -130,7 +130,7 @@
       <div id="u50" class="ax_default paragraph">
         <div id="u50_div" class=""></div>
         <div id="u50_text" class="text ">
-          <p>${formBean.bankid} - ${formBean.branchcode}</p>
+          <p>${formBean.bankid}</p>
         </div>
       </div>
 
