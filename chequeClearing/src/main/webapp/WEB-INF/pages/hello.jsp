@@ -14,7 +14,6 @@
 	    <meta name="apple-mobile-web-app-capable" content="yes" />
 		<link href="./resources/css/styles.css" type="text/css" rel="stylesheet"/>
 		<link href="./resources/css/styles_registeration.css" type="text/css" rel="stylesheet"/>
-		<link href="./resources/css/styles_registerationConf.css" type="text/css" rel="stylesheet"/>
 		<link type="text/css" href="./resources/css/axure_rp_page.css" rel="Stylesheet" />
 	    <link type="text/css" href="./resources/css/jquery-ui-themes.css" rel="Stylesheet" />
 	    <script src="./resources/js/jquery-1.7.1.min.js"></script>
