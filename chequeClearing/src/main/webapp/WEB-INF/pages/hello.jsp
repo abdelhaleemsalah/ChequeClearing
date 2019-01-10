@@ -22,18 +22,20 @@
     
     <body>
    		
-   	 <form:form method = "GET" >
+  	<!--   <form:form method = "GET" >
          <input type = "submit" action = "/search" value = "Search"/>
-     </form:form>
-   		
+     </form:form> -->
+   		        <form id="searchForm" name="tformest"  action="<c:url value="/search" />"  method="get"  >
+						<input id="requestReaderSubmit" type="submit" value=Search />
+						
+		</form>
    		
     		<!-- For login portalUser -->
 		<c:url value="/logout" var="logoutUrl" />
-		<!--<form action="${logoutUrl}" method="post" id="logoutForm">-->
-		<form:form id="hello"  method="post" action="hello"  modelAttribute="formBean" >
+		<form:form id="hello" action="hello"  method="post" modelAttribute="formBean" >
 		
 		
-	<form:hidden path = "pageName" value = "hello" />
+	<!--<form:hidden path = "pageName" value = "hello" />-->
 			
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
@@ -135,8 +137,19 @@
       <div id="u16" class="ax_default button" title="continue registeration">
         <div id="u16_div" class=""></div>
         <div id="u16_text" class="text ">
-        <input type="submit" value="Save"/></div>  
+               <form id="saveForm" name="tformest"  action="<c:url value="/hello" />"  method="post"  >
+						<input id="requestReaderSubmit" type="submit" value=Save />
+						<form:hidden path = "pageName" value = "hello" />
+		</form>
+      
+      </div>  
       </div>
+      
+      
+      
+      
+      
+      
 
       <!-- Unnamed (Rectangle) -->
       <div id="u17" class="ax_default label">

@@ -52,4 +52,11 @@ public class HomeController {
         return "upload";
     }
 
+    
+    @RequestMapping(value = "/search", method = RequestMethod.GET) 
+	public String displayConfirmation()
+	{
+    	
+	return "search"; 
+	}
 }

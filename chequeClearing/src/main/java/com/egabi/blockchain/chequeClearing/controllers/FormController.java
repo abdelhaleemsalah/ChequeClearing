@@ -67,6 +67,7 @@ public class FormController {
 		{
 		
 		if (result.hasErrors()) {
+			System.out.println("pageName has error binding            ");
 			return null;
 		}
 		//model.addAttribute("formBean",formBean);
@@ -76,6 +77,7 @@ public class FormController {
 		// Success response handling
 		System.out.println("account number "+formBean.getAccountnumber());
 		if (ajaxRequest) {
+			System.out.println("page has ajax            ");
 			// prepare model for rendering success message in this request
 			model.addAttribute("message", message);
 			return null;
