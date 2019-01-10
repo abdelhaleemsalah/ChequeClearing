@@ -46,42 +46,54 @@
 </head>
 <body onload='document.loginForm.username.focus();'>
 
-	<h1>Spring Security Login Form (Database + Hibernate Authentication)</h1>
+	<form name='loginForm' action="<c:url value='/login' />" method='POST'>
+	<div id="base" class="">
 
-	<div id="login-box">
+      <!-- Unnamed (Rectangle) -->
+      <div id="u0" class="ax_default button" title="login">
+        <div id="u0_div" class=""></div>
+        <div id="u0_text" class="text ">
+          <input name="submit" type="submit" value="submit" />
+        </div>
+      </div>
 
-		<h3>Login with Username and Password</h3>
+      <!-- Unnamed (Rectangle) -->
+      <div id="u1" class="ax_default heading_1">
+        <div id="u1_div" class=""></div>
+        <div id="u1_text" class="text ">
+          <p><span>Cheque Clearing</span></p>
+        </div>
+      </div>
 
-		<c:if test="${not empty error}">
-			<div class="error">${error}</div>
-		</c:if>
-		<c:if test="${not empty msg}">
-			<div class="msg">${msg}</div>
-		</c:if>
+      <!-- Unnamed (Rectangle) -->
+      <div id="u2" class="ax_default label">
+        <div id="u2_div" class=""></div>
+        <div id="u2_text" class="text ">
+          <p><span>Username:</span></p>
+        </div>
+      </div>
 
-		<form name='loginForm'
-			action="<c:url value='/login' />" method='POST'>
+      <!-- Unnamed (Rectangle) -->
+      <div id="u3" class="ax_default label">
+        <div id="u3_div" class=""></div>
+        <div id="u3_text" class="text ">
+          <p><span>Password:</span></p>
+        </div>
+      </div>
 
-			<table>
-				<tr>
-					<td>User:</td>
-					<td><input type='text' name='username' value="superuser"></td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-					<td><input type='password' name='password' value="password" ></td>
-				</tr>
-				<tr>
-					<td colspan='2'><input name="submit" type="submit"
-						value="submit" /></td>
-				</tr>
-			</table>
+      <!-- Unnamed (Text Field) -->
+      <div id="u4" class="ax_default text_field" title="username">
+        <input id="u4_input" type="text" name="username" title="username"/>
+      </div>
 
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-
-		</form>
-	</div>
+      <!-- Unnamed (Text Field) -->
+      <div id="u5" class="ax_default text_field" title="password">
+        <input id="u5_input" type="password" name="password" title="password" maxlength="15"/>
+        
+      </div>
+    </div> 
+	</form>
+	
 	
 </body>
 </html>
