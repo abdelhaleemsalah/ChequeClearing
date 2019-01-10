@@ -22,12 +22,16 @@
     </head>
     
     <body>
-   
+   		
+   	 <form:form method = "GET" >
+         <input type = "submit" action = "/search" value = "Search"/>
+     </form:form>
+   		
+   		
     		<!-- For login portalUser -->
 		<c:url value="/logout" var="logoutUrl" />
 		<!--<form action="${logoutUrl}" method="post" id="logoutForm">-->
 		<form:form id="hello"  method="post" action="hello"  modelAttribute="formBean" >
-		
 		
 		
 	<form:hidden path = "pageName" value = "hello" />
@@ -174,17 +178,6 @@
     </form:form>
 
     </body>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

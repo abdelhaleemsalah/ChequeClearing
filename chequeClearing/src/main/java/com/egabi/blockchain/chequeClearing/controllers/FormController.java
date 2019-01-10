@@ -97,8 +97,8 @@ public class FormController {
 			ChequeBookDetail newCreatedChequeBook=new ChequeBookDetail();
 			newCreatedChequeBook.setAccountId(new BigDecimal(formBean.getAccountnumber()));
 			newCreatedChequeBook.setBankCode(formBean.getBankid());
-			newCreatedChequeBook.setBranchId(new BigDecimal(107));
-			newCreatedChequeBook.setChequeBookId(new BigDecimal(1));
+			newCreatedChequeBook.setBranchId(new BigDecimal(77));
+			newCreatedChequeBook.setChequeBookId(new BigDecimal(2));
 			newCreatedChequeBook.setChequeSrNoFrom(formBean.getChequeserialNOfrom());
 			newCreatedChequeBook.setChequeSrNoTo(formBean.getChequeserialNOto());
 			newCreatedChequeBook.setCustomerName(formBean.getCustomername());

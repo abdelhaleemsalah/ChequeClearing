@@ -4,6 +4,14 @@
 <html>
 <head>
 <title>Login Page</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/styles_login.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/js/jquery-1.7.1.min.js"></script>
+    <script src="resources/js/jquery-ui-1.8.10.custom.min.js"></script>
 <style>
 .error {
 	padding: 15px;
@@ -74,6 +82,6 @@
 
 		</form>
 	</div>
-
+	
 </body>
 </html>

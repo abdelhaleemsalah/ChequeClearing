@@ -16,9 +16,15 @@ public class ChequeBookSavingServiceImpl implements ChequeBookSavingService{
 	@Transactional
 	public void saveChequeBook(ChequeBookDetail chequebook) {
 		// TODO Auto-generated method stub
-		
-	
 		chequebookRepo.save(chequebook);
 	}
+	@Override
+	public ChequeBookDetail selectChequeBySerial(long srNo) {
+		// TODO Auto-generated method stub
+		ChequeBookDetail selectedCheque=new ChequeBookDetail();
+		selectedCheque=chequebookRepo.findOne(srNo);
+		return selectedCheque;
+	}
+	
 
 }
