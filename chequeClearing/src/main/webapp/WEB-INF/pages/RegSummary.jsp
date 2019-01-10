@@ -13,7 +13,7 @@
     <link href="resources/css/styles_regsummary.css" type="text/css" rel="stylesheet"/>
     <script src="resources/scripts/jquery-1.7.1.min.js"></script>
     <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
-<title>Insert title here</title>
+<title>Cheque Registerationn Summary</title>
 </head>
 <body>
 	<div id="base" class="">
