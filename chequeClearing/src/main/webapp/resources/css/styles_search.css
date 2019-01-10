@@ -35,12 +35,12 @@ body {
   color:#000000;
   text-align:left;
 }
-#u7_img {
+#u7_button {
   border-width:0px;
   position:absolute;
-  left:0px;
-  top:0px;
-  width:32px;
+  left:500px;
+  top:155px;
+  width:60px;
   height:25px;
 }
 #u7 {
@@ -91,3 +91,4 @@ body {
   width:273px;
   word-wrap:break-word;
 }
+

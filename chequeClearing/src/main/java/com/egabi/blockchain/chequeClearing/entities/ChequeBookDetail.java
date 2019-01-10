@@ -26,13 +26,13 @@ public class ChequeBookDetail implements Serializable {
 
 	@Id
 	@Column(name="CHEQUE_BOOK_ID")
-	private BigDecimal chequeBookId;
+	private long chequeBookId;
 
 	@Column(name="CHEQUE_SR_NO_FROM")
-	private BigDecimal chequeSrNoFrom;
+	private long chequeSrNoFrom;
 
 	@Column(name="CHEQUE_SR_NO_TO")
-	private BigDecimal chequeSrNoTo;
+	private long chequeSrNoTo;
 
 	private String currency;
 
@@ -66,27 +66,27 @@ public class ChequeBookDetail implements Serializable {
 		this.branchId = branchId;
 	}
 
-	public BigDecimal getChequeBookId() {
+	public long getChequeBookId() {
 		return this.chequeBookId;
 	}
 
-	public void setChequeBookId(BigDecimal chequeBookId) {
+	public void setChequeBookId(long chequeBookId) {
 		this.chequeBookId = chequeBookId;
 	}
 
-	public BigDecimal getChequeSrNoFrom() {
+	public long getChequeSrNoFrom() {
 		return this.chequeSrNoFrom;
 	}
 
-	public void setChequeSrNoFrom(BigDecimal chequeSrNoFrom) {
+	public void setChequeSrNoFrom(long chequeSrNoFrom) {
 		this.chequeSrNoFrom = chequeSrNoFrom;
 	}
 
-	public BigDecimal getChequeSrNoTo() {
+	public long getChequeSrNoTo() {
 		return this.chequeSrNoTo;
 	}
 
-	public void setChequeSrNoTo(BigDecimal chequeSrNoTo) {
+	public void setChequeSrNoTo(long chequeSrNoTo) {
 		this.chequeSrNoTo = chequeSrNoTo;
 	}
 

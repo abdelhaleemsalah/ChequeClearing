@@ -63,6 +63,7 @@ public class FormController {
 		{
 			returnPage= "hello";
 		}
+		
 		else if(page.equalsIgnoreCase("hello"))
 		{
 		
@@ -100,7 +101,7 @@ public class FormController {
 			newCreatedChequeBook.setAccountId(new BigDecimal(formBean.getAccountnumber()));
 			newCreatedChequeBook.setBankCode(formBean.getBankid());
 			newCreatedChequeBook.setBranchId(new BigDecimal(77));
-			newCreatedChequeBook.setChequeBookId(new BigDecimal(2));
+			newCreatedChequeBook.setChequeBookId(new Long("1"));
 			newCreatedChequeBook.setChequeSrNoFrom(formBean.getChequeserialNOfrom());
 			newCreatedChequeBook.setChequeSrNoTo(formBean.getChequeserialNOto());
 			newCreatedChequeBook.setCustomerName(formBean.getCustomername());
