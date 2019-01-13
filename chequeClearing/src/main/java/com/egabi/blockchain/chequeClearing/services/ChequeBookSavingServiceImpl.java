@@ -1,8 +1,14 @@
 package com.egabi.blockchain.chequeClearing.services;
 
-import java.math.BigDecimal;
+import java.sql.ResultSet;
+
+import javax.naming.spi.DirStateFactory.Result;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +20,10 @@ public class ChequeBookSavingServiceImpl implements ChequeBookSavingService{
 
 	@Autowired
 	private ChequebookRepository chequebookRepo;
+	
+	@PersistenceContext
+    private EntityManager em;
+	
 	@Override
 	@Transactional
 	public void saveChequeBook(ChequeBookDetail chequebook) {
@@ -27,6 +37,11 @@ public class ChequeBookSavingServiceImpl implements ChequeBookSavingService{
 		selectedCheque=chequebookRepo.findOne(srNo);
 		return selectedCheque;
 	}
-	
+	@Override
+	public ChequeBookDetail findOneWithSRnoAndAccNo(long srNo, Long accNo)
+	{
+		ChequeBookDetail chequebook= chequebookRepo.findOneWithSRnoAndAccNo(srNo, accNo);
+		return chequebook;
+	}
 
 }

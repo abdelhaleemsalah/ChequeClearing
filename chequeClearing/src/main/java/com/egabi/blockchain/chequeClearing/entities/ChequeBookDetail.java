@@ -2,7 +2,7 @@ package com.egabi.blockchain.chequeClearing.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.math.BigDecimal;
+
 
 
 /**
@@ -16,13 +16,13 @@ public class ChequeBookDetail implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="ACCOUNT_ID")
-	private BigDecimal accountId;
+	private long accountId;
 
 	@Column(name="BANK_CODE")
 	private String bankCode;
 
 	@Column(name="BRANCH_ID")
-	private BigDecimal branchId;
+	private long branchId;
 
 	@Id
 	@Column(name="CHEQUE_BOOK_ID")
@@ -42,11 +42,11 @@ public class ChequeBookDetail implements Serializable {
 	public ChequeBookDetail() {
 	}
 
-	public BigDecimal getAccountId() {
+	public long getAccountId() {
 		return this.accountId;
 	}
 
-	public void setAccountId(BigDecimal accountId) {
+	public void setAccountId(long accountId) {
 		this.accountId = accountId;
 	}
 
@@ -58,11 +58,11 @@ public class ChequeBookDetail implements Serializable {
 		this.bankCode = bankCode;
 	}
 
-	public BigDecimal getBranchId() {
+	public long getBranchId() {
 		return this.branchId;
 	}
 
-	public void setBranchId(BigDecimal branchId) {
+	public void setBranchId(long branchId) {
 		this.branchId = branchId;
 	}
 

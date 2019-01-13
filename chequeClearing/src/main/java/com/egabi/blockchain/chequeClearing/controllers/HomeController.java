@@ -1,24 +1,25 @@
 package com.egabi.blockchain.chequeClearing.controllers;
 
 import com.egabi.blockchain.chequeClearing.entities.ChequeBookDetail;
+import com.egabi.blockchain.chequeClearing.repositories.ChequebookRepository;
 import com.egabi.blockchain.chequeClearing.services.ChequeBookSavingService;
 import com.egabi.blockchain.chequeClearing.services.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
-import java.math.BigDecimal;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 import java.util.stream.Collectors;
-
-import javax.validation.Valid;
 
 @Controller
 public class HomeController {
@@ -29,6 +30,9 @@ public class HomeController {
     @Autowired
     private ChequeBookSavingService chequeBookSavingService;
 
+	@Autowired
+	ResourceLoader resourceLoader;
+	
     @GetMapping("/login")
     public String login()
     {
@@ -69,21 +73,48 @@ public class HomeController {
 	}
     
     @RequestMapping(value = "/SearchResult", method = RequestMethod.POST) 
-	public String displaySearchResult(@RequestParam("chequeSRno") long serialno, Model model)
+	public String displaySearchResult(@RequestParam("chequeSRno") long serialno, 
+	@RequestParam("bankid") String bankid, @RequestParam("accNo") long accNo,
+	Model model)
 	{
     	FormBean formBean = new FormBean();
     	System.out.println("Cheque SR no: "+serialno);
-    	ChequeBookDetail chequebook=new ChequeBookDetail();
-    	chequebook=chequeBookSavingService.selectChequeBySerial(serialno);
-    	System.out.println("Chequebook currency: "+chequebook.getCurrency());
-    	if((serialno >= chequebook.getChequeSrNoFrom()) && 
-    	   (serialno <= chequebook.getChequeSrNoTo())){	
-    		formBean.setCustomername(chequebook.getCustomerName());
-    		formBean.setAccountnumber(chequebook.getAccountId().toString());
-    		formBean.setChequecurrency(chequebook.getCurrency());
-    		model.addAttribute("formBean",formBean);
-    		return "/SearchResult";
-    	}
-    	return null;
+    	System.out.println("Cheque bank id: "+bankid);
+    	System.out.println("Cheque bank id: "+accNo);
+    	
+    	InputStream input = null;
+		Properties prop=new Properties();
+		String propBankId="";
+		try 
+		{
+			input=resourceLoader.getResource("classpath:bankconfig.properties").getInputStream();
+			prop.load(input);
+			System.out.println("prop get bank id: "+prop.getProperty("mybank"));	
+			propBankId=prop.getProperty("mybank");
+		} 
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(bankid.equals(propBankId))
+		{
+	    	ChequeBookDetail chequebook=chequeBookSavingService.findOneWithSRnoAndAccNo(serialno, accNo);
+	    	System.out.println("Cheque customer name: "+chequebook.getCustomerName());
+	    	
+	    	
+	    	formBean.setCustomername(chequebook.getCustomerName());
+	    	formBean.setAccountnumber(String.valueOf(chequebook.getAccountId()));
+	    	formBean.setChequecurrency(chequebook.getCurrency());
+	    	model.addAttribute("formBean",formBean);
+	    	return "/SearchResult";
+		}
+		else
+		{
+			//call block chain
+			System.out.println("Bank is not CIB");
+			return "/SearchResult";
+		}
 	}
 }

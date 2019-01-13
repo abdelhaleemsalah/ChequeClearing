@@ -99,13 +99,20 @@
       <div id="u12" class="ax_default label">
         <div id="u12_div" class=""></div>
         <div id="u12_text" class="text ">
-          <p><span>Branch ID:</span></p>
+          <p><span>Bank Code:</span></p>
         </div>
       </div>
 
-      <!-- Unnamed (Text Field) -->
-      <div id="u13" class="ax_default text_field" title="branch id">
-        <form:input path="bankid" id="u13_input" type="text" value="" title="Bank id"/>
+      
+       <!-- Unnamed (Droplist) -->
+      <div id="u13" class="ax_default droplist" title="branch id">
+        <form:select id="u13_input" title="Bank id" path="bankid">
+          <option value="HSBC">HSBC</option>
+          <option value="CIB">CIB</option>
+          <option value="MISR">MISR</option>
+          <option value="EDBE">EDBE</option>
+          <option value="ABK">ABK</option>
+        </form:select>
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -144,12 +151,6 @@
       
       </div>  
       </div>
-      
-      
-      
-      
-      
-      
 
       <!-- Unnamed (Rectangle) -->
       <div id="u17" class="ax_default label">

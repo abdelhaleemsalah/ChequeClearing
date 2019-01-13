@@ -1,10 +1,13 @@
 package com.egabi.blockchain.chequeClearing.controllers;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
-
+import java.util.Properties;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.mvc.extensions.ajax.AjaxUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,14 +24,16 @@ import com.egabi.blockchain.chequeClearing.services.ChequeBookSavingService;
 @Controller
 @RequestMapping("/hello")
 @SessionAttributes("formBean")
+//@PropertySource("classpath:resources/bankconfig.properties")
 public class FormController {
 
 	// Invoked on every request
 
+	@Autowired
+	ResourceLoader resourceLoader;
 	
 	@Autowired
     private ChequeBookSavingService chequeBookSavingService;
-	
 	
 	@ModelAttribute
 	public void ajaxAttribute(WebRequest request, Model model) {
@@ -48,7 +53,9 @@ public class FormController {
 		return new FormBean();
 	}
 
-
+	public Resource loadProperty() {
+	    return  resourceLoader.getResource("classpath:resources/bankconfig.properties");
+	}
 	
 	@PostMapping
 	public String processSubmit(@RequestParam(value="pageName") String page,@Valid FormBean formBean, BindingResult result, 
@@ -82,7 +89,9 @@ public class FormController {
 			// prepare model for rendering success message in this request
 			model.addAttribute("message", message);
 			return null;
-		} else {
+		} 
+		else 
+		{
 			// store a success message for rendering on the next request after redirect
 			// redirect back to the form to render the success message along with newly bound values
 			//redirectAttrs.addFlashAttribute("message", message);
@@ -95,27 +104,44 @@ public class FormController {
 			formBean1.setChequeserialNOfrom(new BigDecimal(5));
 			formBean1.setChequeserialNOto(new BigDecimal(20));
 			formBean1.setCustomerid(new BigDecimal(578369));
-			formBean1.setCustomername("hhhhhhh");*/
+			form[]Bean1.setCustomername("hhhhhhh");*/
 			
 			ChequeBookDetail newCreatedChequeBook=new ChequeBookDetail();
-			newCreatedChequeBook.setAccountId(new BigDecimal(formBean.getAccountnumber()));
+			newCreatedChequeBook.setAccountId(Long.getLong(formBean.getAccountnumber()));
 			newCreatedChequeBook.setBankCode(formBean.getBankid());
-			newCreatedChequeBook.setBranchId(new BigDecimal(77));
+			newCreatedChequeBook.setBranchId(Long.getLong("77"));
 			newCreatedChequeBook.setChequeBookId(new Long("1"));
 			newCreatedChequeBook.setChequeSrNoFrom(formBean.getChequeserialNOfrom());
 			newCreatedChequeBook.setChequeSrNoTo(formBean.getChequeserialNOto());
 			newCreatedChequeBook.setCustomerName(formBean.getCustomername());
 			newCreatedChequeBook.setCurrency(formBean.getChequecurrency());
-			
-			
+				
 			chequeBookSavingService.saveChequeBook(newCreatedChequeBook);
-			
+				
 			model.addAttribute("formBean",formBean);
 			returnPage= "RegConfirmation";	
+		}
+			/*else 
+			{
+				System.out.println("Bank id from view: "+formBean.getBankid());
+				InputStream input = null;
+				Properties prop=new Properties();
 				
-		}
-		}
-		return returnPage;
+				try 
+				{
+					input=resourceLoader.getResource("classpath:bankconfig.properties").getInputStream();
+					prop.load(input);
+					System.out.println("prop get bank id: "+prop.getProperty(formBean.getBankid()));	
+				} 
+				catch (IOException e) 
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				returnPage= "RegConfirmation";	
+			}	*/			
+		
+	  }
+	  return returnPage;
 	}
-	
 }
