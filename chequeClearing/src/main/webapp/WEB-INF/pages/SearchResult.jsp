@@ -17,13 +17,21 @@
 </head>
 <body>
 	
-	<form:form id="hello"  method="post" modelAttribute="formBean" >
+	<form:form id="submittingSummary"  method="post" action="submittingSummary" modelAttribute="formBean" >
 	<div id="base" class="">
 
-      <!-- Unnamed (Text Field) -->
-      <div id="u9" class="ax_default text_field">
-        <input id="u9_input" type="number" maxlength="14"/>
-      </div>
+      <!-- Unnamed (Rectangle) -->
+	      <div id="u5" class="ax_default label">
+	        <div id="u5_div" class=""></div>
+	        <div id="u5_text" class="text ">
+	          <p><span>Cheque Serial Number:</span></p>
+	        </div>
+	      </div>
+	  
+	      <!-- Unnamed (Text Field) -->
+	      <div id="u6" class="ax_default text_field">
+	        <p>"${formBean.chequeserialNO}</p>
+	      </div>
 
       <!-- Unnamed (Rectangle) -->
       <div id="u11" class="ax_default box_1">
@@ -43,7 +51,7 @@
 
       <!-- Unnamed (Text Field) -->
       <div id="u13" class="ax_default text_field">
-        <input id="u13_input" type="text" value=""/>
+        <form:input path="chequeAmount" id="u13_input" type="text" value=""/>
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -64,7 +72,7 @@
 
       <!-- Unnamed (Text Field) -->
       <div id="u16" class="ax_default text_field">
-        <input id="u16_input" type="date" value=""/>
+        <form:input path="chequeDueDate" id="u16_input" type="date" value=""/>
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -116,10 +124,9 @@
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u23" class="ax_default button">
-        <div id="u23_div" class=""></div>
-        <div id="u23_text" class="text ">
-          <p><span>Save</span></p>
+      <div id="u0" class="ax_default button" title="login">
+        <div id="u0_text" class="text ">
+          <input name="submit" type="submit" class="u0_div" value="submit" title="submit"/>
         </div>
       </div>
 
@@ -135,9 +142,10 @@
             <p><span>Crossed Cheque </span></p>
           </div>
         </label>
-        <input id="u25_input" type="radio" value="radio" name="u25"/>
+        <input path="isCrossed" id="u25_input" type="radio" value="radio" name="u25"/>
       </div>
     </div>
+    
     </form:form>
 </body>
 </html>

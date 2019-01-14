@@ -52,12 +52,22 @@ body {
   width:375px;
   white-space:nowrap;
 }
-#u59_div {
+#u4_text 
+{
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:9px;
+  width:100px;
+  word-wrap:break-word;
+}
+.u4_div 
+{
   border-width:0px;
   position:absolute;
   left:0px;
   top:0px;
-  width:217px;
+  width:104px;
   height:40px;
   background:inherit;
   background-color:rgba(255, 255, 255, 1);
@@ -69,24 +79,16 @@ body {
   -moz-box-shadow:none;
   -webkit-box-shadow:none;
   box-shadow:none;
-  font-family:'Century Gothic Bold', 'Century Gothic';
+  font-family:'Century Gothic Bold', 'Century Gothic Regular', 'Century Gothic';
+  font-weight:700;
   font-style:normal;
+  font-size:18px;
+  color:#003366;
 }
-#u59 {
+#u7_button {
   border-width:0px;
   position:absolute;
-  left:269px;
-  top:276px;
-  width:217px;
-  height:40px;
-  font-family:'Century Gothic Bold', 'Century Gothic';
-  font-style:normal;
-}
-#u59_text {
-  border-width:0px;
-  position:absolute;
-  left:2px;
-  top:9px;
-  width:213px;
-  word-wrap:break-word;
+  left:230px;
+  top:270px;
+  width:300px;
 }

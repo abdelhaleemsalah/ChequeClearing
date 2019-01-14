@@ -1,16 +1,54 @@
 package com.egabi.blockchain.chequeClearing.controllers;
 
+import java.sql.Date;
 
-public class FormBean {
+public class ChequeFormBean 
+{
 	private String accountnumber ;
 	private long customerid ;
 	private String customername ;
 	private long branchcode ;
 	private String bankid ;
-	private long chequeserialNOfrom ;
-	private long chequeserialNOto ;
+	private long chequeserialNO ;
 	private String chequecurrency ;
 	private String pageName;
+	private long chequeAmount;
+	private boolean isCrossed;
+	private Date chequeDueDate;
+	
+	
+	public Date getChequeDueDate() {
+		return chequeDueDate;
+	}
+
+	public void setChequeDueDate(Date chequeDueDate) {
+		this.chequeDueDate = chequeDueDate;
+	}
+	
+	public long getChequeAmount() {
+		return chequeAmount;
+	}
+
+	public void setChequeAmount(long chequeAmount) {
+		this.chequeAmount = chequeAmount;
+	}
+
+	public boolean isCrossed() {
+		return isCrossed;
+	}
+
+	public void setCrossed(boolean isCrossed) {
+		this.isCrossed = isCrossed;
+	}
+
+	public long getChequeserialNO() {
+		return chequeserialNO;
+	}
+
+	public void setChequeserialNO(long chequeserialNO) {
+		this.chequeserialNO = chequeserialNO;
+	}
+
 	public String getChequecurrency() {
 		return chequecurrency;
 	}
@@ -52,22 +90,6 @@ public class FormBean {
 
 	public void setBankid(String bankid) {
 		this.bankid = bankid;
-	}
-
-	public long getChequeserialNOfrom() {
-		return chequeserialNOfrom;
-	}
-
-	public void setChequeserialNOfrom(long chequeserialNOfrom) {
-		this.chequeserialNOfrom = chequeserialNOfrom;
-	}
-
-	public long getChequeserialNOto() {
-		return chequeserialNOto;
-	}
-
-	public void setChequeserialNOto(long chequeserialNOto) {
-		this.chequeserialNOto = chequeserialNOto;
 	}
 
 	public long getChequebookserialNO() {

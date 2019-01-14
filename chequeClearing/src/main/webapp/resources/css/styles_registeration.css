@@ -320,7 +320,7 @@ body {
 #u15_input:disabled {
   color:grayText;
 }
-#u16_div {
+.u16_div {
   border-width:0px;
   position:absolute;
   left:0px;

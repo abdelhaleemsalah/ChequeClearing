@@ -135,7 +135,7 @@ body {
 #u13_input {
   position:absolute;
   left:0px;
-  top:0px;
+  top:10px;
   width:159px;
   height:25px;
   font-family:'Arial';
@@ -239,7 +239,7 @@ body {
 #u16_input {
   position:absolute;
   left:0px;
-  top:0px;
+  top:10px;
   width:159px;
   height:25px;
   font-family:'Arial';
@@ -491,7 +491,7 @@ body {
 #u22_text {
   border-width:0px;
   position:absolute;
-  left:0px;
+  left:-40px;
   top:0px;
   width:31px;
   white-space:nowrap;
@@ -608,4 +608,112 @@ body {
   position:absolute;
   left:-3px;
   top:-2px;
+}
+
+#u5 {
+  border-width:0px;
+  position:absolute;
+  left:40px;
+  top:296px;
+  width:124px;
+  height:36px;
+  font-family:'Century Gothic Bold', 'Century Gothic';
+  font-weight:700;
+  font-style:normal;
+  font-size:15px;
+  color:#990000;
+}
+#u5_text {
+  border-width:0px;
+  position:absolute;
+  left:60px;
+  top:-150px;
+  width:124px;
+  white-space:nowrap;
+}
+#u5_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:124px;
+  height:36px;
+  background:inherit;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  border-radius:0px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Century Gothic Bold', 'Century Gothic';
+  font-weight:700;
+  font-style:normal;
+  font-size:15px;
+  color:#990000;
+}
+
+#u6 {
+  border-width:0px;
+  position:absolute;
+  left:191px;
+  top:151px;
+  width:300px;
+  height:25px;
+}
+#u6_input {
+  position:absolute;
+  left:90px;
+  width:300px;
+  height:25px;
+  font-family:'Arial';
+  font-weight:400;
+  font-style:normal;
+  font-size:13px;
+  text-decoration:none;
+  color:#000000;
+  text-align:left;
+}
+.u0_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:300px;
+  width:104px;
+  height:40px;
+  background:inherit;
+  background-color:rgba(255, 255, 255, 1);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(121, 121, 121, 1);
+  border-radius:5px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Century Gothic Bold', 'Century Gothic Regular', 'Century Gothic';
+  font-weight:700;
+  font-style:normal;
+  font-size:18px;
+  color:#003366;
+}
+#u0 {
+  border-width:0px;
+  position:absolute;
+  left:293px;
+  top:323px;
+  width:104px;
+  height:40px;
+  font-family:'Century Gothic Bold', 'Century Gothic Regular', 'Century Gothic';
+  font-weight:700;
+  font-style:normal;
+  font-size:18px;
+  color:#003366;
+}
+#u0_text {
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:9px;
+  width:100px;
+  word-wrap:break-word;
 }

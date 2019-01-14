@@ -1,9 +1,12 @@
 package com.egabi.blockchain.chequeClearing.controllers;
 
 import com.egabi.blockchain.chequeClearing.entities.ChequeBookDetail;
-import com.egabi.blockchain.chequeClearing.repositories.ChequebookRepository;
+import com.egabi.blockchain.chequeClearing.entities.ChequeDetail;
 import com.egabi.blockchain.chequeClearing.services.ChequeBookSavingService;
+import com.egabi.blockchain.chequeClearing.services.ChequeDetailsSavingService;
 import com.egabi.blockchain.chequeClearing.services.StorageService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
@@ -18,8 +21,11 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Timestamp;
 import java.util.Properties;
 import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 @Controller
 public class HomeController {
@@ -29,6 +35,9 @@ public class HomeController {
     
     @Autowired
     private ChequeBookSavingService chequeBookSavingService;
+    
+    @Autowired
+    private ChequeDetailsSavingService ChequeDetailsSavingService;
 
 	@Autowired
 	ResourceLoader resourceLoader;
@@ -67,7 +76,7 @@ public class HomeController {
 
     
     @RequestMapping(value = "/search", method = RequestMethod.GET) 
-	public String displayConfirmation()
+	public String displaySearch()
 	{
     	return "search"; 
 	}
@@ -77,7 +86,8 @@ public class HomeController {
 	@RequestParam("bankid") String bankid, @RequestParam("accNo") long accNo,
 	Model model)
 	{
-    	FormBean formBean = new FormBean();
+    	String returnPage=null;
+    	ChequeFormBean singleChequeFormBean = new ChequeFormBean();
     	System.out.println("Cheque SR no: "+serialno);
     	System.out.println("Cheque bank id: "+bankid);
     	System.out.println("Cheque bank id: "+accNo);
@@ -103,18 +113,56 @@ public class HomeController {
 	    	ChequeBookDetail chequebook=chequeBookSavingService.findOneWithSRnoAndAccNo(serialno, accNo);
 	    	System.out.println("Cheque customer name: "+chequebook.getCustomerName());
 	    	
-	    	
-	    	formBean.setCustomername(chequebook.getCustomerName());
-	    	formBean.setAccountnumber(String.valueOf(chequebook.getAccountId()));
-	    	formBean.setChequecurrency(chequebook.getCurrency());
-	    	model.addAttribute("formBean",formBean);
-	    	return "/SearchResult";
+	    	if(chequebook!=null)
+	    	{
+		    	singleChequeFormBean.setChequeserialNO(serialno);
+		    	singleChequeFormBean.setCustomername(chequebook.getCustomerName());
+		    	singleChequeFormBean.setAccountnumber(String.valueOf(chequebook.getAccountId()));
+		    	singleChequeFormBean.setChequecurrency(chequebook.getCurrency());
+		    	singleChequeFormBean.setBankid(String.valueOf(chequebook.getBranchId()));
+		    	singleChequeFormBean.setBranchcode(chequebook.getBranchId());
+		    	model.addAttribute("formBean",singleChequeFormBean);
+		    	returnPage= "SearchResult";
+	    	}
 		}
 		else
 		{
 			//call block chain
 			System.out.println("Bank is not CIB");
-			return "/SearchResult";
+			returnPage= "SearchResult";
 		}
+		return returnPage;
 	}
+    @RequestMapping(value = "/submittingSummary", method = RequestMethod.POST) 
+	public String chequeSubmittingSummary(@Valid ChequeFormBean formBean, Model model)
+	{
+    	System.out.println("submitting summary: "+formBean.getChequeAmount());
+		ChequeDetail submittedCheque=new ChequeDetail();
+		
+    	if(formBean.isCrossed()==false)
+    		submittedCheque.setIsCrossed("N");
+    	else
+    		submittedCheque.setIsCrossed("Y");
+    		
+		submittedCheque.setAccountNo(formBean.getAccountnumber());
+		submittedCheque.setBankCode(formBean.getBankid());
+		submittedCheque.setBranchId(formBean.getBranchcode());
+		submittedCheque.setChequeAmount(formBean.getChequeAmount());
+		submittedCheque.setChequeBookId(formBean.getChequebookserialNO());
+		submittedCheque.setChequeCurrency(formBean.getChequecurrency());
+		submittedCheque.setChequeDueDate(new Timestamp(formBean.getChequeDueDate().getTime()));
+		submittedCheque.setChequeSrNo(formBean.getChequeserialNO());
+		submittedCheque.setPayToUsername(formBean.getCustomername());
+		submittedCheque.setStatus("SUBMITTED");
+		
+		ChequeDetailsSavingService.saveCheque(submittedCheque);
+		
+    	return "submittingSummary"; 
+	}
+    
+    /*@RequestMapping(value = "/SearchResult", method = RequestMethod.POST) 
+	public String displaySearchResult(@RequestParam("chequeSRno") long serialno, 
+	@RequestParam("bankid") String bankid, @RequestParam("accNo") long accNo,
+	Model model)
+	{}*/
 }

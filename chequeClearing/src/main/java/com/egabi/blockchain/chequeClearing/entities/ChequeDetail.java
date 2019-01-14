@@ -2,7 +2,6 @@ package com.egabi.blockchain.chequeClearing.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 
@@ -23,13 +22,13 @@ public class ChequeDetail implements Serializable {
 	private String bankCode;
 
 	@Column(name="BRANCH_ID")
-	private BigDecimal branchId;
+	private long branchId;
 
 	@Column(name="CHEQUE_AMOUNT")
-	private BigDecimal chequeAmount;
+	private long chequeAmount;
 
 	@Column(name="CHEQUE_BOOK_ID")
-	private BigDecimal chequeBookId;
+	private long chequeBookId;
 
 	@Column(name="CHEQUE_CURRENCY")
 	private String chequeCurrency;
@@ -39,7 +38,7 @@ public class ChequeDetail implements Serializable {
 
 	@Id
 	@Column(name="CHEQUE_SR_NO")
-	private BigDecimal chequeSrNo;
+	private long chequeSrNo;
 
 	@Column(name="IS_CROSSED")
 	private String isCrossed;
@@ -68,27 +67,27 @@ public class ChequeDetail implements Serializable {
 		this.bankCode = bankCode;
 	}
 
-	public BigDecimal getBranchId() {
+	public long getBranchId() {
 		return this.branchId;
 	}
 
-	public void setBranchId(BigDecimal branchId) {
+	public void setBranchId(long branchId) {
 		this.branchId = branchId;
 	}
 
-	public BigDecimal getChequeAmount() {
+	public long getChequeAmount() {
 		return this.chequeAmount;
 	}
 
-	public void setChequeAmount(BigDecimal chequeAmount) {
+	public void setChequeAmount(long chequeAmount) {
 		this.chequeAmount = chequeAmount;
 	}
 
-	public BigDecimal getChequeBookId() {
+	public long getChequeBookId() {
 		return this.chequeBookId;
 	}
 
-	public void setChequeBookId(BigDecimal chequeBookId) {
+	public void setChequeBookId(long chequeBookId) {
 		this.chequeBookId = chequeBookId;
 	}
 
@@ -108,11 +107,11 @@ public class ChequeDetail implements Serializable {
 		this.chequeDueDate = chequeDueDate;
 	}
 
-	public BigDecimal getChequeSrNo() {
+	public long getChequeSrNo() {
 		return this.chequeSrNo;
 	}
 
-	public void setChequeSrNo(BigDecimal chequeSrNo) {
+	public void setChequeSrNo(long chequeSrNo) {
 		this.chequeSrNo = chequeSrNo;
 	}
 

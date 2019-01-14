@@ -51,9 +51,8 @@
 
       <!-- Unnamed (Rectangle) -->
       <div id="u0" class="ax_default button" title="login">
-        <div id="u0_div" class=""></div>
         <div id="u0_text" class="text ">
-          <input name="submit" type="submit" value="submit" />
+          <input name="submit" type="submit" class="u0_div" value="submit" title="login"/>
         </div>
       </div>
 

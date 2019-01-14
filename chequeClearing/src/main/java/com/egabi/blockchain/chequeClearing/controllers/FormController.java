@@ -1,12 +1,7 @@
 package com.egabi.blockchain.chequeClearing.controllers;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.util.Properties;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.mvc.extensions.ajax.AjaxUtils;
 import org.springframework.stereotype.Controller;
@@ -52,10 +47,6 @@ public class FormController {
 	public FormBean createFormBean() {
 		return new FormBean();
 	}
-
-	public Resource loadProperty() {
-	    return  resourceLoader.getResource("classpath:resources/bankconfig.properties");
-	}
 	
 	@PostMapping
 	public String processSubmit(@RequestParam(value="pageName") String page,@Valid FormBean formBean, BindingResult result, 
@@ -69,6 +60,24 @@ public class FormController {
 		if(page.equalsIgnoreCase("RegConfirmation"))
 		{
 			returnPage= "hello";
+		}
+		else if(page.equalsIgnoreCase("RegSummary"))
+		{
+			System.out.println("account id: "+formBean.getAccountnumber());
+	    	
+			ChequeBookDetail newCreatedChequeBook=new ChequeBookDetail();
+			newCreatedChequeBook.setAccountId(Long.valueOf(formBean.getAccountnumber()));
+			newCreatedChequeBook.setBankCode(formBean.getBankid());
+			newCreatedChequeBook.setBranchId(Long.valueOf("77"));
+			newCreatedChequeBook.setChequeBookId(Long.valueOf("3"));
+			newCreatedChequeBook.setChequeSrNoFrom(formBean.getChequeserialNOfrom());
+			newCreatedChequeBook.setChequeSrNoTo(formBean.getChequeserialNOto());
+			newCreatedChequeBook.setCustomerName(formBean.getCustomername());
+			newCreatedChequeBook.setCurrency(formBean.getChequecurrency());
+
+			chequeBookSavingService.saveChequeBook(newCreatedChequeBook);
+	    	
+			returnPage= "RegSummary";
 		}
 		
 		else if(page.equalsIgnoreCase("hello"))
@@ -96,28 +105,7 @@ public class FormController {
 			// redirect back to the form to render the success message along with newly bound values
 			//redirectAttrs.addFlashAttribute("message", message);
 			System.out.println("inside process submit");
-			/*FormBean formBean1= new FormBean();
-			formBean1.setAccountnumber("111111");
-			formBean1.setBankid("CIB");
-			formBean1.setChequecurrency("EGP");
-			formBean1.setBranchcode(new BigDecimal(104));
-			formBean1.setChequeserialNOfrom(new BigDecimal(5));
-			formBean1.setChequeserialNOto(new BigDecimal(20));
-			formBean1.setCustomerid(new BigDecimal(578369));
-			form[]Bean1.setCustomername("hhhhhhh");*/
 			
-			ChequeBookDetail newCreatedChequeBook=new ChequeBookDetail();
-			newCreatedChequeBook.setAccountId(Long.getLong(formBean.getAccountnumber()));
-			newCreatedChequeBook.setBankCode(formBean.getBankid());
-			newCreatedChequeBook.setBranchId(Long.getLong("77"));
-			newCreatedChequeBook.setChequeBookId(new Long("1"));
-			newCreatedChequeBook.setChequeSrNoFrom(formBean.getChequeserialNOfrom());
-			newCreatedChequeBook.setChequeSrNoTo(formBean.getChequeserialNOto());
-			newCreatedChequeBook.setCustomerName(formBean.getCustomername());
-			newCreatedChequeBook.setCurrency(formBean.getChequecurrency());
-				
-			chequeBookSavingService.saveChequeBook(newCreatedChequeBook);
-				
 			model.addAttribute("formBean",formBean);
 			returnPage= "RegConfirmation";	
 		}

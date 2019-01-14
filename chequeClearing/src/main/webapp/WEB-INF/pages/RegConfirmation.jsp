@@ -25,7 +25,7 @@
     		<!-- For login portalUser -->
 		<c:url value="/logout" var="logoutUrl" />
 		<!--<form action="${logoutUrl}" method="post" id="logoutForm">-->
-		<!--<form:form id="RegConfirmation"  method="post" modelAttribute="formBean" >-->
+		<form:form id="RegConfirmation"  method="post" modelAttribute="formBean" >
 		
 			<div id="base" class="">
       <!-- Unnamed (Rectangle) -->
@@ -88,24 +88,24 @@
 
       <!-- Unnamed (Rectangle) -->
       <div id="u46" class="ax_default button" title="continue registeration">
-        <div id="u46_div" class=""></div>
         <div id="u46_text" class="text ">
-          <p><span>Register</span></p>
+        <form id="saveForm" name="tformest"  action="<c:url value="/hello" />"  method="get"  >
+          <input id="requestReaderSubmit" type="submit" value="Register" class="u46_div" />
+          <form:hidden path = "pageName" value = "RegSummary" />
+        </form>
         </div>
       </div>
       
       <!-- Unnamed (Rectangle) -->
       <div id="u47" class="ax_default button" title="continue registeration">
-        <div id="u47_div" class=""></div>
         <div id="u47_text" class="text ">
         <form id="requestReader" name="tformest"  action="<c:url value="/hello" />"  method="post"  >
-						<input id="requestReaderSubmit" type="submit" value="Back" />
-						<form:hidden path = "pageName" value = "RegConfirmation" />
+			<input id="requestReaderSubmit" type="submit" value="Back" class="u47_div" />
+			<form:hidden path = "pageName" value = "RegConfirmation" />
 		</form>
         
         
-        
-          
+   
         </div>
       </div>
 
@@ -189,7 +189,7 @@
     </div>
       
         
- <!--  </form:form> -->  
+ </form:form> 
     
     
     </body>

@@ -142,12 +142,11 @@
 
       <!-- Unnamed (Rectangle) -->
       <div id="u16" class="ax_default button" title="continue registeration">
-        <div id="u16_div" class=""></div>
         <div id="u16_text" class="text ">
-               <form id="saveForm" name="tformest"  action="<c:url value="/hello" />"  method="post"  >
-						<input id="requestReaderSubmit" type="submit" value=Save />
+           <form id="saveForm" name="tformest"  action="<c:url value="/hello" />"  method="post"  >
+						<input id="requestReaderSubmit" type="submit" value="Save" class="u16_div" />
 						<form:hidden path = "pageName" value = "hello" />
-		</form>
+		   </form>
       
       </div>  
       </div>

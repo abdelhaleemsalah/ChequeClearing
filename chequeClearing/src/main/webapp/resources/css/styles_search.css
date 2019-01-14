@@ -40,8 +40,7 @@ body {
   position:absolute;
   left:300px;
   top:320px;
-  width:70px;
-  height:23px;
+  width:100px;
 }
 #u7 {
   border-width:0px;
@@ -259,4 +258,37 @@ body {
   top:-235px;
   width:208px;
   white-space:nowrap;
+}
+#u0_text 
+{
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:9px;
+  width:100px;
+  word-wrap:break-word;
+}
+.u0_div 
+{
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:104px;
+  height:40px;
+  background:inherit;
+  background-color:rgba(255, 255, 255, 1);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(121, 121, 121, 1);
+  border-radius:5px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Century Gothic Bold', 'Century Gothic Regular', 'Century Gothic';
+  font-weight:700;
+  font-style:normal;
+  font-size:18px;
+  color:#003366;
 }

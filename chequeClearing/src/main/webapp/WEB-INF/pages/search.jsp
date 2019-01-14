@@ -68,9 +68,8 @@
       </div>
 	          
 	  <div id="u0" class="ax_default button" title="search">
-	        <div id="u0_div" class=""></div>
 	        <div id="u0_text" class="text ">
-	          <input id="u7_button" name="search" type="submit" value="search" />
+	          <input id="u7_button" name="search" type="submit" value="search" class="u0_div" />
 	        </div>
 	  </div>
 	      
