@@ -44,12 +44,12 @@ public class FormController {
 //	      return new ModelAndView("hello", "formBean", new FormBean());
 //	   }
 	@ModelAttribute("formBean")
-	public FormBean createFormBean() {
-		return new FormBean();
+	public ChequeFormBean createFormBean() {
+		return new ChequeFormBean();
 	}
 	
 	@PostMapping
-	public String processSubmit(@RequestParam(value="pageName") String page,@Valid FormBean formBean, BindingResult result, 
+	public String processSubmit(@RequestParam(value="pageName") String page,@Valid 	ChequeFormBean  formBean, BindingResult result, 
 								@ModelAttribute("ajaxRequest") boolean ajaxRequest, 
 								Model model) {
 		

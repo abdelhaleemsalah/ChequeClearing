@@ -2,6 +2,7 @@
     pageEncoding="windows-1256"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,7 +19,7 @@
 </head>
 <body>
 	
-	<form:form id="submittingSummary"  method="post" action="submittingSummary" modelAttribute="formBean" >
+	<form:form id="SearchResult"  method="post"  action="/chequeClearing/submittingSummary"  modelAttribute="formBean" >
 	<div id="base" class="">
 
       <!-- Unnamed (Rectangle) -->
@@ -89,7 +90,7 @@
         <div id="u18_div" class=""></div>
         <div id="u18_text" class="text ">
             <p>${formBean.customername}</p>
-          	<form:hidden path="customername" value="${formBean.customername}" />
+          	
         </div>
       </div>
 
@@ -106,7 +107,7 @@
         <div id="u20_div" class=""></div>
         <div id="u20_text" class="text ">
           <p>${formBean.accountnumber}</p>
-          <form:hidden path="accountnumber" value="${formBean.accountnumber}" />
+        
         </div>
       </div>
 
@@ -123,16 +124,21 @@
         <div id="u22_div" class=""></div>
         <div id="u22_text" class="text ">
           <p>${formBean.chequecurrency}</p>
-          <form:hidden path="chequecurrency" value="${formBean.chequecurrency}" />
+         
         </div>
       </div>
 
-      <!-- Unnamed (Rectangle) -->
-      <div id="u0" class="ax_default button" title="login">
-        <div id="u0_text" class="text ">
-          <input name="submit" type="submit" class="u0_div" value="submit" title="submit"/>
+      <div id="u0" class="ax_default button" title="continue registeration">
+        <div id="u0_text" class="text">
+        <form id="searchsaveForm" name="ttformest" action="<c:url value="/submittingSummary" />" method="post">
+        <input id="registerSubmit" type="submit" value="Register" class="u0_div" />
+    
+        </form>
         </div>
       </div>
+
+
+
 
       <!-- Unnamed (Rectangle) -->
       <div id="u24" class="ax_default label">

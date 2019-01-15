@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=windows-1256"
     pageEncoding="windows-1256"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,9 +20,11 @@
 <body>
 	<div id="base" class="">
 
-	
-	  <form id="searchForm" name="tformest"  action="<c:url value="/SearchResult" />"  method="post"  >
-	  
+	<c:url var="addUrl" value="/chequeClearing/SearchResult"/>
+	  <form:form id="searchForm" name="tformestss"   action="/chequeClearing/SearchResult"    method="post"  modelAttribute="formBean" >
+	  	<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		
 		   <!-- Unnamed (Rectangle) -->
 	      <div id="u11" class="ax_default label">
 	        <div id="u11_div" class=""></div>
@@ -32,12 +35,14 @@
 	  
 	      <!-- Unnamed (Text Field) -->
 	      <div id="u6" class="ax_default text_field">
-	        <input id="u6_input" type="number" name="chequeSRno" value="" maxlength="14"/>
+	      	<form:input path="chequeserialNO" id="u6_input" type="text" value="" title="Cheque Serial number "/>
+	        
 	      </div>
 	      
 	      <!-- Unnamed (Text Field) -->
 	      <div id="u12" class="ax_default text_field" title="account number">
-	        <input id="u12_input" type="text" value="" name="accNo" title="account number"/>
+	      	<form:input path="accountnumber" id="u12_input" type="text" value="" title="Account number "/>
+	      
 	      </div>
 	
 	      <!-- Unnamed (Rectangle) -->
@@ -58,22 +63,35 @@
       
        <!-- Unnamed (Droplist) -->
       <div id="u10" class="ax_default droplist" title="bank id">
-        <select id="u10_input" title="Bank id" name="bankid">
-          <option value="HSBC">HSBC</option>
+      <form:select id="u10_input" title="Bank id" path="bankid">
+           <option value="HSBC">HSBC</option>
           <option value="CIB">CIB</option>
           <option value="MISR">MISR</option>
           <option value="EDBE">EDBE</option>
           <option value="ABK">ABK</option>
-        </select>
+        </form:select>
+       
       </div>
+      
+      
+      
+      
+      
+            <div id="u0" class="ax_default button" title="continue registeration">
+        <div id="u0_text" class="text ">
+           <form id="saveForm" name="tformest"  action="<c:url value="/SearchResult" />"  method="post"  >
+						<input id="u7_button" type="submit" value="Save" class="u0_div" />
+					
+		   </form>
+      
+      </div>  
+      </div>
+      
+      
 	          
-	  <div id="u0" class="ax_default button" title="search">
-	        <div id="u0_text" class="text ">
-	          <input id="u7_button" name="search" type="submit" value="search" class="u0_div" />
-	        </div>
-	  </div>
+	
 	      
-	  </form>
+	  </form:form>
 
       <!-- Unnamed (Rectangle) -->
       <div id="u8" class="ax_default box_1">
