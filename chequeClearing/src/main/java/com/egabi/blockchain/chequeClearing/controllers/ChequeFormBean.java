@@ -33,11 +33,11 @@ public class ChequeFormBean
 		this.chequeAmount = chequeAmount;
 	}
 
-	public boolean isCrossed() {
+	public boolean getIsCrossed() {
 		return isCrossed;
 	}
 
-	public void setCrossed(boolean isCrossed) {
+	public void setIsCrossed(boolean isCrossed) {
 		this.isCrossed = isCrossed;
 	}
 

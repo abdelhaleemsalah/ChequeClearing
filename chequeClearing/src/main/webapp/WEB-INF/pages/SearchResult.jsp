@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=windows-1256"
     pageEncoding="windows-1256"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -30,7 +31,7 @@
 	  
 	      <!-- Unnamed (Text Field) -->
 	      <div id="u6" class="ax_default text_field">
-	        <p>"${formBean.chequeserialNO}</p>
+	        <p>${formBean.chequeserialNO}</p>
 	      </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -88,6 +89,7 @@
         <div id="u18_div" class=""></div>
         <div id="u18_text" class="text ">
             <p>${formBean.customername}</p>
+          	<form:hidden path="customername" value="${formBean.customername}" />
         </div>
       </div>
 
@@ -104,6 +106,7 @@
         <div id="u20_div" class=""></div>
         <div id="u20_text" class="text ">
           <p>${formBean.accountnumber}</p>
+          <form:hidden path="accountnumber" value="${formBean.accountnumber}" />
         </div>
       </div>
 
@@ -120,6 +123,7 @@
         <div id="u22_div" class=""></div>
         <div id="u22_text" class="text ">
           <p>${formBean.chequecurrency}</p>
+          <form:hidden path="chequecurrency" value="${formBean.chequecurrency}" />
         </div>
       </div>
 
@@ -137,12 +141,7 @@
 
       <!-- Unnamed (Radio Button) -->
       <div id="u25" class="ax_default radio_button">
-        <label for="u25_input" style="position: absolute; left: 0px;">
-          <div id="u25_text" class="text ">
-            <p><span>Crossed Cheque </span></p>
-          </div>
-        </label>
-        <input path="isCrossed" id="u25_input" type="radio" value="radio" name="u25"/>
+        <form:radiobutton path="isCrossed" id="u25_input" value="false"/>Crossed Cheque 
       </div>
     </div>
     

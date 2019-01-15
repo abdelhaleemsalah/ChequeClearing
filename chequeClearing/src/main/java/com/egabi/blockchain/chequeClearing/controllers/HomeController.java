@@ -119,7 +119,7 @@ public class HomeController {
 		    	singleChequeFormBean.setCustomername(chequebook.getCustomerName());
 		    	singleChequeFormBean.setAccountnumber(String.valueOf(chequebook.getAccountId()));
 		    	singleChequeFormBean.setChequecurrency(chequebook.getCurrency());
-		    	singleChequeFormBean.setBankid(String.valueOf(chequebook.getBranchId()));
+		    	singleChequeFormBean.setBankid(String.valueOf(chequebook.getBankCode()));
 		    	singleChequeFormBean.setBranchcode(chequebook.getBranchId());
 		    	model.addAttribute("formBean",singleChequeFormBean);
 		    	returnPage= "SearchResult";
@@ -134,12 +134,15 @@ public class HomeController {
 		return returnPage;
 	}
     @RequestMapping(value = "/submittingSummary", method = RequestMethod.POST) 
-	public String chequeSubmittingSummary(@Valid ChequeFormBean formBean, Model model)
+	public String chequeSubmittingSummary(@ModelAttribute("formBean") ChequeFormBean formBean, Model model)
 	{
-    	System.out.println("submitting summary: "+formBean.getChequeAmount());
+    	System.out.println("model.toString() "+model.containsAttribute("formBean"));
+    	System.out.println("model.toString() "+model.toString());
+    	System.out.println("submitting summary hello");
+    	System.out.println("submitting summary: "+formBean.getCustomername());
 		ChequeDetail submittedCheque=new ChequeDetail();
 		
-    	if(formBean.isCrossed()==false)
+    	if(formBean.getIsCrossed()==false)
     		submittedCheque.setIsCrossed("N");
     	else
     		submittedCheque.setIsCrossed("Y");
