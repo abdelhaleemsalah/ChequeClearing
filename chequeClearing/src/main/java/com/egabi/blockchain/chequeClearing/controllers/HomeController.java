@@ -11,12 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.io.IOException;
@@ -28,7 +32,9 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 @Controller
-public class HomeController {
+@ControllerAdvice
+@SessionAttributes("formBean")
+public class HomeController  {
 
     @Autowired
     StorageService storageService;
@@ -49,8 +55,8 @@ public class HomeController {
     }
     
    // @PostMapping("/RegConfirmation") 
-    @RequestMapping(value = "/RegConfirmation", method = RequestMethod.GET) 
-	public String displayConfirmation( @ModelAttribute FormBean formBean,Model model)
+    @RequestMapping(value = "/RegConfirmation", method = RequestMethod.POST) 
+	public String displayConfirmation( @ModelAttribute ChequeFormBean formBean,Model model)
 	{
     	model.addAttribute("formBean", formBean);
     	return "RegConfirmation"; 
@@ -58,7 +64,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET) 
 	public String displayLogin( Model model)
 	{
-		model.addAttribute("formBean", new FormBean());
+		model.addAttribute("formBean", new ChequeFormBean());
 		return "hello"; 
 	}
     @GetMapping("/{tenant}/home")
@@ -76,15 +82,16 @@ public class HomeController {
 
     
     @RequestMapping(value = "/search", method = RequestMethod.GET) 
-	public String displaySearch()
+ 	public ModelAndView  displaySearch()
 	{
-    	return "search"; 
+    	return new ModelAndView("search", "formBean", new ChequeFormBean());
+ 
 	}
-    
+     
     @RequestMapping(value = "/SearchResult", method = RequestMethod.POST) 
-	public String displaySearchResult(@RequestParam("chequeSRno") long serialno, 
-	@RequestParam("bankid") String bankid, @RequestParam("accNo") long accNo,
-	Model model)
+	public ModelAndView displaySearchResult(@RequestParam("chequeserialNO") long serialno, 
+	@RequestParam("bankid") String bankid, @RequestParam("accountnumber") long accNo,
+	ModelMap model)
 	{
     	String returnPage=null;
     	ChequeFormBean singleChequeFormBean = new ChequeFormBean();
@@ -131,10 +138,20 @@ public class HomeController {
 			System.out.println("Bank is not CIB");
 			returnPage= "SearchResult";
 		}
-		return returnPage;
+		
+		
+
+		return  new ModelAndView(returnPage, "formBean", singleChequeFormBean);
 	}
+    
+
+	@ModelAttribute("formBean")
+	public ChequeFormBean createFormBean() {
+		return new ChequeFormBean();
+	}
+	
     @RequestMapping(value = "/submittingSummary", method = RequestMethod.POST) 
-	public String chequeSubmittingSummary(@ModelAttribute("formBean") ChequeFormBean formBean, Model model)
+	public String chequeSubmittingSummary(@Valid @ModelAttribute("formBean")	ChequeFormBean  formBean  , Model model)
 	{
     	System.out.println("model.toString() "+model.containsAttribute("formBean"));
     	System.out.println("model.toString() "+model.toString());

@@ -4,6 +4,8 @@ import java.sql.Date;
 
 public class ChequeFormBean 
 {
+	private long chequeserialNOfrom ;
+	private long chequeserialNOto ;
 	private String accountnumber ;
 	private long customerid ;
 	private String customername ;
@@ -114,6 +116,22 @@ public class ChequeFormBean
 
 	public void setPageName(String pageName) {
 		this.pageName = pageName;
+	}
+
+	public long getChequeserialNOfrom() {
+		return chequeserialNOfrom;
+	}
+
+	public void setChequeserialNOfrom(long chequeserialNOfrom) {
+		this.chequeserialNOfrom = chequeserialNOfrom;
+	}
+
+	public long getChequeserialNOto() {
+		return chequeserialNOto;
+	}
+
+	public void setChequeserialNOto(long chequeserialNOto) {
+		this.chequeserialNOto = chequeserialNOto;
 	}
 
 
