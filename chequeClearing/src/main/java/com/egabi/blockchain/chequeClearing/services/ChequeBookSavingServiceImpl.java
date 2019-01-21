@@ -22,12 +22,12 @@ public class ChequeBookSavingServiceImpl implements ChequeBookSavingService{
 		chequebookRepo.save(chequebook);
 	}
 	@Override
-	public Optional<ChequeBookDetail> selectChequeBySerial(long srNo) {
+	public ChequeBookDetail selectChequeBySerial(long srNo) {
 		// TODO Auto-generated method stub
 		Optional<ChequeBookDetail> selectedCheque;
 		selectedCheque=chequebookRepo.findById(srNo);
-		
-		return selectedCheque;
+		ChequeBookDetail cheque=selectedCheque.get();
+		return cheque;
 	}
 	@Override
 	public ChequeBookDetail findOneWithSRnoAndAccNo(long srNo, Long accNo)

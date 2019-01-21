@@ -1,5 +1,6 @@
 package com.egabi.blockchain.chequeClearing;
 
+import com.egabi.blockchain.chequeClearing.notification.WebSocketNotificationClient;
 //import com.egabi.blockchain.chequeClearing.notification.WebSocketNotificationClient;
 import com.egabi.blockchain.chequeClearing.utils.StorageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,13 @@ public class ChequeClearingApplication {
     public static void main(String[] args) {
         SpringApplication.run(ChequeClearingApplication.class, args);
     
-
+    }
     @Scheduled(fixedRate = 10)
     public void reminder() {
 
         webSocketNotificationClient.sendNotificationToUser("hello adry");
 
-    }
-}
+    
+
 }
 }
