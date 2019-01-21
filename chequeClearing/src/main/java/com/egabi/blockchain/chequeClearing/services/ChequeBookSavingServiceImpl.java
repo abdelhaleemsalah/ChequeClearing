@@ -1,5 +1,7 @@
 package com.egabi.blockchain.chequeClearing.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,10 +22,11 @@ public class ChequeBookSavingServiceImpl implements ChequeBookSavingService{
 		chequebookRepo.save(chequebook);
 	}
 	@Override
-	public ChequeBookDetail selectChequeBySerial(long srNo) {
+	public Optional<ChequeBookDetail> selectChequeBySerial(long srNo) {
 		// TODO Auto-generated method stub
-		ChequeBookDetail selectedCheque=new ChequeBookDetail();
-		selectedCheque=chequebookRepo.findOne(srNo);
+		Optional<ChequeBookDetail> selectedCheque;
+		selectedCheque=chequebookRepo.findById(srNo);
+		
 		return selectedCheque;
 	}
 	@Override

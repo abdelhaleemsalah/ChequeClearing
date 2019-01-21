@@ -5,9 +5,21 @@ import com.egabi.blockchain.chequeClearing.entities.ChequeDetail;
 import com.egabi.blockchain.chequeClearing.services.ChequeBookSavingService;
 import com.egabi.blockchain.chequeClearing.services.ChequeDetailsSavingService;
 import com.egabi.blockchain.chequeClearing.services.StorageService;
+//import com.github.manosbatsis.corbeans.spring.boot.corda.CordaNodeService;
+//import com.github.manosbatsis.corbeans.spring.boot.corda.CordaNodesController;
+//import com.github.manosbatsis.corbeans.spring.boot.corda.rpc.beans.RpcPermissionRepository;
+//import com.github.manosbatsis.corbeans.spring.boot.corda.rpc.beans.RpcRoleRepository;
+//import com.github.manosbatsis.corbeans.spring.boot.corda.rpc.beans.RpcUserRepository;
+//import com.github.manosbatsis.corbeans.spring.boot.corda.rpc.entities.RpcRole;
+//import com.github.manosbatsis.corbeans.spring.boot.corda.rpc.entities.RpcUser;
+import com.github.manosbatsis.corbeans.spring.boot.corda.CordaNodeService;
+import com.github.manosbatsis.corbeans.spring.boot.corda.util.NodeRpcConnection;
 
+import net.corda.core.identity.Party;
+import net.corda.core.messaging.CordaRPCOps;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +38,10 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -36,6 +51,28 @@ import javax.validation.Valid;
 @SessionAttributes("formBean")
 public class HomeController  {
 
+//	  @Autowired
+//	    private CordaNetworkService networkService;
+	    // Autowire all created node services directly, mapped by name
+//	    @Autowired
+//	    private Map<String, CordaNodeService> services;
+//	    // Autowire a node-specific service
+//	    @Autowired
+//	    @Qualifier("partyANodeService")
+//	    private CordaNodeService service;
+	    // You can also specify a custom type explicitly
+	    // for nodes configured using the  `primaryServiceType`
+	    // application property (see following section)
+	   // @Autowired
+	   // private SampleCustomCordaNodeServiceImpl customCervice;
+	
+	
+	  @Autowired
+	    private Map<String, CordaNodeService> services;
+	   
+//	  @Autowired
+//	  private NodeRpcConnection rpcConnection ;
+	   
     @Autowired
     StorageService storageService;
     
@@ -45,6 +82,8 @@ public class HomeController  {
     @Autowired
     private ChequeDetailsSavingService ChequeDetailsSavingService;
 
+//    @Autowired
+//    private CordaNodesController corderController;
 	@Autowired
 	ResourceLoader resourceLoader;
 	
@@ -61,10 +100,27 @@ public class HomeController  {
     	model.addAttribute("formBean", formBean);
     	return "RegConfirmation"; 
 	}
+    
+    @RequestMapping(value = "/RegSummary", method = RequestMethod.GET) 
+	public String displaySummaryConfirmation(Model model)
+	{
+		
+		return "RegSummary"; 
+	}
 	@RequestMapping(value = "/", method = RequestMethod.GET) 
 	public String displayLogin( Model model)
 	{
 		model.addAttribute("formBean", new ChequeFormBean());
+		return "hello"; 
+	}
+	@RequestMapping(value = "/hello", method = RequestMethod.GET) 
+	public String displayHelloLogin( Model model)
+	{
+		if(!model.containsAttribute("formBean"))
+		{
+		model.addAttribute("formBean", new ChequeFormBean());
+		}
+		
 		return "hello"; 
 	}
     @GetMapping("/{tenant}/home")
@@ -87,6 +143,13 @@ public class HomeController  {
     	return new ModelAndView("search", "formBean", new ChequeFormBean());
  
 	}
+    
+//    @Autowired private RpcUserRepository rpcUserRepository;
+//    @Autowired private RpcPermissionRepository rpcPermissionRepository;
+//    @Autowired private RpcRoleRepository rpcRoleRepository;
+
+    // Use repos in your code, e.g.
+ 
      
     @RequestMapping(value = "/SearchResult", method = RequestMethod.POST) 
 	public ModelAndView displaySearchResult(@RequestParam("chequeserialNO") long serialno, 
@@ -136,6 +199,27 @@ public class HomeController  {
 		{
 			//call block chain
 			System.out.println("Bank is not CIB");
+			
+//			java.util.List<RpcRole> roles=new ArrayList<>();
+//			   RpcUser user = rpcUserRepository.save(new RpcUser("user1", "password",  roles));
+//			
+			   CordaNodeService PartyA=  services.get(bankid+"NodeService");
+			   PartyA.peerNames();
+			// 
+//			   CordaRPCOps proxy= rpcConnection.getProxy();		   
+//			   Set<Party> parties= proxy.partiesFromName(bankid,  true);
+//			   if(parties.isEmpty())
+//			   {
+//				  throw new IllegalArgumentException("Target string " +"pARTA"+" doesnt match any nodes on the network.");
+//			   }
+//			   else if (parties.size()>1)
+//			   {
+//		          throw new IllegalArgumentException("Target string " +"pARTA "+" matches multiple nodes on the network.");
+//			   }
+			   
+			   
+//			   proxy.startFlowDynamic(arg0, arg1).
+//			
 			returnPage= "SearchResult";
 		}
 		
@@ -150,7 +234,7 @@ public class HomeController  {
 		return new ChequeFormBean();
 	}
 	
-    @RequestMapping(value = "/submittingSummary", method = RequestMethod.POST) 
+    @RequestMapping(value = "/submittingSummary", method = RequestMethod.GET) 
 	public String chequeSubmittingSummary(@Valid @ModelAttribute("formBean")	ChequeFormBean  formBean  , Model model)
 	{
     	System.out.println("model.toString() "+model.containsAttribute("formBean"));

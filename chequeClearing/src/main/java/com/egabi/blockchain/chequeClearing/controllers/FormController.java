@@ -49,39 +49,45 @@ public class FormController {
 	}
 	
 	@PostMapping
-	public String processSubmit(@RequestParam(value="pageName") String page,@Valid 	ChequeFormBean  formBean, BindingResult result, 
+	public String processSubmit(@Valid 	ChequeFormBean  formBean, BindingResult result, 
 								@ModelAttribute("ajaxRequest") boolean ajaxRequest, 
 								Model model) {
 		
 		
 		System.out.println("inside processSubmit");
-		System.out.println("pageName            "+page);
+	//	System.out.println("pageName            "+page);
 		String returnPage=null;
-		if(page.equalsIgnoreCase("RegConfirmation"))
-		{
-			returnPage= "hello";
-		}
-		else if(page.equalsIgnoreCase("RegSummary"))
-		{
-			System.out.println("account id: "+formBean.getAccountnumber());
-	    	
-			ChequeBookDetail newCreatedChequeBook=new ChequeBookDetail();
-			newCreatedChequeBook.setAccountId(Long.valueOf(formBean.getAccountnumber()));
-			newCreatedChequeBook.setBankCode(formBean.getBankid());
-			newCreatedChequeBook.setBranchId(Long.valueOf("77"));
-			newCreatedChequeBook.setChequeBookId(Long.valueOf("3"));
-			newCreatedChequeBook.setChequeSrNoFrom(formBean.getChequeserialNOfrom());
-			newCreatedChequeBook.setChequeSrNoTo(formBean.getChequeserialNOto());
-			newCreatedChequeBook.setCustomerName(formBean.getCustomername());
-			newCreatedChequeBook.setCurrency(formBean.getChequecurrency());
-
-			chequeBookSavingService.saveChequeBook(newCreatedChequeBook);
-	    	
-			returnPage= "RegSummary";
-		}
+//		if(page.equalsIgnoreCase("RegConfirmation"))
+//		{
+//			returnPage= "hello";
+//		}
+//		else if(page.equalsIgnoreCase("RegSummary"))
+//		{
+//			System.out.println("account id: "+formBean.getAccountnumber());
+//	    	
+//			ChequeBookDetail newCreatedChequeBook=new ChequeBookDetail();
+//			newCreatedChequeBook.setAccountId(Long.valueOf(formBean.getAccountnumber()));
+//			newCreatedChequeBook.setBankCode(formBean.getBankid());
+//			newCreatedChequeBook.setBranchId(Long.valueOf("77"));
+//			newCreatedChequeBook.setChequeBookId(Long.valueOf("3"));
+//			newCreatedChequeBook.setChequeSrNoFrom(formBean.getChequeserialNOfrom());
+//			newCreatedChequeBook.setChequeSrNoTo(formBean.getChequeserialNOto());
+//			newCreatedChequeBook.setCustomerName(formBean.getCustomername());
+//			newCreatedChequeBook.setCurrency(formBean.getChequecurrency());
+//
+//			chequeBookSavingService.saveChequeBook(newCreatedChequeBook);
+//	    	
+//			returnPage= "RegSummary";
+		//}
 		
-		else if(page.equalsIgnoreCase("hello"))
-		{
+//		else if(page.equalsIgnoreCase("hello"))
+//		{
+		
+		if(!model.containsAttribute("formBean"))
+			{
+			model.addAttribute("formBean", new ChequeFormBean());
+			}
+		System.out.println("account id: "+formBean.getAccountnumber());
 		
 		if (result.hasErrors()) {
 			System.out.println("pageName has error binding            ");
@@ -93,14 +99,14 @@ public class FormController {
 		String message = "Form submitted successfully.  Bound " + formBean;
 		// Success response handling
 		System.out.println("account number "+formBean.getAccountnumber());
-		if (ajaxRequest) {
-			System.out.println("page has ajax            ");
-			// prepare model for rendering success message in this request
-			model.addAttribute("message", message);
-			return null;
-		} 
-		else 
-		{
+//		if (ajaxRequest) {
+//			System.out.println("page has ajax            ");
+//			// prepare model for rendering success message in this request
+//			model.addAttribute("message", message);
+//			return null;
+//		} 
+//		else 
+//		{
 			// store a success message for rendering on the next request after redirect
 			// redirect back to the form to render the success message along with newly bound values
 			//redirectAttrs.addFlashAttribute("message", message);
@@ -108,7 +114,7 @@ public class FormController {
 			
 			model.addAttribute("formBean",formBean);
 			returnPage= "RegConfirmation";	
-		}
+	//	}
 			/*else 
 			{
 				System.out.println("Bank id from view: "+formBean.getBankid());
@@ -129,7 +135,7 @@ public class FormController {
 				returnPage= "RegConfirmation";	
 			}	*/			
 		
-	  }
+//	  }
 	  return returnPage;
 	}
 }

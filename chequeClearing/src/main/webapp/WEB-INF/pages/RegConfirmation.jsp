@@ -24,8 +24,9 @@
     
     		<!-- For login portalUser -->
 		<c:url value="/logout" var="logoutUrl" />
-		<!--<form action="${logoutUrl}" method="post" id="logoutForm">-->
-		<form:form id="RegConfirmation"  method="post" modelAttribute="formBean" >
+		<!-- <form action="${logoutUrl}" method="post" id="logoutForm">-->
+		 <form:form id="RegConfirmation"  action="${flowExecutionUrl}"  method="get" modelAttribute="formBean" > 
+		
 		
 			<div id="base" class="">
       <!-- Unnamed (Rectangle) -->
@@ -89,20 +90,29 @@
       <!-- Unnamed (Rectangle) -->
       <div id="u46" class="ax_default button" title="continue registeration">
         <div id="u46_text" class="text ">
-        <form id="saveForm" name="tformest"  action="<c:url value="/hello" />"  method="get"  >
+        <button type="submit" id="Register" name="_eventId_Register">Register</button>
+    			
+        
+        
+       <!--   <form id="saveForm" name="tformest"  action="<c:url value="/hello" />"  method="post"  >
           <input id="requestReaderSubmit" type="submit" value="Register" class="u46_div" />
           <form:hidden path = "pageName" value = "RegSummary" />
-        </form>
+        </form>-->
         </div>
       </div>
       
       <!-- Unnamed (Rectangle) -->
       <div id="u47" class="ax_default button" title="continue registeration">
         <div id="u47_text" class="text ">
-        <form id="requestReader" name="tformest"  action="<c:url value="/hello" />"  method="post"  >
+   
+             <button type="submit" id="Back" name="_eventId_Back">Back</button>
+    			
+      
+      
+      <!-- <form id="requestReader" name="tformest"  action="<c:url value="/hello" />"  method="post"  >
 			<input id="requestReaderSubmit" type="submit" value="Back" class="u47_div" />
 			<form:hidden path = "pageName" value = "RegConfirmation" />
-		</form>
+		</form> -->  
         
         
    
