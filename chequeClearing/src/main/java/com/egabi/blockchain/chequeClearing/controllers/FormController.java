@@ -87,7 +87,7 @@ public class FormController {
 			{
 			model.addAttribute("formBean", new ChequeFormBean());
 			}
-		System.out.println("account id: "+formBean.getAccountnumber());
+		System.out.println("account id: "+formBean.getAccountNumber());
 		
 		if (result.hasErrors()) {
 			System.out.println("pageName has error binding            ");
@@ -98,7 +98,7 @@ public class FormController {
 		// via SessionStatus.setCompleted(). For the demo we leave it in the session.
 		String message = "Form submitted successfully.  Bound " + formBean;
 		// Success response handling
-		System.out.println("account number "+formBean.getAccountnumber());
+		System.out.println("account number "+formBean.getAccountNumber());
 //		if (ajaxRequest) {
 //			System.out.println("page has ajax            ");
 //			// prepare model for rendering success message in this request

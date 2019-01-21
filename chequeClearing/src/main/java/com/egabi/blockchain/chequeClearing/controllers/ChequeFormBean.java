@@ -4,135 +4,106 @@ import java.sql.Date;
 
 public class ChequeFormBean 
 {
-	private long chequeserialNOfrom ;
-	private long chequeserialNOto ;
-	private String accountnumber ;
-	private long customerid ;
-	private String customername ;
-	private long branchcode ;
-	private String bankid ;
-	private long chequeserialNO ;
-	private String chequecurrency ;
+	
+	private long chequeSerialNofrom ;
+	private long chequeSerialNoTo ;
+	private String accountNumber ;
+	private long customerId ;
+	private String customerName ;
+	private long branchCode ;
+	private String bankId ;
+	private long chequeSerialNo ;
+	private String chequeCurrency ;
 	private String pageName;
 	private long chequeAmount;
 	private boolean isCrossed;
 	private Date chequeDueDate;
-	
-	
-	public Date getChequeDueDate() {
-		return chequeDueDate;
+	private long chequeBookSerialNo ;
+	public long getChequeSerialNofrom() {
+		return chequeSerialNofrom;
 	}
-
-	public void setChequeDueDate(Date chequeDueDate) {
-		this.chequeDueDate = chequeDueDate;
+	public void setChequeSerialNofrom(long chequeSerialNofrom) {
+		this.chequeSerialNofrom = chequeSerialNofrom;
 	}
-	
-	public long getChequeAmount() {
-		return chequeAmount;
+	public long getChequeSerialNoTo() {
+		return chequeSerialNoTo;
 	}
-
-	public void setChequeAmount(long chequeAmount) {
-		this.chequeAmount = chequeAmount;
+	public void setChequeSerialNoTo(long chequeSerialNoTo) {
+		this.chequeSerialNoTo = chequeSerialNoTo;
 	}
-
-	public boolean getIsCrossed() {
-		return isCrossed;
+	public String getAccountNumber() {
+		return accountNumber;
 	}
-
-	public void setIsCrossed(boolean isCrossed) {
-		this.isCrossed = isCrossed;
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
 	}
-
-	public long getChequeserialNO() {
-		return chequeserialNO;
+	public long getCustomerId() {
+		return customerId;
 	}
-
-	public void setChequeserialNO(long chequeserialNO) {
-		this.chequeserialNO = chequeserialNO;
+	public void setCustomerId(long customerId) {
+		this.customerId = customerId;
 	}
-
-	public String getChequecurrency() {
-		return chequecurrency;
+	public String getCustomerName() {
+		return customerName;
 	}
-
-	public void setChequecurrency(String chequecurrency) {
-		this.chequecurrency = chequecurrency;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
-
-	private long chequebookserialNO ;
-	
-	public long getCustomerid() 
-	{
-		return customerid;
+	public long getBranchCode() {
+		return branchCode;
 	}
-
-	public void setCustomerid(long customerid) {
-		this.customerid = customerid;
+	public void setBranchCode(long branchCode) {
+		this.branchCode = branchCode;
 	}
-
-	public String getCustomername() {
-		return customername;
+	public String getBankId() {
+		return bankId;
 	}
-
-	public void setCustomername(String customername) {
-		this.customername = customername;
+	public void setBankId(String bankId) {
+		this.bankId = bankId;
 	}
-
-	public long getBranchcode() {
-		return branchcode;
+	public long getChequeSerialNo() {
+		return chequeSerialNo;
 	}
-
-	public void setBranchcode(long branchcode) {
-		this.branchcode = branchcode;
+	public void setChequeSerialNo(long chequeSerialNo) {
+		this.chequeSerialNo = chequeSerialNo;
 	}
-
-	public String getBankid() {
-		return bankid;
+	public String getChequeCurrency() {
+		return chequeCurrency;
 	}
-
-	public void setBankid(String bankid) {
-		this.bankid = bankid;
+	public void setChequeCurrency(String chequeCurrency) {
+		this.chequeCurrency = chequeCurrency;
 	}
-
-	public long getChequebookserialNO() {
-		return chequebookserialNO;
-	}
-
-	public void setChequebookserialNO(long chequebookserialNO) {
-		this.chequebookserialNO = chequebookserialNO;
-	}
-
-	public String getAccountnumber() {
-		return accountnumber;
-	}
-
-	public void setAccountnumber(String accountnumber) {
-		this.accountnumber = accountnumber;
-	}
-
 	public String getPageName() {
 		return pageName;
 	}
-
 	public void setPageName(String pageName) {
 		this.pageName = pageName;
 	}
-
-	public long getChequeserialNOfrom() {
-		return chequeserialNOfrom;
+	public long getChequeAmount() {
+		return chequeAmount;
 	}
-
-	public void setChequeserialNOfrom(long chequeserialNOfrom) {
-		this.chequeserialNOfrom = chequeserialNOfrom;
+	public void setChequeAmount(long chequeAmount) {
+		this.chequeAmount = chequeAmount;
 	}
-
-	public long getChequeserialNOto() {
-		return chequeserialNOto;
+	public boolean isCrossed() {
+		return isCrossed;
 	}
-
-	public void setChequeserialNOto(long chequeserialNOto) {
-		this.chequeserialNOto = chequeserialNOto;
+	public void setCrossed(boolean isCrossed) {
+		this.isCrossed = isCrossed;
 	}
+	public Date getChequeDueDate() {
+		return chequeDueDate;
+	}
+	public void setChequeDueDate(Date chequeDueDate) {
+		this.chequeDueDate = chequeDueDate;
+	}
+	public long getChequeBookSerialNo() {
+		return chequeBookSerialNo;
+	}
+	public void setChequeBookSerialNo(long chequeBookSerialNo) {
+		this.chequeBookSerialNo = chequeBookSerialNo;
+	}
+	
 
 
 	}

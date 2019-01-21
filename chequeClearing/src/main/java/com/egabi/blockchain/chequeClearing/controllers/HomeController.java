@@ -185,12 +185,12 @@ public class HomeController  {
 	    	
 	    	if(chequebook!=null)
 	    	{
-		    	singleChequeFormBean.setChequeserialNO(serialno);
-		    	singleChequeFormBean.setCustomername(chequebook.getCustomerName());
-		    	singleChequeFormBean.setAccountnumber(String.valueOf(chequebook.getAccountId()));
-		    	singleChequeFormBean.setChequecurrency(chequebook.getCurrency());
-		    	singleChequeFormBean.setBankid(String.valueOf(chequebook.getBankCode()));
-		    	singleChequeFormBean.setBranchcode(chequebook.getBranchId());
+		    	singleChequeFormBean.setChequeSerialNo(serialno);
+		    	singleChequeFormBean.setCustomerName(chequebook.getCustomerName());
+		    	singleChequeFormBean.setAccountNumber(String.valueOf(chequebook.getAccountId()));
+		    	singleChequeFormBean.setChequeCurrency(chequebook.getCurrency());
+		    	singleChequeFormBean.setBankId(String.valueOf(chequebook.getBankCode()));
+		    	singleChequeFormBean.setBranchCode(chequebook.getBranchId());
 		    	model.addAttribute("formBean",singleChequeFormBean);
 		    	returnPage= "SearchResult";
 	    	}
@@ -240,23 +240,23 @@ public class HomeController  {
     	System.out.println("model.toString() "+model.containsAttribute("formBean"));
     	System.out.println("model.toString() "+model.toString());
     	System.out.println("submitting summary hello");
-    	System.out.println("submitting summary: "+formBean.getCustomername());
+    	System.out.println("submitting summary: "+formBean.getCustomerName());
 		ChequeDetail submittedCheque=new ChequeDetail();
 		
-    	if(formBean.getIsCrossed()==false)
+    	if(formBean.isCrossed()==false)
     		submittedCheque.setIsCrossed("N");
     	else
     		submittedCheque.setIsCrossed("Y");
     		
-		submittedCheque.setAccountNo(formBean.getAccountnumber());
-		submittedCheque.setBankCode(formBean.getBankid());
-		submittedCheque.setBranchId(formBean.getBranchcode());
+		submittedCheque.setAccountNo(formBean.getAccountNumber());
+		submittedCheque.setBankCode(formBean.getBankId());
+		submittedCheque.setBranchId(formBean.getBranchCode());
 		submittedCheque.setChequeAmount(formBean.getChequeAmount());
-		submittedCheque.setChequeBookId(formBean.getChequebookserialNO());
-		submittedCheque.setChequeCurrency(formBean.getChequecurrency());
+		submittedCheque.setChequeBookId(formBean.getChequeBookSerialNo());
+		submittedCheque.setChequeCurrency(formBean.getChequeCurrency());
 		submittedCheque.setChequeDueDate(new Timestamp(formBean.getChequeDueDate().getTime()));
-		submittedCheque.setChequeSrNo(formBean.getChequeserialNO());
-		submittedCheque.setPayToUsername(formBean.getCustomername());
+		submittedCheque.setChequeSrNo(formBean.getChequeSerialNo());
+		submittedCheque.setPayToUsername(formBean.getCustomerName());
 		submittedCheque.setStatus("SUBMITTED");
 		
 		ChequeDetailsSavingService.saveCheque(submittedCheque);
