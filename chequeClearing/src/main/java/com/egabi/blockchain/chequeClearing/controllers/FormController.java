@@ -3,7 +3,10 @@ package com.egabi.blockchain.chequeClearing.controllers;
 import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 import static javax.ws.rs.core.Response.Status.CREATED;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -24,11 +27,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.WebRequest;
 import com.egabi.blockchain.chequeClearing.entities.ChequeBookDetail;
 import com.egabi.blockchain.chequeClearing.services.ChequeBookSavingService;
+import com.egabi.blockchain.chequeClearing.services.CordaCustomNodeServiceImpl;
 import com.github.manosbatsis.corbeans.spring.boot.corda.CordaNodeService;
 import com.github.manosbatsis.corbeans.spring.boot.corda.util.NodeRpcConnection;
 import com.template.flow.ChequeBookRegisterationFlow;
 import com.template.state.ChequeBookState;
 
+import kotlin.Suppress;
 import net.corda.core.contracts.UniqueIdentifier;
 import net.corda.core.identity.Party;
 import net.corda.core.messaging.CordaRPCOps;
@@ -43,6 +48,12 @@ public class FormController {
 
 	// Invoked on every request
 
+	
+	  @Autowired
+	   @Suppress(names="SpringJavaInjectionPointsAutowiringInspection")
+	   private  Map<String,CordaCustomNodeServiceImpl> services;
+	  
+	  
 	@Autowired
 	ResourceLoader resourceLoader;
 	
@@ -63,8 +74,8 @@ public class FormController {
 //	      return new ModelAndView("hello", "formBean", new FormBean());
 //	   }
 	
-	  @Autowired
-	    private Map<String, CordaNodeService> services;
+//	  @Autowired
+//	    private Map<String, CordaNodeService> services;
 	   
 	  @Autowired
 	  @Qualifier("HSBCRpcConnection")
@@ -80,6 +91,21 @@ public class FormController {
 								@ModelAttribute("ajaxRequest") boolean ajaxRequest, 
 								Model model) {
 		
+		InputStream input = null;
+		Properties prop=new Properties();
+		String propBankId="";
+		try 
+		{
+			input=resourceLoader.getResource("classpath:bankconfig.properties").getInputStream();
+			prop.load(input);
+			System.out.println("prop get bank id: "+prop.getProperty("mybank"));	
+			propBankId=prop.getProperty("mybank");
+		} 
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		System.out.println("inside processSubmit");
 	//	System.out.println("pageName            "+page);
@@ -143,47 +169,54 @@ public class FormController {
 			
 			
 			
-			   CordaNodeService PartyA=  services.get(formBean.getBankId()+"NodeService");
-			   
-			   PartyA.peerNames();
-			// 
-			   CordaRPCOps proxy= rpcConnection.getProxy();		   
-			   Set<Party> parties= proxy.partiesFromName(formBean.getBankId(),  true);
-			   Set<Party> cbeParty= proxy.partiesFromName("CBE",  true);
-			   final Party myIdentity = parties.iterator().next();
-			   final Party cbeIdentity = cbeParty.iterator().next();
-			   if(parties.isEmpty())
-			   {
-				  throw new IllegalArgumentException("Target string " +"pARTA"+" doesnt match any nodes on the network.");
-			   }
-			   else if (parties.size()>1)
-			   {
-		          throw new IllegalArgumentException("Target string " +"pARTA "+" matches multiple nodes on the network.");
-			   }
-			   
-//			   Party registerBank,
-//	           Party cbeBank, long chequeSerialNofrom, long chequeSerialNoTo, String accountNumber, long customerId,
-//	           String customerName, long branchCode, String bankId, String chequeCurrency, long chequeBookSerialNo,
-//	           UniqueIdentifier linearId)
-			   
-			   
-			   ChequeBookState state=new ChequeBookState(myIdentity,cbeIdentity,formBean.getChequeSerialNoFrom(),formBean.getChequeSerialNoTo(),formBean.getAccountNumber(),
-					   formBean.getCustomerId(),formBean.getCustomerName(),formBean.getBranchCode(),formBean.getBankId(),formBean.getChequeCurrency(),formBean.getChequeSerialNo(),new UniqueIdentifier());
-			   Response Responsestatus=null;
-		        try {
-		            final FlowHandle<SignedTransaction> flowHandle = proxy.startFlowDynamic(
-		            		ChequeBookRegisterationFlow.Initiator.class,
-		            		state, cbeIdentity );
-
-		            final SignedTransaction result2 = flowHandle.getReturnValue().get();
-		            final String msg = String.format("Transaction id %s committed to ledger.\n%s",
-		                    result2.getId(), result2.getTx().getOutputStates().get(0));
-		            Responsestatus=Response.status(CREATED).entity(msg).build();
-		        } catch (Exception e) {
-		        	Responsestatus= Response.status(BAD_REQUEST).entity(e.getMessage()).build();
-		        }
+//			   CordaNodeService PartyA=  services.get(formBean.getBankId()+"NodeService");
+//			   
+//			   PartyA.peerNames();
 			
-		        proxy.vaultQuery(ChequeBookState.class).getStates();
+			
+			CordaCustomNodeServiceImpl PartyA=  services.get(propBankId+"NodeService");
+			 
+			   
+			// 
+			   PartyA.registerChequeBook(formBean, formBean.getBankId());
+			// 
+//			   CordaRPCOps proxy= rpcConnection.getProxy();		   
+//			   Set<Party> parties= proxy.partiesFromName(propBankId,  true);
+//			   Set<Party> cbeParty= proxy.partiesFromName("CBE",  true);
+//			   final Party myIdentity = parties.iterator().next();
+//			   final Party cbeIdentity = cbeParty.iterator().next();
+//			   if(parties.isEmpty())
+//			   {
+//				  throw new IllegalArgumentException("Target string " +"pARTA"+" doesnt match any nodes on the network.");
+//			   }
+//			   else if (parties.size()>1)
+//			   {
+//		          throw new IllegalArgumentException("Target string " +"pARTA "+" matches multiple nodes on the network.");
+//			   }
+//			   
+////			   Party registerBank,
+////	           Party cbeBank, long chequeSerialNofrom, long chequeSerialNoTo, String accountNumber, long customerId,
+////	           String customerName, long branchCode, String bankId, String chequeCurrency, long chequeBookSerialNo,
+////	           UniqueIdentifier linearId)
+//			   
+//			   
+//			   ChequeBookState state=new ChequeBookState(myIdentity,cbeIdentity,formBean.getChequeSerialNoFrom(),formBean.getChequeSerialNoTo(),formBean.getAccountNumber(),
+//					   formBean.getCustomerId(),formBean.getCustomerName(),formBean.getBranchCode(),formBean.getBankId(),formBean.getChequeCurrency(),formBean.getChequeSerialNo(),new UniqueIdentifier());
+//			   Response Responsestatus=null;
+//		        try {
+//		            final FlowHandle<SignedTransaction> flowHandle = proxy.startFlowDynamic(
+//		            		ChequeBookRegisterationFlow.Initiator.class,
+//		            		state, cbeIdentity );
+//
+//		            final SignedTransaction result2 = flowHandle.getReturnValue().get();
+//		            final String msg = String.format("Transaction id %s committed to ledger.\n%s",
+//		                    result2.getId(), result2.getTx().getOutputStates().get(0));
+//		            Responsestatus=Response.status(CREATED).entity(msg).build();
+//		        } catch (Exception e) {
+//		        	Responsestatus= Response.status(BAD_REQUEST).entity(e.getMessage()).build();
+//		        }
+//			
+//		        proxy.vaultQuery(ChequeBookState.class).getStates();
 			returnPage= "RegConfirmation";	
 	//	}
 			/*else 
