@@ -27,6 +27,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("hello");
         registry.addViewController("/RegConfirmation").setViewName("RegConfirmation");
+        registry.addViewController("/regSummary").setViewName("regSummary");
        // registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 
