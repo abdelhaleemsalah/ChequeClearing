@@ -35,13 +35,13 @@
 	  
 	      <!-- Unnamed (Text Field) -->
 	      <div id="u6" class="ax_default text_field">
-	      	<form:input path="chequeserialNO" id="u6_input" type="text" value="" title="Cheque Serial number "/>
+	      	<form:input path="chequeSerialNo" id="u6_input" type="text" value="" title="Cheque Serial number "/>
 	        
 	      </div>
 	      
 	      <!-- Unnamed (Text Field) -->
 	      <div id="u12" class="ax_default text_field" title="account number">
-	      	<form:input path="accountnumber" id="u12_input" type="text" value="" title="Account number "/>
+	      	<form:input path="accountNumber" id="u12_input" type="text" value="" title="Account number "/>
 	      
 	      </div>
 	
@@ -63,7 +63,7 @@
       
        <!-- Unnamed (Droplist) -->
       <div id="u10" class="ax_default droplist" title="bank id">
-      <form:select id="u10_input" title="Bank id" path="bankid">
+      <form:select id="u10_input" title="Bank id" path="bankId">
            <option value="HSBC">HSBC</option>
           <option value="CIB">CIB</option>
           <option value="MISR">MISR</option>

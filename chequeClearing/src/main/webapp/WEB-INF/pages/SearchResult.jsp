@@ -147,7 +147,7 @@
 
       <!-- Unnamed (Radio Button) -->
       <div id="u25" class="ax_default radio_button">
-        <form:radiobutton path="isCrossed" id="u25_input" value="false"/>Crossed Cheque 
+        <form:radiobutton path="crossed" id="u25_input" value="false"/>Crossed Cheque 
       </div>
     </div>
     

@@ -5,6 +5,9 @@ import com.egabi.blockchain.chequeClearing.entities.ChequeDetail;
 import com.egabi.blockchain.chequeClearing.services.ChequeBookSavingService;
 import com.egabi.blockchain.chequeClearing.services.ChequeDetailsSavingService;
 import com.egabi.blockchain.chequeClearing.services.StorageService;
+import net.corda.core.node.services.Vault;
+import net.corda.core.node.services.vault.*;
+import net.corda.core.contracts.StateAndRef;
 import net.corda.core.contracts.UniqueIdentifier;
 import com.github.manosbatsis.corbeans.spring.boot.corda.CordaNodeService;
 //import com.github.manosbatsis.corbeans.spring.boot.corda.CordaNodeService;
@@ -15,8 +18,10 @@ import com.github.manosbatsis.corbeans.spring.boot.corda.CordaNodeService;
 //import com.github.manosbatsis.corbeans.spring.boot.corda.rpc.entities.RpcRole;
 //import com.github.manosbatsis.corbeans.spring.boot.corda.rpc.entities.RpcUser;
 import com.github.manosbatsis.corbeans.spring.boot.corda.CordaNodeService;
+import java.lang.reflect.Field;
 import com.github.manosbatsis.corbeans.spring.boot.corda.util.NodeRpcConnection;
 import com.template.flow.ChequeBookRegisterationFlow;
+import com.template.schema.IOUSchemaV1;
 import com.template.state.ChequeBookState;
 import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 import static javax.ws.rs.core.Response.Status.CREATED;
@@ -24,6 +29,8 @@ import javax.ws.rs.core.Response;
 import net.corda.core.identity.Party;
 import net.corda.core.messaging.CordaRPCOps;
 import net.corda.core.messaging.FlowHandle;
+import net.corda.core.node.services.vault.CriteriaExpression;
+import net.corda.core.node.services.vault.QueryCriteria;
 import net.corda.core.transactions.SignedTransaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,11 +54,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.validation.Valid;
 
@@ -207,9 +216,9 @@ public class HomeController  {
  
      
     @RequestMapping(value = "/SearchResult", method = RequestMethod.POST) 
-	public ModelAndView displaySearchResult(@RequestParam("chequeserialNO") long serialno, 
-	@RequestParam("bankid") String bankid, @RequestParam("accountnumber") long accNo,
-	ModelMap model)
+	public ModelAndView displaySearchResult(@RequestParam("chequeSerialNo") long serialno, 
+	@RequestParam("bankId") String bankid, @RequestParam("accountNumber") long accNo,
+	ModelMap model) throws NoSuchFieldException, SecurityException
 	{
     	String returnPage=null;
     	ChequeFormBean singleChequeFormBean = new ChequeFormBean();
@@ -233,48 +242,121 @@ public class HomeController  {
 			e.printStackTrace();
 		}
 		
-		if(bankid.equals(propBankId))
-		{
-	    	ChequeBookDetail chequebook=chequeBookSavingService.findOneWithSRnoAndAccNo(serialno, accNo);
-	    	System.out.println("Cheque customer name: "+chequebook.getCustomerName());
-	    	
-	    	if(chequebook!=null)
-	    	{
-		    	singleChequeFormBean.setChequeSerialNo(serialno);
-		    	singleChequeFormBean.setCustomerName(chequebook.getCustomerName());
-		    	singleChequeFormBean.setAccountNumber(String.valueOf(chequebook.getAccountId()));
-		    	singleChequeFormBean.setChequeCurrency(chequebook.getCurrency());
-		    	singleChequeFormBean.setBankId(String.valueOf(chequebook.getBankCode()));
-		    	singleChequeFormBean.setBranchCode(chequebook.getBranchId());
-		    	model.addAttribute("formBean",singleChequeFormBean);
-		    	returnPage= "SearchResult";
-	    	}
-		}
-		else
-		{
-			//call block chain
-			System.out.println("Bank is not CIB");
-			
-//			java.util.List<RpcRole> roles=new ArrayList<>();
-//			   RpcUser user = rpcUserRepository.save(new RpcUser("user1", "password",  roles));
-//			
-			
-
-			
-			
-	
-			   
-			   
-			   
-			   
-//			   proxy.startFlowDynamic(arg0, arg1).
-//			
-			returnPage= "SearchResult";
-		}
 		
 		
-
-		return  new ModelAndView(returnPage, "formBean", singleChequeFormBean);
+		
+//		if(bankid.equals(propBankId))
+//		{
+//	    	ChequeBookDetail chequebook=chequeBookSavingService.findOneWithSRnoAndAccNo(serialno, accNo);
+//	    	System.out.println("Cheque customer name: "+chequebook.getCustomerName());
+//	    	
+//	    	if(chequebook!=null)
+//	    	{
+//		    	singleChequeFormBean.setChequeSerialNo(serialno);
+//		    	singleChequeFormBean.setCustomerName(chequebook.getCustomerName());
+//		    	singleChequeFormBean.setAccountNumber(String.valueOf(chequebook.getAccountId()));
+//		    	singleChequeFormBean.setChequeCurrency(chequebook.getCurrency());
+//		    	singleChequeFormBean.setBankId(String.valueOf(chequebook.getBankCode()));
+//		    	singleChequeFormBean.setBranchCode(chequebook.getBranchId());
+//		    	model.addAttribute("formBean",singleChequeFormBean);
+//		    	returnPage= "SearchResult";
+//	    	}
+//		}
+//		else
+//		{
+//			//call block chain
+//			System.out.println("Bank is not CIB");
+//			
+////			java.util.List<RpcRole> roles=new ArrayList<>();
+////			   RpcUser user = rpcUserRepository.save(new RpcUser("user1", "password",  roles));
+////			
+//			
+//
+//			
+//			
+//	
+//			   
+//			   
+//			   
+//			   
+////			   proxy.startFlowDynamic(arg0, arg1).
+////			
+//			returnPage= "SearchResult";
+//		}
+		
+		
+		   CordaRPCOps proxy= rpcConnection.getProxy();	
+		   Set<Party> parties= proxy.partiesFromName(bankid,  true);
+		    final Party myIdentity = parties.iterator().next();
+		   
+		    Stream<StateAndRef<ChequeBookState>> statesAndRefs=proxy.vaultQuery(ChequeBookState.class).getStates().stream()
+           .filter(it -> it.getState().getData().getRegisterBank().equals(myIdentity));
+		   
+		    
+		    QueryCriteria generalCriteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.ALL);
+		    Field registerBank = IOUSchemaV1.PersistentIOU.class.getDeclaredField("registerBank");
+	        CriteriaExpression registerBankIndex = Builder.equal(registerBank, myIdentity.getName().toString());
+	        QueryCriteria lenderCriteria = new QueryCriteria.VaultCustomQueryCriteria(registerBankIndex);
+	        QueryCriteria criteria = generalCriteria.and(lenderCriteria);
+	        List<StateAndRef<ChequeBookState>> results = proxy.vaultQueryByCriteria(criteria,ChequeBookState.class).getStates();
+	        
+	        for(StateAndRef<ChequeBookState> chequeBook:results)
+	        {
+	        	if( chequeBook.getState().getData().getAccountNumber().equals(String.valueOf(accNo)))
+		    	{
+		    		if(chequeBook.getState().getData().getChequeSerialNofrom()<=serialno &&chequeBook.getState().getData().getChequeSerialNoTo()>=serialno  )
+		    		{
+		    			singleChequeFormBean.setChequeSerialNo(serialno);
+				    	singleChequeFormBean.setCustomerName(chequeBook.getState().getData().getCustomerName());
+				    	singleChequeFormBean.setAccountNumber(String.valueOf(chequeBook.getState().getData().getAccountNumber()));
+				    	singleChequeFormBean.setChequeCurrency(chequeBook.getState().getData().getChequeCurrency());
+				    	singleChequeFormBean.setBankId(String.valueOf(chequeBook.getState().getData().getBankId()));
+				    	singleChequeFormBean.setBranchCode(chequeBook.getState().getData().getBranchCode());
+				    	model.addAttribute("formBean",singleChequeFormBean);
+		    		}
+		    	}
+	        }
+	        
+//		
+//		    statesAndRefs.forEach(item->{
+//		    	StateAndRef<ChequeBookState> chequeBook=item;
+//		    	if( chequeBook.getState().getData().getAccountNumber().equals(accNo))
+//		    	{
+//		    		if(chequeBook.getState().getData().getChequeSerialNofrom()>=serialno &&chequeBook.getState().getData().getChequeSerialNoTo()>=serialno  )
+//		    		{
+//		    			singleChequeFormBean.setChequeSerialNo(serialno);
+//				    	singleChequeFormBean.setCustomerName(chequeBook.getState().getData().getCustomerName());
+//				    	singleChequeFormBean.setAccountNumber(String.valueOf(chequeBook.getState().getData().getAccountNumber()));
+//				    	singleChequeFormBean.setChequeCurrency(chequeBook.getState().getData().getChequeCurrency());
+//				    	singleChequeFormBean.setBankId(String.valueOf(chequeBook.getState().getData().getBankId()));
+//				    	singleChequeFormBean.setBranchCode(chequeBook.getState().getData().getBranchCode());
+//				    	model.addAttribute("formBean",singleChequeFormBean);
+//		    		}
+//		    	}
+//		    }
+//		    	
+//		
+//			);
+		    
+//		    	StateAndRef<ChequeBookState> chequeBook=statesAndRefs.iterator().next();
+//		    	if( chequeBook.getState().getData().getAccountNumber().equals(accNo))
+//		    	{
+//		    		if(chequeBook.getState().getData().getChequeSerialNofrom()>=serialno &&chequeBook.getState().getData().getChequeSerialNoTo()>=serialno  )
+//		    		{
+//		    			singleChequeFormBean.setChequeSerialNo(serialno);
+//				    	singleChequeFormBean.setCustomerName(chequeBook.getState().getData().getCustomerName());
+//				    	singleChequeFormBean.setAccountNumber(String.valueOf(chequeBook.getState().getData().getAccountNumber()));
+//				    	singleChequeFormBean.setChequeCurrency(chequeBook.getState().getData().getChequeCurrency());
+//				    	singleChequeFormBean.setBankId(String.valueOf(chequeBook.getState().getData().getBankId()));
+//				    	singleChequeFormBean.setBranchCode(chequeBook.getState().getData().getBranchCode());
+//				    	model.addAttribute("formBean",singleChequeFormBean);
+//		    		}
+//		    	}
+//		    	);
+//		    
+		   
+		   
+		return  new ModelAndView("SearchResult", "formBean", singleChequeFormBean);
 	}
     
 

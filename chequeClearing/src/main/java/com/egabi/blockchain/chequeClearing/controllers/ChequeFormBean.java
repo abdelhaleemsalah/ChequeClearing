@@ -16,7 +16,7 @@ public class ChequeFormBean
 	private String chequeCurrency ;
 	private String pageName;
 	private long chequeAmount;
-	private boolean isCrossed;
+	private boolean crossed;
 	private Date chequeDueDate;
 	private long chequeBookSerialNo ;
 	public long getChequeSerialNoFrom() {
@@ -86,10 +86,10 @@ public class ChequeFormBean
 		this.chequeAmount = chequeAmount;
 	}
 	public boolean isCrossed() {
-		return isCrossed;
+		return crossed;
 	}
-	public void setCrossed(boolean isCrossed) {
-		this.isCrossed = isCrossed;
+	public void setCrossed(boolean crossed) {
+		this.crossed = crossed;
 	}
 	public Date getChequeDueDate() {
 		return chequeDueDate;
