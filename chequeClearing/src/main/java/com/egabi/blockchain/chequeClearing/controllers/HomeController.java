@@ -5,6 +5,8 @@ import com.egabi.blockchain.chequeClearing.entities.ChequeDetail;
 import com.egabi.blockchain.chequeClearing.services.ChequeBookSavingService;
 import com.egabi.blockchain.chequeClearing.services.ChequeDetailsSavingService;
 import com.egabi.blockchain.chequeClearing.services.StorageService;
+import net.corda.core.contracts.UniqueIdentifier;
+import com.github.manosbatsis.corbeans.spring.boot.corda.CordaNodeService;
 //import com.github.manosbatsis.corbeans.spring.boot.corda.CordaNodeService;
 //import com.github.manosbatsis.corbeans.spring.boot.corda.CordaNodesController;
 //import com.github.manosbatsis.corbeans.spring.boot.corda.rpc.beans.RpcPermissionRepository;
@@ -14,9 +16,15 @@ import com.egabi.blockchain.chequeClearing.services.StorageService;
 //import com.github.manosbatsis.corbeans.spring.boot.corda.rpc.entities.RpcUser;
 import com.github.manosbatsis.corbeans.spring.boot.corda.CordaNodeService;
 import com.github.manosbatsis.corbeans.spring.boot.corda.util.NodeRpcConnection;
-
+import com.template.flow.ChequeBookRegisterationFlow;
+import com.template.state.ChequeBookState;
+import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
+import static javax.ws.rs.core.Response.Status.CREATED;
+import javax.ws.rs.core.Response;
 import net.corda.core.identity.Party;
 import net.corda.core.messaging.CordaRPCOps;
+import net.corda.core.messaging.FlowHandle;
+import net.corda.core.transactions.SignedTransaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,6 +50,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -70,8 +79,9 @@ public class HomeController  {
 	  @Autowired
 	    private Map<String, CordaNodeService> services;
 	   
-//	  @Autowired
-//	  private NodeRpcConnection rpcConnection ;
+	  @Autowired
+	  @Qualifier("HSBCRpcConnection")
+	  private NodeRpcConnection rpcConnection ;
 	   
     @Autowired
     StorageService storageService;
@@ -102,8 +112,53 @@ public class HomeController  {
 	}
     
     @RequestMapping(value = "/RegSummary", method = RequestMethod.GET) 
-	public String displaySummaryConfirmation(Model model)
+	public String displaySummaryConfirmation(@ModelAttribute ChequeFormBean formBean,Model model)
 	{
+    	
+    	;
+		   CordaNodeService PartyA=  services.get(formBean.getBankId()+"NodeService");
+		   
+		   PartyA.peerNames();
+		// 
+		   CordaRPCOps proxy= rpcConnection.getProxy();		   
+		   Set<Party> parties= proxy.partiesFromName(formBean.getBankId(),  true);
+		   Set<Party> cbeParty= proxy.partiesFromName("CBC",  true);
+		   final Party myIdentity = parties.iterator().next();
+		   final Party cbeIdentity = cbeParty.iterator().next();
+		   if(parties.isEmpty())
+		   {
+			  throw new IllegalArgumentException("Target string " +"pARTA"+" doesnt match any nodes on the network.");
+		   }
+		   else if (parties.size()>1)
+		   {
+	          throw new IllegalArgumentException("Target string " +"pARTA "+" matches multiple nodes on the network.");
+		   }
+		   
+//		   Party registerBank,
+//           Party cbeBank, long chequeSerialNofrom, long chequeSerialNoTo, String accountNumber, long customerId,
+//           String customerName, long branchCode, String bankId, String chequeCurrency, long chequeBookSerialNo,
+//           UniqueIdentifier linearId)
+		   
+		   
+		   ChequeBookState state=new ChequeBookState(myIdentity,cbeIdentity,formBean.getChequeSerialNoFrom(),formBean.getChequeSerialNoTo(),formBean.getAccountNumber(),
+				   formBean.getCustomerId(),formBean.getCustomerName(),formBean.getBranchCode(),formBean.getBankId(),formBean.getChequeCurrency(),formBean.getChequeSerialNo(),new UniqueIdentifier());
+		   Response Responsestatus=null;
+	        try {
+	            final FlowHandle<SignedTransaction> flowHandle = proxy.startFlowDynamic(
+	            		ChequeBookRegisterationFlow.Initiator.class,
+	            		state, cbeParty, true
+	            );
+
+	            final SignedTransaction result = flowHandle.getReturnValue().get();
+	            final String msg = String.format("Transaction id %s committed to ledger.\n%s",
+	                    result.getId(), result.getTx().getOutputStates().get(0));
+	            Responsestatus=Response.status(CREATED).entity(msg).build();
+	        } catch (Exception e) {
+	        	Responsestatus= Response.status(BAD_REQUEST).entity(e.getMessage()).build();
+	        }
+		   
+    	
+    	
 		
 		return "RegSummary"; 
 	}
@@ -203,19 +258,13 @@ public class HomeController  {
 //			java.util.List<RpcRole> roles=new ArrayList<>();
 //			   RpcUser user = rpcUserRepository.save(new RpcUser("user1", "password",  roles));
 //			
-			   CordaNodeService PartyA=  services.get(bankid+"NodeService");
-			   PartyA.peerNames();
-			// 
-//			   CordaRPCOps proxy= rpcConnection.getProxy();		   
-//			   Set<Party> parties= proxy.partiesFromName(bankid,  true);
-//			   if(parties.isEmpty())
-//			   {
-//				  throw new IllegalArgumentException("Target string " +"pARTA"+" doesnt match any nodes on the network.");
-//			   }
-//			   else if (parties.size()>1)
-//			   {
-//		          throw new IllegalArgumentException("Target string " +"pARTA "+" matches multiple nodes on the network.");
-//			   }
+			
+
+			
+			
+	
+			   
+			   
 			   
 			   
 //			   proxy.startFlowDynamic(arg0, arg1).

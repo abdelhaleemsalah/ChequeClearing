@@ -5,7 +5,7 @@ import java.sql.Date;
 public class ChequeFormBean 
 {
 	
-	private long chequeSerialNofrom ;
+	private long chequeSerialNoFrom ;
 	private long chequeSerialNoTo ;
 	private String accountNumber ;
 	private long customerId ;
@@ -19,11 +19,11 @@ public class ChequeFormBean
 	private boolean isCrossed;
 	private Date chequeDueDate;
 	private long chequeBookSerialNo ;
-	public long getChequeSerialNofrom() {
-		return chequeSerialNofrom;
+	public long getChequeSerialNoFrom() {
+		return chequeSerialNoFrom;
 	}
-	public void setChequeSerialNofrom(long chequeSerialNofrom) {
-		this.chequeSerialNofrom = chequeSerialNofrom;
+	public void setChequeSerialNoFrom(long chequeSerialNoFrom) {
+		this.chequeSerialNoFrom = chequeSerialNoFrom;
 	}
 	public long getChequeSerialNoTo() {
 		return chequeSerialNoTo;

@@ -65,7 +65,7 @@
 
       <!-- Unnamed (Text Field) -->
       <div id="u7" class="ax_default text_field" title="from cheque serial number">
-        <form:input path="chequeserialNOfrom" id="u7_input" type="text" value="" title="from cheque serial number"/>
+        <form:input path="chequeSerialNoFrom" id="u7_input" type="text" value="" title="from cheque serial number"/>
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -78,7 +78,7 @@
 
       <!-- Unnamed (Text Field) -->
       <div id="u9" class="ax_default text_field" title="to cheque serial number">
-      	<form:input path="chequeserialNOto" id="u9_input" type="text" value="" title="to cheque serial number"/>
+      	<form:input path="chequeSerialNoTo" id="u9_input" type="text" value="" title="to cheque serial number"/>
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -91,7 +91,7 @@
 
       <!-- Unnamed (Text Field) -->
       <div id="u11" class="ax_default text_field" title="Cif Id">
-        <form:input path="customerid" id="u11_input" type="text" value="" title="Cif Id"/>
+        <form:input path="customerId" id="u11_input" type="text" value="" title="Cif Id"/>
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -105,7 +105,7 @@
       
        <!-- Unnamed (Droplist) -->
       <div id="u13" class="ax_default droplist" title="branch id">
-        <form:select id="u13_input" title="Bank id" path="bankid">
+        <form:select id="u13_input" title="Bank id" path="bankId">
           <option value="HSBC">HSBC</option>
           <option value="CIB">CIB</option>
           <option value="MISR">MISR</option>
@@ -124,7 +124,7 @@
 
       <!-- Unnamed (Droplist) -->
       <div id="u15" class="ax_default droplist" title="cheque currency">
-        <form:select id="u15_input" title="cheque currency" path="chequecurrency">
+        <form:select id="u15_input" title="cheque currency" path="chequeCurrency">
           <option value="EGP">EGP</option>
           <option value="USD">USD</option>
           <option value="EUR">EUR</option>
@@ -160,14 +160,14 @@
 
       <!-- Unnamed (Text Field) -->
       <div id="u18" class="ax_default text_field" title="branch id">
-      	<form:input path="customername" id="u18_input" type="text" value="" title="Customer Name"/>
+      	<form:input path="customerName" id="u18_input" type="text" value="" title="Customer Name"/>
       </div>
 
       <!-- Unnamed (Rectangle) -->
       <div id="u19" class="ax_default label">
         <div id="u19_div" class=""></div>
         <div id="u19_text" class="text ">
-           <form:label path="accountnumber"> <p><span>Cheque Serial number to:</span></p></form:label>
+           <form:label path="accountNumber"> <p><span>Cheque Serial number to:</span></p></form:label>
         
         </div>
       </div>
@@ -182,7 +182,7 @@
 
       <!-- Unnamed (Text Field) -->
       <div id="u21" class="ax_default text_field" title="branch id"> 	
-      	<form:input path="accountnumber" id="u21_input" type="text" value="" title="Account Id"/>
+      	<form:input path="accountNumber" id="u21_input" type="text" value="" title="Account Id"/>
       </div>
     </div>
         

@@ -25,7 +25,7 @@
     		<!-- For login portalUser -->
 		<c:url value="/logout" var="logoutUrl" />
 		<!-- <form action="${logoutUrl}" method="post" id="logoutForm">-->
-		 <form:form id="RegConfirmation"  action="${flowExecutionUrl}"  method="get" modelAttribute="formBean" > 
+		 <form:form id="RegConfirmation"  action="RegSummary"  method="get" modelAttribute="formBean" > 
 		
 		
 			<div id="base" class="">
@@ -124,7 +124,7 @@
       <div id="u48" class="ax_default label">
         <div id="u48_div" class=""></div>
         <div id="u48_text" class="text ">
-          <p>${formBean.customerid}<br></span></p>
+          <p>${formBean.customerId}<br></span></p>
         </div>
       </div>
 
@@ -132,7 +132,7 @@
       <div id="u49" class="ax_default label">
         <div id="u49_div" class=""></div>
         <div id="u49_text" class="text ">
-          <p>${formBean.customername}</p><p><span><br></span></p>
+          <p>${formBean.customerName}</p><p><span><br></span></p>
         </div>
       </div>
       
@@ -140,7 +140,7 @@
       <div id="u50" class="ax_default paragraph">
         <div id="u50_div" class=""></div>
         <div id="u50_text" class="text ">
-          <p>${formBean.bankid}</p>
+          <p>${formBean.bankId}</p>
         </div>
       </div>
 
@@ -148,7 +148,7 @@
       <div id="u51" class="ax_default paragraph">
         <div id="u51_div" class=""></div>
         <div id="u51_text" class="text ">
-          <p>${formBean.chequeserialNOfrom}</p>
+          <p>${formBean.chequeSerialNoFrom}</p>
         </div>
       </div>
 
@@ -156,7 +156,7 @@
       <div id="u52" class="ax_default paragraph">
         <div id="u52_div" class=""></div>
         <div id="u52_text" class="text ">
-          <p>${formBean.chequeserialNOto}</p>
+          <p>${formBean.chequeSerialNoTo}</p>
         </div>
       </div>
       
@@ -164,7 +164,7 @@
       <div id="u53" class="ax_default paragraph">
         <div id="u53_div" class=""></div>
         <div id="u53_text" class="text ">
-          <p>${formBean.chequecurrency}</p>
+          <p>${formBean.chequeCurrency}</p>
         </div>
       </div>
 
@@ -185,7 +185,7 @@
       <div id="u56" class="ax_default paragraph">
         <div id="u56_div" class=""></div>
         <div id="u56_text" class="text ">
-          <p>${formBean.accountnumber}</p>
+          <p>${formBean.accountNumber}</p>
         </div>
       </div>
 

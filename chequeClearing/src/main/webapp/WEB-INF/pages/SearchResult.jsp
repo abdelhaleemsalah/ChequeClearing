@@ -32,7 +32,7 @@
 	  
 	      <!-- Unnamed (Text Field) -->
 	      <div id="u6" class="ax_default text_field">
-	        <p>${formBean.chequeserialNO}</p>
+	        <p>${formBean.chequeSerialNo}</p>
 	      </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -89,7 +89,7 @@
       <div id="u18" class="ax_default label">
         <div id="u18_div" class=""></div>
         <div id="u18_text" class="text ">
-            <p>${formBean.customername}</p>
+            <p>${formBean.customerName}</p>
           	
         </div>
       </div>
@@ -106,7 +106,7 @@
       <div id="u20" class="ax_default label">
         <div id="u20_div" class=""></div>
         <div id="u20_text" class="text ">
-          <p>${formBean.accountnumber}</p>
+          <p>${formBean.accountNumber}</p>
         
         </div>
       </div>
@@ -123,7 +123,7 @@
       <div id="u22" class="ax_default label">
         <div id="u22_div" class=""></div>
         <div id="u22_text" class="text ">
-          <p>${formBean.chequecurrency}</p>
+          <p>${formBean.chequeCurrency}</p>
          
         </div>
       </div>
