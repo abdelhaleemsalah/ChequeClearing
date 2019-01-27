@@ -41,7 +41,7 @@ import net.corda.core.messaging.FlowHandle;
 import net.corda.core.transactions.SignedTransaction;
 
 @Controller
-@RequestMapping("/hello")
+@RequestMapping("/Registeration")
 @SessionAttributes("formBean")
 //@PropertySource("classpath:resources/bankconfig.properties")
 public class FormController {
@@ -65,17 +65,7 @@ public class FormController {
 		model.addAttribute("ajaxRequest", AjaxUtils.isAjaxRequest(request));
 	}
 
-	// Invoked initially to create the "form" attribute
-	// Once created the "form" attribute comes from the HTTP session (see @SessionAttributes)
 
-	
-//	 @RequestMapping(value = "/hello", method = RequestMethod.GET)
-//	   public ModelAndView hello() {
-//	      return new ModelAndView("hello", "formBean", new FormBean());
-//	   }
-	
-//	  @Autowired
-//	    private Map<String, CordaNodeService> services;
 	   
 	  @Autowired
 	  @Qualifier("HSBCRpcConnection")

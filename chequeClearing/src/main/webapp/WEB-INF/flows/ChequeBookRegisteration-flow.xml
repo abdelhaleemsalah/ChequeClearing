@@ -7,7 +7,7 @@
 
 
     <view-state id="RegConfirmation" model="formBean">
-        <transition on="Back" to="hello"/>
+        <transition on="Back" to="Registeration"/>
     </view-state>
     
     <view-state id="RegConfirmation" model="formBean">

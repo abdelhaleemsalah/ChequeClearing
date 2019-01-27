@@ -28,7 +28,7 @@
         </div>
       </div>
       
-      <form:form id="searchForm" name="tformest"  action="hello"  method="post"   modelAttribute="formBean" >
+      <form:form id="searchForm" name="tformest"  action="Registeration"  method="post"   modelAttribute="formBean" >
       
 	      <div id="u4" class="ax_default button" title="Chequebook Registeration">
 		        <div id="u4_text" class="text ">

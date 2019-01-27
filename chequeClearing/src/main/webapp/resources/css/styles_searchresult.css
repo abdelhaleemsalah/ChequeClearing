@@ -660,6 +660,16 @@ body {
   width:300px;
   height:25px;
 }
+
+#u6_text {
+  border-width:0px;
+  position:absolute;
+  left:180px;
+  top:0x;
+  width:300px;
+  word-wrap:break-word;
+}
+
 #u6_input {
   position:absolute;
   left:90px;

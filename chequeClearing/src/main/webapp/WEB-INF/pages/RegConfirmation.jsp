@@ -1,12 +1,13 @@
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 
 <head>
-        <title>Cheque Registeration Confirmation</title>
+
+        <title><spring:message code="chequeRegisterationConfirmation.title"/></title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,7 +39,7 @@
       <div id="u39" class="ax_default box_1">
         <div id="u39_div" class=""></div>
         <div id="u39_text" class="text ">
-          <p style="font-size:25px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;font-size:30px;">&nbsp;Cheque Registeration&nbsp; Confirmation:</span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;"> </span></p>
+          <p style="font-size:25px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;font-size:30px;">&nbsp;<spring:message code="chequeRegisterationConfirmation.message"/></span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;"> </span></p>
         </div>
       </div>
       
@@ -46,7 +47,7 @@
       <div id="u40" class="ax_default label">
         <div id="u40_div" class=""></div>
         <div id="u40_text" class="text ">
-          <p><span>Cheque Serial number from:</span></p>
+          <p><span><spring:message code="chequeSerialNumberFrom.message"/></span></p>
         </div>
       </div>
 
@@ -54,7 +55,7 @@
       <div id="u41" class="ax_default label">
         <div id="u41_div" class=""></div>
         <div id="u41_text" class="text ">
-          <p><span>Customer id:</span></p>
+          <p><span><spring:message code="customerId.message"/> </span></p>
         </div>
       </div>
 
@@ -67,7 +68,7 @@
       <div id="u43" class="ax_default label">
         <div id="u43_div" class=""></div>
         <div id="u43_text" class="text ">
-          <p><span>Currency:</span></p>
+          <p><span><spring:message code="Currency.message"/> </span></p>
         </div>
       </div>
       
@@ -75,7 +76,7 @@
       <div id="u44" class="ax_default label">
         <div id="u44_div" class=""></div>
         <div id="u44_text" class="text ">
-          <p><span>Customer Name:</span></p>
+          <p><span><spring:message code="customerName.message"/> </span></p>
         </div>
       </div>
 
@@ -83,14 +84,14 @@
       <div id="u45" class="ax_default label">
         <div id="u45_div" class=""></div>
         <div id="u45_text" class="text ">
-          <p><span>Cheque Serial number to:</span></p>
+          <p><span><spring:message code="chequeSerialNumberTo.message"/> </span></p>
         </div>
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u46" class="ax_default button" title="continue registeration">
+      <div id="u46" class="ax_default button" >
         <div id="u46_text" class="text ">
-        <button type="submit" id="Register" name="_eventId_Register">Register</button>
+        <button type="submit" id="Register" name="_eventId_Register">    <spring:message code="register.submit" /></button>
     			
         
         
@@ -102,10 +103,10 @@
       </div>
       
       <!-- Unnamed (Rectangle) -->
-      <div id="u47" class="ax_default button" title="continue registeration">
+      <div id="u47" class="ax_default button" >
         <div id="u47_text" class="text ">
    
-             <button type="submit" id="Back" name="_eventId_Back">Back</button>
+             <button type="submit" id="Back" name="_eventId_Back"> <spring:message code="back.submit"/></button>
     			
       
       

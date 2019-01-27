@@ -80,7 +80,7 @@
             <div id="u0" class="ax_default button" title="continue registeration">
         <div id="u0_text" class="text ">
            <form id="saveForm" name="tformest"  action="<c:url value="/SearchResult" />"  method="post"  >
-						<input id="u7_button" type="submit" value="Save" class="u0_div" />
+						<input id="u7_button" type="submit" value="Search" class="u0_div" />
 					
 		   </form>
       

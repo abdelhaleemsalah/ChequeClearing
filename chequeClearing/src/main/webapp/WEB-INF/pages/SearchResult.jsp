@@ -32,7 +32,11 @@
 	  
 	      <!-- Unnamed (Text Field) -->
 	      <div id="u6" class="ax_default text_field">
+	           <div id="u6_div" class=""></div>
+        <div id="u6_text" class="text ">
 	        <p>${formBean.chequeSerialNo}</p>
+	    
+	        </div>
 	      </div>
 
       <!-- Unnamed (Rectangle) -->

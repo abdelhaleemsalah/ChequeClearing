@@ -186,9 +186,9 @@ public class HomeController  {
 	public String displayLogin( Model model)
 	{
 		model.addAttribute("formBean", new ChequeFormBean());
-		return "hello"; 
+		return "Registeration"; 
 	}
-	@RequestMapping(value = "/hello", method = RequestMethod.GET) 
+	@RequestMapping(value = "/Registeration", method = RequestMethod.GET) 
 	public String displayHelloLogin( Model model)
 	{
 		if(!model.containsAttribute("formBean"))
@@ -196,7 +196,7 @@ public class HomeController  {
 		model.addAttribute("formBean", new ChequeFormBean());
 		}
 		
-		return "hello"; 
+		return "Registeration"; 
 	}
     @GetMapping("/{tenant}/home")
     public String homePage(Model model , @PathVariable("tenant") String merchant)

@@ -1,5 +1,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+     <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@page session="true"%>
 <html>
 <head>
@@ -48,11 +50,12 @@
 
 	<form name='loginForm' action="<c:url value='/login' />" method='POST'>
 	<div id="base" class="">
-
+<spring:message code="login.submit" var="labelSubmit"/>
       <!-- Unnamed (Rectangle) -->
       <div id="u0" class="ax_default button" title="login">
         <div id="u0_text" class="text ">
-          <input name="submit" type="submit" class="u0_div" value="submit" title="login"/>
+        
+          <input name="submit" type="submit" class="u0_div" value="${labelSubmit}" title="${labelSubmit}"/>
         </div>
       </div>
 
@@ -60,15 +63,17 @@
       <div id="u1" class="ax_default heading_1">
         <div id="u1_div" class=""></div>
         <div id="u1_text" class="text ">
-          <p><span>Cheque Clearing</span></p>
+          <p><span><spring:message code="welcome.message"/></span></p>
         </div>
       </div>
+      
+      
 
       <!-- Unnamed (Rectangle) -->
       <div id="u2" class="ax_default label">
         <div id="u2_div" class=""></div>
         <div id="u2_text" class="text ">
-          <p><span>Username:</span></p>
+          <p><span><spring:message code="userName.Label"/> </span></p>
         </div>
       </div>
 
@@ -76,7 +81,7 @@
       <div id="u3" class="ax_default label">
         <div id="u3_div" class=""></div>
         <div id="u3_text" class="text ">
-          <p><span>Password:</span></p>
+          <p><span><spring:message code="password.Label"/> </span></p>
         </div>
       </div>
 
@@ -90,6 +95,7 @@
         <input id="u5_input" type="password" name="password" title="password" maxlength="15"/>
         
       </div>
+   
     </div> 
 	</form>
 	
