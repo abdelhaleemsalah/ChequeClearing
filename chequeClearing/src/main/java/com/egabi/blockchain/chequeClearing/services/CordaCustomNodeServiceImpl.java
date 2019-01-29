@@ -38,7 +38,7 @@ public class CordaCustomNodeServiceImpl extends CordaNodeServiceImpl {
 	     * @throws NoSuchFieldException */
 		
 		
-		public ChequeFormBean retrieveChequeBook(String searchBankId,long accNo,long serialno ) throws NoSuchFieldException, SecurityException
+		public ChequeFormBean retrieveChequeBook(String searchBankId,long accNo,Integer serialno ) throws NoSuchFieldException, SecurityException
 		{
 			ChequeFormBean singleChequeFormBean=new ChequeFormBean();
 			   CordaRPCOps proxy= this.getNodeRpcConnection().getProxy();	

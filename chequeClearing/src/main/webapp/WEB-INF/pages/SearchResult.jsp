@@ -15,18 +15,18 @@
     <link href="resources/css/styles_searchresult.css" type="text/css" rel="stylesheet"/>
     <script src="resources/js/jquery-1.7.1.min.js"></script>
     <script src="resources/js/jquery-ui-1.8.10.custom.min.js"></script>
-<title>Insert title here</title>
+<title><spring:message code="searchCheque.title"/></title>
 </head>
 <body>
 	
-	<form:form id="SearchResult"  method="post"  action="/chequeClearing/submittingSummary"  modelAttribute="formBean" >
+	<form:form id="SearchResult"  method="post" action="/chequeClearing/submittingSummary"  modelAttribute="formBean" >
 	<div id="base" class="">
 
       <!-- Unnamed (Rectangle) -->
 	      <div id="u5" class="ax_default label">
 	        <div id="u5_div" class=""></div>
 	        <div id="u5_text" class="text ">
-	          <p><span>Cheque Serial Number:</span></p>
+	          <p><span><spring:message code="chequeSerialNumber.message"/></span></p>
 	        </div>
 	      </div>
 	  
@@ -51,7 +51,7 @@
       <div id="u12" class="ax_default heading_3">
         <div id="u12_div" class=""></div>
         <div id="u12_text" class="text ">
-          <p style="font-size:20px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;color:#003366;">&nbsp;Cheque is registered , Please fill the required data&nbsp; </span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;font-size:25px;"> </span></p>
+          <p style="font-size:20px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;color:#003366;">&nbsp;<spring:message code="chequeIsRegistered.message"/>&nbsp; </span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;font-size:25px;"> </span></p>
         </div>
       </div>
 
@@ -64,7 +64,7 @@
       <div id="u14" class="ax_default label">
         <div id="u14_div" class=""></div>
         <div id="u14_text" class="text ">
-          <p><span>Cheque Amount:</span></p>
+          <p><span><spring:message code="chequeAmount.message"/></span></p>
         </div>
       </div>
 
@@ -72,20 +72,20 @@
       <div id="u15" class="ax_default label">
         <div id="u15_div" class=""></div>
         <div id="u15_text" class="text ">
-          <p><span>Cheque Due date:</span></p>
+          <p><span><spring:message code="chequeDueDate.message"/></span></p>
         </div>
       </div>
 
       <!-- Unnamed (Text Field) -->
       <div id="u16" class="ax_default text_field">
-        <form:input path="chequeDueDate" id="u16_input" type="date" value=""/>
+        <form:input path="chequeDueDate" id="u16_input" type="date"   />
       </div>
 
       <!-- Unnamed (Rectangle) -->
       <div id="u17" class="ax_default label">
         <div id="u17_div" class=""></div>
         <div id="u17_text" class="text ">
-          <p><span>From Username:</span></p>
+          <p><span><spring:message code="fromUserName.message"/></span></p>
         </div>
       </div>
 
@@ -102,7 +102,7 @@
       <div id="u19" class="ax_default label">
         <div id="u19_div" class=""></div>
         <div id="u19_text" class="text ">
-          <p><span>Account Number:</span></p>
+          <p><span><spring:message code="accountId.message"/></span></p>
         </div>
       </div>
 
@@ -119,7 +119,7 @@
       <div id="u21" class="ax_default label">
         <div id="u21_div" class=""></div>
         <div id="u21_text" class="text ">
-          <p><span>Cheque Currency:</span></p>
+          <p><span><spring:message code="chequeCurrency.message"/></span></p>
         </div>
       </div>
 
@@ -132,10 +132,11 @@
         </div>
       </div>
 
-      <div id="u0" class="ax_default button" title="continue registeration">
+<spring:message code="register.submit" var="registerSubmit"/>
+      <div id="u0" class="ax_default button" >
         <div id="u0_text" class="text">
         <form id="searchsaveForm" name="ttformest" action="<c:url value="/submittingSummary" />" method="post">
-        <input id="registerSubmit" type="submit" value="Register" class="u0_div" />
+        <input id="registerSubmit" type="submit" value="${registerSubmit}" class="u0_div" />
     
         </form>
         </div>
@@ -151,7 +152,7 @@
 
       <!-- Unnamed (Radio Button) -->
       <div id="u25" class="ax_default radio_button">
-        <form:radiobutton path="crossed" id="u25_input" value="false"/>Crossed Cheque 
+        <form:checkbox path="crossed" id="u25_input" value="false"/><spring:message code="crossedCheque.message" />
       </div>
     </div>
     

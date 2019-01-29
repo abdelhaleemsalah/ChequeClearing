@@ -21,11 +21,8 @@ public class ChequeDetail implements Serializable {
 	@Column(name="BANK_CODE")
 	private String bankCode;
 
-	@Column(name="BRANCH_ID")
-	private long branchId;
-
 	@Column(name="CHEQUE_AMOUNT")
-	private long chequeAmount;
+	private Double chequeAmount;
 
 	@Column(name="CHEQUE_BOOK_ID")
 	private long chequeBookId;
@@ -67,19 +64,11 @@ public class ChequeDetail implements Serializable {
 		this.bankCode = bankCode;
 	}
 
-	public long getBranchId() {
-		return this.branchId;
-	}
-
-	public void setBranchId(long branchId) {
-		this.branchId = branchId;
-	}
-
-	public long getChequeAmount() {
+	public Double getChequeAmount() {
 		return this.chequeAmount;
 	}
 
-	public void setChequeAmount(long chequeAmount) {
+	public void setChequeAmount(Double chequeAmount) {
 		this.chequeAmount = chequeAmount;
 	}
 

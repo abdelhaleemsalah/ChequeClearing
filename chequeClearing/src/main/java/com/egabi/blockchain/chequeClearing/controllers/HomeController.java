@@ -227,7 +227,7 @@ public class HomeController  {
  
      
     @RequestMapping(value = "/SearchResult", method = RequestMethod.POST) 
-	public ModelAndView displaySearchResult(@RequestParam("chequeSerialNo") long serialno, 
+	public ModelAndView displaySearchResult(@RequestParam("chequeSerialNo") Integer serialno, 
 	@RequestParam("bankId") String bankid, @RequestParam("accountNumber") long accNo,
 	ModelMap model) throws NoSuchFieldException, SecurityException
 	{
@@ -384,7 +384,7 @@ public class HomeController  {
 		return new ChequeFormBean();
 	}
 	
-    @RequestMapping(value = "/submittingSummary", method = RequestMethod.GET) 
+    @RequestMapping(value = "/submittingSummary", method = RequestMethod.POST) 
 	public String chequeSubmittingSummary(@Valid @ModelAttribute("formBean")	ChequeFormBean  formBean  , Model model)
 	{
     	System.out.println("model.toString() "+model.containsAttribute("formBean"));
@@ -400,7 +400,7 @@ public class HomeController  {
     		
 		submittedCheque.setAccountNo(formBean.getAccountNumber());
 		submittedCheque.setBankCode(formBean.getBankId());
-		submittedCheque.setBranchId(formBean.getBranchCode());
+		//submittedCheque.setBranchId(formBean.getBranchCode());
 		submittedCheque.setChequeAmount(formBean.getChequeAmount());
 		submittedCheque.setChequeBookId(formBean.getChequeBookSerialNo());
 		submittedCheque.setChequeCurrency(formBean.getChequeCurrency());

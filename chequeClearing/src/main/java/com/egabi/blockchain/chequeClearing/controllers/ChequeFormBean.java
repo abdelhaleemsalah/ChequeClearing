@@ -1,34 +1,57 @@
 package com.egabi.blockchain.chequeClearing.controllers;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 public class ChequeFormBean 
 {
 	
-	private long chequeSerialNoFrom ;
-	private long chequeSerialNoTo ;
+	
+	private Integer chequeSerialNoFrom ;
+	
+	private Integer chequeSerialNoTo ;
 	private String accountNumber ;
-	private long customerId ;
+	
+	private Integer customerId ;
 	private String customerName ;
 	private long branchCode ;
 	private String bankId ;
-	private long chequeSerialNo ;
+	private Integer chequeSerialNo ;
 	private String chequeCurrency ;
 	private String pageName;
-	private long chequeAmount;
+	private Double chequeAmount;
 	private boolean crossed;
+
 	private Date chequeDueDate;
 	private long chequeBookSerialNo ;
-	public long getChequeSerialNoFrom() {
+	
+//	public ChequeFormBean ()
+//	{
+//	//	chequeDueDate=new java.sql.Date(utilDate.getTime());
+//				
+//		chequeDueDate = new java.util.Date();
+//		
+//////		         System.out.println("Time in java.util.Date is : " + uDate);
+//////		
+////		         DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
+//////		 
+////		         System.out.println("Using a dateFormat date is : " + df.format(chequeDueDate));
+//		         
+//	}
+	public Integer getChequeSerialNoFrom() {
 		return chequeSerialNoFrom;
 	}
-	public void setChequeSerialNoFrom(long chequeSerialNoFrom) {
+	public void setChequeSerialNoFrom(Integer chequeSerialNoFrom) {
 		this.chequeSerialNoFrom = chequeSerialNoFrom;
 	}
-	public long getChequeSerialNoTo() {
+	public Integer getChequeSerialNoTo() {
 		return chequeSerialNoTo;
 	}
-	public void setChequeSerialNoTo(long chequeSerialNoTo) {
+	public void setChequeSerialNoTo(Integer chequeSerialNoTo) {
 		this.chequeSerialNoTo = chequeSerialNoTo;
 	}
 	public String getAccountNumber() {
@@ -37,10 +60,10 @@ public class ChequeFormBean
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-	public long getCustomerId() {
+	public Integer getCustomerId() {
 		return customerId;
 	}
-	public void setCustomerId(long customerId) {
+	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
 	}
 	public String getCustomerName() {
@@ -61,10 +84,10 @@ public class ChequeFormBean
 	public void setBankId(String bankId) {
 		this.bankId = bankId;
 	}
-	public long getChequeSerialNo() {
+	public Integer getChequeSerialNo() {
 		return chequeSerialNo;
 	}
-	public void setChequeSerialNo(long chequeSerialNo) {
+	public void setChequeSerialNo(Integer chequeSerialNo) {
 		this.chequeSerialNo = chequeSerialNo;
 	}
 	public String getChequeCurrency() {
@@ -79,10 +102,10 @@ public class ChequeFormBean
 	public void setPageName(String pageName) {
 		this.pageName = pageName;
 	}
-	public long getChequeAmount() {
+	public Double getChequeAmount() {
 		return chequeAmount;
 	}
-	public void setChequeAmount(long chequeAmount) {
+	public void setChequeAmount(Double chequeAmount) {
 		this.chequeAmount = chequeAmount;
 	}
 	public boolean isCrossed() {
