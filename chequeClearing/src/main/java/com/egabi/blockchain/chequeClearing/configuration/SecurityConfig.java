@@ -79,18 +79,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
-//                .successHandler(new AuthenticationSuccessHandler() {
-//                    @Override
-//                    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-//                        authentication.getDetails();
-//                        System.out.println("Authentication authority"+authentication.getAuthorities());
-//                        System.out.println("Authentication use r"+authentication.getName());
-//                      //  response.sendRedirect(request.getContextPath()+"/merchant1/home");
-//                     //   response.sendRedirect(request.getContextPath()+"/merchant1/home");
-//                      //  response.flushBuffer();
-//
-//                    }
-//                })
+                .successHandler(new AuthenticationSuccessHandler() {
+                    @Override
+                    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+                        authentication.getDetails();
+                        response.sendRedirect(request.getContextPath()+"/"+authentication.getName()+"/Registeration");
+                        response.flushBuffer();
+
+                    }
+                })
                 .and()
                 .logout().permitAll()
                 .and().csrf().disable();

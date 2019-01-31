@@ -54,15 +54,14 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public Stream<Path> loadAll(String merchant) {
-        try {
-            Path merchantPath = this.rootLocation.resolve(merchant);
-            return Files.walk(merchantPath, 1)
-                    .filter(path -> !path.equals(merchantPath))
-                    .map(merchantPath::relativize);
-        } catch (IOException e) {
-            throw new StorageException("Failed to read stored files", e);
+    public Stream<Path> loadAll(String merchant) throws IOException {
+    	Path merchantPath = this.rootLocation.resolve(merchant);
+        if(Files.notExists(merchantPath)){
+        	Files.createDirectory(merchantPath);
         }
+        return Files.walk(merchantPath, 1)
+                .filter(path -> !path.equals(merchantPath))
+                .map(merchantPath::relativize);
 
     }
 

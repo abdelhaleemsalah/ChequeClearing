@@ -11,20 +11,20 @@
 	    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	    <meta name="apple-mobile-web-app-capable" content="yes" />
-		<link href="./resources/css/styles.css" type="text/css" rel="stylesheet"/>
-		<link href="./resources/css/styles_registeration.css" type="text/css" rel="stylesheet"/>
+		<link href="./../resources/css/styles.css" type="text/css" rel="stylesheet"/>
+		<link href="./../resources/css/styles_registeration.css" type="text/css" rel="stylesheet"/>
 		<link type="text/css" href="./resources/css/axure_rp_page.css" rel="Stylesheet" />
 	    <link type="text/css" href="./resources/css/jquery-ui-themes.css" rel="Stylesheet" />
-	    <script src="./resources/js/jquery-1.7.1.min.js"></script>
-	    <script src="./resources/js/jquery-ui-1.8.10.custom.min.js"></script>
+	    <script src="./../resources/js/jquery-1.7.1.min.js"></script>
+	    <script src="./../resources/js/jquery-ui-1.8.10.custom.min.js"></script>
     </head>
-    
+
     <body>
    		<spring:message code="search.submit" var="searchSubmit"/>
   	<!--   <form:form method = "GET" >
          <input type = "submit" action = "/search" value = "Search"/>
      </form:form> -->
-   		        <form id="searchForm" name="tformest"  action="<c:url value="/search" />"  method="get"  >
+   		        <form id="searchForm" name="tformest"  action="<c:url value="/${username}/search" />"  method="get"  >
 						<input id="requestReaderSubmit" type="submit" value="${searchSubmit}" />
 						
 		</form>

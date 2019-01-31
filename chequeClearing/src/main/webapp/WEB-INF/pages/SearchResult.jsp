@@ -10,17 +10,30 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
-    <link href="resources/css/styles.css" type="text/css" rel="stylesheet"/>
-    <link href="resources/css/styles_searchresult.css" type="text/css" rel="stylesheet"/>
-    <script src="resources/js/jquery-1.7.1.min.js"></script>
-    <script src="resources/js/jquery-ui-1.8.10.custom.min.js"></script>
+    <link href="./../resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="./../resources/css/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="./../resources/css/styles_searchresult.css" type="text/css" rel="stylesheet"/>
+    <script src="./../resources/js/jquery-1.7.1.min.js"></script>
+    <script src="./../resources/js/jquery-ui-1.8.10.custom.min.js"></script>
 <title><spring:message code="searchCheque.title"/></title>
 </head>
 <body>
 	
-	<form:form id="SearchResult"  method="post" action="/chequeClearing/submittingSummary"  modelAttribute="formBean" >
+	<form:form id="SearchResult"  method="post" enctype="multipart/form-data"  action="${pageContext.request.contextPath}/${user}/submittingSummary"  modelAttribute="formBean" >
 	<div id="base" class="">
+
+
+  <table>
+            <tr>
+                <td>File to upload:</td>
+                <td><input type="file" name="file"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Upload"/></td>
+            </tr>
+        </table>
+
 
       <!-- Unnamed (Rectangle) -->
 	      <div id="u5" class="ax_default label">
