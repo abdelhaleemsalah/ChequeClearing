@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=windows-1256"
     pageEncoding="windows-1256"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -47,7 +49,7 @@
       <div id="u42" class="ax_default label">
         <div id="u42_div" class=""></div>
         <div id="u42_text" class="text ">
-          <p><span>Nada Abdallah</span></p>
+          <p>${formBean.customerName}</p>
         </div>
       </div>
 
@@ -63,7 +65,7 @@
       <div id="u44" class="ax_default label">
         <div id="u44_div" class=""></div>
         <div id="u44_text" class="text ">
-          <p><span>16003254783647</span></p>
+          <p>${formBean.accountNumber}</p>
         </div>
       </div>
 
@@ -79,7 +81,7 @@
       <div id="u46" class="ax_default label">
         <div id="u46_div" class=""></div>
         <div id="u46_text" class="text ">
-          <p><span>EGP</span></p>
+          <p>${formBean.chequeCurrency}</p>
         </div>
       </div>
 
@@ -87,7 +89,7 @@
       <div id="u47" class="ax_default label">
         <div id="u47_div" class=""></div>
         <div id="u47_text" class="text ">
-          <p><span>5,0000</span></p>
+          <p>${formBean.chequeAmount}</p>
         </div>
       </div>
 
@@ -95,7 +97,7 @@
       <div id="u48" class="ax_default label">
         <div id="u48_div" class=""></div>
         <div id="u48_text" class="text ">
-          <p><span>19/02/19</span></p>
+          <p>${formBean.chequeDueDate}</p>
         </div>
       </div>
 
@@ -108,13 +110,15 @@
       </div>
 
       <!-- Unnamed (Rectangle) -->
+      <spring:message code="register.submit" var="registerSubmit"/>
       <div id="u50" class="ax_default button">
-        <div id="u50_div" class=""></div>
         <div id="u50_text" class="text ">
-          <p><span>Cheque Search</span></p>
+        	<form id="searchsaveForm" name="ttformest" action="<c:url value="/search" />" method="get">
+          		<input id="search" type="submit" value="Cheque Search" class="u50_div" />
+       		</form>
         </div>
       </div>
-
+      
       <!-- Unnamed (Rectangle) -->
       <div id="u51" class="ax_default label">
         <div id="u51_div" class=""></div>
@@ -127,7 +131,7 @@
       <div id="u52" class="ax_default label">
         <div id="u52_div" class=""></div>
         <div id="u52_text" class="text ">
-          <p><span>Yes</span></p>
+          <p>${formBean.crossed}</p>
         </div>
       </div>
     </div>

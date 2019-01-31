@@ -35,7 +35,6 @@
 	           <div id="u6_div" class=""></div>
         <div id="u6_text" class="text ">
 	        <p>${formBean.chequeSerialNo}</p>
-	    
 	        </div>
 	      </div>
 
@@ -141,9 +140,6 @@
         </form>
         </div>
       </div>
-
-
-
 
       <!-- Unnamed (Rectangle) -->
       <div id="u24" class="ax_default label">

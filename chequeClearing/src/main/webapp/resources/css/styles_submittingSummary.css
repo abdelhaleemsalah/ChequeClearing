@@ -170,8 +170,8 @@ body {
 #u42_text {
   border-width:0px;
   position:absolute;
-  left:0px;
-  top:0px;
+  left:32px;
+  top:-2px;
   width:112px;
   white-space:nowrap;
 }
@@ -252,8 +252,8 @@ body {
 #u44_text {
   border-width:0px;
   position:absolute;
-  left:0px;
-  top:0px;
+  left:32px;
+  top:-4px;
   width:113px;
   white-space:nowrap;
 }
@@ -332,7 +332,7 @@ body {
 #u46_text {
   border-width:0px;
   position:absolute;
-  left:0px;
+  left:-10px;
   top:0px;
   width:31px;
   white-space:nowrap;
@@ -410,9 +410,9 @@ body {
 #u48_text {
   border-width:0px;
   position:absolute;
-  left:0px;
+  left:10px;
   top:0px;
-  width:72px;
+  width:100px;
   word-wrap:break-word;
 }
 #u49_div {
@@ -448,7 +448,7 @@ body {
   width:297px;
   white-space:nowrap;
 }
-#u50_div {
+.u50_div {
   border-width:0px;
   position:absolute;
   left:0px;
@@ -567,7 +567,7 @@ body {
 #u52_text {
   border-width:0px;
   position:absolute;
-  left:0px;
+  left:-10px;
   top:0px;
   width:72px;
   word-wrap:break-word;
