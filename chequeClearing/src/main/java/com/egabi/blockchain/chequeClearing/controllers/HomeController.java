@@ -433,7 +433,6 @@ public class HomeController  {
     		
 		submittedCheque.setAccountNo(formBean.getAccountNumber());
 		submittedCheque.setBankCode(formBean.getBankId());
-		//submittedCheque.setBranchId(formBean.getBranchCode());
 		submittedCheque.setChequeAmount(formBean.getChequeAmount());
 		submittedCheque.setChequeBookId(formBean.getChequeBookSerialNo());
 		submittedCheque.setChequeCurrency(formBean.getChequeCurrency());
@@ -451,10 +450,4 @@ public class HomeController  {
         
     	return "submittingSummary"; 
 	}
-    
-    /*@RequestMapping(value = "/SearchResult", method = RequestMethod.POST) 
-	public String displaySearchResult(@RequestParam("chequeSRno") long serialno, 
-	@RequestParam("bankid") String bankid, @RequestParam("accNo") long accNo,
-	Model model)
-	{}*/
 }

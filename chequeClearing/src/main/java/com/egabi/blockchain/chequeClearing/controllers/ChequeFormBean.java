@@ -7,15 +7,13 @@ import java.text.SimpleDateFormat;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import net.corda.core.node.services.vault.GenericQueryCriteria.ChainableQueryCriteria;
 public class ChequeFormBean 
 {
-	
-	
 	private Integer chequeSerialNoFrom ;
-	
 	private Integer chequeSerialNoTo ;
 	private String accountNumber ;
-	
 	private Integer customerId ;
 	private String customerName ;
 	private long branchCode ;
@@ -25,23 +23,13 @@ public class ChequeFormBean
 	private String pageName;
 	private Double chequeAmount;
 	private boolean crossed;
-
 	private Date chequeDueDate;
 	private long chequeBookSerialNo ;
 	
-//	public ChequeFormBean ()
-//	{
-//	//	chequeDueDate=new java.sql.Date(utilDate.getTime());
-//				
-//		chequeDueDate = new java.util.Date();
-//		
-//////		         System.out.println("Time in java.util.Date is : " + uDate);
-//////		
-////		         DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
-//////		 
-////		         System.out.println("Using a dateFormat date is : " + df.format(chequeDueDate));
-//		         
-//	}
+	public ChequeFormBean ()
+	{       
+		this.chequeSerialNo=0;
+	}
 	public Integer getChequeSerialNoFrom() {
 		return chequeSerialNoFrom;
 	}
