@@ -1,25 +1,20 @@
 package com.egabi.blockchain.chequeClearing.controllers;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
-import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
 import com.github.manosbatsis.corbeans.spring.boot.corda.CordaNodeService;
-import com.github.manosbatsis.corbeans.spring.boot.corda.config.CordaNodesProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -43,17 +38,7 @@ import com.egabi.blockchain.chequeClearing.services.ChequeDetailsSavingService;
 import com.egabi.blockchain.chequeClearing.services.CordaCustomNodeServiceImpl;
 import com.egabi.blockchain.chequeClearing.services.StorageService;
 import com.github.manosbatsis.corbeans.spring.boot.corda.util.NodeRpcConnection;
-import com.template.schema.IOUSchemaV1;
-import com.template.state.ChequeBookState;
-
 import kotlin.Suppress;
-import net.corda.core.contracts.StateAndRef;
-import net.corda.core.identity.Party;
-import net.corda.core.messaging.CordaRPCOps;
-import net.corda.core.node.services.Vault;
-import net.corda.core.node.services.vault.Builder;
-import net.corda.core.node.services.vault.CriteriaExpression;
-import net.corda.core.node.services.vault.QueryCriteria;
 
 @Controller
 @ControllerAdvice
@@ -227,14 +212,44 @@ public class HomeController  {
 	{
     	model.addAttribute("user" , username);
     	return new ModelAndView("search", "formBean", new ChequeFormBean());
- 
 	}
     
-//    @Autowired private RpcUserRepository rpcUserRepository;
-//    @Autowired private RpcPermissionRepository rpcPermissionRepository;
-//    @Autowired private RpcRoleRepository rpcRoleRepository;
+    @RequestMapping(value = "/{username}/ChequeDetailsSearch", method = RequestMethod.GET) 
+ 	public ModelAndView displayChequeDeatilsSearch(@PathVariable("username") String username,Model model)
+	{
+    	model.addAttribute("user" , username);
+    	return new ModelAndView("ChequeDetailsSearch", "formBean", new ChequeFormBean());
+	}
 
     // Use repos in your code, e.g.
+    
+    @RequestMapping(value = "/{username}/ChequeDetailsSearchResult", method = RequestMethod.POST) 
+	public ModelAndView displayChequeDetailsSearchResult(@RequestParam("chequeDueDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date chequeDueDate,@RequestParam("chequeStatus") String chequeStatus, 
+	@RequestParam("chequeSerialNo") Integer chequeSerialNo , ModelMap model) throws NoSuchFieldException, SecurityException
+	{
+    	String returnPage=null;
+    	ChequeFormBean singleChequeFormBean = new ChequeFormBean();
+    	System.out.println("Cheque SR no: "+chequeSerialNo);
+    	System.out.println("Cheque due date: "+chequeDueDate);
+    	System.out.println("Cheque staus: "+chequeStatus);
+    	
+    	ChequeDetail RetrievedCheque=new ChequeDetail();
+    	RetrievedCheque=ChequeDetailsSavingService.findOneWithSRnoAndStatusAndDuedate(chequeSerialNo, chequeStatus, chequeDueDate);
+
+    	System.out.println("cheque username: "+RetrievedCheque.getPayToUsername());
+    	
+		return  new ModelAndView("ChequeDetailsSearchResult", "formBean", singleChequeFormBean);
+	
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
  
      
     @RequestMapping(value = "/{username}/SearchResult", method = RequestMethod.POST) 
@@ -439,7 +454,7 @@ public class HomeController  {
 		submittedCheque.setChequeDueDate(new Timestamp(formBean.getChequeDueDate().getTime()));
 		submittedCheque.setChequeSrNo(formBean.getChequeSerialNo());
 		submittedCheque.setPayToUsername(formBean.getCustomerName());
-		submittedCheque.setStatus("SUBMITTED");
+		submittedCheque.setStatus("PENDING REVIEW");
 		
 		ChequeDetailsSavingService.saveCheque(submittedCheque);
 		

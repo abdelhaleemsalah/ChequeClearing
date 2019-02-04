@@ -24,9 +24,12 @@
   	<!--   <form:form method = "GET" >
          <input type = "submit" action = "/search" value = "Search"/>
      </form:form> -->
-   		        <form id="searchForm" name="tformest"  action="<c:url value="/${username}/search" />"  method="get"  >
-						<input id="requestReaderSubmit" type="submit" value="${searchSubmit}" />
-						
+   		<form id="searchForm" name="tformest"  action="<c:url value="/${username}/search" />"  method="get"  >
+			<input id="requestReaderSubmit" type="submit" value="${searchSubmit}" />				
+		</form>
+		
+		<form id="searchForm" name="tformest"  action="<c:url value="/${username}/ChequeDetailsSearch" />"  method="get"  >
+			<input id="requestReaderSubmit" type="submit" value="Cheque Search" />				
 		</form>
    		
     		<!-- For login portalUser -->
