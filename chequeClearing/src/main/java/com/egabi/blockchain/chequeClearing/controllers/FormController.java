@@ -41,7 +41,7 @@ import net.corda.core.messaging.FlowHandle;
 import net.corda.core.transactions.SignedTransaction;
 
 @Controller
-@RequestMapping("/Registeration")
+@RequestMapping("/{username}/Registeration")
 @SessionAttributes("formBean")
 //@PropertySource("classpath:resources/bankconfig.properties")
 public class FormController {
