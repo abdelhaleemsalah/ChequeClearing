@@ -1,14 +1,6 @@
 package com.egabi.blockchain.chequeClearing.controllers;
 
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
-import javax.validation.constraints.NotNull;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
-import net.corda.core.node.services.vault.GenericQueryCriteria.ChainableQueryCriteria;
 public class ChequeFormBean 
 {
 	private Integer chequeSerialNoFrom ;
@@ -25,10 +17,17 @@ public class ChequeFormBean
 	private boolean crossed;
 	private Date chequeDueDate;
 	private long chequeBookSerialNo ;
+	private String chequeStatus;
 	
 	public ChequeFormBean ()
 	{       
 		this.chequeSerialNo=0;
+	}
+	public String getChequeStatus() {
+		return chequeStatus;
+	}
+	public void setChequeStatus(String chequeStatus) {
+		this.chequeStatus = chequeStatus;
 	}
 	public Integer getChequeSerialNoFrom() {
 		return chequeSerialNoFrom;

@@ -21,8 +21,8 @@
 <body>
 	<div id="base" class="">
 
-	<c:url var="addUrl" value="/chequeClearing/SearchResult"/>
-	  <form:form id="searchForm" name="tformestss"   action="${pageContext.request.contextPath}/${user}/SearchResult"    method="post"  modelAttribute="formBean" >
+	<c:url var="addUrl" value="/chequeClearing/ChequeDetailsSearchResult"/>
+	  <form:form id="searchForm" name="tformestss"   action="${pageContext.request.contextPath}/${user}/ChequeDetailsSearchResult"    method="post"  modelAttribute="formBean" >
 	  	<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 		
@@ -35,8 +35,6 @@
 	        </div>
 	      </div>
 	  
-	  
-	  
 	  <spring:message code="chequeSerialNumber.title" var="chequeSerialNumberTitle"/>
 	    <spring:message code="accountId.title" var="accountIdTitle"/>
 	      <!-- Unnamed (Text Field) -->
@@ -47,7 +45,7 @@
 	      
 	      <!-- Unnamed (Text Field) -->
 	      <div id="u12" class="ax_default text_field" >
-	      	<form:input path="accountNumber" id="u12_input" type="text" value="" title="${accountIdTitle}"/>
+	      	<form:input path="chequeDueDate" id="u16_input" type="date" value="" title="cheque duedate"/>
 	      
 	      </div>
 	
@@ -55,7 +53,7 @@
 	      <div id="u13" class="ax_default label">
 	        <div id="u13_div" class=""></div>
 	        <div id="u13_text" class="text ">
-	          <p><span>  <spring:message code="accountId.message" /></span></p>
+	          <p><span>  <spring:message code="chequeDueDate.message" /></span></p>
 	        </div>
 	      </div>
 	   
@@ -63,40 +61,38 @@
       <div id="u9" class="ax_default label">
         <div id="u9_div" class=""></div>
         <div id="u9_text" class="text ">
-          <p><span><spring:message code="BankCode.message" /></span></p>
+          <p><span><spring:message code="chequeStatus.message" /></span></p>
         </div>
       </div>
-            <spring:message code="bankId.title" var="bankIdTitle"/>
+      
+      <spring:message code="chequeStatus.title" var="chequeStatusTitle"/>
        <!-- Unnamed (Droplist) -->
-      <div id="u10" class="ax_default droplist" title="${bankId.title}">
-      <form:select id="u10_input" title="${bankId.title}" path="bankId">
-           <option value="HSBC">HSBC</option>
-          <option value="CIB">CIB</option>
-          <option value="MISR">MISR</option>
-          <option value="EDBE">EDBE</option>
-          <option value="ABK">ABK</option>
-        </form:select>
+      <div id="u10" class="ax_default droplist" title="${chequeStatus.title}">
+      <form:select id="u10_input" title="${chequeStatus.title}" path="chequeStatus">
+          <option value="REGISTERED">REGISTERED</option>
+          <option value="PENDING REVIEW">PENDING REVIEW</option>
+          <option value="REVIEW REJECTED">REVIEW REJECTED</option>
+          <option value="REVIEW APPROVED">REVIEW APPROVED</option>
+          <option value="SUBMITTED">SUBMITTED</option>
+          <option value="UNDER COLLECTION">UNDER COLLECTION</option>
+          <option value="COLLECTION APPROVED">COLLECTION APPROVED</option>
+          <option value="COLLECTION REJECTED">COLLECTION REJECTED</option>
+          <option value="COLLECTED">COLLECTED</option>
+      </form:select>
        
       </div>
       
-      
-      
       <spring:message code="search.submit" var="searchSubmit"/>
       
-            <div id="u0" class="ax_default button" >
+      <div id="u0" class="ax_default button" >
         <div id="u0_text" class="text ">
-           <form id="saveForm" name="tformest"  action="<c:url value="/SearchResult" />"  method="post"  >
-						<input id="u7_button" type="submit" value="${searchSubmit}" class="u0_div" />
-					
-		   </form>
+        <form id="saveForm" name="tformest"  action="<c:url value="/ChequeDetailsSearchResult" />"  method="post"  >
+				<input id="u7_button" type="submit" value="${searchSubmit}" class="u0_div" />		
+		</form>
       
       </div>  
       </div>
-      
-      
-	          
-	
-	      
+        
 	  </form:form>
 
       <!-- Unnamed (Rectangle) -->

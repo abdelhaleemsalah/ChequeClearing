@@ -1,17 +1,10 @@
 package com.egabi.blockchain.chequeClearing.controllers;
 
-import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
-import static javax.ws.rs.core.Response.Status.CREATED;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
-import java.util.Set;
-
 import javax.validation.Valid;
-import javax.ws.rs.core.Response;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.ResourceLoader;
@@ -22,26 +15,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.WebRequest;
-import com.egabi.blockchain.chequeClearing.entities.ChequeBookDetail;
 import com.egabi.blockchain.chequeClearing.services.ChequeBookSavingService;
 import com.egabi.blockchain.chequeClearing.services.CordaCustomNodeServiceImpl;
-import com.github.manosbatsis.corbeans.spring.boot.corda.CordaNodeService;
 import com.github.manosbatsis.corbeans.spring.boot.corda.util.NodeRpcConnection;
-import com.template.flow.ChequeBookRegisterationFlow;
-import com.template.state.ChequeBookState;
-
 import kotlin.Suppress;
-import net.corda.core.contracts.UniqueIdentifier;
-import net.corda.core.identity.Party;
-import net.corda.core.messaging.CordaRPCOps;
-import net.corda.core.messaging.FlowHandle;
-import net.corda.core.transactions.SignedTransaction;
 
 @Controller
-@RequestMapping("/Registeration")
+@RequestMapping("/{username}/Registeration")
 @SessionAttributes("formBean")
 //@PropertySource("classpath:resources/bankconfig.properties")
 public class FormController {
