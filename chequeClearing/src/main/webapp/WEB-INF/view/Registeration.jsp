@@ -4,7 +4,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 
-
 <head>
         <title><spring:message code="welcome.message"/></title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>

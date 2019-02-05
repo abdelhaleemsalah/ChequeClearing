@@ -3,6 +3,7 @@ package com.egabi.blockchain.chequeClearing.controllers;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
@@ -79,18 +80,12 @@ public class HomeController  {
         return "login";
     }
     
-   // @PostMapping("/RegConfirmation") 
-    
-
-    
     @RequestMapping(value = "/{username}/RegConfirmation", method = RequestMethod.POST) 
 	public String displayConfirmation(@PathVariable("username") String username, @ModelAttribute ChequeFormBean formBean,Model model)
 	{
     	model.addAttribute("formBean", formBean);
     	return "RegConfirmation"; 
 	}
-    
-    
     
     @PostConstruct
     public void postConstruct()
@@ -172,21 +167,72 @@ public class HomeController  {
  
     @RequestMapping(value = "/{username}/ChequeDetailsSearchResult", method = RequestMethod.POST) 
 	public ModelAndView displayChequeDetailsSearchResult(@RequestParam("chequeDueDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date chequeDueDate,@RequestParam("chequeStatus") String chequeStatus, 
-	@RequestParam("chequeSerialNo") Integer chequeSerialNo , ModelMap model) throws NoSuchFieldException, SecurityException
+	@RequestParam("chequeSerialNo") Integer chequeSerialNo , ModelMap model, Model mv) throws NoSuchFieldException, SecurityException
 	{
     	String returnPage=null;
     	ChequeFormBean singleChequeFormBean = new ChequeFormBean();
-    	System.out.println("Cheque SR no: "+chequeSerialNo);
-    	System.out.println("Cheque due date: "+chequeDueDate);
-    	System.out.println("Cheque staus: "+chequeStatus);
-    	
-    	ChequeDetail RetrievedCheque=new ChequeDetail();
-    	RetrievedCheque=ChequeDetailsSavingService.findOneWithSRnoAndStatusAndDuedate(chequeSerialNo, chequeStatus, chequeDueDate);
+    	if(chequeSerialNo!=0)
+    	{
+    		System.out.println("Cheque SR no: "+chequeSerialNo);
+	    	System.out.println("Cheque due date: "+chequeDueDate);
+	    	System.out.println("Cheque staus: "+chequeStatus);
 
-    	System.out.println("cheque username: "+RetrievedCheque.getPayToUsername());
-    	
-		return  new ModelAndView("ChequeDetailsSearchResult", "formBean", singleChequeFormBean);
-	
+			ArrayList<ChequeDetail> cheques=new ArrayList<>();
+			
+    		if(!chequeStatus.equals("SELECT"))
+    		{ 
+    			//status is not null
+    			if(chequeDueDate!=null)
+    			{
+    				cheques=ChequeDetailsSavingService.findOneWithSRnoAndStatusAndDuedate(chequeSerialNo, chequeStatus, chequeDueDate);
+    			}
+    			else
+    				cheques=ChequeDetailsSavingService.findOneWithSRnoAndStatus(chequeSerialNo, chequeStatus);
+    		}
+    		else
+    		{
+    			//status is null
+    			if(chequeDueDate!=null)
+    				cheques=ChequeDetailsSavingService.findOneWithSRnoAndDuedate(chequeSerialNo,chequeDueDate);
+    			
+    			//if all params are null except sr no
+    			else  
+    				cheques=ChequeDetailsSavingService.findOneWithSRno(chequeSerialNo);
+    		}
+    		for(int i=0;i<cheques.size();i++)
+			{
+				System.out.println("cheque no:"+i+" username: "+cheques.get(i).getPayToUsername());
+			}
+        	mv.addAttribute("retrievedCheques", cheques);
+    	}
+    	else
+    	{
+    		System.out.println("Cheque SR no: "+chequeSerialNo);
+	    	System.out.println("Cheque due date: "+chequeDueDate);
+	    	System.out.println("Cheque status: "+chequeStatus);
+
+			ArrayList<ChequeDetail> cheques=new ArrayList<>();
+    		if(!chequeStatus.equals("SELECT"))
+    		{ 
+    			//status is not null
+    			if(chequeDueDate!=null)
+    			{}
+    			else
+    				cheques=ChequeDetailsSavingService.findOneWithStatus(chequeStatus);
+    		}
+    		else
+    		{
+    			//status is null
+    			if(chequeDueDate!=null)
+    			{}
+    		}
+    		for(int i=0;i<cheques.size();i++)
+			{
+				System.out.println("cheque no:"+i+" username: "+cheques.get(i).getPayToUsername());
+			}
+        	mv.addAttribute("retrievedCheques", cheques);
+    	}
+    	return new ModelAndView("ChequeDetailsSearchResult", "formBean", singleChequeFormBean);
 	}
     
 

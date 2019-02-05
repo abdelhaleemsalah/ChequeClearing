@@ -69,6 +69,7 @@
        <!-- Unnamed (Droplist) -->
       <div id="u10" class="ax_default droplist" title="${chequeStatus.title}">
       <form:select id="u10_input" title="${chequeStatus.title}" path="chequeStatus">
+      	  <option value="SELECT">SELECT</option>
           <option value="REGISTERED">REGISTERED</option>
           <option value="PENDING REVIEW">PENDING REVIEW</option>
           <option value="REVIEW REJECTED">REVIEW REJECTED</option>
