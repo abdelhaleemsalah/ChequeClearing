@@ -12,8 +12,11 @@
     
     <view-state id="RegConfirmation" model="formBean">
         <transition on="Register" to="regSummary"/>
+          <transition on="Back" to="Registeration"/>
     </view-state>
-    
+    <view-state id="regSummary" model="formBean">
+        <transition on="Back" to="Registeration"/>
+    </view-state>
     <end-state id="regSummary" />
 
 

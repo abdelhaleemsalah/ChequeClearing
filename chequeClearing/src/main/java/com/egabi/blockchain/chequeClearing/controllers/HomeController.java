@@ -99,8 +99,11 @@ public class HomeController  {
     }
     
    // @PostMapping("/RegConfirmation") 
-    @RequestMapping(value = "/RegConfirmation", method = RequestMethod.POST) 
-	public String displayConfirmation( @ModelAttribute ChequeFormBean formBean,Model model)
+    
+
+    
+    @RequestMapping(value = "/{username}/RegConfirmation", method = RequestMethod.POST) 
+	public String displayConfirmation(@PathVariable("username") String username, @ModelAttribute ChequeFormBean formBean,Model model)
 	{
     	model.addAttribute("formBean", formBean);
     	return "RegConfirmation"; 
@@ -120,8 +123,10 @@ public class HomeController  {
     		}
     		
     }
-    @RequestMapping(value = "/RegSummary", method = RequestMethod.GET) 
-	public String displaySummaryConfirmation(@ModelAttribute ChequeFormBean formBean,Model model)
+    
+
+    @RequestMapping(value = "/{username}/RegSummary", method = RequestMethod.GET) 
+	public String displaySummaryConfirmation(@PathVariable("username") String username,@ModelAttribute ChequeFormBean formBean,Model model)
 	{
     	
     	;
