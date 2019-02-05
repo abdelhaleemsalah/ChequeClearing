@@ -13,25 +13,15 @@
 	    <meta name="apple-mobile-web-app-capable" content="yes" />
 		<link href="./../resources/css/styles.css" type="text/css" rel="stylesheet"/>
 		<link href="./../resources/css/styles_registeration.css" type="text/css" rel="stylesheet"/>
-		<link type="text/css" href="./resources/css/axure_rp_page.css" rel="Stylesheet" />
-	    <link type="text/css" href="./resources/css/jquery-ui-themes.css" rel="Stylesheet" />
+		<link type="text/css" href="./../resources/css/axure_rp_page.css" rel="Stylesheet" />
+	    <link type="text/css" href="./../resources/css/jquery-ui-themes.css" rel="Stylesheet" />
 	    <script src="./../resources/js/jquery-1.7.1.min.js"></script>
 	    <script src="./../resources/js/jquery-ui-1.8.10.custom.min.js"></script>
     </head>
 
     <body>
    		<spring:message code="search.submit" var="searchSubmit"/>
-  	<!--   <form:form method = "GET" >
-         <input type = "submit" action = "/search" value = "Search"/>
-     </form:form> -->
-   		<form id="searchForm" name="tformest"  action="<c:url value="/${username}/search" />"  method="get"  >
-			<input id="requestReaderSubmit" type="submit" value="${searchSubmit}" />				
-		</form>
-		
-		<form id="searchForm" name="tformest"  action="<c:url value="/${username}/ChequeDetailsSearch" />"  method="get"  >
-			<input id="requestReaderSubmit" type="submit" value="Cheque Search" />				
-		</form>
-   		
+  	
     		<!-- For login portalUser -->
 		<c:url value="/logout" var="logoutUrl" />
 		<form:form id="hello" action="Registeration"  method="post" modelAttribute="formBean" >

@@ -1,0 +1,44 @@
+body 
+{
+  margin:0px;
+  background-color:rgba(204, 204, 204, 1);
+  background-image:none;
+  position:static;
+  left:auto;
+  width:466px;
+  margin-left:0;
+  margin-right:0;
+  text-align:left;
+}
+#base 
+{
+  position:absolute;
+  z-index:0;
+}
+.tabs 
+{
+    color: #123558;
+    background-color: #9e1212;
+    width:1500px;
+}
+.label 
+{
+	display: inline-block;
+	float: left;
+    padding: 20px 30px;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: normal;
+    background: #922020;
+    cursor: pointer;
+	font-family:"Trebuchet MS";
+	border-color:rgba(204, 204, 204, 1);
+	border-width:1px;
+	border-style:solid;
+}
+ 
+.label:hover 
+{
+    background: #c4c4c4;
+	color: #000;
+}
