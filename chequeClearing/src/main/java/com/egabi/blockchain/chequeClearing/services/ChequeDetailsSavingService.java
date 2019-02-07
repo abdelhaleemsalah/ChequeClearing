@@ -15,5 +15,7 @@ public interface ChequeDetailsSavingService
 	public ArrayList<ChequeDetail> findOneWithStatusAndDuedate(String status,Date chequeDueDate); 
 	public ArrayList<ChequeDetail> findOneWithStatus(String status); 
 	public ArrayList<ChequeDetail> findOneWithDuedate(Date chequeDueDate); 
+	public ChequeDetail findOneChequeWithSRno(long chequeSrNo);
+	public void setUserInfoById(String status ,long chequeSrNo);
 	
 }

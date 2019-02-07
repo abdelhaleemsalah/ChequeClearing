@@ -1,0 +1,131 @@
+body 
+{
+  margin:0px;
+  background-color:rgba(204, 204, 204, 1);
+  background-image:none;
+  position:static;
+  left:auto;
+  width:466px;
+  margin-left:0;
+  margin-right:0;
+  text-align:left;
+}
+#base 
+{
+  position:absolute;
+  z-index:0;
+}
+#u6_div 
+{
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:277px;
+  height:90px;
+  background:inherit;
+  background-color:rgba(201, 201, 201, 1);
+  border:none;
+  border-radius:0px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+}
+#u6 
+{
+  border-width:0px;
+  position:absolute;
+  left:27px;
+  top:73px;
+  width:277px;
+  height:90px;
+}
+#u6_text 
+{
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:277px;
+  word-wrap:break-word;
+}
+.table 
+{ 
+	margin-left: 200px;
+    margin-top: 170px;
+    border-spacing: 10px;
+    border-collapse: separate;
+    color: #121029;
+    padding: 20px 20px;
+    border: solid;
+    border-width: thin;
+}
+.th
+{
+	color: fuchsia;
+	padding:20px;
+    border: solid;
+	text-align: -webkit-center;
+	border-width: thin;
+	border-color: #121029;
+	color: #861717;
+	font-size: 18px;
+	font-family: Century Gothic;
+}
+.td 
+{ 
+    padding: 10px;
+    color: #003366;
+    font-size: 15px;
+    text-align: -webkit-center;
+    border: solid;
+    border-style: outset;
+    font-family: Century Gothic;
+}
+.u16_div 
+{
+  border-width:0px;
+  position:absolute;
+  left:45px;
+  top:0px;
+  width:100px;
+  height:40px;
+  background:inherit;
+  background-color:rgba(255, 255, 255, 1);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(121, 121, 121, 1);
+  border-radius:5px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Century Gothic Bold', 'Century Gothic';
+  font-weight:700;
+  font-style:normal;
+  font-size:18px;
+  color:#003366;
+}
+#u16 
+{
+  border-width:0px;
+  position:absolute;
+  left:153px;
+  top:680px;
+  width:115px;
+  height:40px;
+  font-family:'Century Gothic Bold', 'Century Gothic';
+  font-weight:700;
+  font-style:normal;
+  font-size:18px;
+  color:#003366;
+}
+#u16_text 
+{
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:9px;
+  width:111px;
+  word-wrap:break-word;
+}

@@ -64,10 +64,22 @@ public class ChequeDetailsSavingServiceImpl implements ChequeDetailsSavingServic
 		return cheques;
 	}
 	@Override
-	public ArrayList<ChequeDetail> findOneWithDuedate(Date chequeDueDate) {
+	public ArrayList<ChequeDetail> findOneWithDuedate(Date chequeDueDate) 
+	{
 		// TODO Auto-generated method stub
 		ArrayList<ChequeDetail> cheques= chequeRepo.findOneWithDuedate(chequeDueDate);
 		return cheques;
+	}
+	@Override
+	public ChequeDetail findOneChequeWithSRno(long chequeSrNo) {
+		// TODO Auto-generated method stub
+		Optional<ChequeDetail> cheque= chequeRepo.findById(chequeSrNo);
+		return cheque.get();
+	}
+	@Override
+	public void setUserInfoById(String status, long chequeSrNo) {
+		// TODO Auto-generated method stub
+		chequeRepo.setUserInfoById(status, chequeSrNo);
 	}
 
 }

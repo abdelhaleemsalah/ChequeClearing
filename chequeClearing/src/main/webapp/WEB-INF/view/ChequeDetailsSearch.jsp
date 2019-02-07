@@ -19,10 +19,13 @@
 <title><spring:message code="searchCheque.title"/></title>
 </head>
 <body>
+
+	<form:form id="searchForm" name="tformestss"   action="${pageContext.request.contextPath}/${user}/ChequeDetailsSearchResult"  method="post"  modelAttribute="formBean" >
+	
 	<div id="base" class="">
 
 	<c:url var="addUrl" value="/chequeClearing/ChequeDetailsSearchResult"/>
-	  <form:form id="searchForm" name="tformestss"   action="${pageContext.request.contextPath}/${user}/ChequeDetailsSearchResult"    method="post"  modelAttribute="formBean" >
+	
 	  	<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 		
@@ -36,14 +39,12 @@
 	      </div>
 	  
 	  <spring:message code="chequeSerialNumber.title" var="chequeSerialNumberTitle"/>
-	    <spring:message code="accountId.title" var="accountIdTitle"/>
 	      <!-- Unnamed (Text Field) -->
 	      <div id="u6" class="ax_default text_field">
-	      	<form:input path="chequeSerialNo" id="u6_input" type="text" value="" title="${chequeSerialNumberTitle}"/>
-	        
+	      	<form:input path="chequeSerialNo" id="u6_input" type="text" value="" title="${chequeSerialNumberTitle}"/> 
 	      </div>
 	      
-	      <!-- Unnamed (Text Field) -->
+	       <!-- Unnamed (Text Field) -->
 	      <div id="u12" class="ax_default text_field" >
 	      	<form:input path="chequeDueDate" id="u16_input" type="date" value="" title="cheque duedate"/>
 	      
@@ -93,8 +94,6 @@
       
       </div>  
       </div>
-        
-	  </form:form>
 
       <!-- Unnamed (Rectangle) -->
       <div id="u8" class="ax_default box_1">
@@ -103,6 +102,8 @@
           <p style="font-size:25px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;font-size:30px;color:#003366;">&nbsp;</span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;"> </span></p>
         </div>
       </div>
+          
     </div>
+    </form:form>
 </body>
 </html>

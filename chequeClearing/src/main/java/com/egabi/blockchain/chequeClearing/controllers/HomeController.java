@@ -3,13 +3,17 @@ package com.egabi.blockchain.chequeClearing.controllers;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
+import static java.lang.Math.toIntExact;
 
 import com.github.manosbatsis.corbeans.spring.boot.corda.CordaNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +78,7 @@ public class HomeController  {
 	@Autowired
 	ResourceLoader resourceLoader;
 	
+	
     @GetMapping("/login")
     public String login()
     {
@@ -118,13 +123,9 @@ public class HomeController  {
     @RequestMapping(value = "/{username}/RegSummary", method = RequestMethod.GET) 
 	public String displaySummaryConfirmation(@PathVariable("username") String username,@ModelAttribute ChequeFormBean formBean,Model model)
 	{
-    	
-    	
     	CordaCustomNodeServiceImpl partyA=  services.get(formBean.getBankId()+"NodeService");
     	partyA.registerChequeBook(formBean, formBean.getBankId());
     	
-    	
-		
 		return "RegSummary"; 
 	}
 	@RequestMapping(value = "/", method = RequestMethod.GET) 
@@ -160,18 +161,17 @@ public class HomeController  {
     @RequestMapping(value = "/{username}/ChequeDetailsSearch", method = RequestMethod.GET) 
  	public ModelAndView displayChequeDeatilsSearch(@PathVariable("username") String username,Model model)
 	{
-    	model.addAttribute("user" , username);
+    	model.addAttribute("user", username);
     	return new ModelAndView("ChequeDetailsSearch", "formBean", new ChequeFormBean());
 	}
 
- 
     @RequestMapping(value = "/{username}/ChequeDetailsSearchResult", method = RequestMethod.POST) 
-	public ModelAndView displayChequeDetailsSearchResult(@RequestParam("chequeDueDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date chequeDueDate,@RequestParam("chequeStatus") String chequeStatus, 
+	public ModelAndView displayChequeDetailsSearchResult(@PathVariable("username") String username, @RequestParam("chequeDueDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date chequeDueDate,@RequestParam("chequeStatus") String chequeStatus, 
 	@RequestParam("chequeSerialNo") Integer chequeSerialNo , ModelMap model, Model mv) throws NoSuchFieldException, SecurityException
 	{
     	String returnPage=null;
     	ChequeFormBean singleChequeFormBean = new ChequeFormBean();
-    	if(chequeSerialNo!=0)
+    	if(chequeSerialNo!=0 && chequeSerialNo!=null)
     	{
     		System.out.println("Cheque SR no: "+chequeSerialNo);
 	    	System.out.println("Cheque due date: "+chequeDueDate);
@@ -216,7 +216,7 @@ public class HomeController  {
     		{ 
     			//status is not null
     			if(chequeDueDate!=null)
-    			{}
+    				cheques=ChequeDetailsSavingService.findOneWithStatusAndDuedate(chequeStatus, chequeDueDate);
     			else
     				cheques=ChequeDetailsSavingService.findOneWithStatus(chequeStatus);
     		}
@@ -224,7 +224,7 @@ public class HomeController  {
     		{
     			//status is null
     			if(chequeDueDate!=null)
-    			{}
+    				cheques=ChequeDetailsSavingService.findOneWithDuedate(chequeDueDate);
     		}
     		for(int i=0;i<cheques.size();i++)
 			{
@@ -232,10 +232,50 @@ public class HomeController  {
 			}
         	mv.addAttribute("retrievedCheques", cheques);
     	}
+
+    	mv.addAttribute("user" , username);
     	return new ModelAndView("ChequeDetailsSearchResult", "formBean", singleChequeFormBean);
 	}
     
-
+	@RequestMapping(value = "/{username}/chequesApproval", method = RequestMethod.GET) 
+	public ModelAndView displayApprovalPage(@PathVariable("username") String username,@RequestParam("chequeSerialNo") long chequeSerialNo,
+			Model model) throws NoSuchFieldException, SecurityException
+	{
+    	System.out.println("Cheque SR no: "+chequeSerialNo);
+    	System.out.println("display approval page");
+    	
+    	ChequeDetail cheque=ChequeDetailsSavingService.findOneChequeWithSRno(chequeSerialNo);
+    	System.out.println("Cheque username: "+cheque.getPayToUsername());
+    	
+    	ChequeFormBean chequeBean=new ChequeFormBean();
+    	
+    	chequeBean.setChequeSerialNo(toIntExact(cheque.getChequeSrNo()));
+    	chequeBean.setChequeAmount(cheque.getChequeAmount());
+    	chequeBean.setChequeDueDate(new Date(cheque.getChequeDueDate().getTime()));
+    	chequeBean.setCustomerName(cheque.getPayToUsername());
+    	chequeBean.setAccountNumber(cheque.getAccountNo().toString());
+    	chequeBean.setChequeCurrency(cheque.getChequeCurrency());
+    	chequeBean.setBankId(cheque.getBankCode());
+    	chequeBean.setChequeStatus(cheque.getStatus());
+    	
+    	if(cheque.getIsCrossed().equals("Y"))	
+    		chequeBean.setCrossed(true);
+    	else
+    		chequeBean.setCrossed(false);
+    	
+    	model.addAttribute("user" , username);
+    	return new ModelAndView("chequesApproval", "formBean",chequeBean);
+	}
+	@RequestMapping(value = "/{username}/approvalSummary", method = RequestMethod.POST) 
+	public ModelAndView displayApprovalSummary(@PathVariable("username") String username,
+	@RequestParam("chequeSerialNo") long chequeSerialNo ,Model model) throws NoSuchFieldException, SecurityException
+	{
+    	System.out.println("Cheque SR no: "+chequeSerialNo);
+    	ChequeDetailsSavingService.setUserInfoById("REVIEW APPROVED", chequeSerialNo);
+    	model.addAttribute("user" , username);
+    	return new ModelAndView("approvalSummary", "formBean",new ChequeFormBean());
+	}
+	
     @RequestMapping(value = "/{username}/SearchResult", method = RequestMethod.POST) 
 	public ModelAndView displaySearchResult(@PathVariable("username") String username,@RequestParam("chequeSerialNo") Integer serialno, 
 	@RequestParam("bankId") String bankid, @RequestParam("accountNumber") long accNo,

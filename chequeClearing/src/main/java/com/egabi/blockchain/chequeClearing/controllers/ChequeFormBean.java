@@ -1,6 +1,7 @@
 package com.egabi.blockchain.chequeClearing.controllers;
 
-import java.sql.Date;
+import java.util.Date;
+
 public class ChequeFormBean 
 {
 	private Integer chequeSerialNoFrom ;

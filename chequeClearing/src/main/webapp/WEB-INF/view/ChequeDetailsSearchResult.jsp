@@ -5,13 +5,55 @@
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
-<title>Insert title here</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link type="text/css" href="./../resources/css/axure_rp_page.css" rel="Stylesheet" />
+	<link type="text/css" href="./../resources/css/jquery-ui-themes.css" rel="Stylesheet" />
+    <link href="./../resources/css/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="./../resources/css/styles_chequeDetailsSearchResult.css" type="text/css" rel="stylesheet"/>
+    <script src="./../resources/js/jquery-1.7.1.min.js"></script>
+    <script src="./../resources/js/jquery-ui-1.8.10.custom.min.js"></script>
 </head>
 <body>
-	<c:forEach items="${retrievedCheques}" var="ChequeForm">     
-	   <c:out value="${ChequeForm.status}"/>
-	   <c:out value="${ChequeForm.payToUsername}"/>
-	</c:forEach>
+	
+	   <!-- Unnamed (Rectangle) -->
+      <div id="u6" class="ax_default box_1">
+        <div id="u6_div" class=""></div>
+        <div id="u6_text" class="text ">
+          <p style="font-size:25px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;font-size:30px;">&nbsp;<spring:message code="chequesDetailsSearch.message"/></span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;"> </span></p>
+        </div>
+      </div>
+	
+	<form id="searchForm" name="tformest"  method="post">
+	
+		<table class="table">
+		  <tr>
+		    <th class="th">Cheque Serial number</th>
+		    <th class="th">Cheque Username</th>
+		    <th class="th">Cheque Amount</th>
+		    <th class="th">Cheque Currency</th>
+		    <th class="th">Cheque Duedate</th>
+		    <th class="th">Cheque Account Number</th>
+		    <th class="th">Cheque Crossed Flag</th>
+		    <th class="th">Cheque Status</th>
+		  </tr>
+		  <c:forEach items="${retrievedCheques}" var="ChequeForm">
+		  <tr>
+		    <td class="td" style="text-decoration: underline;">
+		    <a href="chequesApproval?chequeSerialNo=${ChequeForm.chequeSrNo}">${ChequeForm.chequeSrNo}</a></td>
+		    
+		    <td class="td">${ChequeForm.payToUsername}</td>
+		   	<td class="td">${ChequeForm.chequeAmount}</td>
+		   	<td class="td">${ChequeForm.chequeCurrency}</td>
+		   	<td class="td">${ChequeForm.chequeDueDate}</td>
+		   	<td class="td">${ChequeForm.accountNo}</td>
+		   	<td class="td">${ChequeForm.isCrossed}</td>
+		   	<td class="td">${ChequeForm.status}</td>
+		  </tr>
+		  </c:forEach>
+		</table>
+	</form>
 </body>
 </html>
