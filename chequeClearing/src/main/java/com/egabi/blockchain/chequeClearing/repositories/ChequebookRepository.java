@@ -1,7 +1,5 @@
 package com.egabi.blockchain.chequeClearing.repositories;
 
-import java.util.Date;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

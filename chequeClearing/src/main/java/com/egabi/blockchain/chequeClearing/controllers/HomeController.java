@@ -272,7 +272,7 @@ public class HomeController  {
 	{
     	System.out.println("Cheque SR no: "+chequeSerialNo);
     	ChequeDetailsSavingService.setUserInfoById("REVIEW APPROVED", chequeSerialNo);
-    	model.addAttribute("user" , username);
+    	model.addAttribute("user",username);
     	return new ModelAndView("approvalSummary", "formBean",new ChequeFormBean());
 	}
 	
