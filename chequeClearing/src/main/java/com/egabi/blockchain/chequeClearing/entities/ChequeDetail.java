@@ -43,6 +43,17 @@ public class ChequeDetail implements Serializable {
 	@Column(name="PAY_TO_USERNAME")
 	private String payToUsername;
 
+	@Column(name="FROM_USERNAME")
+	private String fromUsername;
+	
+	public String getFromUsername() {
+		return fromUsername;
+	}
+
+	public void setFromUsername(String fromUsername) {
+		this.fromUsername = fromUsername;
+	}
+
 	private String status;
 
 	public ChequeDetail() {

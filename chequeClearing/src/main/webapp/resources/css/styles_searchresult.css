@@ -21,6 +21,48 @@ body {
   width:300px;
   height:25px;
 }
+#u8 {
+  border-width:0px;
+  position:absolute;
+  left:80px;
+  top:350px;
+  width:124px;
+  height:36px;
+  font-family:'Century Gothic Bold', 'Century Gothic';
+  font-weight:700;
+  font-style:normal;
+  font-size:15px;
+  color:#990000;
+}
+#u8_text {
+  border-width:0px;
+  position:absolute;
+  left:60px;
+  top:85px;
+  width:124px;
+  white-space:nowrap;
+}
+#u8_div {
+  border-width:0px;
+  position:absolute;
+  left:50px;
+  top:150px;
+  width:124px;
+  height:36px;
+  background:inherit;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  border-radius:0px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Century Gothic Bold', 'Century Gothic';
+  font-weight:700;
+  font-style:normal;
+  font-size:15px;
+  color:#990000;
+}
+
 #u9_input {
   position:absolute;
   left:0px;
@@ -164,7 +206,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u14 {
   border-width:0px;
@@ -177,7 +219,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u14_text {
   border-width:0px;
@@ -205,7 +247,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u15 {
   border-width:0px;
@@ -218,7 +260,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u15_text {
   border-width:0px;
@@ -268,7 +310,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u17 {
   border-width:0px;
@@ -281,13 +323,13 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u17_text {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:0px;
+  top:40px;
   width:119px;
   white-space:nowrap;
 }
@@ -328,7 +370,7 @@ body {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:0px;
+  top:40px;
   width:112px;
   white-space:nowrap;
 }
@@ -350,7 +392,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u19 {
   border-width:0px;
@@ -363,13 +405,13 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u19_text {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:0px;
+  top:40px;
   width:131px;
   white-space:nowrap;
 }
@@ -410,7 +452,7 @@ body {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:0px;
+  top:40px;
   width:113px;
   white-space:nowrap;
 }
@@ -432,7 +474,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u21 {
   border-width:0px;
@@ -445,13 +487,13 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u21_text {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:0px;
+  top:40px;
   width:138px;
   white-space:nowrap;
 }
@@ -492,7 +534,7 @@ body {
   border-width:0px;
   position:absolute;
   left:-40px;
-  top:0px;
+  top:40px;
   width:31px;
   white-space:nowrap;
 }
@@ -558,7 +600,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u24 {
   border-width:0px;
@@ -571,7 +613,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u24_text {
   border-width:0px;
@@ -586,14 +628,14 @@ body {
   border-width:0px;
   position:absolute;
   left:139px;
-  top:393px;
+  top:405px;
   width:164px;
   height:21px;
   font-family:'Century Gothic Bold', 'Century Gothic';
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u25_text {
   border-width:0px;
@@ -664,7 +706,7 @@ body {
 #u6_text {
   border-width:0px;
   position:absolute;
-  left:180px;
+  left:185px;
   top:0x;
   width:300px;
   word-wrap:break-word;
@@ -687,7 +729,7 @@ body {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:300px;
+  top:350px;
   width:104px;
   height:40px;
   background:inherit;
@@ -726,4 +768,34 @@ body {
   top:9px;
   width:100px;
   word-wrap:break-word;
+}
+#u26
+{
+  border-width:0px;
+  position:absolute;
+  left:139px;
+  top:393px;
+  width:164px;
+  height:21px;
+  font-family:'Century Gothic Bold', 'Century Gothic';
+  font-weight:700;
+  font-style:normal;
+  font-size:15px;
+  color:#990000;
+}
+
+#u26_input
+{
+  position:absolute;
+  left:235px;
+  top:50px;
+  width:159px;
+  height:25px;
+  font-family:'Arial';
+  font-weight:400;
+  font-style:normal;
+  font-size:13px;
+  text-decoration:none;
+  color:#000000;
+  text-align:left;
 }

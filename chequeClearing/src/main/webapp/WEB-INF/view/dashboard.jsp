@@ -23,6 +23,9 @@
   <form id="searchForm" name="tformest"  action="<c:url value="/${username}/ChequeDetailsSearch" />"  method="get">
 		<input id="requestReaderSubmit" type="submit" class="label" value="Bank Cheque Reviewing" />				
   </form>
+  <form id="searchForm" name="tformest"  action="<c:url value="/${username}/chequeSearchReport" />"  method="get">
+		<input id="requestReaderSubmit" type="submit" class="label" value="Bank Cheque Report" />				
+  </form>
 </div>
 	
 </body>

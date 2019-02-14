@@ -152,7 +152,7 @@ public class HomeController  {
 
     
     @RequestMapping(value = "/{username}/search", method = RequestMethod.GET) 
- 	public ModelAndView  displaySearch(@PathVariable("username") String username,Model model)
+ 	public ModelAndView displaySearch(@PathVariable("username") String username,Model model)
 	{
     	model.addAttribute("user" , username);
     	return new ModelAndView("search", "formBean", new ChequeFormBean());
@@ -164,20 +164,143 @@ public class HomeController  {
     	model.addAttribute("user", username);
     	return new ModelAndView("ChequeDetailsSearch", "formBean", new ChequeFormBean());
 	}
+    @RequestMapping(value = "/{username}/chequeSearchReport", method = RequestMethod.GET) 
+    public ModelAndView displayChequeReport(@PathVariable("username") String username,Model model)
+	{
+    	model.addAttribute("user", username);
+    	return new ModelAndView("chequeSearchReport", "formBean", new ChequeFormBean());
+	}
 
+    @RequestMapping(value = "/{username}/chequeSearchReportResult", method = RequestMethod.POST) 
+	public ModelAndView displayChequeSearchReport(@PathVariable("username") String username,@RequestParam("chequeStatus") String chequeStatus, 
+	@RequestParam("chequeSerialNo") Integer chequeSerialNo , ModelMap model, Model mv) throws NoSuchFieldException, SecurityException
+	{
+		ArrayList<ChequeDetail> cheques=new ArrayList<>();
+    	if(chequeSerialNo!=0 && chequeSerialNo!=null)
+    	{
+    		System.out.println("Cheque SR no: "+chequeSerialNo);
+	    	System.out.println("Cheque staus: "+chequeStatus);
+			
+    		if(!chequeStatus.equals("SELECT"))
+    		{ 
+    			//status is not null
+    			cheques=ChequeDetailsSavingService.findOneWithSRnoAndStatus(chequeSerialNo, chequeStatus);
+    		}
+    		else
+    		{
+    			//status is null
+    			cheques=ChequeDetailsSavingService.findOneWithSRno(chequeSerialNo);
+    		}
+    		for(int i=0;i<cheques.size();i++)
+			{
+				System.out.println("cheque no:"+i+" username: "+cheques.get(i).getPayToUsername());
+			}
+    	}
+    	else
+    	{
+    		cheques=ChequeDetailsSavingService.findOneWithStatus(chequeStatus);
+    	}
+    	mv.addAttribute("retrievedCheques", cheques);
+    	mv.addAttribute("user" , username);
+    	return new ModelAndView("chequeSearchReportResult", "formBean", new ChequeFormBean());
+	}
+    
+    @RequestMapping(value = "/{username}/chequeSearchReportResultDetails" , method = RequestMethod.GET)
+    public ModelAndView displayChequeSearchReportResultDetails(@PathVariable("username") String username,@RequestParam("chequeSerialNo") long chequeSerialNo,
+			Model model) throws NoSuchFieldException, SecurityException
+	{
+    	System.out.println("Cheque SR no: "+chequeSerialNo);
+    	System.out.println("display ChequeSearchReportResultDetails page");
+    	
+    	boolean isVisiable=false;
+    	
+    	ChequeDetail cheque=ChequeDetailsSavingService.findOneChequeWithSRno(chequeSerialNo);
+    	System.out.println("Cheque username: "+cheque.getPayToUsername());
+    	
+    	ChequeFormBean chequeBean=new ChequeFormBean();
+    	
+    	chequeBean.setChequeSerialNo(toIntExact(cheque.getChequeSrNo()));
+    	chequeBean.setChequeAmount(cheque.getChequeAmount());
+    	chequeBean.setChequeDueDate(new Date(cheque.getChequeDueDate().getTime()));
+    	chequeBean.setPaytoUsername(cheque.getPayToUsername());
+    	chequeBean.setAccountNumber(cheque.getAccountNo().toString());
+    	chequeBean.setChequeCurrency(cheque.getChequeCurrency());
+    	chequeBean.setBankId(cheque.getBankCode());
+    	chequeBean.setChequeStatus(cheque.getStatus());
+    	chequeBean.setCustomerName(cheque.getFromUsername());
+    	
+    	if(cheque.getIsCrossed().equals("Y"))	
+    		chequeBean.setCrossed(true);
+    	else
+    		chequeBean.setCrossed(false);
+    	
+    	if(cheque.getStatus().equals("REVIEW REJECTED"))
+    		isVisiable=true;
+    		
+    	System.out.println("Modify Visiable: "+isVisiable);
+    	model.addAttribute("modifyVisiablity", isVisiable);
+    	model.addAttribute("user",username);
+    	return new ModelAndView("chequeSearchReportResultDetails", "formBean",chequeBean);
+	}
+    
+    @RequestMapping(value = "/{username}/chequeDetailsEdit" , method = RequestMethod.POST)
+    public ModelAndView displayChequeDetailsModification(@PathVariable("username") String username,
+    @Valid @ModelAttribute("formBean") ChequeFormBean formBean, Model model) throws NoSuchFieldException, SecurityException
+	{
+    	System.out.println("chequeDetailsEdit chequeSerialNo: "+formBean.getChequeSerialNo());
+    	model.addAttribute("user",username);
+    	return new ModelAndView("chequeDetailsEdit", "formBean",formBean);
+	}
+    @RequestMapping(value = "/{username}/chequeDetailsEditSummary" , method = RequestMethod.POST)
+    public ModelAndView displayChequeDetailsModificationSummary(@RequestParam("file") MultipartFile file,
+    RedirectAttributes redirectAttributes , @PathVariable("username") String username, 
+    @Valid @ModelAttribute("formBean") ChequeFormBean formBean , Model model)
+    {
+    	String crossedCheque="Y";
+    	if(formBean.isCrossed()==false)
+    		crossedCheque="N";
+    	
+    	ChequeDetailsSavingService.updateChequeById(formBean.getChequeDueDate(), 
+    	formBean.getChequeSerialNo(), formBean.getChequeAmount(), crossedCheque, 
+    	formBean.getPaytoUsername());
+    	model.addAttribute("user",username);
+    	return new ModelAndView("chequeDetailsEditSummary");
+    }
+    		
+    
     @RequestMapping(value = "/{username}/ChequeDetailsSearchResult", method = RequestMethod.POST) 
 	public ModelAndView displayChequeDetailsSearchResult(@PathVariable("username") String username, @RequestParam("chequeDueDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date chequeDueDate,@RequestParam("chequeStatus") String chequeStatus, 
 	@RequestParam("chequeSerialNo") Integer chequeSerialNo , ModelMap model, Model mv) throws NoSuchFieldException, SecurityException
 	{
     	String returnPage=null;
     	ChequeFormBean singleChequeFormBean = new ChequeFormBean();
-    	if(chequeSerialNo!=0 && chequeSerialNo!=null)
+		ArrayList<ChequeDetail> cheques=new ArrayList<>();
+    	if(chequeSerialNo==null || chequeSerialNo==0)
     	{
     		System.out.println("Cheque SR no: "+chequeSerialNo);
 	    	System.out.println("Cheque due date: "+chequeDueDate);
-	    	System.out.println("Cheque staus: "+chequeStatus);
+	    	System.out.println("Cheque status: "+chequeStatus);
 
-			ArrayList<ChequeDetail> cheques=new ArrayList<>();
+    		if(!chequeStatus.equals("SELECT"))
+    		{ 
+    			//status is not null
+    			if(chequeDueDate!=null)
+    				cheques=ChequeDetailsSavingService.findOneWithStatusAndDuedate(chequeStatus, chequeDueDate);
+    			else
+    				cheques=ChequeDetailsSavingService.findOneWithStatus(chequeStatus);
+    		}
+    		else
+    		{
+    			//status is null
+    			if(chequeDueDate!=null)
+    				cheques=ChequeDetailsSavingService.findOneWithDuedate(chequeDueDate);
+    		}
+    	}
+    	else
+    	{
+        	System.out.println("Cheque SR no: "+chequeSerialNo);
+	    	System.out.println("Cheque due date: "+chequeDueDate);
+	    	System.out.println("Cheque staus: "+chequeStatus);
 			
     		if(!chequeStatus.equals("SELECT"))
     		{ 
@@ -198,41 +321,14 @@ public class HomeController  {
     			//if all params are null except sr no
     			else  
     				cheques=ChequeDetailsSavingService.findOneWithSRno(chequeSerialNo);
-    		}
-    		for(int i=0;i<cheques.size();i++)
-			{
-				System.out.println("cheque no:"+i+" username: "+cheques.get(i).getPayToUsername());
-			}
-        	mv.addAttribute("retrievedCheques", cheques);
+    		}		
     	}
-    	else
-    	{
-    		System.out.println("Cheque SR no: "+chequeSerialNo);
-	    	System.out.println("Cheque due date: "+chequeDueDate);
-	    	System.out.println("Cheque status: "+chequeStatus);
-
-			ArrayList<ChequeDetail> cheques=new ArrayList<>();
-    		if(!chequeStatus.equals("SELECT"))
-    		{ 
-    			//status is not null
-    			if(chequeDueDate!=null)
-    				cheques=ChequeDetailsSavingService.findOneWithStatusAndDuedate(chequeStatus, chequeDueDate);
-    			else
-    				cheques=ChequeDetailsSavingService.findOneWithStatus(chequeStatus);
-    		}
-    		else
-    		{
-    			//status is null
-    			if(chequeDueDate!=null)
-    				cheques=ChequeDetailsSavingService.findOneWithDuedate(chequeDueDate);
-    		}
-    		for(int i=0;i<cheques.size();i++)
-			{
-				System.out.println("cheque no:"+i+" username: "+cheques.get(i).getPayToUsername());
-			}
-        	mv.addAttribute("retrievedCheques", cheques);
-    	}
-
+    	for(int i=0;i<cheques.size();i++)
+		{
+			System.out.println("cheque no:"+i+" username: "+cheques.get(i).getPayToUsername());
+		}
+    	mv.addAttribute("retrievedCheques", cheques);
+    	
     	mv.addAttribute("user" , username);
     	return new ModelAndView("ChequeDetailsSearchResult", "formBean", singleChequeFormBean);
 	}
@@ -252,11 +348,12 @@ public class HomeController  {
     	chequeBean.setChequeSerialNo(toIntExact(cheque.getChequeSrNo()));
     	chequeBean.setChequeAmount(cheque.getChequeAmount());
     	chequeBean.setChequeDueDate(new Date(cheque.getChequeDueDate().getTime()));
-    	chequeBean.setCustomerName(cheque.getPayToUsername());
+    	chequeBean.setPaytoUsername(cheque.getPayToUsername());
     	chequeBean.setAccountNumber(cheque.getAccountNo().toString());
     	chequeBean.setChequeCurrency(cheque.getChequeCurrency());
     	chequeBean.setBankId(cheque.getBankCode());
     	chequeBean.setChequeStatus(cheque.getStatus());
+    	chequeBean.setCustomerName(cheque.getFromUsername());
     	
     	if(cheque.getIsCrossed().equals("Y"))	
     		chequeBean.setCrossed(true);
@@ -285,7 +382,7 @@ public class HomeController  {
     	ChequeFormBean singleChequeFormBean = new ChequeFormBean();
     	System.out.println("Cheque SR no: "+serialno);
     	System.out.println("Cheque bank id: "+bankid);
-    	System.out.println("Cheque bank id: "+accNo);
+    	System.out.println("Cheque account no: "+accNo);
     	
     	InputStream input = null;
 		Properties prop=new Properties();
@@ -305,6 +402,12 @@ public class HomeController  {
 		
 		model.addAttribute("user" , username);
 		   
+		CordaCustomNodeServiceImpl PartyA=  services.get(bankid+"NodeService");
+		 
+		
+		singleChequeFormBean=PartyA.retrieveChequeBook(bankid,accNo,serialno);
+	
+		
 		return  new ModelAndView("SearchResult", "formBean", singleChequeFormBean);
 	}
     
@@ -314,16 +417,13 @@ public class HomeController  {
 		return new ChequeFormBean();
 	}
 	
-	
-	
     @RequestMapping(value = "/{username}/submittingSummary", method = RequestMethod.POST) 
 	public String chequeSubmittingSummary(@RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes  , @PathVariable("username") String username ,@Valid @ModelAttribute("formBean")	ChequeFormBean  formBean  , Model model)
+            RedirectAttributes redirectAttributes  , @PathVariable("username") String username ,
+            @Valid @ModelAttribute("formBean")	ChequeFormBean  formBean, Model model)
 	{
-    	System.out.println("model.toString() "+model.containsAttribute("formBean"));
-    	System.out.println("model.toString() "+model.toString());
     	System.out.println("submitting summary hello");
-    	System.out.println("submitting summary: "+formBean.getCustomerName());
+    	System.out.println("submitting summary: "+formBean.getPaytoUsername());
 		ChequeDetail submittedCheque=new ChequeDetail();
 		
     	if(formBean.isCrossed()==false)
@@ -338,7 +438,8 @@ public class HomeController  {
 		submittedCheque.setChequeCurrency(formBean.getChequeCurrency());
 		submittedCheque.setChequeDueDate(new Timestamp(formBean.getChequeDueDate().getTime()));
 		submittedCheque.setChequeSrNo(formBean.getChequeSerialNo());
-		submittedCheque.setPayToUsername(formBean.getCustomerName());
+		submittedCheque.setPayToUsername(formBean.getPaytoUsername());
+		submittedCheque.setFromUsername(formBean.getCustomerName());
 		submittedCheque.setStatus("PENDING REVIEW");
 		
 		ChequeDetailsSavingService.saveCheque(submittedCheque);

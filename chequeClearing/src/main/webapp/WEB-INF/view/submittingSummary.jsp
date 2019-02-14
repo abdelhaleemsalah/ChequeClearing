@@ -38,6 +38,22 @@
         </div>
       </div>
 
+		<!-- Unnamed (Rectangle) -->
+      <div id="u37" class="ax_default label">
+        <div id="u37_div" class=""></div>
+        <div id="u37_text" class="text ">
+          <p><span><spring:message code="paytoUserName.message"/></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u38" class="ax_default label">
+        <div id="u38_div" class=""></div>
+        <div id="u38_text" class="text ">
+          <p>${formBean.paytoUsername}</p>
+        </div>
+      </div>
+
       <!-- Unnamed (Rectangle) -->
       <div id="u41" class="ax_default label">
         <div id="u41_div" class=""></div>
@@ -114,7 +130,7 @@
       <spring:message code="register.submit" var="registerSubmit"/>
       <div id="u50" class="ax_default button">
         <div id="u50_text" class="text ">
-        	<form id="searchsaveForm" name="ttformest" action="<c:url value="/search" />" method="get">
+        	<form id="searchsaveForm" name="ttformest" action="<c:url value="/${username}/search" />" method="get">
           		<input id="search" type="submit" value="Cheque Search" class="u50_div" />
        		</form>
         </div>

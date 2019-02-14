@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=windows-1256"
     pageEncoding="windows-1256"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,7 +20,7 @@
 </head>
 <body>
 
-	<form:form id="SearchResult"  method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/${user}/approvalSummary" modelAttribute="formBean" >
+	<form:form id="SearchResult"  method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/${user}/chequeDetailsEdit" modelAttribute="formBean" >
 	
 	<div id="base" class="">
 
@@ -153,20 +153,27 @@
         </div>
       </div>
 
-	 <spring:message code="approve.submit" var="approveSubmit"/>
-	 <spring:message code="reject.submit" var="rejectSubmit"/>
+	 <spring:message code="back.submit" var="backSubmit"/>
+	 <spring:message code="modify.submit" var="modifySubmit"/>
 	 
       <!-- Unnamed (Rectangle) -->
       <div id="u73" class="ax_default button">
-        <div id="u73_text" class="text">
-          <input id="u7_button" type="submit" value="${approveSubmit}" class="u73_div" />		
+        <div id="u73_text" class="text ">
+          <input id="u7_button" type="submit" value="${backSubmit}" class="u73_div" />	
         </div>
       </div>
 
+	<c:if test = "${modifyVisiablity==false}">
+    	<c:set var="display" value="none" />
+	</c:if>
+	<c:if test = "${modifyVisiablity==true}">
+		<c:set var="display" value="block" />
+	</c:if>
+
       <!-- Unnamed (Rectangle) -->
       <div id="u74" class="ax_default button">
-        <div id="u74_text" class="text">
-          <input id="u7_button" type="submit" value="${rejectSubmit}" class="u74_div" />		
+        <div id="u74_text" class="text ">
+         	<input id="u7_button" type="submit" value="${modifySubmit}" class="u74_div" style="display: ${display};"/>		
         </div>
       </div>
 

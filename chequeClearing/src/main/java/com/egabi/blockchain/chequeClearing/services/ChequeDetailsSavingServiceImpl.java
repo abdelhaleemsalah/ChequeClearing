@@ -81,5 +81,11 @@ public class ChequeDetailsSavingServiceImpl implements ChequeDetailsSavingServic
 		// TODO Auto-generated method stub
 		chequeRepo.setUserInfoById(status, chequeSrNo);
 	}
+	@Override
+	public void updateChequeById(Date chequeDueDate,long chequeSrNo,Double chequeAmount,String isCrossed,String payToUsername)
+	{
+		chequeRepo.updateChequeById(chequeDueDate, chequeSrNo, chequeAmount, isCrossed, payToUsername);
+	}
+	
 
 }

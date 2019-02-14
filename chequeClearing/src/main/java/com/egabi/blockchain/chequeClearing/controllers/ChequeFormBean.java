@@ -2,6 +2,8 @@ package com.egabi.blockchain.chequeClearing.controllers;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class ChequeFormBean 
 {
 	private Integer chequeSerialNoFrom ;
@@ -9,6 +11,7 @@ public class ChequeFormBean
 	private String accountNumber ;
 	private Integer customerId ;
 	private String customerName ;
+	private String paytoUsername ;
 	private long branchCode ;
 	private String bankId ;
 	private Integer chequeSerialNo ;
@@ -16,6 +19,7 @@ public class ChequeFormBean
 	private String pageName;
 	private Double chequeAmount;
 	private boolean crossed;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date chequeDueDate;
 	private long chequeBookSerialNo ;
 	private String chequeStatus;
@@ -114,7 +118,12 @@ public class ChequeFormBean
 	public void setChequeBookSerialNo(long chequeBookSerialNo) {
 		this.chequeBookSerialNo = chequeBookSerialNo;
 	}
-	
+	public String getPaytoUsername() {
+		return paytoUsername;
+	}
+	public void setPaytoUsername(String paytoUsername) {
+		this.paytoUsername = paytoUsername;
+	}
 
 
 	}

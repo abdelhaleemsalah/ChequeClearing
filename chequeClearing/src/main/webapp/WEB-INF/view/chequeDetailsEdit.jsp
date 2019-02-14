@@ -19,7 +19,8 @@
 </head>
 <body>
 	
-	<form:form id="SearchResult"  method="post" enctype="multipart/form-data"  action="${pageContext.request.contextPath}/${user}/submittingSummary"  modelAttribute="formBean" >
+	
+	<form:form id="SearchResult"  method="post" enctype="multipart/form-data"  action="${pageContext.request.contextPath}/${user}/chequeDetailsEditSummary"  modelAttribute="formBean" >
 	<div id="base" class="">
 
 
@@ -45,7 +46,7 @@
 	      <!-- Unnamed (Text Field) -->
 	      <div id="u6" class="ax_default text_field">
 	           <div id="u6_div" class=""></div>
-        <div id="u6_text" class="text ">
+        	<div id="u6_text" class="text ">
 	        <p>${formBean.chequeSerialNo}</p>
 	        </div>
 	      </div>
@@ -60,7 +61,7 @@
 	  
 	      <!-- Unnamed (Text Field) -->
       <div id="u26" class="ax_default text_field">
-     	<form:input path="paytoUsername" id="u26_input" type="text" value=""/>
+     	<form:input path="paytoUsername" id="u26_input" type="text" value="${formBean.paytoUsername}"/>
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -81,7 +82,7 @@
 
       <!-- Unnamed (Text Field) -->
       <div id="u13" class="ax_default text_field">
-        <form:input path="chequeAmount" id="u13_input" type="text" value=""/>
+        <form:input path="chequeAmount" id="u13_input" type="text" value="${formBean.chequeAmount}"/>
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -102,7 +103,7 @@
 
       <!-- Unnamed (Text Field) -->
       <div id="u16" class="ax_default text_field">
-        <form:input path="chequeDueDate" id="u16_input" type="date"   />
+        <form:input path="chequeDueDate" id="u16_input" type="date" value=""  />
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -156,11 +157,11 @@
         </div>
       </div>
 
-<spring:message code="register.submit" var="registerSubmit"/>
+<spring:message code="save.submit" var="saveSubmit"/>
       <div id="u0" class="ax_default button" >
         <div id="u0_text" class="text">
-        <form id="searchsaveForm" name="ttformest" action="<c:url value="/submittingSummary" />" method="post">
-        <input id="registerSubmit" type="submit" value="${registerSubmit}" class="u0_div" />
+        <form id="searchsaveForm" name="ttformest" action="<c:url value="/chequeDetailsEditSummary" />" method="post">
+        <input id="registerSubmit" type="submit" value="${saveSubmit}" class="u0_div" />
     
         </form>
         </div>

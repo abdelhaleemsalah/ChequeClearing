@@ -13,6 +13,83 @@ body {
   position:absolute;
   z-index:0;
 }
+#u37
+{
+  border-width:0px;
+  position:absolute;
+  left:145px;
+  top:263px;
+  width:150px;
+  height:21px;
+  font-family:'Century Gothic Bold', 'Century Gothic';
+  font-weight:700;
+  font-style:normal;
+  font-size:15px;
+  color:#990000;
+}
+#u37_div
+{
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:119px;
+  height:21px;
+  background:inherit;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  border-radius:0px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Century Gothic Bold', 'Century Gothic';
+  font-weight:700;
+  font-style:normal;
+  font-size:15px;
+  color:#990000;
+}
+#u38
+{
+  border-width:0px;
+  position:absolute;
+  left:378px;
+  top:263px;
+  width:112px;
+  height:21px;
+  font-family:'Century Gothic';
+  font-weight:400;
+  font-style:normal;
+  font-size:15px;
+}
+#u38_div
+{
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:112px;
+  height:21px;
+  background:inherit;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  border-radius:0px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Century Gothic';
+  font-weight:400;
+  font-style:normal;
+  font-size:15px;
+}
+#u38_text
+{
+  border-width:0px;
+  position:absolute;
+  left:32px;
+  top:0px;
+  width:112px;
+  white-space:nowrap;
+}
 #u39_div {
   border-width:0px;
   position:absolute;
@@ -31,7 +108,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u39 {
   border-width:0px;
@@ -44,7 +121,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u39_text {
   border-width:0px;
@@ -72,7 +149,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u40 {
   border-width:0px;
@@ -85,7 +162,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u40_text {
   border-width:0px;
@@ -113,7 +190,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u41 {
   border-width:0px;
@@ -126,13 +203,13 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u41_text {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:0px;
+  top:60px;
   width:119px;
   white-space:nowrap;
 }
@@ -171,7 +248,7 @@ body {
   border-width:0px;
   position:absolute;
   left:32px;
-  top:-2px;
+  top:57px;
   width:112px;
   white-space:nowrap;
 }
@@ -193,7 +270,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u43 {
   border-width:0px;
@@ -206,13 +283,13 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u43_text {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:0px;
+  top:60px;
   width:131px;
   white-space:nowrap;
 }
@@ -253,7 +330,7 @@ body {
   border-width:0px;
   position:absolute;
   left:32px;
-  top:-4px;
+  top:55px;
   width:113px;
   white-space:nowrap;
 }
@@ -275,7 +352,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u45 {
   border-width:0px;
@@ -288,13 +365,13 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u45_text {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:0px;
+  top:60px;
   width:138px;
   white-space:nowrap;
 }
@@ -333,7 +410,7 @@ body {
   border-width:0px;
   position:absolute;
   left:-10px;
-  top:0px;
+  top:60px;
   width:31px;
   white-space:nowrap;
 }
@@ -411,8 +488,8 @@ body {
   border-width:0px;
   position:absolute;
   left:10px;
-  top:0px;
-  width:100px;
+  top:-10px;
+  width:200px;
   word-wrap:break-word;
 }
 #u49_div {
@@ -443,8 +520,8 @@ body {
 #u49_text {
   border-width:0px;
   position:absolute;
-  left:0px;
-  top:0px;
+  left:20px;
+  top:70px;
   width:297px;
   white-space:nowrap;
 }
@@ -452,7 +529,7 @@ body {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:0px;
+  top:70px;
   width:152px;
   height:40px;
   background:inherit;
@@ -510,7 +587,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u51 {
   border-width:0px;
@@ -523,7 +600,7 @@ body {
   font-weight:700;
   font-style:normal;
   font-size:15px;
-  color:#990033;
+  color:#990000;
 }
 #u51_text {
   border-width:0px;
