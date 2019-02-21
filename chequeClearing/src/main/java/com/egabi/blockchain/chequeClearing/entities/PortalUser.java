@@ -13,7 +13,6 @@ import javax.persistence.Table;
 @Table(name = "users")
 public class PortalUser {
 
-    
     private long userId;
     private String username;
     private String password;

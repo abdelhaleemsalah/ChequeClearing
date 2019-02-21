@@ -52,7 +52,7 @@
       <div id="u62" class="ax_default label">
         <div id="u62_div" class=""></div>
         <div id="u62_text" class="text ">
-          <p><span>Account Number:</span></p>
+          <p><span><spring:message code="chequeOwnerAccount.message"/></span></p>
         </div>
       </div>
 
@@ -71,20 +71,28 @@
           <p><span>Pay to:</span></p>
         </div>
       </div>
+      
+      <!-- Unnamed (Rectangle) -->
+      <div id="u48" class="ax_default label">
+        <div id="u48_div" class=""></div>
+        <div id="u48_text" class="text ">
+          <p><span>Pay to Account:</span></p>
+        </div>
+      </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u65" class="ax_default label">
-        <div id="u65_div" class=""></div>
-        <div id="u65_text" class="text ">
+      <div id="u50" class="ax_default label">
+        <div id="u50_div" class=""></div>
+        <div id="u50_text" class="text ">
           <p><span>Bank ID:</span></p>
         </div>
       </div>
       
       <!-- Unnamed (Rectangle) -->
-      <div id="u50" class="ax_default label">
-        <div id="u50_div" class=""></div>
-        <div id="u50_text" class="text ">
-          <p><span>Account Owner:</span></p>
+      <div id="u65" class="ax_default label">
+        <div id="u65_div" class=""></div>
+        <div id="u65_text" class="text ">
+          <p><span><spring:message code="fromUserName.message"/></span></p>
         </div>
       </div>
 
@@ -112,11 +120,20 @@
           <p>${formBean.paytoUsername}</p>
         </div>
       </div>
+      
+      <!-- Unnamed (Rectangle) -->
+      <div id="u49" class="ax_default label">
+        <div id="u49_div" class=""></div>
+        <div id="u49_text" class="text ">
+          <p>${formBean.paytoAccountNumber}</p>
+        </div>
+      </div>
+      
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u69" class="ax_default label">
-        <div id="u69_div" class=""></div>
-        <div id="u69_text" class="text ">
+      <div id="u51" class="ax_default label">
+        <div id="u51_div" class=""></div>
+        <div id="u51_text" class="text ">
           <p>${formBean.bankId}</p>
         </div>
       </div>
@@ -146,9 +163,9 @@
       </div>
       
       <!-- Unnamed (Rectangle) -->
-      <div id="u51" class="ax_default label">
-        <div id="u51_div" class=""></div>
-        <div id="u51_text" class="text ">
+      <div id="u69" class="ax_default label">
+        <div id="u69_div" class=""></div>
+        <div id="u69_text" class="text ">
           <p>${formBean.customerName}</p>
         </div>
       </div>

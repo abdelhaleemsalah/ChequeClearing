@@ -79,8 +79,6 @@
        
       </div>
       
-      
-      
       <spring:message code="search.submit" var="searchSubmit"/>
       
             <div id="u0" class="ax_default button" >

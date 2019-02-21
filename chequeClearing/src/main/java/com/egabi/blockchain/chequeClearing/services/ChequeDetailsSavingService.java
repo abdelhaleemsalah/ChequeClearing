@@ -3,8 +3,6 @@ package com.egabi.blockchain.chequeClearing.services;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.springframework.data.repository.query.Param;
-
 import com.egabi.blockchain.chequeClearing.entities.ChequeDetail;
 
 public interface ChequeDetailsSavingService 
@@ -19,6 +17,7 @@ public interface ChequeDetailsSavingService
 	public ArrayList<ChequeDetail> findOneWithDuedate(Date chequeDueDate); 
 	public ChequeDetail findOneChequeWithSRno(long chequeSrNo);
 	public void setUserInfoById(String status ,long chequeSrNo);
-	public void updateChequeById(Date chequeDueDate,long chequeSrNo,Double chequeAmount,String isCrossed,String payToUsername);
+	public void updateChequeById(Date chequeDueDate,long chequeSrNo,Double chequeAmount,
+	String isCrossed,String payToUsername,String status);
 	
 }

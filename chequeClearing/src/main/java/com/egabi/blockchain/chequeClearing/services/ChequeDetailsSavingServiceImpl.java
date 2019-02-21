@@ -82,9 +82,10 @@ public class ChequeDetailsSavingServiceImpl implements ChequeDetailsSavingServic
 		chequeRepo.setUserInfoById(status, chequeSrNo);
 	}
 	@Override
-	public void updateChequeById(Date chequeDueDate,long chequeSrNo,Double chequeAmount,String isCrossed,String payToUsername)
+	public void updateChequeById(Date chequeDueDate,long chequeSrNo,Double chequeAmount,
+	String isCrossed,String payToUsername,String status)
 	{
-		chequeRepo.updateChequeById(chequeDueDate, chequeSrNo, chequeAmount, isCrossed, payToUsername);
+		chequeRepo.updateChequeById(chequeDueDate, chequeSrNo, chequeAmount, isCrossed, payToUsername, status);
 	}
 	
 

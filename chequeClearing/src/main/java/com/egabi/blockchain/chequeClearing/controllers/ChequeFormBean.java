@@ -9,6 +9,7 @@ public class ChequeFormBean
 	private Integer chequeSerialNoFrom ;
 	private Integer chequeSerialNoTo ;
 	private String accountNumber ;
+	private String paytoAccountNumber ;
 	private Integer customerId ;
 	private String customerName ;
 	private String paytoUsername ;
@@ -124,7 +125,12 @@ public class ChequeFormBean
 	public void setPaytoUsername(String paytoUsername) {
 		this.paytoUsername = paytoUsername;
 	}
-
+	public String getPaytoAccountNumber() {
+		return paytoAccountNumber;
+	}
+	public void setPaytoAccountNumber(String paytoAccountNumber) {
+		this.paytoAccountNumber = paytoAccountNumber;
+	}
 
 	}
         

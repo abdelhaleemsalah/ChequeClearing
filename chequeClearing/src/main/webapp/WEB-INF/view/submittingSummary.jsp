@@ -53,6 +53,22 @@
           <p>${formBean.paytoUsername}</p>
         </div>
       </div>
+		
+	<!-- Unnamed (Rectangle) -->
+      <div id="u36" class="ax_default label">
+        <div id="u36_div" class=""></div>
+        <div id="u36_text" class="text ">
+          <p><span><spring:message code="paytoUserAcc.message"/></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u35" class="ax_default label">
+        <div id="u35_div" class=""></div>
+        <div id="u35_text" class="text ">
+          <p>${formBean.paytoAccountNumber}</p>
+        </div>
+      </div>
 
       <!-- Unnamed (Rectangle) -->
       <div id="u41" class="ax_default label">
@@ -74,7 +90,7 @@
       <div id="u43" class="ax_default label">
         <div id="u43_div" class=""></div>
         <div id="u43_text" class="text ">
-          <p><span><spring:message code="accountId.message"/></span></p>
+          <p><span><spring:message code="chequeOwnerAccount.message"/></span></p>
         </div>
       </div>
 

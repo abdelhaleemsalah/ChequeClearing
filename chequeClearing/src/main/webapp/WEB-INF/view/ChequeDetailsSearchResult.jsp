@@ -31,8 +31,9 @@
 		<table class="table">
 		  <tr>
 		    <th class="th">Cheque Serial number</th>
-		    <th class="th">Cheque Pay to</th>
+		    <th class="th">Cheque Owner name</th>
 		    <th class="th">Cheque Amount</th>
+		    <th class="th">Cheque Pay to</th>
 		    <th class="th">Cheque Bank</th>
 		    <th class="th">Cheque Status</th>
 		  </tr>
@@ -40,8 +41,9 @@
 		  <tr>
 		    <td class="td" style="text-decoration: underline;">
 		    <a href="chequesApproval?chequeSerialNo=${ChequeForm.chequeSrNo}">${ChequeForm.chequeSrNo}</a></td>
-		    <td class="td">${ChequeForm.payToUsername}</td>
+		    <td class="td">${ChequeForm.fromUsername}</td>
 		   	<td class="td">${ChequeForm.chequeAmount}</td>
+		    <td class="td">${ChequeForm.payToUsername}</td>
 		   	<td class="td">${ChequeForm.bankCode}</td>
 		   	<td class="td">${ChequeForm.status}</td>
 		  </tr>

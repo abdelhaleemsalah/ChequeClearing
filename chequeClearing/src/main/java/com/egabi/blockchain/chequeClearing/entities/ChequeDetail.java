@@ -42,9 +42,14 @@ public class ChequeDetail implements Serializable {
 
 	@Column(name="PAY_TO_USERNAME")
 	private String payToUsername;
+	
+	@Column(name="PAY_TO_ACCOUNT_NO")
+	private String payToAccountNo;
 
 	@Column(name="FROM_USERNAME")
 	private String fromUsername;
+
+	private String status;
 	
 	public String getFromUsername() {
 		return fromUsername;
@@ -53,8 +58,6 @@ public class ChequeDetail implements Serializable {
 	public void setFromUsername(String fromUsername) {
 		this.fromUsername = fromUsername;
 	}
-
-	private String status;
 
 	public ChequeDetail() {
 	}
@@ -137,6 +140,14 @@ public class ChequeDetail implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getPayToAccountNo() {
+		return payToAccountNo;
+	}
+
+	public void setPayToAccountNo(String payToAccountNo) {
+		this.payToAccountNo = payToAccountNo;
 	}
 
 }

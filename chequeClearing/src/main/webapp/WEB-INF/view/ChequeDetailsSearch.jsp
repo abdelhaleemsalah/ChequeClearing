@@ -76,7 +76,6 @@
           <option value="REVIEW REJECTED">REVIEW REJECTED</option>
           <option value="REVIEW APPROVED">REVIEW APPROVED</option>
           <option value="SUBMITTED">SUBMITTED</option>
-          <option value="UNDER COLLECTION">UNDER COLLECTION</option>
           <option value="COLLECTION APPROVED">COLLECTION APPROVED</option>
           <option value="COLLECTION REJECTED">COLLECTION REJECTED</option>
           <option value="COLLECTED">COLLECTED</option>

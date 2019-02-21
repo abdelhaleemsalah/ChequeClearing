@@ -31,12 +31,8 @@
 		<table class="table">
 		  <tr>
 		    <th class="th">Cheque Serial number</th>
-		    <th class="th">Cheque Username</th>
+		    <th class="th">Cheque Owner Name</th>
 		    <th class="th">Cheque Amount</th>
-		    <th class="th">Cheque Currency</th>
-		    <th class="th">Cheque Duedate</th>
-		    <th class="th">Cheque Account Number</th>
-		    <th class="th">Cheque Crossed Flag</th>
 		    <th class="th">Cheque Status</th>
 		  </tr>
 		  <c:forEach items="${retrievedCheques}" var="ChequeForm">
@@ -44,12 +40,8 @@
 		    <td class="td" style="text-decoration: underline;">
 		    <a href="chequeSearchReportResultDetails?chequeSerialNo=${ChequeForm.chequeSrNo}">${ChequeForm.chequeSrNo}</a></td>
 		    
-		    <td class="td">${ChequeForm.payToUsername}</td>
+		    <td class="td">${ChequeForm.fromUsername}</td>
 		   	<td class="td">${ChequeForm.chequeAmount}</td>
-		   	<td class="td">${ChequeForm.chequeCurrency}</td>
-		   	<td class="td">${ChequeForm.chequeDueDate}</td>
-		   	<td class="td">${ChequeForm.accountNo}</td>
-		   	<td class="td">${ChequeForm.isCrossed}</td>
 		   	<td class="td">${ChequeForm.status}</td>
 		  </tr>
 		  </c:forEach>

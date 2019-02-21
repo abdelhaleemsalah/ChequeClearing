@@ -3,6 +3,7 @@ package com.egabi.blockchain.chequeClearing.controllers;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -128,6 +129,12 @@ public class HomeController  {
     	
 		return "RegSummary"; 
 	}
+    @RequestMapping(value = "/{username}/bankuserManagement", method = RequestMethod.GET) 
+	public ModelAndView displayUserManagement(@PathVariable("username") String username,@ModelAttribute ChequeFormBean formBean,Model model)
+	{
+    	model.addAttribute("user" , username);
+    	return new ModelAndView("bankuserManagement","formBean",new ChequeFormBean());
+	}
 	@RequestMapping(value = "/", method = RequestMethod.GET) 
 	public String displayLogin( Model model)
 	{
@@ -228,13 +235,15 @@ public class HomeController  {
     	chequeBean.setBankId(cheque.getBankCode());
     	chequeBean.setChequeStatus(cheque.getStatus());
     	chequeBean.setCustomerName(cheque.getFromUsername());
+    	chequeBean.setPaytoAccountNumber(cheque.getPayToAccountNo());
     	
     	if(cheque.getIsCrossed().equals("Y"))	
     		chequeBean.setCrossed(true);
     	else
     		chequeBean.setCrossed(false);
     	
-    	if(cheque.getStatus().equals("REVIEW REJECTED"))
+    	if(cheque.getStatus().equals("PENDING REVIEW") || 
+    	   cheque.getStatus().equals("REVIEW REJECTED"))
     		isVisiable=true;
     		
     	System.out.println("Modify Visiable: "+isVisiable);
@@ -260,9 +269,10 @@ public class HomeController  {
     	if(formBean.isCrossed()==false)
     		crossedCheque="N";
     	
+    	String chequeStatus="PENDING REVIEW";
     	ChequeDetailsSavingService.updateChequeById(formBean.getChequeDueDate(), 
     	formBean.getChequeSerialNo(), formBean.getChequeAmount(), crossedCheque, 
-    	formBean.getPaytoUsername());
+    	formBean.getPaytoUsername(),chequeStatus);
     	model.addAttribute("user",username);
     	return new ModelAndView("chequeDetailsEditSummary");
     }
@@ -335,7 +345,7 @@ public class HomeController  {
     
 	@RequestMapping(value = "/{username}/chequesApproval", method = RequestMethod.GET) 
 	public ModelAndView displayApprovalPage(@PathVariable("username") String username,@RequestParam("chequeSerialNo") long chequeSerialNo,
-			Model model) throws NoSuchFieldException, SecurityException
+			Model model) throws NoSuchFieldException, SecurityException, ParseException
 	{
     	System.out.println("Cheque SR no: "+chequeSerialNo);
     	System.out.println("display approval page");
@@ -354,6 +364,7 @@ public class HomeController  {
     	chequeBean.setBankId(cheque.getBankCode());
     	chequeBean.setChequeStatus(cheque.getStatus());
     	chequeBean.setCustomerName(cheque.getFromUsername());
+    	chequeBean.setPaytoAccountNumber(cheque.getPayToAccountNo());
     	
     	if(cheque.getIsCrossed().equals("Y"))	
     		chequeBean.setCrossed(true);
@@ -419,11 +430,12 @@ public class HomeController  {
 	
     @RequestMapping(value = "/{username}/submittingSummary", method = RequestMethod.POST) 
 	public String chequeSubmittingSummary(@RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes  , @PathVariable("username") String username ,
-            @Valid @ModelAttribute("formBean")	ChequeFormBean  formBean, Model model)
+    RedirectAttributes redirectAttributes  , @PathVariable("username") String username ,
+    @Valid @ModelAttribute("formBean")	ChequeFormBean  formBean, Model model)
 	{
     	System.out.println("submitting summary hello");
     	System.out.println("submitting summary: "+formBean.getPaytoUsername());
+    	System.out.println("submitting summary: "+formBean.getPaytoAccountNumber());
 		ChequeDetail submittedCheque=new ChequeDetail();
 		
     	if(formBean.isCrossed()==false)
@@ -439,6 +451,7 @@ public class HomeController  {
 		submittedCheque.setChequeDueDate(new Timestamp(formBean.getChequeDueDate().getTime()));
 		submittedCheque.setChequeSrNo(formBean.getChequeSerialNo());
 		submittedCheque.setPayToUsername(formBean.getPaytoUsername());
+		submittedCheque.setPayToAccountNo(formBean.getPaytoAccountNumber());
 		submittedCheque.setFromUsername(formBean.getCustomerName());
 		submittedCheque.setStatus("PENDING REVIEW");
 		

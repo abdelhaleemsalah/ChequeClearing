@@ -35,7 +35,7 @@
             </tr>
         </table>
 
-      <!-- Unnamed (Rectangle) -->
+       <!-- Unnamed (Rectangle) -->
 	      <div id="u5" class="ax_default label">
 	        <div id="u5_div" class=""></div>
 	        <div id="u5_text" class="text ">
@@ -46,24 +46,37 @@
 	      <!-- Unnamed (Text Field) -->
 	      <div id="u6" class="ax_default text_field">
 	           <div id="u6_div" class=""></div>
-        	<div id="u6_text" class="text ">
+        <div id="u6_text" class="text ">
 	        <p>${formBean.chequeSerialNo}</p>
 	        </div>
 	      </div>
 	      
-	      <!-- Unnamed (Rectangle) -->
+	  <!-- Unnamed (Rectangle) -->
 	      <div id="u8" class="ax_default label">
 	        <div id="u8_div" class=""></div>
 	        <div id="u8_text" class="text ">
-	          <p>Pay to username:</p>
+	          <p>Pay to:</p>
+	        </div>
+	  </div>
+	  
+	      <!-- Unnamed (Text Field) -->
+      <div id="u26" class="ax_default text_field">
+     	<form:input path="paytoUsername" id="u26_input" type="text" value=""/>
+      </div>
+      
+        <!-- Unnamed (Rectangle) -->
+	      <div id="u7" class="ax_default label">
+	        <div id="u7_div" class=""></div>
+	        <div id="u7_text" class="text ">
+	          <p>Pay to Account:</p>
 	        </div>
 	      </div>
 	  
 	      <!-- Unnamed (Text Field) -->
-      <div id="u26" class="ax_default text_field">
-     	<form:input path="paytoUsername" id="u26_input" type="text" value="${formBean.paytoUsername}"/>
+      <div id="u4" class="ax_default text_field">
+     	<form:input path="paytoAccountNumber" id="u4_input" type="text" value=""/>
       </div>
-
+  
       <!-- Unnamed (Rectangle) -->
       <div id="u11" class="ax_default box_1">
         <div id="u11_div" class=""></div>
@@ -82,7 +95,7 @@
 
       <!-- Unnamed (Text Field) -->
       <div id="u13" class="ax_default text_field">
-        <form:input path="chequeAmount" id="u13_input" type="text" value="${formBean.chequeAmount}"/>
+        <form:input path="chequeAmount" id="u13_input" type="text" value=""/>
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -103,7 +116,7 @@
 
       <!-- Unnamed (Text Field) -->
       <div id="u16" class="ax_default text_field">
-        <form:input path="chequeDueDate" id="u16_input" type="date" value=""  />
+        <form:input path="chequeDueDate" id="u16_input" type="date"   />
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -127,7 +140,7 @@
       <div id="u19" class="ax_default label">
         <div id="u19_div" class=""></div>
         <div id="u19_text" class="text ">
-          <p><span><spring:message code="accountId.message"/></span></p>
+          <p><span><spring:message code="chequeOwnerAccount.message"/></span></p>
         </div>
       </div>
 
@@ -156,7 +169,7 @@
          
         </div>
       </div>
-
+      
 <spring:message code="save.submit" var="saveSubmit"/>
       <div id="u0" class="ax_default button" >
         <div id="u0_text" class="text">

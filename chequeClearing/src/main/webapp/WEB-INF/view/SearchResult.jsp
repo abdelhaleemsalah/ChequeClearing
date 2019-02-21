@@ -50,19 +50,32 @@
 	        </div>
 	      </div>
 	      
-	      <!-- Unnamed (Rectangle) -->
+	  <!-- Unnamed (Rectangle) -->
 	      <div id="u8" class="ax_default label">
 	        <div id="u8_div" class=""></div>
 	        <div id="u8_text" class="text ">
-	          <p>Pay to username:</p>
+	          <p>Pay to:</p>
 	        </div>
-	      </div>
+	  </div>
 	  
 	      <!-- Unnamed (Text Field) -->
       <div id="u26" class="ax_default text_field">
      	<form:input path="paytoUsername" id="u26_input" type="text" value=""/>
       </div>
-
+      
+        <!-- Unnamed (Rectangle) -->
+	      <div id="u7" class="ax_default label">
+	        <div id="u7_div" class=""></div>
+	        <div id="u7_text" class="text ">
+	          <p>Pay to Account:</p>
+	        </div>
+	      </div>
+	  
+	      <!-- Unnamed (Text Field) -->
+      <div id="u4" class="ax_default text_field">
+     	<form:input path="paytoAccountNumber" id="u4_input" type="text" value=""/>
+      </div>
+  
       <!-- Unnamed (Rectangle) -->
       <div id="u11" class="ax_default box_1">
         <div id="u11_div" class=""></div>
@@ -126,7 +139,7 @@
       <div id="u19" class="ax_default label">
         <div id="u19_div" class=""></div>
         <div id="u19_text" class="text ">
-          <p><span><spring:message code="accountId.message"/></span></p>
+          <p><span><spring:message code="chequeOwnerAccount.message"/></span></p>
         </div>
       </div>
 
