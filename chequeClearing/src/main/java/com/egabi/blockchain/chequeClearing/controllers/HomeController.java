@@ -8,9 +8,11 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
@@ -39,10 +41,13 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.egabi.blockchain.chequeClearing.entities.ChequeDetail;
+import com.egabi.blockchain.chequeClearing.entities.PortalUser;
+import com.egabi.blockchain.chequeClearing.entities.UserRole;
 import com.egabi.blockchain.chequeClearing.services.ChequeBookSavingService;
 import com.egabi.blockchain.chequeClearing.services.ChequeDetailsSavingService;
 import com.egabi.blockchain.chequeClearing.services.CordaCustomNodeServiceImpl;
 import com.egabi.blockchain.chequeClearing.services.StorageService;
+import com.egabi.blockchain.chequeClearing.services.UserProcessingService;
 import com.github.manosbatsis.corbeans.spring.boot.corda.util.NodeRpcConnection;
 import kotlin.Suppress;
 
@@ -64,8 +69,9 @@ public class HomeController  {
 	  @Autowired
 	  @Qualifier("HSBCNodeService")
 	  private CordaNodeService hsbcNodeService ;
-	   
 	  
+	@Autowired
+	private UserProcessingService userProcessingService;
 	  
     @Autowired
     StorageService storageService;
@@ -92,6 +98,38 @@ public class HomeController  {
     	model.addAttribute("formBean", formBean);
     	return "RegConfirmation"; 
 	}
+    
+    @RequestMapping(value = "/{username}/bankuserManagement", method = RequestMethod.GET) 
+    public String displayUserManagement(@PathVariable("username") String username, Model model)
+	{
+    	if(!model.containsAttribute("userform"))
+		{
+			model.addAttribute("userform", new UserFormBean());
+			model.addAttribute("username" , username);
+		}
+    	System.out.print("hellllo");
+		return "bankuserManagement"; 
+	}
+    @RequestMapping(value = "/{username}/userCreationSummary", method = RequestMethod.POST) 
+    public String displayUserCreationSummary(@PathVariable("username") String username, @Valid @ModelAttribute(value="userform") UserFormBean userform,Model model)
+	{
+    	System.out.print("userCreationSummary username: "+userform.getUsername()+" "+
+    	userform.getPassword()+" "+userform.getUserRole()+" "+userform.getUserNationalId());
+    	PortalUser p=new PortalUser();
+    	p.setEnabled(true);
+    	p.setUsername(userform.getUsername());
+    	p.setPassword(userform.getPassword());
+    	p.setNationalID(userform.getUserNationalId());
+    	p.setUserId(userform.getUserId());
+    	Set<UserRole> userRole = new HashSet<UserRole>(0);
+    	UserRole e=new UserRole(p,userform.getUserRole());
+    	userRole.add(e);
+    	p.setUserRole(userRole);
+    	
+    	userProcessingService.saveUserDetails(p);
+		return "userCreationSummary"; 
+	}
+    
     
     @PostConstruct
     public void postConstruct()
@@ -129,12 +167,7 @@ public class HomeController  {
     	
 		return "RegSummary"; 
 	}
-    @RequestMapping(value = "/{username}/bankuserManagement", method = RequestMethod.GET) 
-	public ModelAndView displayUserManagement(@PathVariable("username") String username,@ModelAttribute ChequeFormBean formBean,Model model)
-	{
-    	model.addAttribute("user" , username);
-    	return new ModelAndView("bankuserManagement","formBean",new ChequeFormBean());
-	}
+   
 	@RequestMapping(value = "/", method = RequestMethod.GET) 
 	public String displayLogin( Model model)
 	{

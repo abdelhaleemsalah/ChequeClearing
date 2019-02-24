@@ -17,8 +17,10 @@ public class PortalUser {
     private String username;
     private String password;
     private boolean enabled;
+    private String nationalID;
     private Set<UserRole> userRole = new HashSet<UserRole>(0);
-
+    
+    
     public PortalUser() {
     }
 
@@ -29,11 +31,12 @@ public class PortalUser {
     }
 
     public PortalUser(String username, String password,
-                      boolean enabled, Set<UserRole> userRole) {
+                      boolean enabled, Set<UserRole> userRole, String nationalID) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
         this.userRole = userRole;
+        this.nationalID = nationalID;
     }
 
    
@@ -86,4 +89,14 @@ public class PortalUser {
     public void setUserId(long id) {
         this.userId = id;
     }
+	@Column(name = "NATIONAL_ID",nullable = false)
+	public String getNationalID() {
+		return nationalID;
+	}
+
+	public void setNationalID(String nationalID) {
+		this.nationalID = nationalID;
+	}
+    
+    
 }

@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends CrudRepository<PortalUser, Long> {
 
     PortalUser findPortalUserByUsername(String username);
+    
 }

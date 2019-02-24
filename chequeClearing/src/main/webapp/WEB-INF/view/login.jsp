@@ -73,7 +73,7 @@
       <div id="u2" class="ax_default label">
         <div id="u2_div" class=""></div>
         <div id="u2_text" class="text ">
-          <p><span><spring:message code="userName.Label"/> </span></p>
+          <p><span><spring:message code="userName.message"/> </span></p>
         </div>
       </div>
 
@@ -81,7 +81,7 @@
       <div id="u3" class="ax_default label">
         <div id="u3_div" class=""></div>
         <div id="u3_text" class="text ">
-          <p><span><spring:message code="password.Label"/> </span></p>
+          <p><span><spring:message code="password.message"/> </span></p>
         </div>
       </div>
 
