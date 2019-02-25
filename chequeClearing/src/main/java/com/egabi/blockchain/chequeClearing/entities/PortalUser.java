@@ -2,6 +2,8 @@ package com.egabi.blockchain.chequeClearing.entities;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -69,7 +71,7 @@ public class PortalUser {
         this.enabled = enabled;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "portalUser")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "portalUser",cascade = CascadeType.ALL)
     public Set<UserRole> getUserRole() {
         return this.userRole;
     }
