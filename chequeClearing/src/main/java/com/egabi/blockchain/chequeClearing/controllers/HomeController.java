@@ -51,7 +51,7 @@ import com.egabi.blockchain.chequeClearing.services.UserProcessingService;
 import com.github.manosbatsis.corbeans.spring.boot.corda.util.NodeRpcConnection;
 import kotlin.Suppress;
 
-@Controller
+@Controller("homeController")
 @ControllerAdvice
 @SessionAttributes("formBean")
 public class HomeController  {
@@ -495,5 +495,26 @@ public class HomeController  {
         
         
     	return "submittingSummary"; 
+	}
+    
+    
+    
+    
+    public void registerChequeBook(ChequeFormBean formBean)
+    {
+    	CordaCustomNodeServiceImpl partyA=  services.get(formBean.getBankId()+"NodeService");
+    	partyA.registerChequeBook(formBean, formBean.getBankId());
+    }
+    
+    
+	
+
+	
+	
+	
+		//@GetMapping("/bankuser/Registeration")
+	public ChequeFormBean initiateFormBean() {
+		ChequeFormBean formBeam= new ChequeFormBean();
+		return formBeam;
 	}
 }

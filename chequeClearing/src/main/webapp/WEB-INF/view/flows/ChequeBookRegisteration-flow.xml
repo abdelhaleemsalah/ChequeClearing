@@ -1,0 +1,58 @@
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
+
+
+
+
+<!-- <var name="formBean" class="com.egabi.blockchain.chequeClearing.controllers.ChequeFormBean"/> -->
+
+
+
+<on-start>
+		<evaluate expression="homeController.initiateFormBean()"  result="flowScope.formBean" />
+	</on-start>
+
+
+   <view-state id="Registeration" model="formBean"  >
+   <binder>
+			<binding property="chequeSerialNoFrom" />
+			<binding property="chequeSerialNoTo" />
+			<binding property="customerId" />
+			<binding property="bankId" />
+			<binding property="chequeCurrency" />
+			<binding property="customerName" />
+			<binding property="accountNumber" />
+			
+			
+				</binder>
+				<on-render>
+			<render fragments="body" />
+		</on-render>
+    <transition on="Submit" to="RegConfirmation" />
+   </view-state>
+    
+    <view-state id="RegConfirmation" model="formBean">
+    <on-render>
+			<render fragments="body" />
+		</on-render>
+        <transition on="Register" to="RegSummary"  >
+        <evaluate expression="homeController.registerChequeBook(formBean)" />
+        </transition>
+          <transition on="Back" to="Registeration"/>
+         
+    </view-state>
+   
+
+    <view-state id="RegSummary"  >
+        <on-render>
+			<render fragments="body" />
+		</on-render>
+    <transition on="Reg" to="Regist" />
+    </view-state>
+  
+<end-state id="Regist" />
+
+
+</flow>

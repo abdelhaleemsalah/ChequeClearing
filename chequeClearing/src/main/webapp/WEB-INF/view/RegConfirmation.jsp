@@ -26,7 +26,8 @@
     		<!-- For login portalUser -->
 		<c:url value="/logout" var="logoutUrl" />
 		<!-- <form action="${logoutUrl}" method="post" id="logoutForm">-->
-		 <form:form id="RegConfirmation"  action=" ${flowExecutionUrl}"  method="get" modelAttribute="formBean" > 
+			 <form:form id="RegConfirmation"  action=" ${flowExecutionUrl}"  method="post" modelAttribute="formBean" > 
+		
 		
 		
 			<div id="base" class="">

@@ -23,7 +23,7 @@
   	
     		<!-- For login portalUser -->
 		<c:url value="/logout" var="logoutUrl" />
-		<form:form id="hello" action="Registeration"  method="post" modelAttribute="formBean" >
+		<form:form id="hello" action=" ${flowExecutionUrl}"  method="post" modelAttribute="formBean" >
 		
 		
 	<!--<form:hidden path = "pageName" value = "hello" />-->
@@ -139,10 +139,17 @@
       <!-- Unnamed (Rectangle) -->
       <div id="u16" class="ax_default button" title="${continueRegisterationTitle}">
         <div id="u16_text" class="text ">
+      <button type="submit" id="Back" name="_eventId_Back"> <spring:message code="back.submit"/></button>
+    			
+						<input id="requestReaderSubmit"  name="_eventId_Submit" type="submit" value="${saveSubmit}" class="u16_div" />
+
+      
+        
+       <!-- 
            <form id="saveForm" name="tformest"  action="<c:url value="/Registeration" />"  method="post"  >
 						<input id="requestReaderSubmit" type="submit" value="${saveSubmit}" class="u16_div" />
 						<form:hidden path = "pageName" value = "hello" />
-		   </form>
+		   </form> --> 
       
       </div>  
       </div>

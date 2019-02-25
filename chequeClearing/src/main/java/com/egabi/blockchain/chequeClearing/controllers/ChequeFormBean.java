@@ -1,10 +1,11 @@
 package com.egabi.blockchain.chequeClearing.controllers;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class ChequeFormBean 
+public class ChequeFormBean  implements Serializable
 {
 	private Integer chequeSerialNoFrom ;
 	private Integer chequeSerialNoTo ;

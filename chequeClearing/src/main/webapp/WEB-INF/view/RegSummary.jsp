@@ -9,12 +9,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
-    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
-    <link href="resources/css/styles.css" type="text/css" rel="stylesheet"/>
-    <link href="resources/css/styles_regsummary.css" type="text/css" rel="stylesheet"/>
-    <script src="resources/js/jquery-1.7.1.min.js"></script>
-    <script src="resources/js/jquery-ui-1.8.10.custom.min.js"></script>
+    <link href="./../resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="./../resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="./../resources/css/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="./../resources/css/styles_regsummary.css" type="text/css" rel="stylesheet"/>
+    <script src="./../resources/js/jquery-1.7.1.min.js"></script>
+    <script src="./../resources/js/jquery-ui-1.8.10.custom.min.js"></script>
 <title>Cheque Registeration Summary</title>
 </head>
 <body>
@@ -28,11 +28,12 @@
         </div>
       </div>
       
-      <form:form id="searchForm" name="tformest"  action="Registeration"  method="post"   modelAttribute="formBean" >
+      <form:form id="searchForm" name="tformest"   action="${flowExecutionUrl}"  method="get"   modelAttribute="formBean" >
       
 	      <div id="u4" class="ax_default button" title="Chequebook Registeration">
 		        <div id="u4_text" class="text ">
-		          <input id="u7_button" name="Chequebook Registeration" type="submit" value="Chequebook Registeration" class="u4_div" />
+		    
+		          <input id="u7_button" name="_eventId_Reg" type="submit" value="Chequebook Registeration" class="u4_div" />
 		        </div>
 		  </div>
 		  
