@@ -36,19 +36,13 @@ public class ChequeDetailsSavingServiceImpl implements ChequeDetailsSavingServic
 		return cheques;
 	}
 	@Override
-	public ArrayList<ChequeDetail> findOneWithSRnoAndStatus(long chequeSrNo, String status)
+	public ArrayList<ChequeDetail> findOneWithSRnoAndStatusAndUserId(long chequeSrNo, String status, long userID)
 	{
 		// TODO Auto-generated method stub
-		ArrayList<ChequeDetail> cheques= chequeRepo.findOneWithSRnoAndStatus(chequeSrNo,status);
+		ArrayList<ChequeDetail> cheques= chequeRepo.findOneWithSRnoAndStatusAndUserId(chequeSrNo,status,userID);
 		return cheques;
 	}
-	@Override
-	public ArrayList<ChequeDetail> findOneWithSRno(long chequeSrNo)
-	{
-		// TODO Auto-generated method stub
-		ArrayList<ChequeDetail> cheques= chequeRepo.findOneWithSRno(chequeSrNo);
-		return cheques;
-	}
+	
 	@Override
 	public ArrayList<ChequeDetail> findOneWithStatusAndDuedate(String status, Date chequeDueDate)
 	{
@@ -87,6 +81,32 @@ public class ChequeDetailsSavingServiceImpl implements ChequeDetailsSavingServic
 	{
 		chequeRepo.updateChequeById(chequeDueDate, chequeSrNo, chequeAmount, isCrossed, payToUsername, status);
 	}
+	@Override
+	public ArrayList<ChequeDetail> findOneWithSRnoAndUserId(long chequeSrNo,long userID) 
+	{
+		// TODO Auto-generated method stub
+		ArrayList<ChequeDetail> cheques= chequeRepo.findOneWithSRnoAndUserId(chequeSrNo,userID);
+		return cheques;
+	}
+	@Override
+	public ArrayList<ChequeDetail> findOneWithSRno(long chequeSrNo) {
+		// TODO Auto-generated method stub
+		ArrayList<ChequeDetail> cheques= chequeRepo.findOneWithSRno(chequeSrNo);
+		return cheques;
+	}
+	@Override
+	public ArrayList<ChequeDetail> findOneWithSRnoAndStatus(long chequeSrNo, String status) {
+		// TODO Auto-generated method stub
+		ArrayList<ChequeDetail> cheques= chequeRepo.findOneWithSRnoAndStatus(chequeSrNo, status);
+		return cheques;
+	}
+	@Override
+	public ArrayList<ChequeDetail> findOneWithStatusAndUserId(String status, long userID) {
+		// TODO Auto-generated method stub
+		ArrayList<ChequeDetail> cheques= chequeRepo.findOneWithStatusAndUserId(status, userID);
+		return cheques;
+	}
+	
 	
 
 }

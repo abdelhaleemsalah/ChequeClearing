@@ -1,14 +1,11 @@
 package com.egabi.blockchain.chequeClearing.entities;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,7 +17,10 @@ public class PortalUser {
     private String password;
     private boolean enabled;
     private String nationalID;
-    private Set<UserRole> userRole = new HashSet<UserRole>(0);
+   // private Integer roleID;
+    
+   
+    private UserRole role;
     
     
     public PortalUser() {
@@ -33,12 +33,12 @@ public class PortalUser {
     }
 
     public PortalUser(String username, String password,
-                      boolean enabled, Set<UserRole> userRole, String nationalID) {
+                      boolean enabled, UserRole userRole, String nationalID) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
-        this.userRole = userRole;
         this.nationalID = nationalID;
+        this.role=userRole;
     }
 
    
@@ -70,20 +70,19 @@ public class PortalUser {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "portalUser",cascade = CascadeType.ALL)
-    public Set<UserRole> getUserRole() {
-        return this.userRole;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="USER_ROLE_ID")
+    public UserRole getUserRole() {
+        return this.role;
     }
 
-    public void setUserRole(Set<UserRole> userRole) {
-        this.userRole = userRole;
+    public void setUserRole(UserRole userRole) {
+        this.role = userRole;
     }
 
     @Id
     @Column(name = "USERID",
     nullable = false)
-  //  @Column(name = "enabled", nullable = false)
     public long getUserId() {
         return userId;
     }
@@ -99,6 +98,15 @@ public class PortalUser {
 	public void setNationalID(String nationalID) {
 		this.nationalID = nationalID;
 	}
+	
+//	@Column(name="ROLE_ID",nullable = false)
+//	public Integer getRoleID() {
+//		return roleID;
+//	}
+//
+//	public void setRoleID(Integer roleID) {
+//		this.roleID = roleID;
+//	}
     
     
 }

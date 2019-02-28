@@ -45,14 +45,14 @@ public class MyUserDetailsService implements UserDetailsService {
                 user.isEnabled(), true, true, true, authorities);
     }
 
-    private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
+    private List<GrantedAuthority> buildUserAuthority(UserRole userRole) {
 
         Set<GrantedAuthority> setAuths = new HashSet<>();
 
         // Build user's authorities
-        for (UserRole userRole : userRoles) {
+       // for (UserRole userRole : userRoles) {
             setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
-        }
+       // }
 
         List<GrantedAuthority> Result = new ArrayList<>(setAuths);
 

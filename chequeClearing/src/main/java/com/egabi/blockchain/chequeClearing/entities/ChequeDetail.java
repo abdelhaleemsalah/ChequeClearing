@@ -51,6 +51,9 @@ public class ChequeDetail implements Serializable {
 
 	private String status;
 	
+	@Column(name="USER_ID")
+	private long userID;
+	
 	public String getFromUsername() {
 		return fromUsername;
 	}
@@ -148,6 +151,14 @@ public class ChequeDetail implements Serializable {
 
 	public void setPayToAccountNo(String payToAccountNo) {
 		this.payToAccountNo = payToAccountNo;
+	}
+
+	public long getUserID() {
+		return userID;
+	}
+
+	public void setUserID(long userID) {
+		this.userID = userID;
 	}
 
 }

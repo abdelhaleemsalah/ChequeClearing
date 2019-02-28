@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -43,6 +44,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.egabi.blockchain.chequeClearing.entities.ChequeDetail;
 import com.egabi.blockchain.chequeClearing.entities.PortalUser;
 import com.egabi.blockchain.chequeClearing.entities.UserRole;
+import com.egabi.blockchain.chequeClearing.repositories.UserRepository;
 import com.egabi.blockchain.chequeClearing.services.ChequeBookSavingService;
 import com.egabi.blockchain.chequeClearing.services.ChequeDetailsSavingService;
 import com.egabi.blockchain.chequeClearing.services.CordaCustomNodeServiceImpl;
@@ -85,6 +87,11 @@ public class HomeController  {
 	@Autowired
 	ResourceLoader resourceLoader;
 	
+	@Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
     @GetMapping("/login")
     public String login()
@@ -115,18 +122,28 @@ public class HomeController  {
 	{
     	System.out.print("userCreationSummary username: "+userform.getUsername()+" "+
     	userform.getPassword()+" "+userform.getUserRole()+" "+userform.getUserNationalId());
-    	PortalUser p=new PortalUser();
-    	p.setEnabled(true);
-    	p.setUsername(userform.getUsername());
-    	p.setPassword(userform.getPassword());
-    	p.setNationalID(userform.getUserNationalId());
-    	p.setUserId(userform.getUserId());
-    	Set<UserRole> userRole = new HashSet<UserRole>(0);
-    	UserRole e=new UserRole(p,userform.getUserRole());
-    	userRole.add(e);
-    	p.setUserRole(userRole);
+    	PortalUser newCreatedUser=new PortalUser();
+    	newCreatedUser.setEnabled(true);
+    	newCreatedUser.setUsername(userform.getUsername());
+    	newCreatedUser.setPassword(bCryptPasswordEncoder.encode(userform.getPassword()));
+    	newCreatedUser.setNationalID(userform.getUserNationalId());
+    	newCreatedUser.setUserId(userform.getUserId());
     	
-    	userProcessingService.saveUserDetails(p);
+    	//UserRole  userRole=new UserRole(userform.getUserRole());
+    	
+    	UserRole userRole = new UserRole();
+    	if(userform.getUserRole().equals("ENDUSER"))
+    	{
+    		userRole.setRole("ROLE_USER");
+    		userRole.setUserRoleId(2);
+    	}
+    	else if(userform.getUserRole().equals("BANKUSER"))
+    	{
+    		userRole.setRole("ROLE_ADMIN");
+    		userRole.setUserRoleId(1);
+    	}
+    	newCreatedUser.setUserRole(userRole);
+    	userProcessingService.saveUserDetails(newCreatedUser);
 		return "userCreationSummary"; 
 	}
     
@@ -216,6 +233,9 @@ public class HomeController  {
 	@RequestParam("chequeSerialNo") Integer chequeSerialNo , ModelMap model, Model mv) throws NoSuchFieldException, SecurityException
 	{
 		ArrayList<ChequeDetail> cheques=new ArrayList<>();
+		PortalUser portalUser = userRepository.findPortalUserByUsername(username);
+    	System.out.println("submittingSummary Page: "+portalUser.getUserId());
+    	
     	if(chequeSerialNo!=0 && chequeSerialNo!=null)
     	{
     		System.out.println("Cheque SR no: "+chequeSerialNo);
@@ -224,12 +244,12 @@ public class HomeController  {
     		if(!chequeStatus.equals("SELECT"))
     		{ 
     			//status is not null
-    			cheques=ChequeDetailsSavingService.findOneWithSRnoAndStatus(chequeSerialNo, chequeStatus);
+    			cheques=ChequeDetailsSavingService.findOneWithSRnoAndStatusAndUserId(chequeSerialNo, chequeStatus, portalUser.getUserId());
     		}
     		else
     		{
     			//status is null
-    			cheques=ChequeDetailsSavingService.findOneWithSRno(chequeSerialNo);
+    			cheques=ChequeDetailsSavingService.findOneWithSRnoAndUserId(chequeSerialNo, portalUser.getUserId());
     		}
     		for(int i=0;i<cheques.size();i++)
 			{
@@ -238,7 +258,7 @@ public class HomeController  {
     	}
     	else
     	{
-    		cheques=ChequeDetailsSavingService.findOneWithStatus(chequeStatus);
+    		cheques=ChequeDetailsSavingService.findOneWithStatusAndUserId(chequeStatus, portalUser.getUserId());
     	}
     	mv.addAttribute("retrievedCheques", cheques);
     	mv.addAttribute("user" , username);
@@ -418,8 +438,10 @@ public class HomeController  {
 	}
 	
     @RequestMapping(value = "/{username}/SearchResult", method = RequestMethod.POST) 
-	public ModelAndView displaySearchResult(@PathVariable("username") String username,@RequestParam("chequeSerialNo") Integer serialno, 
+	public ModelAndView displaySearchResult(@PathVariable("username") String username,
+	@RequestParam("chequeSerialNo") Integer serialno,
 	@RequestParam("bankId") String bankid, @RequestParam("accountNumber") long accNo,
+	Model m,
 	ModelMap model) throws NoSuchFieldException, SecurityException
 	{
     	String returnPage=null;
@@ -445,7 +467,7 @@ public class HomeController  {
 		}
 		
 		model.addAttribute("user" , username);
-		   
+		
 		CordaCustomNodeServiceImpl PartyA=  services.get(bankid+"NodeService");
 		 
 		
@@ -463,13 +485,17 @@ public class HomeController  {
 	
     @RequestMapping(value = "/{username}/submittingSummary", method = RequestMethod.POST) 
 	public String chequeSubmittingSummary(@RequestParam("file") MultipartFile file,
-    RedirectAttributes redirectAttributes  , @PathVariable("username") String username ,
+    RedirectAttributes redirectAttributes, @PathVariable("username") String username ,
     @Valid @ModelAttribute("formBean")	ChequeFormBean  formBean, Model model)
 	{
     	System.out.println("submitting summary hello");
     	System.out.println("submitting summary: "+formBean.getPaytoUsername());
     	System.out.println("submitting summary: "+formBean.getPaytoAccountNumber());
+		
 		ChequeDetail submittedCheque=new ChequeDetail();
+		
+		PortalUser portalUser = userRepository.findPortalUserByUsername(username);
+    	System.out.println("submittingSummary Page: "+portalUser.getUserId());
 		
     	if(formBean.isCrossed()==false)
     		submittedCheque.setIsCrossed("N");
@@ -487,6 +513,7 @@ public class HomeController  {
 		submittedCheque.setPayToAccountNo(formBean.getPaytoAccountNumber());
 		submittedCheque.setFromUsername(formBean.getCustomerName());
 		submittedCheque.setStatus("PENDING REVIEW");
+		submittedCheque.setUserID(portalUser.getUserId());
 		
 		ChequeDetailsSavingService.saveCheque(submittedCheque);
 		
