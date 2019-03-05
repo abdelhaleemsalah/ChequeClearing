@@ -50,6 +50,7 @@ public interface ChequeRepository extends CrudRepository<ChequeDetail,Long> {
 	void setUserInfoById(@Param("status") String status ,@Param("chequeSrNo") long chequeSrNo);
 	
 	
+	
 	@Modifying
 	@Transactional
 	@Query(value="update ChequeDetail c set c.chequeDueDate=:chequeDueDate, c.chequeAmount=:chequeAmount , "
