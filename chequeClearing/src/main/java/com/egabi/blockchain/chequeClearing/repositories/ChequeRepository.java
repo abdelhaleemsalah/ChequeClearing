@@ -35,6 +35,7 @@ public interface ChequeRepository extends CrudRepository<ChequeDetail,Long> {
 	@Query(value="SELECT sw FROM ChequeDetail sw WHERE sw.status=:status AND sw.userID.userId=:userID order by sw.chequeSrNo ASC", nativeQuery = false)
 	ArrayList<ChequeDetail> findOneWithStatusAndUserId(@Param("status") String status, @Param("userID") long userID); 
 	
+	
 	@Query(value="SELECT sw FROM ChequeDetail sw WHERE sw.chequeDueDate=:chequeDueDate order by sw.chequeSrNo ASC", nativeQuery = false)
 	ArrayList<ChequeDetail> findOneWithDuedate(@Param("chequeDueDate") Date chequeDueDate); 
 	
