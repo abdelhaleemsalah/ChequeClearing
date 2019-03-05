@@ -53,9 +53,9 @@ public class ChequeDetail implements Serializable {
 	private String chequeImageName;
 
 	private String status;
-	
-	@Column(name="USER_ID")
-	private long userID;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="USER_ID")
+	private PortalUser userID;
 	
 	public String getFromUsername() {
 		return fromUsername;
@@ -156,11 +156,11 @@ public class ChequeDetail implements Serializable {
 		this.payToAccountNo = payToAccountNo;
 	}
 
-	public long getUserID() {
+	public PortalUser getUserID() {
 		return userID;
 	}
 
-	public void setUserID(long userID) {
+	public void setUserID(PortalUser userID) {
 		this.userID = userID;
 	}
 

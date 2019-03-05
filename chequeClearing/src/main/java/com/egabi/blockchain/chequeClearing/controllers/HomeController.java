@@ -237,7 +237,7 @@ public class HomeController  {
 		PortalUser portalUser = userRepository.findPortalUserByUsername(username);
     	System.out.println("submittingSummary Page: "+portalUser.getUserId());
     	
-    	if(chequeSerialNo!=0 && chequeSerialNo!=null)
+    	if(chequeSerialNo!=null  && chequeSerialNo!=0)
     	{
     		System.out.println("Cheque SR no: "+chequeSerialNo);
 	    	System.out.println("Cheque staus: "+chequeStatus);
@@ -427,7 +427,7 @@ public class HomeController  {
     
 	@RequestMapping(value = "/{username}/chequesApproval", method = RequestMethod.GET) 
 	public ModelAndView displayApprovalPage(@PathVariable("username") String username,@RequestParam("chequeSerialNo") long chequeSerialNo,
-			Model model) throws NoSuchFieldException, SecurityException, ParseException
+			Model model) throws NoSuchFieldException, SecurityException, ParseException, IOException
 	{
     	System.out.println("Cheque SR no: "+chequeSerialNo);
     	System.out.println("display approval page");
@@ -447,13 +447,20 @@ public class HomeController  {
     	chequeBean.setChequeStatus(cheque.getStatus());
     	chequeBean.setCustomerName(cheque.getFromUsername());
     	chequeBean.setPaytoAccountNumber(cheque.getPayToAccountNo());
-    	
+    	chequeBean.setChequeImageName(cheque.getChequeImageName());
     	if(cheque.getIsCrossed().equals("Y"))	
     		chequeBean.setCrossed(true);
     	else
     		chequeBean.setCrossed(false);
     	
     	model.addAttribute("user" , username);
+    	
+        model.addAttribute("files", storageService.loadFile(cheque.getUserID().getUsername(),cheque.getChequeImageName()).map(
+                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+                        "serveFile",  path.getFileName().toString() , cheque.getUserID().getUsername()).build().toString())
+                .collect(Collectors.toList()));
+        
+        
     	return new ModelAndView("chequesApproval", "formBean",chequeBean);
 	}
 	@RequestMapping(value = "/{username}/approvalSummary", method = RequestMethod.POST) 
@@ -542,7 +549,7 @@ public class HomeController  {
 		submittedCheque.setPayToAccountNo(formBean.getPaytoAccountNumber());
 		submittedCheque.setFromUsername(formBean.getCustomerName());
 		submittedCheque.setStatus("PENDING REVIEW");
-		submittedCheque.setUserID(portalUser.getUserId());
+		submittedCheque.setUserID(portalUser);
 		submittedCheque.setChequeImageName(file.getOriginalFilename());
 		ChequeDetailsSavingService.saveCheque(submittedCheque);
 		
