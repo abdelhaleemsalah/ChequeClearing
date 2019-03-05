@@ -32,16 +32,16 @@ public interface ChequeRepository extends CrudRepository<ChequeDetail,Long> {
 	@Query(value="SELECT sw FROM ChequeDetail sw WHERE sw.status=:status order by sw.chequeSrNo ASC", nativeQuery = false)
 	ArrayList<ChequeDetail> findOneWithStatus(@Param("status") String status); 
 	
-	@Query(value="SELECT sw FROM ChequeDetail sw WHERE sw.status=:status AND sw.userID=:userID order by sw.chequeSrNo ASC", nativeQuery = false)
+	@Query(value="SELECT sw FROM ChequeDetail sw WHERE sw.status=:status AND sw.userID.userId=:userID order by sw.chequeSrNo ASC", nativeQuery = false)
 	ArrayList<ChequeDetail> findOneWithStatusAndUserId(@Param("status") String status, @Param("userID") long userID); 
 	
 	@Query(value="SELECT sw FROM ChequeDetail sw WHERE sw.chequeDueDate=:chequeDueDate order by sw.chequeSrNo ASC", nativeQuery = false)
 	ArrayList<ChequeDetail> findOneWithDuedate(@Param("chequeDueDate") Date chequeDueDate); 
 	
-	@Query(value="SELECT sw FROM ChequeDetail sw WHERE sw.chequeSrNo=:chequeSrNo AND sw.status=:status AND sw.userID=:userID", nativeQuery = false)
+	@Query(value="SELECT sw FROM ChequeDetail sw WHERE sw.chequeSrNo=:chequeSrNo AND sw.status=:status AND sw.userID.userId=:userID", nativeQuery = false)
 	ArrayList<ChequeDetail> findOneWithSRnoAndStatusAndUserId(@Param("chequeSrNo") long chequeSrNo, @Param("status") String status, @Param("userID") long userID);
 	
-	@Query(value="SELECT sw FROM ChequeDetail sw WHERE sw.chequeSrNo=:chequeSrNo AND sw.userID=:userID", nativeQuery = false)
+	@Query(value="SELECT sw FROM ChequeDetail sw WHERE sw.chequeSrNo=:chequeSrNo AND sw.userID.userId=:userID", nativeQuery = false)
 	ArrayList<ChequeDetail> findOneWithSRnoAndUserId(@Param("chequeSrNo") long chequeSrNo, @Param("userID") long userID);
 	
 	@Modifying
