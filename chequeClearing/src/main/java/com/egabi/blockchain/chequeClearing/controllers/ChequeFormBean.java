@@ -25,6 +25,7 @@ public class ChequeFormBean  implements Serializable
 	private Date chequeDueDate;
 	private long chequeBookSerialNo ;
 	private String chequeStatus;
+	private String chequeImageName;
 	
 	public ChequeFormBean ()
 	{       
@@ -131,6 +132,12 @@ public class ChequeFormBean  implements Serializable
 	}
 	public void setPaytoAccountNumber(String paytoAccountNumber) {
 		this.paytoAccountNumber = paytoAccountNumber;
+	}
+	public String getChequeImageName() {
+		return chequeImageName;
+	}
+	public void setChequeImageName(String chequeImageName) {
+		this.chequeImageName = chequeImageName;
 	}
 
 	}

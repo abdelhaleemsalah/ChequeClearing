@@ -48,6 +48,9 @@ public class ChequeDetail implements Serializable {
 
 	@Column(name="FROM_USERNAME")
 	private String fromUsername;
+	
+	@Column(name="CHEQUE_IMAGE_NAME")
+	private String chequeImageName;
 
 	private String status;
 	
@@ -159,6 +162,14 @@ public class ChequeDetail implements Serializable {
 
 	public void setUserID(long userID) {
 		this.userID = userID;
+	}
+
+	public String getChequeImageName() {
+		return chequeImageName;
+	}
+
+	public void setChequeImageName(String chequeImageName) {
+		this.chequeImageName = chequeImageName;
 	}
 
 }

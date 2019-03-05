@@ -179,6 +179,7 @@ public class HomeController  {
     @RequestMapping(value = "/{username}/RegSummary", method = RequestMethod.GET) 
 	public String displaySummaryConfirmation(@PathVariable("username") String username,@ModelAttribute ChequeFormBean formBean,Model model)
 	{
+    	
     	CordaCustomNodeServiceImpl partyA=  services.get(formBean.getBankId()+"NodeService");
     	partyA.registerChequeBook(formBean, formBean.getBankId());
     	
@@ -267,7 +268,7 @@ public class HomeController  {
     
     @RequestMapping(value = "/{username}/chequeSearchReportResultDetails" , method = RequestMethod.GET)
     public ModelAndView displayChequeSearchReportResultDetails(@PathVariable("username") String username,@RequestParam("chequeSerialNo") long chequeSerialNo,
-			Model model) throws NoSuchFieldException, SecurityException
+			Model model) throws NoSuchFieldException, SecurityException, IOException
 	{
     	System.out.println("Cheque SR no: "+chequeSerialNo);
     	System.out.println("display ChequeSearchReportResultDetails page");
@@ -289,7 +290,7 @@ public class HomeController  {
     	chequeBean.setChequeStatus(cheque.getStatus());
     	chequeBean.setCustomerName(cheque.getFromUsername());
     	chequeBean.setPaytoAccountNumber(cheque.getPayToAccountNo());
-    	
+    	chequeBean.setChequeImageName(cheque.getChequeImageName());
     	if(cheque.getIsCrossed().equals("Y"))	
     		chequeBean.setCrossed(true);
     	else
@@ -302,6 +303,23 @@ public class HomeController  {
     	System.out.println("Modify Visiable: "+isVisiable);
     	model.addAttribute("modifyVisiablity", isVisiable);
     	model.addAttribute("user",username);
+    	
+    	
+//    	storageService.loadAll(merchant).map(
+//                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+//                        "serveFile",  path.getFileName().toString() , merchant).build().toString())
+//                .collect(Collectors.toList())
+    	
+        model.addAttribute("files", storageService.loadFile(username,cheque.getChequeImageName()).map(
+                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+                        "serveFile",  path.getFileName().toString() , username).build().toString())
+                .collect(Collectors.toList()));
+        
+        
+//        model.addAttribute("file", storageService.loadFile(username,cheque.getChequeImageName()).map(
+//                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+//                        "serveFile",  path.getFileName().toString() , username).build().toString())
+//                .collect(Collectors.toList());
     	return new ModelAndView("chequeSearchReportResultDetails", "formBean",chequeBean);
 	}
     
@@ -316,16 +334,26 @@ public class HomeController  {
     @RequestMapping(value = "/{username}/chequeDetailsEditSummary" , method = RequestMethod.POST)
     public ModelAndView displayChequeDetailsModificationSummary(@RequestParam("file") MultipartFile file,
     RedirectAttributes redirectAttributes , @PathVariable("username") String username, 
-    @Valid @ModelAttribute("formBean") ChequeFormBean formBean , Model model)
+    @Valid @ModelAttribute("formBean") ChequeFormBean formBean , Model model) throws IOException
     {
     	String crossedCheque="Y";
     	if(formBean.isCrossed()==false)
     		crossedCheque="N";
     	
+    	ArrayList<ChequeDetail> cheques=new ArrayList<>();
+    	cheques=ChequeDetailsSavingService.findOneWithSRno(formBean.getChequeSerialNo());
+    	if(!file.getOriginalFilename().trim().isEmpty() && !cheques.get(0).getChequeImageName().equalsIgnoreCase(file.getOriginalFilename()) )
+    	{
+    		storageService.store(file, username);
+    		storageService.deleteFile(username, cheques.get(0).getChequeImageName());
+    		formBean.setChequeImageName(file.getOriginalFilename());
+    		
+    	}
+    	
     	String chequeStatus="PENDING REVIEW";
     	ChequeDetailsSavingService.updateChequeById(formBean.getChequeDueDate(), 
     	formBean.getChequeSerialNo(), formBean.getChequeAmount(), crossedCheque, 
-    	formBean.getPaytoUsername(),chequeStatus);
+    	formBean.getPaytoUsername(),chequeStatus,formBean.getChequeImageName());
     	model.addAttribute("user",username);
     	return new ModelAndView("chequeDetailsEditSummary");
     }
@@ -514,7 +542,7 @@ public class HomeController  {
 		submittedCheque.setFromUsername(formBean.getCustomerName());
 		submittedCheque.setStatus("PENDING REVIEW");
 		submittedCheque.setUserID(portalUser.getUserId());
-		
+		submittedCheque.setChequeImageName(file.getOriginalFilename());
 		ChequeDetailsSavingService.saveCheque(submittedCheque);
 		
 		
@@ -529,8 +557,25 @@ public class HomeController  {
     
     public void registerChequeBook(ChequeFormBean formBean)
     {
-    	CordaCustomNodeServiceImpl partyA=  services.get(formBean.getBankId()+"NodeService");
-    	partyA.registerChequeBook(formBean, formBean.getBankId());
+    	
+       	InputStream input = null;
+		Properties prop=new Properties();
+		String propBankId="";
+		try 
+		{
+			input=resourceLoader.getResource("classpath:bankconfig.properties").getInputStream();
+			prop.load(input);
+			System.out.println("prop get bank id: "+prop.getProperty("mybank"));	
+			propBankId=prop.getProperty("mybank");
+		} 
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		formBean.setBankId(propBankId);
+	CordaCustomNodeServiceImpl partyA=  services.get(formBean.getBankId()+"NodeService");
+	partyA.registerChequeBook(formBean,formBean.getBankId());
     }
     
     

@@ -202,6 +202,15 @@
         </div>
       </div>
     </div>
+   
+    <h2>Columns</h2>
+    <ul>
+        <c:forEach var="file" items="${files}">
+            <li><a href="${file}">${file}</a></li>
+        </c:forEach>
+    </ul>
+
+
     </form:form>
     
 </body>

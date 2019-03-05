@@ -15,9 +15,11 @@ public interface StorageService {
 
     Stream<Path> loadAll(String tenant) throws IOException ;
 
-    Path load(String filename , String merchant) ;
+    Path load(String filename , String merchant);
+    Stream<Path> loadFile(String filename , String merchant)throws IOException;
 
     Resource loadAsResource(String filename, String merchant);
 
+    public void deleteFile(String userName, String fileName) throws IOException;
     void deleteAll();
 }

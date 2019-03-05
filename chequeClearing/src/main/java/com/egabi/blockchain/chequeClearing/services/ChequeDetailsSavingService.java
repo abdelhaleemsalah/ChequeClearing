@@ -23,7 +23,7 @@ public interface ChequeDetailsSavingService
 	public ChequeDetail findOneChequeWithSRno(long chequeSrNo);
 	public void setUserInfoById(String status ,long chequeSrNo);
 	public void updateChequeById(Date chequeDueDate,long chequeSrNo,Double chequeAmount,
-	String isCrossed,String payToUsername,String status);
+	String isCrossed,String payToUsername,String status,String chequeImageName);
 	
 	
 	

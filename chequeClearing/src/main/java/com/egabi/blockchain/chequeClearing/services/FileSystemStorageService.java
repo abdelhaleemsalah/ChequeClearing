@@ -64,12 +64,40 @@ public class FileSystemStorageService implements StorageService {
                 .map(merchantPath::relativize);
 
     }
-
     @Override
     public Path load(String filename, String merchant) {
         return rootLocation.resolve(merchant).resolve(filename);
     }
+    @Override
+    public Stream<Path> loadFile(String userName, String fileName) throws IOException {
+    	
+    	Path merchantPath = this.rootLocation.resolve(userName).resolve(fileName);
+//        if(Files.notExists(merchantPath)){
+//        	Files.createDirectory(merchantPath);
+//        }
+        return Files.walk(merchantPath);
+//                .filter(path -> !path.equals(merchantPath))
+//                .map(merchantPath::relativize);
+    	
+    	
+        //return rootLocation.resolve(merchant).resolve(filename);
+    }
 
+    @Override
+    public void deleteFile(String userName, String fileName) throws IOException {
+    	
+    	Path merchantPath = this.rootLocation.resolve(userName).resolve(fileName);
+//        if(Files.notExists(merchantPath)){
+//        	Files.createDirectory(merchantPath);
+//        }
+         Files.deleteIfExists(merchantPath);
+//                .filter(path -> !path.equals(merchantPath))
+//                .map(merchantPath::relativize);
+    	
+    	
+        //return rootLocation.resolve(merchant).resolve(filename);
+    }
+    
     @Override
     public Resource loadAsResource(String filename , String merchant) {
         try {

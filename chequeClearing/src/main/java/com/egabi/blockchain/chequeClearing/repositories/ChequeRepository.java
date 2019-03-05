@@ -52,11 +52,11 @@ public interface ChequeRepository extends CrudRepository<ChequeDetail,Long> {
 	@Modifying
 	@Transactional
 	@Query(value="update ChequeDetail c set c.chequeDueDate=:chequeDueDate, c.chequeAmount=:chequeAmount , "
-	+ "c.isCrossed=:isCrossed , c.payToUsername=:payToUsername , c.status=:status where "
+	+ "c.isCrossed=:isCrossed , c.payToUsername=:payToUsername , c.status=:status, c.chequeImageName=:chequeImageName where "
 	+ "c.chequeSrNo=:chequeSrNo", nativeQuery = false)
 	void updateChequeById(@Param("chequeDueDate") Date chequeDueDate, @Param("chequeSrNo") 
 	long chequeSrNo, @Param("chequeAmount") Double chequeAmount, @Param("isCrossed") String isCrossed,
-	@Param("payToUsername") String payToUsername,@Param("status") String status);
+	@Param("payToUsername") String payToUsername,@Param("status") String status,@Param("chequeImageName") String chequeImageName);
 	
 }
 
