@@ -336,6 +336,7 @@ public class HomeController  {
     RedirectAttributes redirectAttributes , @PathVariable("username") String username, 
     @Valid @ModelAttribute("formBean") ChequeFormBean formBean , Model model) throws IOException
     {
+    	
     	String crossedCheque="Y";
     	if(formBean.isCrossed()==false)
     		crossedCheque="N";

@@ -71,6 +71,7 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public Stream<Path> loadFile(String userName, String fileName) throws IOException {
     	
+    	
     	Path merchantPath = this.rootLocation.resolve(userName).resolve(fileName);
 //        if(Files.notExists(merchantPath)){
 //        	Files.createDirectory(merchantPath);

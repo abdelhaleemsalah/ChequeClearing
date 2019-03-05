@@ -20,6 +20,7 @@ public interface StorageService {
 
     Resource loadAsResource(String filename, String merchant);
 
+    
     public void deleteFile(String userName, String fileName) throws IOException;
     void deleteAll();
 }

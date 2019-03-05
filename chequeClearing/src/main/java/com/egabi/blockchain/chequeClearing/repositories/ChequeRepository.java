@@ -58,6 +58,7 @@ public interface ChequeRepository extends CrudRepository<ChequeDetail,Long> {
 	long chequeSrNo, @Param("chequeAmount") Double chequeAmount, @Param("isCrossed") String isCrossed,
 	@Param("payToUsername") String payToUsername,@Param("status") String status,@Param("chequeImageName") String chequeImageName);
 	
+	
 }
 
 
