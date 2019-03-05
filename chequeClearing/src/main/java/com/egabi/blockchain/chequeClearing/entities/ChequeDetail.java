@@ -57,6 +57,7 @@ public class ChequeDetail implements Serializable {
     @JoinColumn(name="USER_ID")
 	private PortalUser userID;
 	
+    
 	public String getFromUsername() {
 		return fromUsername;
 	}

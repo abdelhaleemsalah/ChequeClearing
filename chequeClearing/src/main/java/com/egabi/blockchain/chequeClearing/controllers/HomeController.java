@@ -249,6 +249,7 @@ public class HomeController  {
     		}
     		else
     		{
+    			
     			//status is null
     			cheques=ChequeDetailsSavingService.findOneWithSRnoAndUserId(chequeSerialNo, portalUser.getUserId());
     		}
