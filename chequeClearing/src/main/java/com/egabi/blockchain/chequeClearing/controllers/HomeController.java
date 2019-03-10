@@ -27,6 +27,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -481,6 +482,7 @@ public class HomeController  {
 	Model m,
 	ModelMap model) throws NoSuchFieldException, SecurityException
 	{
+    	
     	String returnPage=null;
     	ChequeFormBean singleChequeFormBean = new ChequeFormBean();
     	System.out.println("Cheque SR no: "+serialno);
@@ -502,7 +504,10 @@ public class HomeController  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+//		if (bankid.equalsIgnoreCase(propBankId))
+//		{
+//			return null;
+//		}
 		model.addAttribute("user" , username);
 		
 		CordaCustomNodeServiceImpl PartyA=  services.get(bankid+"NodeService");
@@ -525,6 +530,7 @@ public class HomeController  {
     RedirectAttributes redirectAttributes, @PathVariable("username") String username ,
     @Valid @ModelAttribute("formBean")	ChequeFormBean  formBean, Model model)
 	{
+    	
     	System.out.println("submitting summary hello");
     	System.out.println("submitting summary: "+formBean.getPaytoUsername());
     	System.out.println("submitting summary: "+formBean.getPaytoAccountNumber());
