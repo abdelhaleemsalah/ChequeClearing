@@ -14,6 +14,7 @@
 </head>
 <body>
 
+
 	<form action="<c:url value="/logout" />" method="post" class="inline">
 		<div class="span-4 welcomelabel">
 			<c:if test="${pageContext.request.userPrincipal != null}">
@@ -44,12 +45,12 @@
 		  </form>
 	</sec:authorize>
 	
-	
   	<sec:authorize access="hasRole('ROLE_USER')" >
 		  <form id="searchForm" name="tformest"  action="<c:url value="/${username}/search" />"  method="get">
 				<input id="requestReaderSubmit" type="submit" class="tablabel" value="Customer Cheque Upload" />				
 		  </form>
 	</sec:authorize>
+	
 	
   	<sec:authorize access="hasRole('ROLE_ADMIN')" >
 		  <form id="searchForm" name="tformest"  action="<c:url value="/${username}/ChequeDetailsSearch" />"  method="get">

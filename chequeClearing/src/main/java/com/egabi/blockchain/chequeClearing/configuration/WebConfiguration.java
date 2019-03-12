@@ -34,6 +34,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     private WebFlowConfig webFlowConfig;
 	
 	
+	
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("Registeration");
@@ -49,9 +50,6 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 		resolver.setViewClass(FlowAjaxTiles3View.class);
 		return resolver;
 	}
-    
-    
-    
     
 //    @Bean
 //    public InternalResourceViewResolver viewResolver() {
