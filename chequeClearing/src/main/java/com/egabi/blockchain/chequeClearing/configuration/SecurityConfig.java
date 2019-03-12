@@ -86,6 +86,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         response.sendRedirect(request.getContextPath()+"/"+authentication.getName()+"/dashboard");
                         response.flushBuffer();
 
+                        
+                        
                     }
                 })
                 .and()
