@@ -13,38 +13,7 @@
 </head>
 <body>
 	
-<div class="tabs">
-	<sec:authorize access="hasRole('ROLE_ADMIN')" >
-		  <form id="searchForm" name="tformest"  action="<c:url value="/${username}/Registeration" />"  method="get">
-				<input id="requestReaderSubmit" type="submit" class="label" value="Chequebook Registeration" />				
-		  </form>
-	</sec:authorize>
-	
-  	<sec:authorize access="hasRole('ROLE_USER')" >
-		  <form id="searchForm" name="tformest"  action="<c:url value="/${username}/search" />"  method="get">
-				<input id="requestReaderSubmit" type="submit" class="label" value="Customer Cheque Upload" />				
-		  </form>
-	</sec:authorize>
-	
-  	<sec:authorize access="hasRole('ROLE_ADMIN')" >
-		  <form id="searchForm" name="tformest"  action="<c:url value="/${username}/ChequeDetailsSearch" />"  method="get">
-				<input id="requestReaderSubmit" type="submit" class="label" value="Bank Cheque Reviewing" />				
-		  </form>
-  	</sec:authorize>
-  
-  	<sec:authorize access="hasRole('ROLE_USER')" >
-		  <form id="searchForm" name="tformest"  action="<c:url value="/${username}/chequeSearchReport" />"  method="get">
-				<input id="requestReaderSubmit" type="submit" class="label" value="Bank Cheque Report" />				
-		  </form>
-  	</sec:authorize>
-  
-  	<sec:authorize access="hasRole('ROLE_SUPER_USER')" >
-		  <form id="searchForm" name="tformest"  action="<c:url value="/${username}/bankuserManagement" />"  method="get">
-				<input id="requestReaderSubmit" type="submit" class="label" value="Bank Users Management" />				
-		  </form>
-  	</sec:authorize>
-  
-</div>
+
 	
 </body>
 </html>

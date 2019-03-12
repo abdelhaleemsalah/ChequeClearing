@@ -11,7 +11,7 @@ import org.springframework.webflow.mvc.servlet.AbstractFlowHandler;
 
 public class ChequeRegisterationFlowHandler  extends AbstractFlowHandler {
 
-	    private static final String DEFAULT_URL = "/bankuser/Registeration";
+	    private static final String DEFAULT_URL = "/Registeration";
 
 		@Override
 		public String handleExecutionOutcome(FlowExecutionOutcome outcome, HttpServletRequest req, HttpServletResponse res) {

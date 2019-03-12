@@ -18,14 +18,6 @@
 </head>
 <body>
 	
-	   <!-- Unnamed (Rectangle) -->
-      <div id="u6" class="ax_default box_1">
-        <div id="u6_div" class=""></div>
-        <div id="u6_text" class="text ">
-          <p style="font-size:25px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;font-size:30px;">&nbsp;<spring:message code="chequesDetailsSearch.message"/></span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;"> </span></p>
-        </div>
-      </div>
-	
 	<form id="searchForm" name="tformest"  method="post">
 	
 		<table class="table">

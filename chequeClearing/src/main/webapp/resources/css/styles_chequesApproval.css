@@ -754,7 +754,7 @@ body {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:170px;
+  top:240px;
   width:90px;
   height:40px;
   background:inherit;
@@ -798,7 +798,7 @@ body {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:170px;
+  top:240px;
   width:77px;
   height:40px;
   background:inherit;
@@ -905,5 +905,13 @@ body {
   left:2px;
   top:12px;
   width:333px;
+  word-wrap:break-word;
+}
+#u77_text {
+  border-width:0px;
+  position:absolute;
+  left:45px;
+  top:680px;
+  width:500px;
   word-wrap:break-word;
 }

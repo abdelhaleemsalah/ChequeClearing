@@ -22,7 +22,7 @@
    		<spring:message code="search.submit" var="searchSubmit"/>
   	
     		<!-- For login portalUser -->
-		<c:url value="/logout" var="logoutUrl" />
+		
 		<form:form id="hello" action=" ${flowExecutionUrl}"  method="post" modelAttribute="formBean" >
 		
 		
@@ -36,13 +36,6 @@
 				document.getElementById("hello").submit();
 			}
 		</script>
-
-		<c:if test="${pageContext.request.userPrincipal.name != null}">
-			<h2>
-				User : ${pageContext.request.userPrincipal.name} | <a
-					href="javascript:formSubmit()"> Logout</a>
-			</h2>
-		</c:if>
     
    <!--  <form action="@{/logout}">-->
     <div id="base" class="">

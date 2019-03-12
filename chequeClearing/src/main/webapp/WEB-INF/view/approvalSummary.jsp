@@ -28,16 +28,6 @@
           <p style="font-size:20px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;color:#003366;">&nbsp;<spring:message code="chequeIsApprovedReviewSuccessfully.message"/></span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;font-size:25px;"> </span></p>
         </div>
       </div>
-
-      <!-- Unnamed (Rectangle) -->
-      <spring:message code="register.submit" var="registerSubmit"/>
-      <div id="u50" class="ax_default button">
-        <div id="u50_text" class="text ">
-        	<form id="searchsaveForm" name="ttformest" action="<c:url value="/${user}/ChequeDetailsSearch" />" method="get">
-          		<input id="search" type="submit" value="Cheque Details Search" class="u50_div" />
-       		</form>
-        </div>
-      </div>
       
      
 </body>

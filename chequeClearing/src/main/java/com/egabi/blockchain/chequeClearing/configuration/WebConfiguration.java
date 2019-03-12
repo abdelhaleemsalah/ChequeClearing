@@ -21,6 +21,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.webflow.mvc.servlet.FlowHandlerAdapter;
 import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
+import org.springframework.webflow.mvc.view.AjaxUrlBasedViewResolver;
+import org.springframework.webflow.mvc.view.FlowAjaxTiles3View;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
@@ -40,21 +42,31 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
        // registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 
-    @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver
-                = new InternalResourceViewResolver();
-        viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/view/");
-        viewResolver.setSuffix(".jsp");
-        return viewResolver;
-    }
     
-    @Override
-	public void configureViewResolvers(ViewResolverRegistry registry) {
-		TilesViewResolver viewResolver = new TilesViewResolver();
-		registry.viewResolver(viewResolver);
+    @Bean
+	public AjaxUrlBasedViewResolver viewAjaxResolver() {
+		AjaxUrlBasedViewResolver resolver = new AjaxUrlBasedViewResolver();
+		resolver.setViewClass(FlowAjaxTiles3View.class);
+		return resolver;
 	}
+    
+    
+//    @Bean
+//    public InternalResourceViewResolver viewResolver() {
+//        InternalResourceViewResolver viewResolver
+//                = new InternalResourceViewResolver();
+//        viewResolver.setViewClass(JstlView.class);
+//        viewResolver.setPrefix("/WEB-INF/view/");
+//        viewResolver.setSuffix(".jsp");
+//        return viewResolver;
+//    }
+    
+//    @Override
+//	public void configureViewResolvers(ViewResolverRegistry registry) {
+//		TilesViewResolver viewResolver = new TilesViewResolver();
+//		registry.viewResolver(viewResolver);
+//		
+//	}
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

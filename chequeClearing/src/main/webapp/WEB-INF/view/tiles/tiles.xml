@@ -8,7 +8,6 @@
        template="/WEB-INF/view/tiles/layouts/defaultLayout.jsp">  
        <put-attribute name="title" value="" />  
        <put-attribute name="header" value="/WEB-INF/view/tiles/template/defaultHeader.jsp" />  
-       <put-attribute name="menu" value="/WEB-INF/view/tiles/template/defaultMenu.jsp" />  
        <put-attribute name="body" value="" />  
        <put-attribute name="footer" value="/WEB-INF/view/tiles/template/defaultFooter.jsp" />  
    </definition>  
@@ -18,6 +17,37 @@
        <put-attribute name="title" value="Welcome" />  
        <put-attribute name="body" value="/WEB-INF/view/dashboard.jsp" />  
    </definition>  
-
+	<definition name="search" extends="base-definition">  
+       <put-attribute name="title" value="userChequeSearch" />  
+       <put-attribute name="body" value="/WEB-INF/view/search.jsp" />  
+   </definition> 
+   <definition name="chequeSearchReport" extends="base-definition">  
+       <put-attribute name="title" value="chequeSearchReport" />  
+       <put-attribute name="body" value="/WEB-INF/view/chequeSearchReport.jsp" />  
+   </definition> 
+   <definition name="Registeration" extends="base-definition">  
+       <put-attribute name="title" value="Registeration" />  
+       <put-attribute name="body" value="/WEB-INF/view/Registeration.jsp" />  
+   </definition> 
+     <definition name="login" extends="base-definition">  
+       <put-attribute name="title" value="login" />  
+       <put-attribute name="body" value="/WEB-INF/view/login.jsp" />  
+   </definition> 
+   <definition name="ChequeDetailsSearch" extends="base-definition">  
+       <put-attribute name="title" value="ChequeDetailsSearch" />  
+       <put-attribute name="body" value="/WEB-INF/view/ChequeDetailsSearch.jsp" />  
+   </definition> 
+   <definition name="ChequeDetailsSearchResult" extends="base-definition">  
+       <put-attribute name="title" value="ChequeDetailsSearchResult" />  
+       <put-attribute name="body" value="/WEB-INF/view/ChequeDetailsSearchResult.jsp" />  
+   </definition> 
+   <definition name="chequesApproval" extends="base-definition">  
+       <put-attribute name="title" value="chequesApproval" />  
+       <put-attribute name="body" value="/WEB-INF/view/chequesApproval.jsp" />  
+   </definition> 
+    <definition name="approvalSummary" extends="base-definition">  
+       <put-attribute name="title" value="approvalSummary" />  
+       <put-attribute name="body" value="/WEB-INF/view/approvalSummary.jsp" />  
+   </definition> 
  
 </tiles-definitions>
