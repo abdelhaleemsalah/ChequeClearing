@@ -21,6 +21,9 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.webflow.mvc.servlet.FlowHandlerAdapter;
 import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
+
 @Configuration
 @EnableWebMvc
 public class WebConfiguration extends WebMvcConfigurerAdapter {
@@ -46,6 +49,12 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
+    
+    @Override
+	public void configureViewResolvers(ViewResolverRegistry registry) {
+		TilesViewResolver viewResolver = new TilesViewResolver();
+		registry.viewResolver(viewResolver);
+	}
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -68,10 +77,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry){
         registry.addInterceptor(localeChangeInterceptor());
     }
-    @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
-        registry.viewResolver(viewResolver());
-    }
+    
 	@Bean
     public FlowHandlerMapping flowHandlerMapping() {
         FlowHandlerMapping handlerMapping = new FlowHandlerMapping();
@@ -90,5 +96,13 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 	@Bean(name="bankuser/Registeration")
 	public ChequeRegisterationFlowHandler ChequeRegisterationFlowHandler() {
 		return new ChequeRegisterationFlowHandler();
+	}
+	
+	@Bean
+	public TilesConfigurer tilesConfigurer(){
+	    TilesConfigurer tilesConfigurer = new TilesConfigurer();
+	    tilesConfigurer.setDefinitions(new String[] {"/WEB-INF/view/**/tiles.xml"});
+	    tilesConfigurer.setCheckRefresh(true);
+	    return tilesConfigurer;
 	}
 }
