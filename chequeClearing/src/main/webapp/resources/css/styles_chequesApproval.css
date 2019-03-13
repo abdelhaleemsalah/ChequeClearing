@@ -915,3 +915,49 @@ body {
   width:500px;
   word-wrap:break-word;
 }
+
+
+.u79_div {
+  border-width:0px;
+  position:absolute;
+  left:130px;
+  top:240px;
+  width:77px;
+  height:40px;
+  background:inherit;
+  background-color:rgba(255, 255, 255, 1);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(121, 121, 121, 1);
+  border-radius:5px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Century Gothic';
+  font-weight:400;
+  font-style:normal;
+  font-size:18px;
+  color:#003366;
+}
+#u79 {
+  border-width:0px;
+  position:absolute;
+  left:370px;
+  top:512px;
+  width:77px;
+  height:40px;
+  font-family:'Century Gothic';
+  font-weight:400;
+  font-style:normal;
+  font-size:18px;
+  color:#003366;
+}
+#u79_text {
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:9px;
+  width:73px;
+  word-wrap:break-word;
+}

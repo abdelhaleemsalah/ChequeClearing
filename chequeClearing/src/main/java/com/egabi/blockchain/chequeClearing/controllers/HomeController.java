@@ -276,7 +276,7 @@ public class HomeController  {
     	System.out.println("display ChequeSearchReportResultDetails page");
     	
     	boolean isVisiable=false;
-    	
+    	boolean submitVisiable=false;
     	ChequeDetail cheque=ChequeDetailsSavingService.findOneChequeWithSRno(chequeSerialNo);
     	System.out.println("Cheque username: "+cheque.getPayToUsername());
     	
@@ -302,8 +302,14 @@ public class HomeController  {
     	   cheque.getStatus().equals("REVIEW REJECTED"))
     		isVisiable=true;
     		
+    	
+    	if(cheque.getChequeDueDate().compareTo(new Date())<=0)
+    	{
+    		submitVisiable=true;
+    	}
     	System.out.println("Modify Visiable: "+isVisiable);
     	model.addAttribute("modifyVisiablity", isVisiable);
+    	model.addAttribute("submitVisiablity", submitVisiable);
     	model.addAttribute("user",username);
     	
     	
@@ -512,7 +518,7 @@ public class HomeController  {
 		
 		CordaCustomNodeServiceImpl PartyA=  services.get(bankid+"NodeService");
 		 
-		
+		//PartyA.getNodeRpcConnection().getProxy().u
 		singleChequeFormBean=PartyA.retrieveChequeBook(bankid,accNo,serialno);
 	
 		

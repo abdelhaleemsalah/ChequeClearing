@@ -186,11 +186,23 @@
 	<c:if test = "${modifyVisiablity==true}">
 		<c:set var="display" value="block" />
 	</c:if>
+	
+		<c:if test = "${submitVisiablity==false}">
+    	<c:set var="displaySubmit" value="none" />
+	</c:if>
+	<c:if test = "${submitVisiablity==true}">
+		<c:set var="displaySubmit" value="block" />
+	</c:if>
 
       <!-- Unnamed (Rectangle) -->
       <div id="u74" class="ax_default button">
         <div id="u74_text" class="text ">
          	<input id="u7_button" type="submit" value="${modifySubmit}" class="u74_div" style="display: ${display};"/>		
+        </div>
+      </div>
+       <div id="u79" class="ax_default button">
+        <div id="u79_text" class="text ">
+         	<input id="u7_button" type="submit" value="Submit" class="u79_div" style="display: ${displaySubmit};"/>		
         </div>
       </div>
    
