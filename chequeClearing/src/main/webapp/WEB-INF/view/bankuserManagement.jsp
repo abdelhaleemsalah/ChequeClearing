@@ -22,14 +22,6 @@
    		<spring:message code="search.submit" var="searchSubmit"/>
    																
 	<form:form id="SearchResult"  method="post" enctype="multipart/form-data"  action="${pageContext.request.contextPath}/${username}/userCreationSummary"  modelAttribute="userform" >
-				
-      <!-- Unnamed (Rectangle) -->
-      <div id="u6" class="ax_default box_1">
-        <div id="u6_div" class=""></div>
-        <div id="u6_text" class="text ">
-          <p style="font-size:25px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;font-size:30px;">&nbsp;<spring:message code="userRegisteration.message"/></span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;"> </span></p>
-        </div>
-      </div>
 
       <!-- Unnamed (Rectangle) -->
       <div id="u10" class="ax_default label">

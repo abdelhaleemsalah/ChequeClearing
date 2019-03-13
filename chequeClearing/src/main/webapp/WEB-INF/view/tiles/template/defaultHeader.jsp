@@ -27,15 +27,6 @@
 		</div>
 	</form>
 
-
-<!--  
-  <c:url value="/logout" var="logoutUrl" />
-  <c:if test="${pageContext.request.userPrincipal.name != null}">
-		<h2>
-			User : ${pageContext.request.userPrincipal.name} | <a
-			href="javascript:formSubmit()"> Logout</a>
-		</h2>
-  </c:if> -->
   
 <div class="tabs">
 	<sec:authorize access="hasRole('ROLE_ADMIN')" >

@@ -16,7 +16,7 @@
     <link href="./../resources/css/styles_chequeDetailsEditSummary.css" type="text/css" rel="stylesheet"/>
     <script src="./../resources/js/jquery-1.7.1.min.js"></script>
     <script src="./../resources/js/jquery-ui-1.8.10.custom.min.js"></script>
-	<title><spring:message code="chequeIsUpdatedSuccessfully.message"/></title>
+	<title><spring:message code="chequeIsSavedSuccessfully.message"/></title>
 </head>
 <body>
 
@@ -25,17 +25,7 @@
       <div id="u49" class="ax_default heading_3">
         <div id="u49_div" class=""></div>
         <div id="u49_text" class="text ">
-          <p style="font-size:20px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;color:#003366;">&nbsp;<spring:message code="chequeIsUpdatedSuccessfully.message"/></span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;font-size:25px;"> </span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Rectangle) -->
-      <spring:message code="register.submit" var="registerSubmit"/>
-      <div id="u50" class="ax_default button">
-        <div id="u50_text" class="text ">
-        	<form id="searchsaveForm" name="ttformest" action="<c:url value="/${user}/chequeSearchReport" />" method="get">
-          		<input id="search" type="submit" value="Cheque Search Report" class="u50_div" />
-       		</form>
+          <p style="font-size:20px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;color:#003366;">&nbsp;<spring:message code="chequeIsSavedSuccessfully.message"/></span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;font-size:25px;"> </span></p>
         </div>
       </div>
    

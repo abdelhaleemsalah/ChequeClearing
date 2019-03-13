@@ -61,5 +61,42 @@
        <put-attribute name="title" value="approvalSummary" />  
        <put-attribute name="body" value="/WEB-INF/view/approvalSummary.jsp" />  
    </definition> 
+   <definition name="SearchResult" extends="base-definition">  
+       <put-attribute name="title" value="SearchResult" />  
+       <put-attribute name="body" value="/WEB-INF/view/SearchResult.jsp" />  
+   </definition> 
+   <definition name="SearchResult" extends="base-definition">  
+       <put-attribute name="title" value="SearchResult" />  
+       <put-attribute name="body" value="/WEB-INF/view/SearchResult.jsp" />  
+   </definition> 
+   <definition name="submittingSummary" extends="base-definition">  
+       <put-attribute name="title" value="submittingSummary" />  
+       <put-attribute name="body" value="/WEB-INF/view/submittingSummary.jsp" />  
+   </definition> 
+    <definition name="chequeSearchReportResult" extends="base-definition">  
+       <put-attribute name="title" value="chequeSearchReportResult" />  
+       <put-attribute name="body" value="/WEB-INF/view/chequeSearchReportResult.jsp" />  
+   </definition> 
+   <definition name="chequeSearchReportResultDetails" extends="base-definition">  
+       <put-attribute name="title" value="chequeSearchReportResultDetails" />  
+       <put-attribute name="body" value="/WEB-INF/view/chequeSearchReportResultDetails.jsp" />  
+   </definition>
+    <definition name="chequeDetailsEdit" extends="base-definition">  
+       <put-attribute name="title" value="chequeDetailsEdit" />  
+       <put-attribute name="body" value="/WEB-INF/view/chequeDetailsEdit.jsp" />  
+   </definition>
+   <definition name="chequeDetailsEditSummary" extends="base-definition">  
+       <put-attribute name="title" value="chequeDetailsEditSummary" />  
+       <put-attribute name="body" value="/WEB-INF/view/chequeDetailsEditSummary.jsp" />  
+   </definition>
+   <definition name="bankuserManagement" extends="base-definition">  
+       <put-attribute name="title" value="bankuserManagement" />  
+       <put-attribute name="body" value="/WEB-INF/view/bankuserManagement.jsp" />  
+   </definition>
+      <definition name="userCreationSummary" extends="base-definition">  
+       <put-attribute name="title" value="userCreationSummary" />  
+       <put-attribute name="body" value="/WEB-INF/view/userCreationSummary.jsp" />  
+   </definition>
+   
  
 </tiles-definitions>

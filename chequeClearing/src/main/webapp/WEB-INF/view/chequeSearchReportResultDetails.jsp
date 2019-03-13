@@ -193,21 +193,10 @@
          	<input id="u7_button" type="submit" value="${modifySubmit}" class="u74_div" style="display: ${display};"/>		
         </div>
       </div>
-
-
-      <!-- Unnamed (Rectangle) -->
-      <div id="u76" class="ax_default box_1">
-        <div id="u76_div" class=""></div>
-        <div id="u76_text" class="text ">
-          <p><span>Cheques Review Details:</span></p>
-        </div>
-      </div>
-    </div>
    
-    <h2>Columns</h2>
-    <ul>
+  	<ul>
         <c:forEach var="file" items="${files}">
-            <li><a href="${file}">${file}</a></li>
+            <li id="u77_text"><a href="${file}" class="u77_text" >${file}</a></li>
         </c:forEach>
     </ul>
 

@@ -23,16 +23,7 @@
 	<div id="base" class="">
 
 
-  	<table>
-            <tr>
-                <td>File to upload:</td>
-                <td><input type="file" name="file"/></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Upload"/></td>
-            </tr>
-        </table>
+  	
 
       <!-- Unnamed (Rectangle) -->
 	      <div id="u5" class="ax_default label">
@@ -74,14 +65,6 @@
 	      <!-- Unnamed (Text Field) -->
       <div id="u4" class="ax_default text_field">
      	<form:input path="paytoAccountNumber" id="u4_input" type="text" value=""/>
-      </div>
-  
-      <!-- Unnamed (Rectangle) -->
-      <div id="u11" class="ax_default box_1">
-        <div id="u11_div" class=""></div>
-        <div id="u11_text" class="text ">
-          <p style="font-size:25px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;font-size:30px;color:#003366;">&nbsp;Cheque Search:</span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;"> </span></p>
-        </div>
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -148,7 +131,6 @@
         <div id="u20_div" class=""></div>
         <div id="u20_text" class="text ">
           <p>${formBean.accountNumber}</p>
-        
         </div>
       </div>
 
@@ -165,16 +147,28 @@
         <div id="u22_div" class=""></div>
         <div id="u22_text" class="text ">
           <p>${formBean.chequeCurrency}</p>
-         
         </div>
       </div>
-
+      
+       <!-- Unnamed (Rectangle) -->
+      <div id="u2" class="ax_default label">
+        <div id="u2_div" class=""></div>
+        <div id="u2_text" class="text ">
+          <p><span>File to upload:</span></p>
+        </div>
+      </div>
+      
+     <div>
+		 <!--  <button class="btn">Upload a file</button>  -->
+		  <input type="file" name="file" class="upload-btn-wrapper" />
+	 </div>  
+	
+	
 <spring:message code="register.submit" var="registerSubmit"/>
       <div id="u0" class="ax_default button" >
         <div id="u0_text" class="text">
         <form id="searchsaveForm" name="ttformest" action="<c:url value="/submittingSummary" />" method="post">
-        <input id="registerSubmit" type="submit" value="${registerSubmit}" class="u0_div" />
-    
+        	<input id="registerSubmit" type="submit" value="${registerSubmit}" class="u0_div" />
         </form>
         </div>
       </div>

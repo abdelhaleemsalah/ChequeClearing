@@ -16,7 +16,7 @@
     <link href="./../resources/css/styles_submittingSummary.css" type="text/css" rel="stylesheet"/>
     <script src="./../resources/js/jquery-1.7.1.min.js"></script>
     <script src="./../resources/js/jquery-ui-1.8.10.custom.min.js"></script>
-	   <title><spring:message code="saveChequeSummary.message"/></title>
+	<title><spring:message code="saveChequeSummary.message"/></title>
 </head>
 <body>
 
@@ -142,16 +142,6 @@
         </div>
       </div>
 
-      <!-- Unnamed (Rectangle) -->
-      <spring:message code="register.submit" var="registerSubmit"/>
-      <div id="u50" class="ax_default button">
-        <div id="u50_text" class="text ">
-        	<form id="searchsaveForm" name="ttformest" action="<c:url value="/${username}/search" />" method="get">
-          		<input id="search" type="submit" value="Cheque Search" class="u50_div" />
-       		</form>
-        </div>
-      </div>
-      
       <!-- Unnamed (Rectangle) -->
       <div id="u51" class="ax_default label">
         <div id="u51_div" class=""></div>

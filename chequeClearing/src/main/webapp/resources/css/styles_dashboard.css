@@ -42,6 +42,22 @@ body
     background: #c4c4c4;
 	color: #000;
 }
+.tablabel:AFTER
+{
+    display: inline-block;
+	float: left;
+    padding: 20px 30px;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: normal;
+    background: purple;
+    cursor: pointer;
+	font-family:"Trebuchet MS";
+	border-color:rgba(204, 204, 204, 1);
+	border-width:1px;
+	border-style:solid;
+}
+
 .u90_div {
   border-width:0px;
   position:absolute;
