@@ -67,6 +67,14 @@
        <put-attribute name="title" value="approvalSummary" />  
        <put-attribute name="body" value="/WEB-INF/view/approvalSummary.jsp" />  
    </definition> 
+   <definition name="rejectionSummary" extends="base-definition">  
+       <put-attribute name="title" value="rejectionSummary" />  
+       <put-attribute name="body" value="/WEB-INF/view/rejectionSummary.jsp" />  
+   </definition>
+   <definition name="submissionSummary" extends="base-definition">  
+       <put-attribute name="title" value="submissionSummary" />  
+       <put-attribute name="body" value="/WEB-INF/view/submissionSummary.jsp" />  
+   </definition>
    <definition name="SearchResult" extends="base-definition">  
        <put-attribute name="title" value="SearchResult" />  
        <put-attribute name="body" value="/WEB-INF/view/SearchResult.jsp" />  

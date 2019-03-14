@@ -199,7 +199,7 @@
 
 	 <div id="u79" class="ax_default button">
         <div id="u79_text" class="text ">
-         	<input id="u7_button" type="submit" value="Submit" class="u79_div" style="display: ${displaySubmit};"/>		
+         	<input id="u7_button" type="submit" value="Submit" class="u79_div" name="_eventId_Submit" style="display: ${displaySubmit};"/>		
         </div>
       </div>
     

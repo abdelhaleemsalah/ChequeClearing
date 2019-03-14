@@ -19,7 +19,8 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
 
     @Bean
     public FlowDefinitionRegistry flowRegistry() {
-    	   return getFlowDefinitionRegistryBuilder(flowBuilderServices()).addFlowLocation("/WEB-INF/view/flows/ChequeBookRegisteration-flow.xml", "bankuser/Registeration").build();
+    	   //return getFlowDefinitionRegistryBuilder(flowBuilderServices()).addFlowLocation("/WEB-INF/view/flows/ChequeBookRegisteration-flow.xml", "bankuser/Registeration").build();
+    	return getFlowDefinitionRegistryBuilder(flowBuilderServices()).addFlowLocation("/WEB-INF/view/flows/ChequeReview-flow.xml", "bankuser/chequesApproval").build();
     }
     
     

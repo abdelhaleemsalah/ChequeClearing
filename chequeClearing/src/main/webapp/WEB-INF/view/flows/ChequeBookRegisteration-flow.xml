@@ -10,39 +10,39 @@
 
 
 
-<on-start>
+	<on-start>
 		<evaluate expression="homeController.initiateFormBean()"  result="flowScope.formBean" />
 	</on-start>
 
 
    <view-state id="Registeration" model="formBean"  >
-   <binder>
-			<binding property="chequeSerialNoFrom" />
-			<binding property="chequeSerialNoTo" />
-			<binding property="customerId" />
-			<binding property="bankId" />
-			<binding property="chequeCurrency" />
-			<binding property="customerName" />
-			<binding property="accountNumber" />
-			
-			
-			
-				</binder>
-				<on-render>
-			<render fragments="body" />
-		</on-render>
-    <transition on="Submit" to="RegConfirmation" />
+	   <binder>
+				<binding property="chequeSerialNoFrom" />
+				<binding property="chequeSerialNoTo" />
+				<binding property="customerId" />
+				<binding property="bankId" />
+				<binding property="chequeCurrency" />
+				<binding property="customerName" />
+				<binding property="accountNumber" />
+		</binder>
+					
+	   <on-render>
+				<render fragments="body" />
+	   </on-render>
+		
+	   <transition on="Submit" to="RegConfirmation" />
    </view-state>
     
-    <view-state id="RegConfirmation" model="formBean">
-    <on-render>
-			<render fragments="body" />
-		</on-render>
-        <transition on="Register" to="RegSummary"  >
-        <evaluate expression="homeController.registerChequeBook(formBean)" />
-        </transition>
-          <transition on="Back" to="Registeration"/>
-         
+    
+   <view-state id="RegConfirmation" model="formBean">
+	   <on-render>
+				<render fragments="body" />
+	   </on-render>
+	   
+	   <transition on="Register" to="RegSummary"  >
+	   		<evaluate expression="homeController.registerChequeBook(formBean)" />
+	   </transition>
+	   <transition on="Back" to="Registeration"/>
     </view-state>
    
 
@@ -50,10 +50,12 @@
         <on-render>
 			<render fragments="body" />
 		</on-render>
-    <transition on="Reg" to="Regist" />
+   		<transition on="Reg" to="Regist" />
     </view-state>
   
+
 <end-state id="Regist" />
+
 
 
 </flow>

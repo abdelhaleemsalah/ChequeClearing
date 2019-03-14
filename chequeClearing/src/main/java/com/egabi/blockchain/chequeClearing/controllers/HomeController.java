@@ -590,6 +590,11 @@ public class HomeController  {
     	System.out.println("Cheque Rejected SR no: "+formBean.getChequeSerialNo());
     	ChequeDetailsSavingService.setUserInfoById("REVIEW REJECTED", formBean.getChequeSerialNo());
     }
+    public void submitCheque(ChequeFormBean formBean)
+    {
+    	System.out.println("Cheque Submitted SR no: "+formBean.getChequeSerialNo());
+    	//submission execution
+    }
     
     public void registerChequeBook(ChequeFormBean formBean)
     {
@@ -616,13 +621,34 @@ public class HomeController  {
     
     
 	
-
-	
-	
-	
-		//@GetMapping("/bankuser/Registeration")
-	public ChequeFormBean initiateFormBean() {
+    public ChequeFormBean initiateFormBean() {
 		ChequeFormBean formBeam= new ChequeFormBean();
 		return formBeam;
+	}
+	
+	
+	public ChequeFormBean getChequeDetails(long chequeSerialNo) {
+		ChequeDetail cheque=ChequeDetailsSavingService.findOneChequeWithSRno(chequeSerialNo);
+		ChequeFormBean chequeBean=new ChequeFormBean();
+		
+		System.out.println("inside getChequeDetails method");
+		
+		chequeBean.setChequeSerialNo(toIntExact(cheque.getChequeSrNo()));
+    	chequeBean.setChequeAmount(cheque.getChequeAmount());
+    	chequeBean.setChequeDueDate(new Date(cheque.getChequeDueDate().getTime()));
+    	chequeBean.setPaytoUsername(cheque.getPayToUsername());
+    	chequeBean.setAccountNumber(cheque.getAccountNo().toString());
+    	chequeBean.setChequeCurrency(cheque.getChequeCurrency());
+    	chequeBean.setBankId(cheque.getBankCode());
+    	chequeBean.setChequeStatus(cheque.getStatus());
+    	chequeBean.setCustomerName(cheque.getFromUsername());
+    	chequeBean.setPaytoAccountNumber(cheque.getPayToAccountNo());
+    	chequeBean.setChequeImageName(cheque.getChequeImageName());
+    	if(cheque.getIsCrossed().equals("Y"))	
+    		chequeBean.setCrossed(true);
+    	else
+    		chequeBean.setCrossed(false);
+    	
+    	return chequeBean;
 	}
 }

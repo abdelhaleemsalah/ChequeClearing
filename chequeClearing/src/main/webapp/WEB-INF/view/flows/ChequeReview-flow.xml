@@ -1,0 +1,32 @@
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
+
+	<input name="chequeSerialNo"/>
+	<on-start>
+		<evaluate expression="homeController.getChequeDetails(chequeSerialNo)"  result="flowScope.formBean" />
+	</on-start>
+	
+	<view-state id="chequesApproval" view="chequesApproval" model="formBean">
+		
+	    <on-render>
+				<set name="formBean.chequeSerialNo" value="chequeSerialNo"></set>
+	    </on-render>
+		
+	   <transition on="Approve" to="approvalSummary"  >
+	   		<evaluate expression="homeController.approveCheque(formBean)" />
+	   </transition>
+	   <transition on="Reject" to="rejectionSummary"  >
+	   		<evaluate expression="homeController.rejectCheque(formBean)" />
+	   </transition>
+	   <transition on="Submit" to="submissionSummary"  >
+	   		<evaluate expression="homeController.submitCheque(formBean)" />
+	   </transition>
+   </view-state>
+   
+	<view-state id="approvalSummary" view="approvalSummary"/>
+	<view-state id="rejectionSummary" view="rejectionSummary"/>
+	<view-state id="submissionSummary" view="submissionSummary"/>
+
+</flow>
