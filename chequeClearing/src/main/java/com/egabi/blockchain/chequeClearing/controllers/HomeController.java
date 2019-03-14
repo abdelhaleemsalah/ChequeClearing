@@ -314,6 +314,7 @@ public class HomeController  {
     	model.addAttribute("user",username);
     	
     	
+    	
 //    	storageService.loadAll(merchant).map(
 //                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
 //                        "serveFile",  path.getFileName().toString() , merchant).build().toString())

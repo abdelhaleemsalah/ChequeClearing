@@ -180,6 +180,7 @@
         </div>
       </div>
 
+
 	<c:if test = "${modifyVisiablity==false}">
     	<c:set var="display" value="none" />
 	</c:if>
