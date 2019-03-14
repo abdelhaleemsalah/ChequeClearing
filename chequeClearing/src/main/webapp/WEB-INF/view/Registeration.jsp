@@ -40,13 +40,6 @@
    <!--  <form action="@{/logout}">-->
     <div id="base" class="">
 
-      <!-- Unnamed (Rectangle) -->
-      <div id="u6" class="ax_default box_1">
-        <div id="u6_div" class=""></div>
-        <div id="u6_text" class="text ">
-          <p style="font-size:25px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;font-size:30px;">&nbsp;<spring:message code="chequeRegisteration.message"/></span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;"> </span></p>
-        </div>
-      </div>
 
 	<spring:message code="chequeSerialNumberFrom.title" var="chequeSerialFromTitle"/>
       <!-- Unnamed (Text Field) -->
@@ -85,26 +78,6 @@
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u12" class="ax_default label">
-        <div id="u12_div" class=""></div>
-        <div id="u12_text" class="text ">
-          <p><span><spring:message code="BankCode.message"/></span></p>
-        </div>
-      </div>
-
-       <spring:message code="bankId.title" var="bankIdTitle"/>
-       <!-- Unnamed (Droplist) -->
-      <div id="u13" class="ax_default droplist" >
-        <form:select id="u13_input" title="${bankIdTitle}" path="bankId">
-          <option value="HSBC">HSBC</option>
-          <option value="CIB">CIB</option>
-          <option value="MISR">MISR</option>
-          <option value="EDBE">EDBE</option>
-          <option value="ABK">ABK</option>
-        </form:select>
-      </div>
-
-      <!-- Unnamed (Rectangle) -->
       <div id="u14" class="ax_default label">
         <div id="u14_div" class=""></div>
         <div id="u14_text" class="text ">
@@ -134,9 +107,7 @@
       <!-- Unnamed (Rectangle) -->
       <div id="u16" class="ax_default button" title="${continueRegisterationTitle}">
         <div id="u16_text" class="text ">
-      <button type="submit" id="Back" name="_eventId_Back"> <spring:message code="back.submit"/></button>
-    			
-						<input id="requestReaderSubmit"  name="_eventId_Submit" type="submit" value="${saveSubmit}" class="u16_div" />
+			<input id="requestReaderSubmit"  name="_eventId_Submit" type="submit" value="${saveSubmit}" class="u16_div" />
 
       
         

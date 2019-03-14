@@ -43,8 +43,14 @@
        <put-attribute name="title" value="Registeration" />  
        <put-attribute name="body" value="/WEB-INF/view/Registeration.jsp" />  
    </definition> 
-   
-   
+   <definition name="RegConfirmation" extends="base-definition">  
+       <put-attribute name="title" value="RegConfirmation" />  
+       <put-attribute name="body" value="/WEB-INF/view/RegConfirmation.jsp" />  
+   </definition> 
+   <definition name="RegSummary" extends="base-definition">  
+       <put-attribute name="title" value="RegSummary" />  
+       <put-attribute name="body" value="/WEB-INF/view/RegSummary.jsp" />  
+   </definition> 
    <definition name="ChequeDetailsSearch" extends="base-definition">  
        <put-attribute name="title" value="ChequeDetailsSearch" />  
        <put-attribute name="body" value="/WEB-INF/view/ChequeDetailsSearch.jsp" />  

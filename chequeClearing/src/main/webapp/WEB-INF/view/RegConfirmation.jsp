@@ -35,14 +35,6 @@
       <div id="u38" class="ax_default heading_2">
         <div id="u38_div" class=""></div>
       </div>
-
-      <!-- Unnamed (Rectangle) -->
-      <div id="u39" class="ax_default box_1">
-        <div id="u39_div" class=""></div>
-        <div id="u39_text" class="text ">
-          <p style="font-size:25px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;font-size:30px;">&nbsp;<spring:message code="chequeRegisterationConfirmation.message"/></span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;"> </span></p>
-        </div>
-      </div>
       
       <!--  Unnamed (Rectangle) -->
       <div id="u40" class="ax_default label">
@@ -92,7 +84,7 @@
       <!-- Unnamed (Rectangle) -->
       <div id="u46" class="ax_default button" >
         <div id="u46_text" class="text ">
-        <button type="submit" id="Register" name="_eventId_Register">    <spring:message code="register.submit" /></button>
+        <button type="submit" id="Register" name="_eventId_Register" class="u47_div"><spring:message code="register.submit" /></button>
     			
         
         
@@ -107,7 +99,7 @@
       <div id="u47" class="ax_default button" >
         <div id="u47_text" class="text ">
    
-             <button type="submit" id="Back" name="_eventId_Back"> <spring:message code="back.submit"/></button>
+             <button type="submit" id="Back" name="_eventId_Back" class="u47_div"> <spring:message code="back.submit"/></button>
     			
       
       
@@ -137,14 +129,6 @@
           <p>${formBean.customerName}</p><p><span><br></span></p>
         </div>
       </div>
-      
-      <!-- Unnamed (Rectangle) -->
-      <div id="u50" class="ax_default paragraph">
-        <div id="u50_div" class=""></div>
-        <div id="u50_text" class="text ">
-          <p>${formBean.bankId}</p>
-        </div>
-      </div>
 
       <!-- Unnamed (Rectangle) -->
       <div id="u51" class="ax_default paragraph">
@@ -167,14 +151,6 @@
         <div id="u53_div" class=""></div>
         <div id="u53_text" class="text ">
           <p>${formBean.chequeCurrency}</p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Rectangle) -->
-      <div id="u54" class="ax_default label">
-        <div id="u54_div" class=""></div>
-        <div id="u54_text" class="text ">
-          <p><span>Branch Id:</span></p>
         </div>
       </div>
 

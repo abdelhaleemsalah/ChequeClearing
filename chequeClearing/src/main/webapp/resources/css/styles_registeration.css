@@ -55,7 +55,7 @@ body {
 #u7_input {
   position:absolute;
   left:0px;
-  top:0px;
+  top:-80px;
   width:167px;
   height:33px;
   font-family:'Arial';
@@ -103,7 +103,7 @@ body {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:0px;
+  top:-70px;
   width:208px;
   white-space:nowrap;
 }
@@ -118,7 +118,7 @@ body {
 #u9_input {
   position:absolute;
   left:0px;
-  top:0px;
+  top:-75px;
   width:167px;
   height:33px;
   font-family:'Arial';
@@ -292,7 +292,7 @@ body {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:0px;
+  top:-60px;
   width:74px;
   white-space:nowrap;
 }
@@ -307,7 +307,7 @@ body {
 #u15_input {
   position:absolute;
   left:0px;
-  top:0px;
+  top:-75px;
   width:89px;
   height:29px;
   font-family:'Arial';
@@ -324,7 +324,7 @@ body {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:0px;
+  top:-50px;
   width:115px;
   height:40px;
   background:inherit;
@@ -401,7 +401,7 @@ body {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:0px;
+  top:-10px;
   width:124px;
   white-space:nowrap;
 }
@@ -416,7 +416,7 @@ body {
 #u18_input {
   position:absolute;
   left:40px;
-  top:0px;
+  top:-15px;
   width:167px;
   height:33px;
   font-family:'Arial';
@@ -464,7 +464,7 @@ body {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:0px;
+  top:-65px;
   width:189px;
   white-space:nowrap;
 }
@@ -472,7 +472,7 @@ body {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:0px;
+  top:-10px;
   width:87px;
   height:36px;
   background:inherit;
@@ -505,7 +505,7 @@ body {
   border-width:0px;
   position:absolute;
   left:0px;
-  top:0px;
+  top:-10px;
   width:87px;
   white-space:nowrap;
 }
@@ -520,7 +520,7 @@ body {
 #u21_input {
   position:absolute;
   left:40px;
-  top:0px;
+  top:-15px;
   width:167px;
   height:33px;
   font-family:'Arial';
