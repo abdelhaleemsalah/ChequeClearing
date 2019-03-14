@@ -18,7 +18,7 @@
 </head>
 <body>
 	
-	<form id="searchForm" name="tformest"  method="post">
+	<form id="searchForm" name="tformest" action="${flowExecutionUrl}" method="post">
 	
 		<table class="table">
 		  <tr>

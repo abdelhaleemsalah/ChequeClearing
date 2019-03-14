@@ -276,7 +276,6 @@ public class HomeController  {
     	System.out.println("display ChequeSearchReportResultDetails page");
     	
     	boolean isVisiable=false;
-    	boolean submitVisiable=false;
     	ChequeDetail cheque=ChequeDetailsSavingService.findOneChequeWithSRno(chequeSerialNo);
     	System.out.println("Cheque username: "+cheque.getPayToUsername());
     	
@@ -303,16 +302,9 @@ public class HomeController  {
     	   cheque.getStatus().equals("REVIEW REJECTED"))
     		isVisiable=true;
     		
-    	
-    	if(cheque.getChequeDueDate().compareTo(new Date())<=0)
-    	{
-    		submitVisiable=true;
-    	}
     	System.out.println("Modify Visiable: "+isVisiable);
     	model.addAttribute("modifyVisiablity", isVisiable);
-    	model.addAttribute("submitVisiablity", submitVisiable);
     	model.addAttribute("user",username);
-    	
     	
     	
 //    	storageService.loadAll(merchant).map(
@@ -439,6 +431,7 @@ public class HomeController  {
 	public ModelAndView displayApprovalPage(@PathVariable("username") String username,@RequestParam("chequeSerialNo") long chequeSerialNo,
 			Model model) throws NoSuchFieldException, SecurityException, ParseException, IOException
 	{
+		boolean submitVisiable=false;
     	System.out.println("Cheque SR no: "+chequeSerialNo);
     	System.out.println("display approval page");
     	
@@ -463,7 +456,13 @@ public class HomeController  {
     	else
     		chequeBean.setCrossed(false);
     	
+    	if(cheque.getChequeDueDate().compareTo(new Date())<=0)
+    	{
+    		submitVisiable=true;
+    	}
+    	
     	model.addAttribute("user" , username);
+    	model.addAttribute("submitVisiablity", submitVisiable);
     	
         model.addAttribute("files", storageService.loadFile(cheque.getUserID().getUsername(),cheque.getChequeImageName()).map(
                 path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
@@ -477,10 +476,16 @@ public class HomeController  {
 	public ModelAndView displayApprovalSummary(@PathVariable("username") String username,
 	@RequestParam("chequeSerialNo") long chequeSerialNo ,Model model) throws NoSuchFieldException, SecurityException
 	{
-    	System.out.println("Cheque SR no: "+chequeSerialNo);
-    	ChequeDetailsSavingService.setUserInfoById("REVIEW APPROVED", chequeSerialNo);
     	model.addAttribute("user",username);
     	return new ModelAndView("approvalSummary", "formBean",new ChequeFormBean());
+	}
+	
+	@RequestMapping(value = "/{username}/rejectionSummary", method = RequestMethod.POST) 
+	public ModelAndView displayRejectionSummary(@PathVariable("username") String username,
+	@RequestParam("chequeSerialNo") long chequeSerialNo ,Model model) throws NoSuchFieldException, SecurityException
+	{
+    	model.addAttribute("user",username);
+    	return new ModelAndView("rejectionSummary", "formBean",new ChequeFormBean());
 	}
 	
     @RequestMapping(value = "/{username}/SearchResult", method = RequestMethod.POST) 
@@ -575,8 +580,16 @@ public class HomeController  {
     	return "submittingSummary"; 
 	}
     
-    
-    
+    public void approveCheque(ChequeFormBean formBean)
+    {
+    	System.out.println("Cheque Approved SR no: "+formBean.getChequeSerialNo());
+    	ChequeDetailsSavingService.setUserInfoById("REVIEW APPROVED", formBean.getChequeSerialNo());
+    }
+    public void rejectCheque(ChequeFormBean formBean)
+    {
+    	System.out.println("Cheque Rejected SR no: "+formBean.getChequeSerialNo());
+    	ChequeDetailsSavingService.setUserInfoById("REVIEW REJECTED", formBean.getChequeSerialNo());
+    }
     
     public void registerChequeBook(ChequeFormBean formBean)
     {

@@ -20,7 +20,7 @@
 </head>
 <body>
 
-	<form:form id="SearchResult"  method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/${user}/approvalSummary" modelAttribute="formBean" >
+	<form:form id="SearchResult"  method="post" enctype="multipart/form-data" action="${flowExecutionUrl}" modelAttribute="formBean" >
 	
 	<div id="base" class="">
 
@@ -173,20 +173,35 @@
 	 <spring:message code="approve.submit" var="approveSubmit"/>
 	 <spring:message code="reject.submit" var="rejectSubmit"/>
 	 
+	 <c:if test = "${submitVisiablity==false}">
+    	<c:set var="displaySubmit" value="none" />
+    	<c:set var="displayApproveAndReject" value="block" />
+	 </c:if>
+	 <c:if test = "${submitVisiablity==true}">
+		<c:set var="displaySubmit" value="block" />
+    	<c:set var="displayApproveAndReject" value="none" />
+		
+	 </c:if>
+	 
       <!-- Unnamed (Rectangle) -->
       <div id="u73" class="ax_default button">
         <div id="u73_text" class="text">
-          <input id="u7_button" type="submit" value="${approveSubmit}" class="u73_div" />		
+          <input id="u7_button" type="submit" value="${approveSubmit}" class="u73_div" name="_eventId_Approve" style="display: ${displayApproveAndReject};"/>		
         </div>
       </div>
 
       <!-- Unnamed (Rectangle) -->
       <div id="u74" class="ax_default button">
         <div id="u74_text" class="text">
-          <input id="u7_button" type="submit" value="${rejectSubmit}" class="u74_div" />		
+          <input id="u7_button" type="submit" value="${rejectSubmit}" class="u74_div" name="_eventId_Reject" style="display: ${displayApproveAndReject};"/>		
         </div>
       </div>
 
+	 <div id="u79" class="ax_default button">
+        <div id="u79_text" class="text ">
+         	<input id="u7_button" type="submit" value="Submit" class="u79_div" style="display: ${displaySubmit};"/>		
+        </div>
+      </div>
     
        <ul>
         <c:forEach var="file" items="${files}">
