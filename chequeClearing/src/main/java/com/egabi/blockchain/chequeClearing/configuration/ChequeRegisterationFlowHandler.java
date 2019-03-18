@@ -12,22 +12,29 @@ import org.springframework.webflow.mvc.servlet.AbstractFlowHandler;
 public class ChequeRegisterationFlowHandler  extends AbstractFlowHandler {
 
 	
-	    //private static final String DEFAULT_URL = "/Registeration";
-	    private static final String DEFAULT_URL = "/chequesApproval";
 
+	//private static final String DEFAULT_URL = "/Registeration";
+		//private static final String DEFAULT_URL = "/chequesApproval";
+	   private String DEFAULT_URL = "/Registeration";
+
+		
 		@Override
 		public String handleExecutionOutcome(FlowExecutionOutcome outcome, HttpServletRequest req, HttpServletResponse res) {
-			System.out.println("user name ya ged3an "+req.getAttribute("user"));
+
+			System.out.println("outcome is "+outcome.getId());
 			return DEFAULT_URL;
 		}
 
 		@Override
 		public String handleException(FlowException e, HttpServletRequest request, HttpServletResponse response) {
 			if (e instanceof NoSuchFlowExecutionException) {
+				System.out.println("handleException user name ya ged3an "+request.getAttribute("user"));
 				return DEFAULT_URL;
 			}
 			else {
 				throw e;
 			}
 		}
+		
+		
 }

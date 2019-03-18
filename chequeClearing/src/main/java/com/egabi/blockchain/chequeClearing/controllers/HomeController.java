@@ -198,15 +198,14 @@ public class HomeController  {
 	{
 		if(!model.containsAttribute("formBean"))
 		{
-	       
-		model.addAttribute("formBean", new ChequeFormBean());
-		 model.addAttribute("user" , username);
+			model.addAttribute("formBean", new ChequeFormBean());
+			model.addAttribute("user" , username);
 		}
 		 model.addAttribute("files", storageService.loadAll(username).map(
 		          path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
 		                  "serveFile",  path.getFileName().toString() , username).build().toString())
 		          .collect(Collectors.toList()));
-		return "Registeration"; 
+		return "redirect:/flow/registeration"; 
 	}
 
     
@@ -598,7 +597,6 @@ public class HomeController  {
     
     public void registerChequeBook(ChequeFormBean formBean)
     {
-    	
        	InputStream input = null;
 		Properties prop=new Properties();
 		String propBankId="";

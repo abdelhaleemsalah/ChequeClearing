@@ -105,8 +105,9 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         handlerAdapter.setSaveOutputToFlashScopeOnRedirect(true);
         return handlerAdapter;
     }
-	@Bean(name="bankuser/Registeration")
-	public ChequeRegisterationFlowHandler ChequeRegisterationFlowHandler() {
+	@Bean(name="view/flows")
+	public ChequeRegisterationFlowHandler ChequeRegisterationFlowHandler()
+	{
 		return new ChequeRegisterationFlowHandler();
 	}
 	
