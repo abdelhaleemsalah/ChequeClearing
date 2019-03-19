@@ -3,7 +3,11 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
 
+	<input name="username"/>
 	<input name="chequeSerialNo"/>
+	<input name="submitVisiablity"/>
+	<input name="files"/>
+	
 	<on-start>
 		<evaluate expression="homeController.getChequeDetails(chequeSerialNo)"  result="flowScope.formBean" />
 	</on-start>

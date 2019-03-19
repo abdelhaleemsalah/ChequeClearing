@@ -200,7 +200,9 @@ public class HomeController  {
 		{
 			model.addAttribute("formBean", new ChequeFormBean());
 			model.addAttribute("user" , username);
+			
 		}
+		model.addAttribute("username" , username);
 		 model.addAttribute("files", storageService.loadAll(username).map(
 		          path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
 		                  "serveFile",  path.getFileName().toString() , username).build().toString())
@@ -427,7 +429,7 @@ public class HomeController  {
 	}
     
 	@RequestMapping(value = "/{username}/chequesApproval", method = RequestMethod.GET) 
-	public ModelAndView displayApprovalPage(@PathVariable("username") String username,@RequestParam("chequeSerialNo") long chequeSerialNo,
+	public String displayApprovalPage(@PathVariable("username") String username,@RequestParam("chequeSerialNo") long chequeSerialNo,
 			Model model) throws NoSuchFieldException, SecurityException, ParseException, IOException
 	{
 		boolean submitVisiable=false;
@@ -461,15 +463,17 @@ public class HomeController  {
     	}
     	
     	model.addAttribute("user" , username);
+    	model.addAttribute("username" , username);
     	model.addAttribute("submitVisiablity", submitVisiable);
-    	
-        model.addAttribute("files", storageService.loadFile(cheque.getUserID().getUsername(),cheque.getChequeImageName()).map(
+    	model.addAttribute("formBean" , chequeBean);
+    	model.addAttribute("chequeSerialNo",chequeSerialNo);
+        model.addAttribute("files", storageService.loadFile(username,cheque.getChequeImageName()).map(
                 path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
                         "serveFile",  path.getFileName().toString() , cheque.getUserID().getUsername()).build().toString())
                 .collect(Collectors.toList()));
         
-        
-    	return new ModelAndView("chequesApproval", "formBean",chequeBean);
+		return "redirect:/flow/chequeReview"; 
+    	//return new ModelAndView("flow/chequeReview", "formBean",chequeBean);
 	}
 	@RequestMapping(value = "/{username}/approvalSummary", method = RequestMethod.POST) 
 	public ModelAndView displayApprovalSummary(@PathVariable("username") String username,

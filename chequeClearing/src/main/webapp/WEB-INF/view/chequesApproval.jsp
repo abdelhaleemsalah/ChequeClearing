@@ -173,33 +173,27 @@
 	 <spring:message code="approve.submit" var="approveSubmit"/>
 	 <spring:message code="reject.submit" var="rejectSubmit"/>
 	 
-	 <c:if test = "${submitVisiablity==false}">
-    	<c:set var="displaySubmit" value="none" />
-    	<c:set var="displayApproveAndReject" value="block" />
-	 </c:if>
-	 <c:if test = "${submitVisiablity==true}">
-		<c:set var="displaySubmit" value="block" />
-    	<c:set var="displayApproveAndReject" value="none" />
-		
-	 </c:if>
-	 
       <!-- Unnamed (Rectangle) -->
       <div id="u73" class="ax_default button">
         <div id="u73_text" class="text">
-          <input id="u7_button" type="submit" value="${approveSubmit}" class="u73_div" name="_eventId_Approve" style="display: ${displayApproveAndReject};"/>		
+           <input id="u7_button" type="submit" value="${approveSubmit}" class="u73_div" name="_eventId_Approve" 
+		   <c:if test="${submitVisiablity == true}"><c:out value="disabled='disabled'"/></c:if> />
         </div>
       </div>
 
       <!-- Unnamed (Rectangle) -->
       <div id="u74" class="ax_default button">
         <div id="u74_text" class="text">
-          <input id="u7_button" type="submit" value="${rejectSubmit}" class="u74_div" name="_eventId_Reject" style="display: ${displayApproveAndReject};"/>		
+	       <input id="u7_button" type="submit" value="${rejectSubmit}" class="u74_div" name="_eventId_Reject"   
+		   <c:if test="${submitVisiablity == true}"><c:out value="disabled='disabled'"/></c:if> />	
         </div>
       </div>
 
 	 <div id="u79" class="ax_default button">
         <div id="u79_text" class="text ">
-         	<input id="u7_button" type="submit" value="Submit" class="u79_div" name="_eventId_Submit" style="display: ${displaySubmit};"/>		
+         	<!-- <input id="u7_button" type="submit" value="Submit" class="u79_div" name="_eventId_Submit" disabled="${enableSubmit}"/>	 -->
+         	<input id="u7_button" type="submit" value="Submit" class="u79_div" name="_eventId_Submit" 
+		    <c:if test="${submitVisiablity == false}"><c:out value="disabled='disabled'"/></c:if> />	
         </div>
       </div>
     
