@@ -2,11 +2,18 @@ package com.egabi.blockchain.chequeClearing.controllers;
 
 import java.io.Serializable;
 import java.util.Date;
-
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Email;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class ChequeFormBean  implements Serializable
 {
+	
 	private Integer chequeSerialNoFrom ;
 	private Integer chequeSerialNoTo ;
 	private String accountNumber ;
@@ -21,6 +28,7 @@ public class ChequeFormBean  implements Serializable
 	private String pageName;
 	private Double chequeAmount;
 	private boolean crossed;
+		
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date chequeDueDate;
 	private long chequeBookSerialNo ;
@@ -37,36 +45,43 @@ public class ChequeFormBean  implements Serializable
 	public void setChequeStatus(String chequeStatus) {
 		this.chequeStatus = chequeStatus;
 	}
+	@NotNull
 	public Integer getChequeSerialNoFrom() {
 		return chequeSerialNoFrom;
 	}
 	public void setChequeSerialNoFrom(Integer chequeSerialNoFrom) {
 		this.chequeSerialNoFrom = chequeSerialNoFrom;
 	}
+	@NotNull
 	public Integer getChequeSerialNoTo() {
 		return chequeSerialNoTo;
 	}
 	public void setChequeSerialNoTo(Integer chequeSerialNoTo) {
 		this.chequeSerialNoTo = chequeSerialNoTo;
 	}
+	@NotEmpty
 	public String getAccountNumber() {
 		return accountNumber;
 	}
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
+	@NotNull
 	public Integer getCustomerId() {
 		return customerId;
 	}
 	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
 	}
+	@NotEmpty(message= "Customer name must be between 10 and 200 characters")
+	@Size(min = 10, max = 200, message= "Customer name must be between 10 and 200 characters")
 	public String getCustomerName() {
 		return customerName;
 	}
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
+	
 	public long getBranchCode() {
 		return branchCode;
 	}
@@ -85,6 +100,7 @@ public class ChequeFormBean  implements Serializable
 	public void setChequeSerialNo(Integer chequeSerialNo) {
 		this.chequeSerialNo = chequeSerialNo;
 	}
+	@NotNull
 	public String getChequeCurrency() {
 		return chequeCurrency;
 	}

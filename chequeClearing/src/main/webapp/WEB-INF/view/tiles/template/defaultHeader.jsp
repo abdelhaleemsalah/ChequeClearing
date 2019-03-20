@@ -9,6 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="./../resources/css/styles.css" type="text/css" rel="stylesheet"/>
 <link href="./../resources/css/styles_dashboard.css" type="text/css" rel="stylesheet"/>
+ <script type="text/javascript" src="<c:url value="./../resources/spring/Spring.js" />"></script>
+  <!--  <script type="text/javascript" src="<c:url value="./../resources/spring/Spring-Dojo.js" />"></script>
+     <script type="text/javascript" src="<c:url value="./../resources/dojo/dojo.js" />"></script>-->  
 
 <title>Insert title here</title>
 </head>

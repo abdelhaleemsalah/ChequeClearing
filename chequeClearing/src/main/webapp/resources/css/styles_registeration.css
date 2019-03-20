@@ -531,3 +531,13 @@ body {
   color:#000000;
   text-align:left;
 }
+
+.error
+{ 
+	background: #FBE3E4; color: #8a1f11; border-color: #FBC2C4; 
+}
+.error a
+{ 
+	color: #8a1f11; 
+}
+

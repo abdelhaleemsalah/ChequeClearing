@@ -64,7 +64,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/").setCacheControl(CacheControl.noCache());
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/","/", "classpath:/META-INF/web-resources/").setCacheControl(CacheControl.noCache());
     }
     @Bean
     public LocaleResolver localeResolver(){

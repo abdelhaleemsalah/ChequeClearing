@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 
 <head>
@@ -22,7 +23,16 @@
    		<spring:message code="search.submit" var="searchSubmit"/>
   	
     		<!-- For login portalUser -->
-		
+		<spring:hasBindErrors name="formBean">
+			<div class="error">
+				<spring:bind path="formBean.*">
+					<c:forEach items="${status.errorMessages}" var="error">
+						<span><c:out value="${error}"/></span><br>
+					</c:forEach>
+				</spring:bind>
+			</div>
+		</spring:hasBindErrors>
+			
 		<form:form id="hello" action=" ${flowExecutionUrl}"  method="post" modelAttribute="formBean" >
 		
 		
@@ -107,8 +117,11 @@
       <!-- Unnamed (Rectangle) -->
       <div id="u16" class="ax_default button" title="${continueRegisterationTitle}">
         <div id="u16_text" class="text ">
-			<input id="requestReaderSubmit"  name="_eventId_Submit" type="submit" value="${saveSubmit}" class="u16_div" />
-
+			<input id="submit"  name="_eventId_Submit" type="submit" value="${saveSubmit}" class="u16_div" />
+<script type="text/javascript">
+						Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'submit', event:'onclick'}));
+						Spring.addDecoration(new Spring.AjaxEventDecoration({elementId:'submit',event:'onclick',formId:'formBean'}));
+					</script>
       
         
        <!-- 
@@ -119,6 +132,11 @@
       
       </div>  
       </div>
+      
+      
+      
+      
+      		
 
       <!-- Unnamed (Rectangle) -->
       <div id="u17" class="ax_default label">
@@ -132,6 +150,12 @@
       <spring:message code="customerName.title" var="customerNameTitle"/>
       <div id="u18" class="ax_default text_field" >
       	<form:input path="customerName" id="u18_input" type="text" value="" title="${customerNameTitle}"/>
+      	<script type="text/javascript">
+							Spring.addDecoration(new Spring.ElementDecoration({
+								elementId : "customerName",
+								widgetType : "dijit.form.ValidationTextBox",
+								widgetAttrs : { required : true }}));
+		</script>
       </div>
 
       <!-- Unnamed (Rectangle) -->
