@@ -138,7 +138,7 @@
       <div id="u49" class="ax_default heading_3">
         <div id="u49_div" class=""></div>
         <div id="u49_text" class="text ">
-          <p style="font-size:20px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;color:#003366;">&nbsp;<spring:message code="chequeIsSavedSuccefully.message"/></span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;font-size:25px;"> </span></p>
+          <p style="font-size:20px;"><span style="font-family:'Arial Italic', 'Arial';font-weight:400;font-style:italic;color:#003366;">&nbsp;<spring:message code="chequeIsSavedSuccessfully.message"/></span><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-style:normal;font-size:25px;"> </span></p>
         </div>
       </div>
 

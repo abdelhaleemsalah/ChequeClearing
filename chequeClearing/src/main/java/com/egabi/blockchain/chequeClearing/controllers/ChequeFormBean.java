@@ -22,7 +22,8 @@ public class ChequeFormBean  implements Serializable
 	private String customerName ;
 	private String paytoUsername ;
 	private long branchCode ;
-	private String bankId ;
+	private String fromBankId ;
+	private String toBankId ;
 	private Integer chequeSerialNo ;
 	private String chequeCurrency ;
 	private String pageName;
@@ -88,12 +89,7 @@ public class ChequeFormBean  implements Serializable
 	public void setBranchCode(long branchCode) {
 		this.branchCode = branchCode;
 	}
-	public String getBankId() {
-		return bankId;
-	}
-	public void setBankId(String bankId) {
-		this.bankId = bankId;
-	}
+
 	public Integer getChequeSerialNo() {
 		return chequeSerialNo;
 	}
@@ -154,6 +150,18 @@ public class ChequeFormBean  implements Serializable
 	}
 	public void setChequeImageName(String chequeImageName) {
 		this.chequeImageName = chequeImageName;
+	}
+	public String getFromBankId() {
+		return fromBankId;
+	}
+	public void setFromBankId(String fromBankId) {
+		this.fromBankId = fromBankId;
+	}
+	public String getToBankId() {
+		return toBankId;
+	}
+	public void setToBankId(String toBankId) {
+		this.toBankId = toBankId;
 	}
 
 	}

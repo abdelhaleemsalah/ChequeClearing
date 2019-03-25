@@ -3,33 +3,45 @@ package com.egabi.blockchain.chequeClearing.services;
 import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 import static javax.ws.rs.core.Response.Status.CREATED;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
+import java.util.jar.JarInputStream;
 import java.util.stream.Stream;
 
 import javax.ws.rs.core.Response;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 
 import com.egabi.blockchain.chequeClearing.controllers.ChequeFormBean;
 import com.github.manosbatsis.corbeans.spring.boot.corda.CordaNodeServiceImpl;
 import com.github.manosbatsis.corbeans.spring.boot.corda.util.NodeRpcConnection;
 import com.template.flow.ChequeBookRegisterationFlow;
+import com.template.flow.ChequeSubmitFlow;
 import com.template.schema.IOUSchemaV1;
 import com.template.state.ChequeBookState;
-
+import com.template.state.ChequeState;
 import net.corda.core.contracts.StateAndRef;
 import net.corda.core.contracts.UniqueIdentifier;
+import net.corda.core.crypto.SecureHash;
 import net.corda.core.identity.Party;
 import net.corda.core.messaging.CordaRPCOps;
 import net.corda.core.messaging.FlowHandle;
 import net.corda.core.node.services.Vault;
 import net.corda.core.node.services.vault.Builder;
+import net.corda.core.node.services.vault.ColumnPredicate;
 import net.corda.core.node.services.vault.CriteriaExpression;
 import net.corda.core.node.services.vault.QueryCriteria;
 import net.corda.core.transactions.SignedTransaction;
 
 public class CordaCustomNodeServiceImpl extends CordaNodeServiceImpl {
 
+	@Autowired
+	ResourceLoader resourceLoader;
 		public CordaCustomNodeServiceImpl(NodeRpcConnection nodeRpcConnection){
 			super(nodeRpcConnection);
 		}
@@ -62,12 +74,17 @@ public class CordaCustomNodeServiceImpl extends CordaNodeServiceImpl {
 			    	{
 			    		if(chequeBook.getState().getData().getChequeSerialNofrom()<=serialno &&chequeBook.getState().getData().getChequeSerialNoTo()>=serialno  )
 			    		{
+			    		
+
 			    			singleChequeFormBean.setChequeSerialNo(serialno);
 					    	singleChequeFormBean.setCustomerName(chequeBook.getState().getData().getCustomerName());
 					    	singleChequeFormBean.setAccountNumber(String.valueOf(chequeBook.getState().getData().getAccountNumber()));
 					    	singleChequeFormBean.setChequeCurrency(chequeBook.getState().getData().getChequeCurrency());
-					    	singleChequeFormBean.setBankId(String.valueOf(chequeBook.getState().getData().getBankId()));
+					    	singleChequeFormBean.setFromBankId(String.valueOf(chequeBook.getState().getData().getBankId()));
 					    	singleChequeFormBean.setBranchCode(chequeBook.getState().getData().getBranchCode());
+					    	singleChequeFormBean.setChequeSerialNoFrom(Integer.parseInt(String.valueOf(chequeBook.getState().getData().getChequeSerialNofrom())));
+					    	singleChequeFormBean.setChequeSerialNoTo(Integer.parseInt(String.valueOf(chequeBook.getState().getData().getChequeSerialNoTo())));
+					    	singleChequeFormBean.setCustomerId(Integer.parseInt(String.valueOf(chequeBook.getState().getData().getCustomerId())));
 					    	//model.addAttribute("formBean",singleChequeFormBean);
 			    		}
 			    	}
@@ -101,7 +118,7 @@ public class CordaCustomNodeServiceImpl extends CordaNodeServiceImpl {
 			   
 			   
 			   ChequeBookState state=new ChequeBookState(myIdentity,cbeIdentity,formBean.getChequeSerialNoFrom(),formBean.getChequeSerialNoTo(),formBean.getAccountNumber(),
-					   formBean.getCustomerId(),formBean.getCustomerName(),formBean.getBranchCode(),formBean.getBankId(),formBean.getChequeCurrency(),formBean.getChequeSerialNo(),new UniqueIdentifier());
+					   formBean.getCustomerId(),formBean.getCustomerName(),formBean.getBranchCode(),registerBankId,formBean.getChequeCurrency(),formBean.getChequeSerialNo(),new UniqueIdentifier());
 			   Response Responsestatus=null;
 		        try {
 		            final FlowHandle<SignedTransaction> flowHandle = proxy.startFlowDynamic(
@@ -117,4 +134,66 @@ public class CordaCustomNodeServiceImpl extends CordaNodeServiceImpl {
 		        }
 	    	
 	    	return true;}
+	
+
+public void submitCheque(ChequeFormBean formBean, InputStream fileStream,String toBank)
+{
+	InputStream input = null;
+	Properties prop = new Properties();
+	String propBankId = "";
+	try {
+		input = resourceLoader.getResource("classpath:bankconfig.properties").getInputStream();
+		prop.load(input);
+		System.out.println("prop get bank id: " + prop.getProperty("mybank"));
+		propBankId = prop.getProperty("mybank");
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
+
+	CordaRPCOps proxy= this.getNodeRpcConnection().getProxy();	
+	   Set<Party> parties= proxy.partiesFromName(propBankId,  true);
+	  Set<Party> toOutOfBeanParty= proxy.partiesFromName(toBank,  true);
+	  Set<Party> toParty= proxy.partiesFromName(formBean.getToBankId(),  true);
+	   final Party myIdentity = parties.iterator().next();
+	   final Party toOutOfBeanIdentity = toOutOfBeanParty.iterator().next();
+	   final Party toIdentity = toParty.iterator().next();
+	   
+//	   ColumnPredicate<java.lang.String> uploaderCondition ;
+//	   ColumnPredicate<java.lang.String> filenameCondition;
+	   
+ // proxy.queryAttachments(AttachmentsQueryCriteria(uploaderCondition,  filenameCondition) );
+	   JarInputStream stream=null;
+	   try {
+		 stream=new JarInputStream(fileStream);
+	} catch (IOException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+	   
+	SecureHash  hash=proxy.uploadAttachment(fileStream);
+	
+
+	ChequeState state=new ChequeState(myIdentity,toIdentity,Long.parseLong(formBean.getChequeSerialNo().toString()),formBean.getPaytoUsername(),formBean.getPaytoAccountNumber(),formBean.getToBankId(),
+			formBean.getChequeAmount().longValue(),formBean.getChequeDueDate(),formBean.getChequeCurrency(),formBean.getAccountNumber(),formBean.getCustomerName(),propBankId,new UniqueIdentifier());
+	  Response Responsestatus=null;
+	  
+        try {
+     	 
+            final FlowHandle<SignedTransaction> flowHandle = proxy.startTrackedFlowDynamic(
+            		ChequeSubmitFlow.Initiator.class,
+            		state, toOutOfBeanIdentity,hash);
+
+            final SignedTransaction result = flowHandle.getReturnValue().get();
+            final String msg = String.format("Transaction id %s committed to ledger.\n%s",
+                    result.getId(), result.getTx().getOutputStates().get(0));
+            Responsestatus=Response.status(CREATED).entity(msg).build();
+        } catch (Exception e) {
+        	Responsestatus= Response.status(BAD_REQUEST).entity(e.getMessage()).build();
+        }
+
+        
+        
+        
+	}
+}

@@ -134,7 +134,7 @@
       <div id="u51" class="ax_default label">
         <div id="u51_div" class=""></div>
         <div id="u51_text" class="text ">
-          <p>${formBean.bankId}</p>
+          <p>${formBean.toBankId}</p>
         </div>
       </div>
 

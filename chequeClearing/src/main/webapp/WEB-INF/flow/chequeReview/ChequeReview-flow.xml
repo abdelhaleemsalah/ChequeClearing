@@ -25,7 +25,7 @@
 	   		<evaluate expression="homeController.rejectCheque(formBean)" />
 	   </transition>
 	   <transition on="Submit" to="submissionSummary"  >
-	   		<evaluate expression="homeController.submitCheque(formBean)" />
+	   		<evaluate expression="homeController.submitCheque(formBean,files)" />
 	   </transition>
    </view-state>
    

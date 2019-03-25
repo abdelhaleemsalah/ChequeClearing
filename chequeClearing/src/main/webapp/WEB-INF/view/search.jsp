@@ -69,7 +69,7 @@
             <spring:message code="bankId.title" var="bankIdTitle"/>
        <!-- Unnamed (Droplist) -->
       <div id="u10" class="ax_default droplist" title="${bankId.title}">
-      <form:select id="u10_input" title="${bankId.title}" path="bankId">
+      <form:select id="u10_input" title="${bankId.title}" path="fromBankId">
            <option value="HSBC">HSBC</option>
           <option value="CIB">CIB</option>
           <option value="MISR">MISR</option>

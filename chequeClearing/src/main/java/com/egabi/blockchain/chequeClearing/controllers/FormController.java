@@ -94,7 +94,7 @@ public class FormController {
 
 		CordaCustomNodeServiceImpl PartyA = services.get(propBankId + "NodeService");
 
-		PartyA.registerChequeBook(formBean, formBean.getBankId());
+		PartyA.registerChequeBook(formBean, formBean.getFromBankId());
 
 		returnPage = "RegConfirmation";
 
