@@ -239,6 +239,12 @@ public class HomeController {
 		return new ModelAndView("ChequeDetailsSearch", "formBean", new ChequeFormBean());
 	}
 
+	@RequestMapping(value = "/{username}/submittedChequesSearch", method = RequestMethod.GET)
+	public ModelAndView displaySubmittedChequesSearch(@PathVariable("username") String username, Model model) {
+		model.addAttribute("user", username);
+		return new ModelAndView("submittedChequesSearch", "formBean", new ChequeFormBean());
+	}
+	
 	@RequestMapping(value = "/{username}/chequeSearchReport", method = RequestMethod.GET)
 	public ModelAndView displayChequeReport(@PathVariable("username") String username, Model model) {
 		model.addAttribute("user", username);
@@ -276,6 +282,39 @@ public class HomeController {
 		mv.addAttribute("user", username);
 		return new ModelAndView("chequeSearchReportResult", "formBean", new ChequeFormBean());
 	}
+	
+	@RequestMapping(value = "/{username}/submittedChequesSearchResult", method = RequestMethod.POST)
+	public ModelAndView displaySubmittedChequesSearchResult(@PathVariable("username") String username,
+			@RequestParam("chequeDueDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date chequeDueDate,
+			ModelMap model, Model mv) throws NoSuchFieldException, SecurityException {
+		ArrayList<ChequeDetail> cheques = new ArrayList<>();
+		PortalUser portalUser = userRepository.findPortalUserByUsername(username);
+		System.out.println("submittedChequesSearchResult Page: " + portalUser.getUserId());
+
+		/*if (chequeSerialNo != null && chequeSerialNo != 0) {
+			System.out.println("Cheque SR no: " + chequeSerialNo);
+			System.out.println("Cheque staus: " + chequeStatus);
+
+			if (!chequeStatus.equals("SELECT")) {
+				// status is not null
+				cheques = ChequeDetailsSavingService.findOneWithSRnoAndStatusAndUserId(chequeSerialNo, chequeStatus,
+						portalUser.getUserId());
+			} else {
+
+				// status is null
+				cheques = ChequeDetailsSavingService.findOneWithSRnoAndUserId(chequeSerialNo, portalUser.getUserId());
+			}
+			for (int i = 0; i < cheques.size(); i++) {
+				System.out.println("cheque no:" + i + " username: " + cheques.get(i).getPayToUsername());
+			}
+		} else {
+			cheques = ChequeDetailsSavingService.findOneWithStatusAndUserId(chequeStatus, portalUser.getUserId());
+		}
+		mv.addAttribute("retrievedCheques", cheques);
+		mv.addAttribute("user", username);*/
+		return new ModelAndView("submittedChequesSearchResult", "formBean", new ChequeFormBean());
+	}
+
 
 	@RequestMapping(value = "/{username}/chequeSearchReportResultDetails", method = RequestMethod.GET)
 	public ModelAndView displayChequeSearchReportResultDetails(@PathVariable("username") String username,

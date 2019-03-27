@@ -63,6 +63,12 @@
 				<input id="requestReaderSubmit" type="submit" class="tablabel" value="Bank Users Management" />				
 		  </form>
   	</sec:authorize>
+  	
+  	<sec:authorize access="hasRole('ROLE_ADMIN')" >
+		  <form id="searchForm" name="tformest"  action="<c:url value="/${username}/submittedChequesSearch" />"  method="get">
+				<input id="requestReaderSubmit" type="submit" class="tablabel" value="Review Submitted Cheques" />				
+		  </form>
+  	</sec:authorize>
   
 </div>
 	

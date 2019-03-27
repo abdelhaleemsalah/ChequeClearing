@@ -111,6 +111,14 @@
        <put-attribute name="title" value="userCreationSummary" />  
        <put-attribute name="body" value="/WEB-INF/view/userCreationSummary.jsp" />  
    </definition>
+   <definition name="submittedChequesSearch" extends="base-definition">  
+       <put-attribute name="title" value="submittedChequesSearch" />  
+       <put-attribute name="body" value="/WEB-INF/view/submittedChequesSearch.jsp" />  
+   </definition>
+   <definition name="submittedChequesSearchResult" extends="base-definition">  
+       <put-attribute name="title" value="submittedChequesSearchResult" />  
+       <put-attribute name="body" value="/WEB-INF/view/submittedChequesSearchResult.jsp" />  
+   </definition>
    
  
 </tiles-definitions>
