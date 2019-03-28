@@ -71,9 +71,9 @@ public class ChequeDetailsSavingServiceImpl implements ChequeDetailsSavingServic
 		return cheque.get();
 	}
 	@Override
-	public void setUserInfoById(String status, long chequeSrNo) {
+	public void setChequeInfoById(String status, Date chequeModificationDate, long chequeSrNo) {
 		// TODO Auto-generated method stub
-		chequeRepo.setUserInfoById(status, chequeSrNo);
+		chequeRepo.setChequeInfoById(status, chequeModificationDate, chequeSrNo);
 	}
 	@Override
 	public void updateChequeById(Date chequeDueDate,long chequeSrNo,Double chequeAmount,

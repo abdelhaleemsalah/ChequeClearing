@@ -21,7 +21,7 @@ public interface ChequeDetailsSavingService
 	public ArrayList<ChequeDetail> findOneWithSRnoAndStatus(long chequeSrNo,String status);
 	public ArrayList<ChequeDetail> findOneWithStatusAndUserId(String status,long userID); 
 	public ChequeDetail findOneChequeWithSRno(long chequeSrNo);
-	public void setUserInfoById(String status ,long chequeSrNo);
+	public void setChequeInfoById(String status ,Date chequeModificationDate, long chequeSrNo);
 	public void updateChequeById(Date chequeDueDate,long chequeSrNo,Double chequeAmount,
 	String isCrossed,String payToUsername,String status,String chequeImageName);
 	

@@ -32,6 +32,12 @@ public class ChequeDetail implements Serializable {
 
 	@Column(name="CHEQUE_DUE_DATE")
 	private Timestamp chequeDueDate;
+	
+	@Column(name="CHEQUE_INITIAL_DATE")
+	private Timestamp chequeInitialDate;
+	
+	@Column(name="CHEQUE_MODIFICATION_DATE")
+	private Timestamp chequeModificationDate;
 
 	@Id
 	@Column(name="CHEQUE_SR_NO")
@@ -173,4 +179,20 @@ public class ChequeDetail implements Serializable {
 		this.chequeImageName = chequeImageName;
 	}
 
+	public Timestamp getChequeInitialDate() {
+		return chequeInitialDate;
+	}
+
+	public void setChequeInitialDate(Timestamp chequeInitialDate) {
+		this.chequeInitialDate = chequeInitialDate;
+	}
+
+	public Timestamp getChequeModificationDate() {
+		return chequeModificationDate;
+	}
+
+	public void setChequeModificationDate(Timestamp chequeModificationDate) {
+		this.chequeModificationDate = chequeModificationDate;
+	}
+	
 }

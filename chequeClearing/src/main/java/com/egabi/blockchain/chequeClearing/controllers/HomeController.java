@@ -521,7 +521,8 @@ public class HomeController {
 	@RequestMapping(value = "/{username}/approvalSummary", method = RequestMethod.POST)
 	public ModelAndView displayApprovalSummary(@PathVariable("username") String username,
 			@RequestParam("chequeSerialNo") long chequeSerialNo, Model model)
-			throws NoSuchFieldException, SecurityException {
+			throws NoSuchFieldException, SecurityException 
+	{
 		model.addAttribute("user", username);
 		return new ModelAndView("approvalSummary", "formBean", new ChequeFormBean());
 	}
@@ -609,6 +610,9 @@ public class HomeController {
 		submittedCheque.setStatus("PENDING REVIEW");
 		submittedCheque.setUserID(portalUser);
 		submittedCheque.setChequeImageName(file.getOriginalFilename());
+		submittedCheque.setChequeInitialDate(new Timestamp(new Date().getTime()));
+		submittedCheque.setChequeModificationDate(new Timestamp(new Date().getTime()));
+		
 		ChequeDetailsSavingService.saveCheque(submittedCheque);
 
 		storageService.store(file, username);
@@ -618,12 +622,12 @@ public class HomeController {
 
 	public void approveCheque(ChequeFormBean formBean) {
 		System.out.println("Cheque Approved SR no: " + formBean.getChequeSerialNo());
-		ChequeDetailsSavingService.setUserInfoById("REVIEW APPROVED", formBean.getChequeSerialNo());
+		ChequeDetailsSavingService.setChequeInfoById("REVIEW APPROVED", new Timestamp(new Date().getTime()), formBean.getChequeSerialNo());
 	}
 
 	public void rejectCheque(ChequeFormBean formBean) {
 		System.out.println("Cheque Rejected SR no: " + formBean.getChequeSerialNo());
-		ChequeDetailsSavingService.setUserInfoById("REVIEW REJECTED", formBean.getChequeSerialNo());
+		ChequeDetailsSavingService.setChequeInfoById("REVIEW REJECTED", new Timestamp(new Date().getTime()), formBean.getChequeSerialNo());
 	}
 
 

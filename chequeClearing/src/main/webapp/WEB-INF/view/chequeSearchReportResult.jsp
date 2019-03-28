@@ -26,6 +26,7 @@
 		    <th class="th">Cheque Owner Name</th>
 		    <th class="th">Cheque Amount</th>
 		    <th class="th">Cheque Status</th>
+		    <th class="th">Cheque Modifying Date</th>
 		  </tr>
 		  <c:forEach items="${retrievedCheques}" var="ChequeForm">
 		  <tr>
@@ -35,6 +36,7 @@
 		    <td class="td">${ChequeForm.fromUsername}</td>
 		   	<td class="td">${ChequeForm.chequeAmount}</td>
 		   	<td class="td">${ChequeForm.status}</td>
+		   	<td class="td">${ChequeForm.chequeModificationDate}</td>
 		  </tr>
 		  </c:forEach>
 		</table>

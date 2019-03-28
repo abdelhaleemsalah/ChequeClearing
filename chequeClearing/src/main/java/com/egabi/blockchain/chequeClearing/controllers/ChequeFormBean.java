@@ -36,6 +36,25 @@ public class ChequeFormBean  implements Serializable
 	private String chequeStatus;
 	private String chequeImageName;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date chequeInitialDate;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date chequeModificationDate;
+	
+	public Date getChequeInitialDate() {
+		return chequeInitialDate;
+	}
+	public void setChequeInitialDate(Date chequeInitialDate) {
+		this.chequeInitialDate = chequeInitialDate;
+	}
+	public Date getChequeModificationDate() {
+		return chequeModificationDate;
+	}
+	public void setChequeModificationDate(Date chequeModificationDate) {
+		this.chequeModificationDate = chequeModificationDate;
+	}
+	
 	public ChequeFormBean ()
 	{       
 		this.chequeSerialNo=0;
