@@ -13,7 +13,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class ChequeFormBean  implements Serializable
 {
-	
 	private Integer chequeSerialNoFrom ;
 	private Integer chequeSerialNoTo ;
 	private String accountNumber ;
@@ -93,7 +92,7 @@ public class ChequeFormBean  implements Serializable
 	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
 	}
-	@NotEmpty(message= "Customer name must be between 10 and 200 characters")
+	@NotEmpty(message= "Customer name must be not empty")
 	@Size(min = 10, max = 200, message= "Customer name must be between 10 and 200 characters")
 	public String getCustomerName() {
 		return customerName;

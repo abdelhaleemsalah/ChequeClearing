@@ -576,19 +576,29 @@ public class HomeController {
 		InputStream input = null;
 		Properties prop = new Properties();
 		String propBankId = "";
+		String errorMessage="";
 		try {
 			input = resourceLoader.getResource("classpath:bankconfig.properties").getInputStream();
 			prop.load(input);
 			System.out.println("prop get bank id: " + prop.getProperty("mybank"));
 			propBankId = prop.getProperty("mybank");
+			
+			input = resourceLoader.getResource("classpath:messages.properties").getInputStream();
+			prop.load(input);
+			System.out.println("prop get error message: " + prop.getProperty("selectedBankIsInvalid.message"));
+			errorMessage = prop.getProperty("selectedBankIsInvalid.message");
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// if (bankid.equalsIgnoreCase(propBankId))
-		// {
-		// return null;
-		// }
+		if (bankid.equalsIgnoreCase(propBankId))
+		{
+			System.out.println("Error");
+			model.addAttribute("error",errorMessage);
+			return new ModelAndView("search", "formBean", singleChequeFormBean);
+		}
+			
 		model.addAttribute("user", username);
 
 		CordaCustomNodeServiceImpl PartyA = services.get(bankid + "NodeService");

@@ -21,10 +21,17 @@
 <body>
 	<div id="base" class="">
 
+
 	<c:url var="addUrl" value="/chequeClearing/SearchResult"/>
 	  <form:form id="searchForm" name="tformestss"   action="${pageContext.request.contextPath}/${user}/SearchResult"    method="post"  modelAttribute="formBean" >
 	  	<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
+		
+			
+			<c:if test="${not empty error}">
+				<img src="./../resources/images/error_icon.png" class="img"/>
+		   		<p class="u77_text">${error}</p>
+			</c:if>
 		
 		   <!-- Unnamed (Rectangle) -->
 	      <div id="u11" class="ax_default label">

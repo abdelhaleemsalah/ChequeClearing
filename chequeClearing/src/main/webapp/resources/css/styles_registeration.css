@@ -534,10 +534,25 @@ body {
 
 .error
 { 
-	background: #FBE3E4; color: #8a1f11; border-color: #FBC2C4; 
+	border-width:0px;
+	position:absolute;
+	left:100px;
+	top:120px;
+	width:600px;
+	white-space:nowrap;
+    font-family:'Century Gothic Bold', 'Century Gothic Regular', 'Century Gothic';
+    font-weight:700;
+    font-style:normal;
+    font-size:16px;
+    color: #D8000C;
+    background-color: #FFD2D2;
 }
 .error a
 { 
 	color: #8a1f11; 
 }
-
+.img 
+{
+  width: 2%;
+  height: auto;
+}

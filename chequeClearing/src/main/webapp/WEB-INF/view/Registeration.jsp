@@ -27,6 +27,7 @@
 			<div class="error">
 				<spring:bind path="formBean.*">
 					<c:forEach items="${status.errorMessages}" var="error">
+						<img src="./../resources/images/error_icon.png" class="img"/>
 						<span><c:out value="${error}"/></span><br>
 					</c:forEach>
 				</spring:bind>
@@ -118,10 +119,10 @@
       <div id="u16" class="ax_default button" title="${continueRegisterationTitle}">
         <div id="u16_text" class="text ">
 			<input id="submit"  name="_eventId_Submit" type="submit" value="${saveSubmit}" class="u16_div" />
-<script type="text/javascript">
+					<!-- <script type="text/javascript">
 						Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'submit', event:'onclick'}));
 						Spring.addDecoration(new Spring.AjaxEventDecoration({elementId:'submit',event:'onclick',formId:'formBean'}));
-					</script>
+					</script> -->
       
         
        <!-- 
@@ -150,12 +151,12 @@
       <spring:message code="customerName.title" var="customerNameTitle"/>
       <div id="u18" class="ax_default text_field" >
       	<form:input path="customerName" id="u18_input" type="text" value="" title="${customerNameTitle}"/>
-      	<script type="text/javascript">
+      	<!-- <script type="text/javascript">
 							Spring.addDecoration(new Spring.ElementDecoration({
 								elementId : "customerName",
 								widgetType : "dijit.form.ValidationTextBox",
 								widgetAttrs : { required : true }}));
-		</script>
+		</script> -->
       </div>
 
       <!-- Unnamed (Rectangle) -->

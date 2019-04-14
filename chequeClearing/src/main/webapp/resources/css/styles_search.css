@@ -153,6 +153,21 @@ body {
   color:#000000;
   text-align:left;
 }
+.u77_text 
+{
+  border-width:0px;
+  position:absolute;
+  left:100px;
+  top:100px;
+  width:600px;
+  white-space:nowrap;
+  font-family:'Century Gothic Bold', 'Century Gothic Regular', 'Century Gothic';
+  font-weight:700;
+  font-style:normal;
+  font-size:16px;
+  color: #D8000C;
+  background-color: #FFD2D2;
+}
 #u11 {
   border-width:0px;
   position:absolute;
@@ -305,4 +320,11 @@ body {
   text-decoration:none;
   color:#000000;
   text-align:left;
+}
+.img 
+{
+  width: 5%;
+  height: auto;
+  padding-left: 80px;
+  padding-top: 103px;
 }
