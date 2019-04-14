@@ -6,6 +6,8 @@ import static javax.ws.rs.core.Response.Status.CREATED;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -22,6 +24,7 @@ import com.github.manosbatsis.corbeans.spring.boot.corda.CordaNodeServiceImpl;
 import com.github.manosbatsis.corbeans.spring.boot.corda.util.NodeRpcConnection;
 import com.template.flow.ChequeBookRegisterationFlow;
 import com.template.flow.ChequeSubmitFlow;
+import com.template.schema.ChequeSchema;
 import com.template.schema.IOUSchemaV1;
 import com.template.state.ChequeBookState;
 import com.template.state.ChequeState;
@@ -37,7 +40,7 @@ import net.corda.core.node.services.vault.ColumnPredicate;
 import net.corda.core.node.services.vault.CriteriaExpression;
 import net.corda.core.node.services.vault.QueryCriteria;
 import net.corda.core.transactions.SignedTransaction;
-
+import  net.corda.core.internal.InputStreamAndHash;
 public class CordaCustomNodeServiceImpl extends CordaNodeServiceImpl {
 
 	@Autowired
@@ -49,7 +52,32 @@ public class CordaCustomNodeServiceImpl extends CordaNodeServiceImpl {
 	     * @throws SecurityException 
 	     * @throws NoSuchFieldException */
 		
+		// 
 		
+		public ArrayList<ChequeFormBean> retreieveSubmittedCheque(String searchBankId , Date chequeDueDate ) throws NoSuchFieldException, SecurityException
+		{
+			ChequeFormBean singleChequeFormBean=new ChequeFormBean();
+			   CordaRPCOps proxy= this.getNodeRpcConnection().getProxy();	
+			   Set<Party> parties= proxy.partiesFromName(searchBankId,  true);
+			    final Party bankIdentity = parties.iterator().next();
+			    
+			    
+			    QueryCriteria generalCriteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.ALL);
+			    Field toBank = ChequeSchema.PersistentIOU.class.getDeclaredField("toBank");
+		        CriteriaExpression toBankIndex = Builder.equal(toBank, searchBankId);
+		        QueryCriteria toBankCriteria = new QueryCriteria.VaultCustomQueryCriteria(toBankIndex);
+		        QueryCriteria criteria = generalCriteria.and(toBankCriteria);
+		        List<StateAndRef<ChequeState>> results = proxy.vaultQueryByCriteria(criteria,ChequeState.class).getStates();
+		        
+//			    List<StateAndRef<ChequeState>> statesAndRefs=proxy.vaultQuery(ChequeState.class).getStates().stream()
+//			    		.filter(it -> it.getState().getData().getChequeDueDate().equals(chequeDueDate));
+			    for(StateAndRef<ChequeState> chequeBook:results)
+		        {
+			    	System.out.println("chque amount " +chequeBook.getState().getData().getChequeAmount());
+		        }
+			
+			return null;
+		}
 		public ChequeFormBean retrieveChequeBook(String searchBankId,long accNo,Integer serialno ) throws NoSuchFieldException, SecurityException
 		{
 			ChequeFormBean singleChequeFormBean=new ChequeFormBean();
@@ -57,8 +85,8 @@ public class CordaCustomNodeServiceImpl extends CordaNodeServiceImpl {
 			   Set<Party> parties= proxy.partiesFromName(searchBankId,  true);
 			    final Party bankIdentity = parties.iterator().next();
 			   
-			    Stream<StateAndRef<ChequeBookState>> statesAndRefs=proxy.vaultQuery(ChequeBookState.class).getStates().stream()
-	           .filter(it -> it.getState().getData().getRegisterBank().equals(bankIdentity));
+//			    Stream<StateAndRef<ChequeBookState>> statesAndRefs=proxy.vaultQuery(ChequeBookState.class).getStates().stream()
+//	           .filter(it -> it.getState().getData().getRegisterBank().equals(bankIdentity));
 			   
 			    
 			    QueryCriteria generalCriteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.ALL);
@@ -164,6 +192,9 @@ public void submitCheque(ChequeFormBean formBean, InputStream fileStream,String 
 	   
  // proxy.queryAttachments(AttachmentsQueryCriteria(uploaderCondition,  filenameCondition) );
 	   JarInputStream stream=null;
+	   
+	   
+//	  InputStreamAndHash.class.newInstance().c
 	   try {
 		 stream=new JarInputStream(fileStream);
 	} catch (IOException e1) {
@@ -171,7 +202,7 @@ public void submitCheque(ChequeFormBean formBean, InputStream fileStream,String 
 		e1.printStackTrace();
 	}
 	   
-	SecureHash  hash=proxy.uploadAttachment(fileStream);
+//	SecureHash  hash=proxy.uploadAttachment(fileStream);
 	
 
 	ChequeState state=new ChequeState(myIdentity,toIdentity,Long.parseLong(formBean.getChequeSerialNo().toString()),formBean.getPaytoUsername(),formBean.getPaytoAccountNumber(),formBean.getToBankId(),
@@ -180,9 +211,13 @@ public void submitCheque(ChequeFormBean formBean, InputStream fileStream,String 
 	  
         try {
      	 
+//            final FlowHandle<SignedTransaction> flowHandle = proxy.startTrackedFlowDynamic(
+//            		ChequeSubmitFlow.Initiator.class,
+//            		state, toOutOfBeanIdentity,hash);
+//            
             final FlowHandle<SignedTransaction> flowHandle = proxy.startTrackedFlowDynamic(
             		ChequeSubmitFlow.Initiator.class,
-            		state, toOutOfBeanIdentity,hash);
+            		state, toOutOfBeanIdentity);
 
             final SignedTransaction result = flowHandle.getReturnValue().get();
             final String msg = String.format("Transaction id %s committed to ledger.\n%s",

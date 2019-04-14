@@ -29,7 +29,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
+import java.util.jar.JarOutputStream;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
@@ -291,6 +293,30 @@ public class HomeController {
 		PortalUser portalUser = userRepository.findPortalUserByUsername(username);
 		System.out.println("submittedChequesSearchResult Page: " + portalUser.getUserId());
 
+		
+		InputStream input = null;
+		Properties prop = new Properties();
+		String propBankId = "";
+		try {
+			input = resourceLoader.getResource("classpath:bankconfig.properties").getInputStream();
+			prop.load(input);
+			System.out.println("prop get bank id: " + prop.getProperty("mybank"));
+			propBankId = prop.getProperty("mybank");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// if (bankid.equalsIgnoreCase(propBankId))
+		// {
+		// return null;
+		// }
+		model.addAttribute("user", username);
+
+		CordaCustomNodeServiceImpl PartyA = services.get(propBankId + "NodeService");
+		PartyA.retreieveSubmittedCheque(propBankId, chequeDueDate);
+				
+				
+				
 		/*if (chequeSerialNo != null && chequeSerialNo != 0) {
 			System.out.println("Cheque SR no: " + chequeSerialNo);
 			System.out.println("Cheque staus: " + chequeStatus);
@@ -632,13 +658,13 @@ public class HomeController {
 
 
 
-	public void writeToZipFile(String path, ZipOutputStream zipStream) throws FileNotFoundException, IOException {
+	public void writeToZipFile(String path, JarOutputStream zipStream) throws FileNotFoundException, IOException {
 		System.out.println("Writing file : '" + path + "' to zip file");
 		File aFile = new File(path);
 		//aFile.createNewFile();
-		
+		String filename=getFileName(path);
 		FileInputStream fis = new FileInputStream(aFile);
-		ZipEntry zipEntry = new ZipEntry(path);
+		JarEntry zipEntry = new JarEntry(filename);
 		zipStream.putNextEntry(zipEntry);
 		byte[] bytes = new byte[1024];
 		int length;
@@ -693,12 +719,12 @@ public class HomeController {
     }
 
    // http://localhost:8080/chequeClearing/files/enduser/postman.png
-//    public String getFileName(String path)
-//    {
-//    	int slashindex=path.lastIndexOf("/");
-//    	String filename=path.substring(slashindex,path.length());
-//    	return filename;
-//    }
+    public String getFileName(String path)
+    {
+    	int slashindex=path.lastIndexOf("/");
+    	String filename=path.substring(slashindex+1,path.length());
+    	return filename;
+    }
     public String getDirectoryName(String path)
     {
     	int slashindex=path.lastIndexOf("/");
@@ -745,13 +771,15 @@ public class HomeController {
 
 	
 //String fileURL = "http://jdbc.postgresql.org/download/postgresql-9.2-1002.jdbc4.jar";
-		String saveDir = "E:/Download/test.jar";
-		File f=new File("E:/Download/test.jar");
-		f.createNewFile();
+		//String saveDir = "E:/Download/test.jar";
+		File f=new File("D:/upload-dir2/enduser/test.jar");
+	//	f.createNewFile();
 FileOutputStream foss = new FileOutputStream(f.getPath());
-FileInputStream fileStream = new FileInputStream(f.getPath());
-		ZipOutputStream zipOS = new ZipOutputStream(foss);
+
+		JarOutputStream zipOS = new JarOutputStream(foss);
 		writeToZipFile(file.getURL().getPath(), zipOS);
+		FileInputStream fileStream = new FileInputStream(f.getPath());
+		//zipFiles("test", "D:/upload-dir2/enduser");
 		// Read more:
 		// http://www.java67.com/2016/12/how-to-create-zip-file-in-java-zipentry-example.html#ixzz5jBC0rBz4
 		InputStream inputStream = null;
@@ -773,10 +801,10 @@ FileInputStream fileStream = new FileInputStream(f.getPath());
 		
 		
         BufferedInputStream bis = new BufferedInputStream(fileStream);
-        ZipInputStream zis = new ZipInputStream(bis);
+        ZipInputStream zis = new ZipInputStream(fileStream);
 		
         JarInputStream jarstream=new JarInputStream(fileStream);
-		
+      
 		partyA.submitCheque(formBean, jarstream, "CBE");
 		partyCBE.submitCheque(formBean, jarstream, formBean.getToBankId());
 
@@ -835,4 +863,8 @@ FileInputStream fileStream = new FileInputStream(f.getPath());
 
 		return chequeBean;
 	}
+	
+	
+	
+	
 }
