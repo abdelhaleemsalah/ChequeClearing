@@ -576,8 +576,14 @@ public class HomeController {
 		InputStream input = null;
 		Properties prop = new Properties();
 		String propBankId = "";
-		String errorMessage="";
-		try {
+		String bankIderrorMessage="";
+		String chequeIsNotRegisteredErrorMessage="";
+		String chequeIsAlreadySavedErrorMessage="";
+		
+		model.addAttribute("user", username);
+		
+		try 
+		{
 			input = resourceLoader.getResource("classpath:bankconfig.properties").getInputStream();
 			prop.load(input);
 			System.out.println("prop get bank id: " + prop.getProperty("mybank"));
@@ -586,26 +592,46 @@ public class HomeController {
 			input = resourceLoader.getResource("classpath:messages.properties").getInputStream();
 			prop.load(input);
 			System.out.println("prop get error message: " + prop.getProperty("selectedBankIsInvalid.message"));
-			errorMessage = prop.getProperty("selectedBankIsInvalid.message");
+			bankIderrorMessage = prop.getProperty("selectedBankIsInvalid.message");
+			
+			System.out.println("prop get error message: " + prop.getProperty("chequeIsNotRegistered.message"));
+			chequeIsNotRegisteredErrorMessage = prop.getProperty("chequeIsNotRegistered.message");
+			
+			System.out.println("prop get error message: " + prop.getProperty("chequeIsAlreadySaved.message"));
+			chequeIsAlreadySavedErrorMessage = prop.getProperty("chequeIsAlreadySaved.message");
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		if (bankid.equalsIgnoreCase(propBankId))
 		{
-			System.out.println("Error");
-			model.addAttribute("error",errorMessage);
+			System.out.println("Error , cant search with your bank id");
+			model.addAttribute("error",bankIderrorMessage);
 			return new ModelAndView("search", "formBean", singleChequeFormBean);
 		}
-			
-		model.addAttribute("user", username);
-
-		CordaCustomNodeServiceImpl PartyA = services.get(bankid + "NodeService");
-
-		// PartyA.getNodeRpcConnection().getProxy().u
-		singleChequeFormBean = PartyA.retrieveChequeBook(bankid, accNo, serialno);
-
+		else
+		{
+			CordaCustomNodeServiceImpl PartyA = services.get(bankid + "NodeService");
+			singleChequeFormBean = PartyA.retrieveChequeBook(bankid, accNo, serialno);
+			if(singleChequeFormBean.getCustomerId()==null)
+			{
+				System.out.println("can't found this cheque");
+				model.addAttribute("error",chequeIsNotRegisteredErrorMessage);
+				return new ModelAndView("search", "formBean", singleChequeFormBean);
+			}
+			else
+			{
+				ChequeDetail cheque=ChequeDetailsSavingService.checkIfChequeSaved(serialno, bankid, String.valueOf(accNo));
+				if(cheque!=null)
+				{
+					System.out.println("cheque already saved");
+					model.addAttribute("error",chequeIsAlreadySavedErrorMessage);
+					return new ModelAndView("search", "formBean", chequeIsAlreadySavedErrorMessage);
+				}
+			}
+		}
 		return new ModelAndView("SearchResult", "formBean", singleChequeFormBean);
 	}
 

@@ -106,6 +106,12 @@ public class ChequeDetailsSavingServiceImpl implements ChequeDetailsSavingServic
 		ArrayList<ChequeDetail> cheques= chequeRepo.findOneWithStatusAndUserId(status, userID);
 		return cheques;
 	}
+	@Override
+	public ChequeDetail checkIfChequeSaved(long chequeSrNo, String bankCode, String accountNo) {
+		// TODO Auto-generated method stub
+		ChequeDetail cheque= chequeRepo.checkIfChequeSaved(chequeSrNo,bankCode,accountNo);
+		return cheque;
+	}
 	
 	
 

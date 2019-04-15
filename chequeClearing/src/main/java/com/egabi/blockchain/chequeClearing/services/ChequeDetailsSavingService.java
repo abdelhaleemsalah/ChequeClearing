@@ -24,7 +24,5 @@ public interface ChequeDetailsSavingService
 	public void setChequeInfoById(String status ,Date chequeModificationDate, long chequeSrNo);
 	public void updateChequeById(Date chequeDueDate,long chequeSrNo,Double chequeAmount,
 	String isCrossed,String payToUsername,String status,String chequeImageName);
-	
-	
-	
+	public ChequeDetail checkIfChequeSaved(long chequeSrNo,String bankCode,String accountNo);
 }

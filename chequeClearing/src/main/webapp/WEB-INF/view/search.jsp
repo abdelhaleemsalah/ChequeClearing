@@ -29,8 +29,10 @@
 		
 			
 			<c:if test="${not empty error}">
-				<img src="./../resources/images/error_icon.png" class="img"/>
-		   		<p class="u77_text">${error}</p>
+				<div class="error">
+					<img src="./../resources/images/error_icon.png" class="img"/>
+					<span><c:out value="${error}"/></span><br>
+		   		</div>
 			</c:if>
 		
 		   <!-- Unnamed (Rectangle) -->

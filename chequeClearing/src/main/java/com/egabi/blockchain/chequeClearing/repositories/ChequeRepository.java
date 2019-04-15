@@ -35,7 +35,6 @@ public interface ChequeRepository extends CrudRepository<ChequeDetail,Long> {
 	@Query(value="SELECT sw FROM ChequeDetail sw WHERE sw.status=:status AND sw.userID.userId=:userID order by sw.chequeSrNo ASC", nativeQuery = false)
 	ArrayList<ChequeDetail> findOneWithStatusAndUserId(@Param("status") String status, @Param("userID") long userID); 
 	
-	
 	@Query(value="SELECT sw FROM ChequeDetail sw WHERE sw.chequeDueDate=:chequeDueDate order by sw.chequeSrNo ASC", nativeQuery = false)
 	ArrayList<ChequeDetail> findOneWithDuedate(@Param("chequeDueDate") Date chequeDueDate); 
 	
@@ -50,8 +49,6 @@ public interface ChequeRepository extends CrudRepository<ChequeDetail,Long> {
 	@Query(value="update ChequeDetail c set c.status=:status , c.chequeModificationDate=:chequeModificationDate where c.chequeSrNo=:chequeSrNo", nativeQuery = false)
 	void setChequeInfoById(@Param("status") String status ,@Param("chequeModificationDate") Date chequeModificationDate, @Param("chequeSrNo") long chequeSrNo);
 	
-	
-	
 	@Modifying
 	@Transactional
 	@Query(value="update ChequeDetail c set c.chequeDueDate=:chequeDueDate, c.chequeAmount=:chequeAmount , "
@@ -61,7 +58,8 @@ public interface ChequeRepository extends CrudRepository<ChequeDetail,Long> {
 	long chequeSrNo, @Param("chequeAmount") Double chequeAmount, @Param("isCrossed") String isCrossed,
 	@Param("payToUsername") String payToUsername,@Param("status") String status,@Param("chequeImageName") String chequeImageName);
 	
-	
+	@Query(value="SELECT sw FROM ChequeDetail sw WHERE sw.chequeSrNo=:chequeSrNo AND sw.bankCode=:bankCode AND sw.accountNo=:accountNo", nativeQuery = false)
+	ChequeDetail checkIfChequeSaved(@Param("chequeSrNo") long chequeSrNo, @Param("bankCode") String bankCode, @Param("accountNo") String accountNo);
 }
 
 
