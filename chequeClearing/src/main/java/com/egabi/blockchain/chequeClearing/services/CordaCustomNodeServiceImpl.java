@@ -7,12 +7,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.util.jar.JarInputStream;
 import java.util.stream.Stream;
+import java.time.LocalDate;
 
 import javax.ws.rs.core.Response;
 
@@ -63,7 +65,7 @@ public class CordaCustomNodeServiceImpl extends CordaNodeServiceImpl {
 			    
 			    
 			    QueryCriteria generalCriteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.ALL);
-			    Field toBank = ChequeSchema.PersistentIOU.class.getDeclaredField("toBank");
+			    Field toBank = ChequeSchema.PersistentIOU.class.getDeclaredField("payToUserBankName");
 		        CriteriaExpression toBankIndex = Builder.equal(toBank, searchBankId);
 		        QueryCriteria toBankCriteria = new QueryCriteria.VaultCustomQueryCriteria(toBankIndex);
 		        QueryCriteria criteria = generalCriteria.and(toBankCriteria);
@@ -203,10 +205,16 @@ public void submitCheque(ChequeFormBean formBean, InputStream fileStream,String 
 	}
 	   
 //	SecureHash  hash=proxy.uploadAttachment(fileStream);
-	
+
+		//Creating LocalDate by providing input arguments
+	   Calendar c = Calendar.getInstance(); 
+	   c.setTime(formBean.getChequeDueDate());
+	   
+	   
+		LocalDate dueDate = LocalDate.of(c.get(Calendar.YEAR), c.get(Calendar.MONTH)+1, c.get(Calendar.DAY_OF_MONTH));
 
 	ChequeState state=new ChequeState(myIdentity,toIdentity,Long.parseLong(formBean.getChequeSerialNo().toString()),formBean.getPaytoUsername(),formBean.getPaytoAccountNumber(),formBean.getToBankId(),
-			formBean.getChequeAmount().longValue(),formBean.getChequeDueDate(),formBean.getChequeCurrency(),formBean.getAccountNumber(),formBean.getCustomerName(),propBankId,new UniqueIdentifier());
+			formBean.getChequeAmount().longValue(),dueDate,formBean.getChequeCurrency(),formBean.getAccountNumber(),formBean.getCustomerName(),propBankId,new UniqueIdentifier());
 	  Response Responsestatus=null;
 	  
         try {
