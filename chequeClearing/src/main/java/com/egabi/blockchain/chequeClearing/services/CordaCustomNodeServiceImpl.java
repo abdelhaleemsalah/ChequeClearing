@@ -58,6 +58,7 @@ public class CordaCustomNodeServiceImpl extends CordaNodeServiceImpl {
 		
 		public ArrayList<ChequeFormBean> retreieveSubmittedCheque(String searchBankId , Date chequeDueDate ) throws NoSuchFieldException, SecurityException
 		{
+			ArrayList<ChequeFormBean> result= new ArrayList<ChequeFormBean>();
 			ChequeFormBean singleChequeFormBean=new ChequeFormBean();
 			   CordaRPCOps proxy= this.getNodeRpcConnection().getProxy();	
 			   Set<Party> parties= proxy.partiesFromName(searchBankId,  true);
@@ -66,19 +67,104 @@ public class CordaCustomNodeServiceImpl extends CordaNodeServiceImpl {
 			    
 			    QueryCriteria generalCriteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.ALL);
 			    Field toBank = ChequeSchema.PersistentIOU.class.getDeclaredField("payToUserBankName");
+			    Field dueDate = ChequeSchema.PersistentIOU.class.getDeclaredField("chequeDueDate");
 		        CriteriaExpression toBankIndex = Builder.equal(toBank, searchBankId);
+		        
+		        Calendar c = Calendar.getInstance(); 
+		 	   c.setTime(chequeDueDate);
+		 	   
+		 	   
+		 		LocalDate dueDateLocal = LocalDate.of(c.get(Calendar.YEAR), c.get(Calendar.MONTH)+1, c.get(Calendar.DAY_OF_MONTH));
+		        
+		        
+		        CriteriaExpression dueDateIndex = Builder.equal(dueDate, dueDateLocal);
 		        QueryCriteria toBankCriteria = new QueryCriteria.VaultCustomQueryCriteria(toBankIndex);
-		        QueryCriteria criteria = generalCriteria.and(toBankCriteria);
+		        QueryCriteria dueDateCriteria = new QueryCriteria.VaultCustomQueryCriteria(dueDateIndex);
+		        QueryCriteria criteria = generalCriteria.and(toBankCriteria).and(dueDateCriteria);
+		        
 		        List<StateAndRef<ChequeState>> results = proxy.vaultQueryByCriteria(criteria,ChequeState.class).getStates();
 		        
 //			    List<StateAndRef<ChequeState>> statesAndRefs=proxy.vaultQuery(ChequeState.class).getStates().stream()
 //			    		.filter(it -> it.getState().getData().getChequeDueDate().equals(chequeDueDate));
 			    for(StateAndRef<ChequeState> chequeBook:results)
 		        {
+			    	ChequeFormBean chequeFormBean= new ChequeFormBean();
+			    	if(chequeBook.getState().getData().getFromBank() !=null)
+			    	{
+			    		chequeFormBean.setFromBankId(chequeBook.getState().getData().getFromBank().getName().toString() );
+			    	}
+			    	if(chequeBook.getState().getData().getToBank() !=null)
+			    	{
+			    		chequeFormBean.setToBankId(chequeBook.getState().getData().getToBank().getName().toString() );
+			    	}
+			    	if(chequeBook.getState().getData().getChequeSerialNumber()!=0)
+			    	{
+			    		chequeFormBean.setChequeSerialNo(Integer.parseInt(String.valueOf(chequeBook.getState().getData().getChequeSerialNumber())));
+			    	}
+			    	if(chequeBook.getState().getData().getPayToUserAccount()!=null)
+			    	{
+			    		chequeFormBean.setPaytoAccountNumber(chequeBook.getState().getData().getPayToUserAccount());
+			    	}
+			    	if(chequeBook.getState().getData().getPayToUserName()!=null)
+			    	{
+			    		chequeFormBean.setPaytoUsername(chequeBook.getState().getData().getPayToUserName());
+			    	}
+			    	if(chequeBook.getState().getData().getPayToUserBankName()!=null)
+			    	{
+			    		chequeFormBean.setToBankId(chequeBook.getState().getData().getPayToUserBankName());
+			    	}
+			    	
+			    	if(chequeBook.getState().getData().getChequeAmount()!=0)
+			    	{
+			    		chequeFormBean.setChequeAmount(Double.parseDouble(String.valueOf(chequeBook.getState().getData().getChequeAmount())));
+			    	}
+			    	
+			    	if(chequeBook.getState().getData().getChequeDueDate()!=null)
+			    	{
+			    		int year =chequeBook.getState().getData().getChequeDueDate().getYear();
+			    		int month =chequeBook.getState().getData().getChequeDueDate().getMonthValue();
+			    		int day =chequeBook.getState().getData().getChequeDueDate().getDayOfMonth();
+			    		chequeFormBean.setChequeDueDate(new  Date(year, month, day)      );
+			    	}
+			    	if(chequeBook.getState().getData().getChequeCurrency()!=null)
+			    	{
+			    		chequeFormBean.setChequeCurrency(chequeBook.getState().getData().getChequeCurrency()) ;    
+			    	
+			    	}
+			    	
+			     	if(chequeBook.getState().getData().getChequeCurrency()!=null)
+			    	{
+			    		chequeFormBean.setChequeCurrency(chequeBook.getState().getData().getChequeCurrency()) ;    
+			    	
+			    	}
+			     	if(chequeBook.getState().getData().getChequeOwnerAccount()!=null)
+			    	{
+			    		chequeFormBean.setAccountNumber(chequeBook.getState().getData().getChequeOwnerAccount()) ;    
+			    	
+			    	}
+			     	
+			      	if(chequeBook.getState().getData().getChequeOwnerName()!=null)
+			    	{
+			    		chequeFormBean.setCustomerName(chequeBook.getState().getData().getChequeOwnerName()) ;    
+			    	
+			    	}
+			      	if(chequeBook.getState().getData().getChequeOwnerBankName()!=null)
+			    	{
+			    		chequeFormBean.setFromBankId(chequeBook.getState().getData().getChequeOwnerBankName()) ;    
+			    	
+			    	}
+			      	
+			    	/*
+	
+        @Column(name = "chequeOwnerAccount") private  String chequeOwnerAccount;
+        @Column(name = "chequeOwnerName") private  String chequeOwnerName;
+        @Column(name = "chequeOwnerBankName") private  String chequeOwnerBankName;
+			    	 */
 			    	System.out.println("chque amount " +chequeBook.getState().getData().getChequeAmount());
+			    	result.add(chequeFormBean);
 		        }
 			
-			return null;
+			return result;
 		}
 		public ChequeFormBean retrieveChequeBook(String searchBankId,long accNo,Integer serialno ) throws NoSuchFieldException, SecurityException
 		{

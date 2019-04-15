@@ -313,7 +313,7 @@ public class HomeController {
 		model.addAttribute("user", username);
 
 		CordaCustomNodeServiceImpl PartyA = services.get(propBankId + "NodeService");
-		PartyA.retreieveSubmittedCheque(propBankId, chequeDueDate);
+		ArrayList<ChequeFormBean> result =PartyA.retreieveSubmittedCheque(propBankId, chequeDueDate); 
 				
 				
 				
@@ -338,7 +338,7 @@ public class HomeController {
 		}
 		mv.addAttribute("retrievedCheques", cheques);
 		mv.addAttribute("user", username);*/
-		return new ModelAndView("submittedChequesSearchResult", "formBean", new ChequeFormBean());
+		return new ModelAndView("submittedChequesSearchResult", "retrievedCheques", result); 
 	}
 
 
