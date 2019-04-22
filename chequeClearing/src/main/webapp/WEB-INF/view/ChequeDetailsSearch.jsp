@@ -29,6 +29,14 @@
 	  	<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 		
+		<c:if test="${not empty error}">
+				<div class="error">
+					<img src="./../resources/images/error_icon.png" class="img"/>
+					<span><c:out value="${error}"/></span><br>
+		   		</div>
+		</c:if>
+		
+		
 		   <!-- Unnamed (Rectangle) -->
 	      <div id="u11" class="ax_default label">
 	        <div id="u11_div" class=""></div>
@@ -41,13 +49,13 @@
 	  <spring:message code="chequeSerialNumber.title" var="chequeSerialNumberTitle"/>
 	      <!-- Unnamed (Text Field) -->
 	      <div id="u6" class="ax_default text_field">
-	      	<form:input path="chequeSerialNo" id="u6_input" type="text" value="" title="${chequeSerialNumberTitle}"/> 
+	      		<form:input path="chequeSerialNo" id="u6_input" type="text" value="" title="${chequeSerialNumberTitle}"/> 	
+	      		<!--<form:errors path="chequeSerialNo" cssClass="error"/>-->
 	      </div>
 	      
 	       <!-- Unnamed (Text Field) -->
 	      <div id="u12" class="ax_default text_field" >
 	      	<form:input path="chequeDueDate" id="u16_input" type="date" value="" title="cheque duedate"/>
-	      
 	      </div>
 	
 	      <!-- Unnamed (Rectangle) -->
@@ -90,7 +98,6 @@
         <form id="saveForm" name="tformest"  action="<c:url value="/ChequeDetailsSearchResult" />"  method="post"  >
 				<input id="u7_button" type="submit" value="${searchSubmit}" class="u0_div" />		
 		</form>
-      
       </div>  
       </div>
 

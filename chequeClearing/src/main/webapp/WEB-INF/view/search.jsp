@@ -27,13 +27,12 @@
 	  	<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 		
-			
-			<c:if test="${not empty error}">
-				<div class="error">
+			<!-- <div class="error">
+				<c:if test="${not empty error}">
 					<img src="./../resources/images/error_icon.png" class="img"/>
 					<span><c:out value="${error}"/></span><br>
-		   		</div>
-			</c:if>
+				</c:if>
+			</div> -->
 		
 		   <!-- Unnamed (Rectangle) -->
 	      <div id="u11" class="ax_default label">
@@ -44,27 +43,27 @@
 	        </div>
 	      </div>
 	  
-	  
-	  
 	  <spring:message code="chequeSerialNumber.title" var="chequeSerialNumberTitle"/>
-	    <spring:message code="accountId.title" var="accountIdTitle"/>
+	    
 	      <!-- Unnamed (Text Field) -->
 	      <div id="u6" class="ax_default text_field">
-	      	<form:input path="chequeSerialNo" id="u6_input" type="text" value="" title="${chequeSerialNumberTitle}"/>
-	        
+	      		<form:input path="chequeSerialNo" id="u6_input" type="text" value="" title="${chequeSerialNumberTitle}"/>
+	      		<form:errors path="chequeSerialNo" cssClass="error" />
+	      		
 	      </div>
 	      
 	      <!-- Unnamed (Text Field) -->
 	      <div id="u12" class="ax_default text_field" >
 	      	<form:input path="accountNumber" id="u12_input" type="text" value="" title="${accountIdTitle}"/>
-	      
+			<!--<form:errors path="accountNumber" cssClass="error" element="div" />
+	      	<div id="accountNumber.errors" class="error">account number is not text</div>	  -->    
 	      </div>
 	
 	      <!-- Unnamed (Rectangle) -->
 	      <div id="u13" class="ax_default label">
 	        <div id="u13_div" class=""></div>
 	        <div id="u13_text" class="text ">
-	          <p><span>  <spring:message code="accountId.message" /></span></p>
+	          <p><span><spring:message code="accountId.message" /></span></p>
 	        </div>
 	      </div>
 	   

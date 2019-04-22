@@ -328,13 +328,12 @@ body {
 	left:80px;
 	top:105px;
 	width:600px;
-	white-space:nowrap;
+	white-space: nowrap;
     font-family:'Century Gothic Bold', 'Century Gothic Regular', 'Century Gothic';
     font-weight:700;
     font-style:normal;
     font-size:16px;
     color: #D8000C;
-    background-color: #FFD2D2;
 }
 .error a
 { 

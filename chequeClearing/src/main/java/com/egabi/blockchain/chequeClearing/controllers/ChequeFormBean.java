@@ -2,20 +2,25 @@ package com.egabi.blockchain.chequeClearing.controllers;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.Email;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 
 public class ChequeFormBean  implements Serializable
 {
 	private Integer chequeSerialNoFrom ;
 	private Integer chequeSerialNoTo ;
-	private String accountNumber ;
+	private Integer accountNumber ;
 	private String paytoAccountNumber ;
 	private Integer customerId ;
 	private String customerName ;
@@ -56,7 +61,7 @@ public class ChequeFormBean  implements Serializable
 	
 	public ChequeFormBean ()
 	{       
-		this.chequeSerialNo=0;
+		//this.chequeSerialNo=0;
 	}
 	public String getChequeStatus() {
 		return chequeStatus;
@@ -78,11 +83,11 @@ public class ChequeFormBean  implements Serializable
 	public void setChequeSerialNoTo(Integer chequeSerialNoTo) {
 		this.chequeSerialNoTo = chequeSerialNoTo;
 	}
-	@NotEmpty
-	public String getAccountNumber() {
+	@NotNull
+	public Integer getAccountNumber() {
 		return accountNumber;
 	}
-	public void setAccountNumber(String accountNumber) {
+	public void setAccountNumber(Integer accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 	@NotNull
@@ -107,7 +112,9 @@ public class ChequeFormBean  implements Serializable
 	public void setBranchCode(long branchCode) {
 		this.branchCode = branchCode;
 	}
-
+	@NumberFormat(style=Style.NUMBER)
+	@NotNull(message="Cheque serial number is incorecct ")
+	@Min( value = 10)
 	public Integer getChequeSerialNo() {
 		return chequeSerialNo;
 	}
@@ -115,6 +122,7 @@ public class ChequeFormBean  implements Serializable
 		this.chequeSerialNo = chequeSerialNo;
 	}
 	@NotNull
+	@NotEmpty
 	public String getChequeCurrency() {
 		return chequeCurrency;
 	}

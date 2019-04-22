@@ -139,7 +139,7 @@ public class CordaCustomNodeServiceImpl extends CordaNodeServiceImpl {
 			    	}
 			     	if(chequeBook.getState().getData().getChequeOwnerAccount()!=null)
 			    	{
-			    		chequeFormBean.setAccountNumber(chequeBook.getState().getData().getChequeOwnerAccount()) ;    
+			    		chequeFormBean.setAccountNumber(Integer.valueOf(chequeBook.getState().getData().getChequeOwnerAccount())) ;    
 			    	
 			    	}
 			     	
@@ -194,7 +194,7 @@ public class CordaCustomNodeServiceImpl extends CordaNodeServiceImpl {
 
 			    			singleChequeFormBean.setChequeSerialNo(serialno);
 					    	singleChequeFormBean.setCustomerName(chequeBook.getState().getData().getCustomerName());
-					    	singleChequeFormBean.setAccountNumber(String.valueOf(chequeBook.getState().getData().getAccountNumber()));
+					    	singleChequeFormBean.setAccountNumber(Integer.valueOf(chequeBook.getState().getData().getAccountNumber()));
 					    	singleChequeFormBean.setChequeCurrency(chequeBook.getState().getData().getChequeCurrency());
 					    	singleChequeFormBean.setFromBankId(String.valueOf(chequeBook.getState().getData().getBankId()));
 					    	singleChequeFormBean.setBranchCode(chequeBook.getState().getData().getBranchCode());
@@ -233,7 +233,7 @@ public class CordaCustomNodeServiceImpl extends CordaNodeServiceImpl {
 //	           UniqueIdentifier linearId)
 			   
 			   
-			   ChequeBookState state=new ChequeBookState(myIdentity,cbeIdentity,formBean.getChequeSerialNoFrom(),formBean.getChequeSerialNoTo(),formBean.getAccountNumber(),
+			   ChequeBookState state=new ChequeBookState(myIdentity,cbeIdentity,formBean.getChequeSerialNoFrom(),formBean.getChequeSerialNoTo(),formBean.getAccountNumber().toString(),
 					   formBean.getCustomerId(),formBean.getCustomerName(),formBean.getBranchCode(),registerBankId,formBean.getChequeCurrency(),formBean.getChequeSerialNo(),new UniqueIdentifier());
 			   Response Responsestatus=null;
 		        try {
@@ -300,7 +300,7 @@ public void submitCheque(ChequeFormBean formBean, InputStream fileStream,String 
 		LocalDate dueDate = LocalDate.of(c.get(Calendar.YEAR), c.get(Calendar.MONTH)+1, c.get(Calendar.DAY_OF_MONTH));
 
 	ChequeState state=new ChequeState(myIdentity,toIdentity,Long.parseLong(formBean.getChequeSerialNo().toString()),formBean.getPaytoUsername(),formBean.getPaytoAccountNumber(),formBean.getToBankId(),
-			formBean.getChequeAmount().longValue(),dueDate,formBean.getChequeCurrency(),formBean.getAccountNumber(),formBean.getCustomerName(),propBankId,new UniqueIdentifier());
+			formBean.getChequeAmount().longValue(),dueDate,formBean.getChequeCurrency(),formBean.getAccountNumber().toString(),formBean.getCustomerName(),propBankId,new UniqueIdentifier());
 	  Response Responsestatus=null;
 	  
         try {
