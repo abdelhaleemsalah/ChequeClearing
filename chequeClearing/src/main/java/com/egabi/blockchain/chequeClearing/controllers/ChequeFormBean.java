@@ -113,7 +113,6 @@ public class ChequeFormBean  implements Serializable
 		this.branchCode = branchCode;
 	}
 	@NumberFormat(style=Style.NUMBER)
-	@NotNull(message="Cheque serial number is incorecct ")
 	@Min( value = 10)
 	public Integer getChequeSerialNo() {
 		return chequeSerialNo;

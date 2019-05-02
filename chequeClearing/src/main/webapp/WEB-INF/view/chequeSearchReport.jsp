@@ -26,6 +26,13 @@
 	  	<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 		
+		<div class="error">
+				<c:if test="${not empty error}">
+					<img src="./../resources/images/error_icon.png" class="img"/>
+					<span><c:out value="${error}"/></span><br>
+				</c:if>
+			</div>
+		
 		   <!-- Unnamed (Rectangle) -->
 	      <div id="u11" class="ax_default label">
 	        <div id="u11_div" class=""></div>

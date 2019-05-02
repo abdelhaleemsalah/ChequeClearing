@@ -23,7 +23,7 @@
    		<spring:message code="search.submit" var="searchSubmit"/>
   	
     		<!-- For login portalUser -->
-<!--  	<spring:hasBindErrors name="formBean">
+	 	<spring:hasBindErrors name="formBean">
 			<div class="error">
 				<spring:bind path="formBean.*">
 					<c:forEach items="${status.errorMessages}" var="error">
@@ -32,7 +32,7 @@
 					</c:forEach>
 				</spring:bind>
 			</div>
-		</spring:hasBindErrors>-->	
+		</spring:hasBindErrors>
 			
 		<form:form id="hello" action=" ${flowExecutionUrl}"  method="post" modelAttribute="formBean" >
 		

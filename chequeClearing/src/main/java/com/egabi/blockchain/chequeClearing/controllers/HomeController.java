@@ -275,8 +275,31 @@ public class HomeController {
 			ModelMap model, Model mv) throws NoSuchFieldException, SecurityException {
 		ArrayList<ChequeDetail> cheques = new ArrayList<>();
 		PortalUser portalUser = userRepository.findPortalUserByUsername(username);
+		String noChosenCriteriaErrorMessage="";
 		System.out.println("submittingSummary Page: " + portalUser.getUserId());
+		InputStream input = null;
+		Properties prop = new Properties();
+		mv.addAttribute("user", username);
+		
+		try
+		{
+			input = resourceLoader.getResource("classpath:messages.properties").getInputStream();
+			prop.load(input);
+			System.out.println("prop get error message: " + prop.getProperty("noChosenCriteria.message"));
+			noChosenCriteriaErrorMessage = prop.getProperty("noChosenCriteria.message");
+		}
+		catch(IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+		if(chequeSerialNo.toString().matches("[a-z]"))
+		{
+			System.out.println("String in number field");
+			model.addAttribute("error",noChosenCriteriaErrorMessage);
+			return new ModelAndView("chequeSearchReport", "formBean", new ChequeFormBean());
+		}
 		if (chequeSerialNo != null && chequeSerialNo != 0) {
 			System.out.println("Cheque SR no: " + chequeSerialNo);
 			System.out.println("Cheque staus: " + chequeStatus);
@@ -293,11 +316,21 @@ public class HomeController {
 			for (int i = 0; i < cheques.size(); i++) {
 				System.out.println("cheque no:" + i + " username: " + cheques.get(i).getPayToUsername());
 			}
-		} else {
-			cheques = ChequeDetailsSavingService.findOneWithStatusAndUserId(chequeStatus, portalUser.getUserId());
+		}
+		else 
+		{
+			if (!chequeStatus.equals("SELECT")) 
+			{
+				// status is not null
+				cheques = ChequeDetailsSavingService.findOneWithStatusAndUserId(chequeStatus, portalUser.getUserId());
+			}
+			else
+			{
+				model.addAttribute("error",noChosenCriteriaErrorMessage);
+				return new ModelAndView("chequeSearchReport", "formBean", new ChequeFormBean());
+			}
 		}
 		mv.addAttribute("retrievedCheques", cheques);
-		mv.addAttribute("user", username);
 		return new ModelAndView("chequeSearchReportResult", "formBean", new ChequeFormBean());
 	}
 	
@@ -635,7 +668,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/{username}/SearchResult", method = RequestMethod.POST)
-	public ModelAndView displaySearchResult(@Valid @ModelAttribute("formBean") ChequeFormBean formBean, BindingResult result , @PathVariable("username") String username, Model m, ModelMap model)
+	public ModelAndView displaySearchResult(@Valid @ModelAttribute("formBean") ChequeFormBean formBean, @PathVariable("username") String username, Model m, ModelMap model)
 	throws NoSuchFieldException, SecurityException {
 
 		String returnPage = null;
@@ -655,6 +688,7 @@ public class HomeController {
 		String chequeIsAlreadySavedErrorMessage="";
 		String invalidSerialNumberValueErrorMessage="";
 		String invalidAccountNoValueErrorMessage="";
+		String serialNumberNullErrorMessage="";
 
 		model.addAttribute("user", username);
 		
@@ -676,49 +710,53 @@ public class HomeController {
 			System.out.println("prop get error message: " + prop.getProperty("chequeIsAlreadySaved.message"));
 			chequeIsAlreadySavedErrorMessage = prop.getProperty("chequeIsAlreadySaved.message");
 
-			System.out.println("prop get error message: " + prop.getProperty("invalidSerialNumberValue.message"));
+			System.out.println("prop get error message: " + prop.getProperty("serialNoCannotbeNull.message"));
+			serialNumberNullErrorMessage = prop.getProperty("serialNoCannotbeNull.message");
+			
+			/*System.out.println("prop get error message: " + prop.getProperty("invalidSerialNumberValue.message"));
 			invalidSerialNumberValueErrorMessage = prop.getProperty("invalidSerialNumberValue.message");
 
 			System.out.println("prop get error message: " + prop.getProperty("invalidAccountNoValue.message"));
-			invalidAccountNoValueErrorMessage = prop.getProperty("invalidAccountNoValue.message");
+			invalidAccountNoValueErrorMessage = prop.getProperty("invalidAccountNoValue.message");*/
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (result.hasErrors()) 
+		if(serialno==null)
 		{
-			System.out.println("Hello error");
-			model.addAttribute("error",invalidSerialNumberValueErrorMessage);
-			return new ModelAndView("search", "formBean", formBean);
-		}
-		
-		
-		if(bankid.equalsIgnoreCase(propBankId))
-		{
-			System.out.println("Error , cant search with your bank id");
-			model.addAttribute("error",bankIderrorMessage);
+			System.out.println("Error , serial number is null");
+			model.addAttribute("error",serialNumberNullErrorMessage);
 			return new ModelAndView("search", "formBean", formBean);
 		}
 		else
 		{
-				long accNo = Long.valueOf(formBean.getAccountNumber());
-				CordaCustomNodeServiceImpl PartyA = services.get(bankid + "NodeService");
-				formBean = PartyA.retrieveChequeBook(bankid, accNo, serialno);
-				if(formBean.getCustomerId()==null)
-				{
-					System.out.println("can't found this cheque");
-					model.addAttribute("error",chequeIsNotRegisteredErrorMessage);
-					return new ModelAndView("search", "formBean", formBean);
-				}
-				else
-				{
-					ChequeDetail cheque=ChequeDetailsSavingService.checkIfChequeSaved(serialno, bankid, String.valueOf(accNo));
-					if(cheque!=null)
+			if(bankid.equalsIgnoreCase(propBankId))
+			{
+				System.out.println("Error , cant search with your bank id");
+				model.addAttribute("error",bankIderrorMessage);
+				return new ModelAndView("search", "formBean", formBean);
+			}
+			else
+			{
+					long accNo = Long.valueOf(formBean.getAccountNumber());
+					CordaCustomNodeServiceImpl PartyA = services.get(bankid + "NodeService");
+					formBean = PartyA.retrieveChequeBook(bankid, accNo, serialno);
+					if(formBean.getCustomerId()==null)
 					{
-						System.out.println("cheque already saved");
-						model.addAttribute("error",chequeIsAlreadySavedErrorMessage);
-						return new ModelAndView("search", "formBean", chequeIsAlreadySavedErrorMessage);
+						System.out.println("can't found this cheque");
+						model.addAttribute("error",chequeIsNotRegisteredErrorMessage);
+						return new ModelAndView("search", "formBean", formBean);
+					}
+					else
+					{
+						ChequeDetail cheque=ChequeDetailsSavingService.checkIfChequeSaved(serialno, bankid, String.valueOf(accNo));
+						if(cheque!=null)
+						{
+							System.out.println("cheque already saved");
+							model.addAttribute("error",chequeIsAlreadySavedErrorMessage);
+							return new ModelAndView("search", "formBean", chequeIsAlreadySavedErrorMessage);
+						}
 					}
 				}
 		}
