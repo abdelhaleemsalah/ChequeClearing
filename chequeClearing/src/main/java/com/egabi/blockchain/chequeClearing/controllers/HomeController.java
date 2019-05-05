@@ -276,6 +276,7 @@ public class HomeController {
 		ArrayList<ChequeDetail> cheques = new ArrayList<>();
 		PortalUser portalUser = userRepository.findPortalUserByUsername(username);
 		String noChosenCriteriaErrorMessage="";
+		String chequeNotRegiseterdErrorMessage="";
 		System.out.println("submittingSummary Page: " + portalUser.getUserId());
 		InputStream input = null;
 		Properties prop = new Properties();
@@ -287,6 +288,9 @@ public class HomeController {
 			prop.load(input);
 			System.out.println("prop get error message: " + prop.getProperty("noChosenCriteria.message"));
 			noChosenCriteriaErrorMessage = prop.getProperty("noChosenCriteria.message");
+
+			System.out.println("prop get error message: " + prop.getProperty("chequeIsNotRegistered.message"));
+			chequeNotRegiseterdErrorMessage = prop.getProperty("chequeIsNotRegistered.message");
 		}
 		catch(IOException e)
 		{
@@ -294,13 +298,8 @@ public class HomeController {
 			e.printStackTrace();
 		}
 
-		if(chequeSerialNo.toString().matches("[a-z]"))
+		if (chequeSerialNo != null && chequeSerialNo != 0) 
 		{
-			System.out.println("String in number field");
-			model.addAttribute("error",noChosenCriteriaErrorMessage);
-			return new ModelAndView("chequeSearchReport", "formBean", new ChequeFormBean());
-		}
-		if (chequeSerialNo != null && chequeSerialNo != 0) {
 			System.out.println("Cheque SR no: " + chequeSerialNo);
 			System.out.println("Cheque staus: " + chequeStatus);
 
@@ -312,9 +311,6 @@ public class HomeController {
 
 				// status is null
 				cheques = ChequeDetailsSavingService.findOneWithSRnoAndUserId(chequeSerialNo, portalUser.getUserId());
-			}
-			for (int i = 0; i < cheques.size(); i++) {
-				System.out.println("cheque no:" + i + " username: " + cheques.get(i).getPayToUsername());
 			}
 		}
 		else 
@@ -329,6 +325,15 @@ public class HomeController {
 				model.addAttribute("error",noChosenCriteriaErrorMessage);
 				return new ModelAndView("chequeSearchReport", "formBean", new ChequeFormBean());
 			}
+		}
+		if(cheques.size()==0)
+		{
+			model.addAttribute("error",chequeNotRegiseterdErrorMessage);
+			return new ModelAndView("chequeSearchReport", "formBean", new ChequeFormBean());
+		}
+		for (int i = 0; i < cheques.size(); i++) 
+		{
+			System.out.println("cheque no:" + i + " username: " + cheques.get(i).getPayToUsername());
 		}
 		mv.addAttribute("retrievedCheques", cheques);
 		return new ModelAndView("chequeSearchReportResult", "formBean", new ChequeFormBean());
@@ -467,6 +472,32 @@ public class HomeController {
 			RedirectAttributes redirectAttributes, @PathVariable("username") String username,
 			@Valid @ModelAttribute("formBean") ChequeFormBean formBean, Model model) throws IOException {
 
+		InputStream input = null;
+		Properties prop = new Properties();
+		String chequeNotRegiseteredErrorMessage="";
+		
+		try
+		{
+			input = resourceLoader.getResource("classpath:messages.properties").getInputStream();
+			prop.load(input);
+			System.out.println("prop get error message: " + prop.getProperty("chequeIsNotRegistered.message"));
+			chequeNotRegiseteredErrorMessage = prop.getProperty("chequeIsNotRegistered.message");
+		}
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(formBean.getChequeAmount()==null || formBean.getChequeDueDate()==null 
+		|| formBean.getPaytoUsername()==null || formBean.getPaytoUsername().isEmpty()==true || 
+		formBean.getPaytoAccountNumber()==null || formBean.getPaytoAccountNumber().isEmpty()==true)
+		{
+			System.out.println("theres null in the bean");
+			model.addAttribute("user", username);
+			model.addAttribute("error", chequeNotRegiseteredErrorMessage);
+			return new ModelAndView("chequeDetailsEdit");
+		}
 		String crossedCheque = "Y";
 		if (formBean.isCrossed() == false)
 			crossedCheque = "N";
@@ -1027,8 +1058,4 @@ FileOutputStream foss = new FileOutputStream(f.getPath());
 
 		return chequeBean;
 	}
-	
-	
-	
-	
 }

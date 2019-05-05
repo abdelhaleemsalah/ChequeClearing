@@ -23,6 +23,13 @@
 	<form:form id="SearchResult"  method="post" enctype="multipart/form-data"  action="${pageContext.request.contextPath}/${user}/chequeDetailsEditSummary"  modelAttribute="formBean" >
 	<div id="base" class="">
 
+	<div class="error">
+				<c:if test="${not empty error}">
+					<img src="./../resources/images/error_icon.png" class="img"/>
+					<span><c:out value="${error}"/></span><br>
+				</c:if>
+	</div>
+		
 
        <!-- Unnamed (Rectangle) -->
 	      <div id="u5" class="ax_default label">
