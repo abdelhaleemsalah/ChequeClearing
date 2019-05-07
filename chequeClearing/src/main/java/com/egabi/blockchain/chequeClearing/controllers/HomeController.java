@@ -469,13 +469,15 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/{username}/chequeDetailsEditSummary", method = RequestMethod.POST)
-	public ModelAndView displayChequeDetailsModificationSummary(@RequestParam("file") MultipartFile file,
-			RedirectAttributes redirectAttributes, @PathVariable("username") String username,
-			@Valid @ModelAttribute("formBean") ChequeFormBean formBean, Model model) throws IOException {
+	public ModelAndView displayChequeDetailsModificationSummary(@Valid @ModelAttribute("formBean") ChequeFormBean formBean,
+	@RequestParam("file") MultipartFile file, BindingResult result , RedirectAttributes redirectAttributes, @PathVariable("username") String username,
+	Model model) throws IOException {
 
 		InputStream input = null;
 		Properties prop = new Properties();
 		String chequeNotRegiseteredErrorMessage="";
+		String invalidAccountNumberErrorMessage="";
+		String invalidUsernameErrorMessage="";
 		
 		try
 		{
@@ -483,6 +485,12 @@ public class HomeController {
 			prop.load(input);
 			System.out.println("prop get error message: " + prop.getProperty("chequeIsNotRegistered.message"));
 			chequeNotRegiseteredErrorMessage = prop.getProperty("chequeIsNotRegistered.message");
+
+			System.out.println("prop get error message: " + prop.getProperty("invalidAccountNoValue.message"));
+			invalidAccountNumberErrorMessage = prop.getProperty("invalidAccountNoValue.message");
+
+			System.out.println("prop get error message: " + prop.getProperty("invalidUsernameValue.message"));
+			invalidUsernameErrorMessage = prop.getProperty("invalidUsernameValue.message");
 		}
 		catch (IOException e) 
 		{
@@ -490,16 +498,37 @@ public class HomeController {
 			e.printStackTrace();
 		}
 		
+		if(result.hasErrors())
+		{
+			model.addAttribute("user", username);
+			return new ModelAndView("chequeDetailsEdit");
+		}
 		if(formBean.getChequeAmount()==null || formBean.getChequeDueDate()==null 
 		|| formBean.getPaytoUsername()==null || formBean.getPaytoUsername().isEmpty()==true || 
 		formBean.getPaytoAccountNumber()==null || formBean.getPaytoAccountNumber().isEmpty()==true)
 		{
-			System.out.println("theres null in the bean");
-			model.addAttribute("user", username);
-			model.addAttribute("error", chequeNotRegiseteredErrorMessage);
-			return new ModelAndView("chequeDetailsEdit");
-		}
-		String crossedCheque = "Y";
+						System.out.println("theres null in the bean");
+						model.addAttribute("user", username);
+						model.addAttribute("error", chequeNotRegiseteredErrorMessage);
+						return new ModelAndView("chequeDetailsEdit");
+			}
+			else if(formBean.getPaytoAccountNumber().matches("[a-z]+")
+			|| formBean.getPaytoAccountNumber().matches("[A-Z]+") )
+			{
+						System.out.println("theres error in the account number");
+						model.addAttribute("user", username);
+						model.addAttribute("error", invalidAccountNumberErrorMessage);
+						return new ModelAndView("chequeDetailsEdit");
+			}
+			else if(formBean.getPaytoUsername().matches("[0-9]+"))
+			{
+						System.out.println("theres error in the username");
+						model.addAttribute("user", username);
+						model.addAttribute("error", invalidUsernameErrorMessage);
+						return new ModelAndView("chequeDetailsEdit");
+			}
+		
+				String crossedCheque = "Y";
 		if (formBean.isCrossed() == false)
 			crossedCheque = "N";
 

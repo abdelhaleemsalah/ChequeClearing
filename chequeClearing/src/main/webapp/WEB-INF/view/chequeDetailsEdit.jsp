@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=windows-1256"
     pageEncoding="windows-1256"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -24,10 +24,10 @@
 	<div id="base" class="">
 
 	<div class="error">
-				<c:if test="${not empty error}">
-					<img src="./../resources/images/error_icon.png" class="img"/>
-					<span><c:out value="${error}"/></span><br>
-				</c:if>
+		<c:if test="${not empty error}">
+			<img src="./../resources/images/error_icon.png" class="img"/>
+			<span><c:out value="${error}"/></span><br>
+		</c:if>
 	</div>
 		
 
@@ -85,6 +85,7 @@
       <!-- Unnamed (Text Field) -->
       <div id="u13" class="ax_default text_field">
         <form:input path="chequeAmount" id="u13_input" type="text" value=""/>
+        <form:errors path="chequeAmount" />
       </div>
 
       <!-- Unnamed (Rectangle) -->
