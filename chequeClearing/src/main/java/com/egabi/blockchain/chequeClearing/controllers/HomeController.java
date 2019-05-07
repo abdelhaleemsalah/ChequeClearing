@@ -282,6 +282,7 @@ public class HomeController {
 		Properties prop = new Properties();
 		mv.addAttribute("user", username);
 		
+		
 		try
 		{
 			input = resourceLoader.getResource("classpath:messages.properties").getInputStream();
